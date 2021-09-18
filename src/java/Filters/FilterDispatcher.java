@@ -101,10 +101,11 @@ public class FilterDispatcher implements Filter {
    public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
+        HashMap<String, String> roadmap = (HashMap<String, String>) request.getServletContext().getAttribute("ROADMAP");
         HttpServletRequest req = (HttpServletRequest) request;
         String uri = req.getRequestURI();
-        String url = "";
-         log("FilterDispatcher:doFilter()");
+        String url = roadmap.get("default");
+
         try {
             int lastIndex = uri.lastIndexOf("/");
             String resource = uri.substring(lastIndex + 1);
@@ -114,13 +115,17 @@ public class FilterDispatcher implements Filter {
 //                        + resource.substring(1)
 //                        + "Servlet";
 
-                if (resource.lastIndexOf(".html") > 0) {
+                if (resource.lastIndexOf(".html") > 0 || resource.lastIndexOf(".jsp") > 0) {
                     url = resource;
                 } else {
                     String name = resource.substring(0, 1).toUpperCase() + resource.substring(1); // Login
+                    url = roadmap.get(name);
                 }
             }
-            
+            if (url == null) {
+                url = roadmap.get("default");
+            }
+
             if (url != null) {
                 RequestDispatcher rd = req.getRequestDispatcher(url);
                 rd.forward(request, response);
