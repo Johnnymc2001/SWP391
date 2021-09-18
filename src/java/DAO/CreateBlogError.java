@@ -14,10 +14,26 @@ import java.io.Serializable;
 public class CreateBlogError implements Serializable{
     private String titleLengthErr;
     private String contentLengthErr;
-    private String categoryErr;
 
     public CreateBlogError() {
     }
-    
+
+    public String getTitleLengthErr() {
+        return titleLengthErr;
+    }
+
+    public void setTitleLengthErr(String titleLengthErr) {
+        this.titleLengthErr = titleLengthErr;
+    }
+
+    public String getContentLengthErr() {
+        return contentLengthErr;
+    }
+
+    public void setContentLengthErr(String contentLengthErr) {
+        this.contentLengthErr = contentLengthErr;
+    }
+
+
 }
 
