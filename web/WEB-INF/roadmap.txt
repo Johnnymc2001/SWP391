@@ -1,4 +1,4 @@
-=StartupServlet
+=HomePageServlet
 home=StartupServlet
 student=UserDashboardServlet
 createblog=CreateBlogServlet
