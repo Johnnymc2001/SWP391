@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>Create a Post</h1>
-        <form action="create" method="POST">
+        <form action="createBlog" method="POST">
             <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
             Title: <br/><input type="text" value="${param.title}" name="txtTitle" maxlength="60" size="62"/> <br/>
             <c:if test="${not empty errors.titleLengthErr}">
@@ -29,8 +29,8 @@
                 </font><br/>
             </c:if>
                 
-            <input type="file" id="attachment" name="fileAttachment">
-            <input type="submit">
+            <br/><input type="file" id="attachment" name="fileAttachment">
+            <input type="submit"><br/>
             
             <select name="categoryBox">
             <c:set var="dtoList" value="${sessionScope.CATEGORY}"/>
