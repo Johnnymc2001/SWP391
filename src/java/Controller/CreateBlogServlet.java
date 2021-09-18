@@ -69,11 +69,6 @@ public class CreateBlogServlet extends HttpServlet {
                 errors.setContentLengthErr("Password is required from 6 to 30 characters");
             } 
             
-            if(categoryID.trim().length() < 1) {
-                foundErr = true;
-                errors.setCategoryErr("Category is required");
-            } 
-            
             //2. Process
             if(foundErr){
                 //3. Send errors to users
