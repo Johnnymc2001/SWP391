@@ -49,7 +49,7 @@ public class CreateBlogServlet extends HttpServlet {
         String content = request.getParameter("txtContent");
         String categoryID = request.getParameter("txtCategoryID");
         boolean hasAttachment = false;
-        if(request.getParameter("hasAttachment").equals("true")){
+        if(!request.getParameter("fileAttachment").isEmpty()){
             hasAttachment = true;
         }
         String tags = request.getParameter("txtTags");

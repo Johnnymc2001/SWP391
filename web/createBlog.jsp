@@ -28,6 +28,9 @@
                     ${errors.contentLengthErr}
                 </font><br/>
             </c:if>
+                
+            <input type="file" id="attachment" name="fileAttachment">
+            <input type="submit">
             
             <select name="categoryBox">
             <c:set var="dtoList" value="${sessionScope.CATEGORY}"/>
