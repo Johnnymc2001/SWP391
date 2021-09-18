@@ -1,0 +1,73 @@
+.info_body {
+    background-color: #C1AC95;
+}
+
+.aboutus_header {
+    width: 100%;
+    color: white;
+    font-family: 'Carattere', cursive;
+    font-size: 500%;
+}
+
+.aboutus_header img {
+    width: 100%;
+    object-fit: cover;
+    height: 300px;
+    -webkit-box-shadow: 0px 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+    position: relative;
+    filter: blur(2px) brightness(80%);
+}
+
+.aboutus_header h1 {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    text-align: center;
+}
+
+.team_info {
+    padding: 50px;
+    color: white;
+}
+
+.team_info img {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    -webkit-box-shadow: 7px 5px 3px -3px black;
+    -moz-box-shadow: 7px 5px 3px -3px black;
+    box-shadow: 7px 7px 7px -3px black;
+    transition: ease-in-out .5s;
+}
+
+.team_info img:hover {
+    border-radius: 50%;
+    height: 205px;
+    width: 205px;
+    -webkit-box-shadow: 10px 8px 6px -6px black;
+    -moz-box-shadow: 10px 8px 6px -6px black;
+    box-shadow: 10px 10px 10px -6px black;
+    filter: blur(2px);
+    transition: ease-in-out .5s;
+}
+
+.team_info .avatar{
+    text-align: center;
+}
+
+.team_info,
+.khoatd,
+.haotn,
+.longnnh,
+.tamt {
+    padding-bottom: 20px;
+}
+
+.team_info .content {
+    text-align: center;
+    -webkit-box-shadow: 10px 8px 6px -6px black;
+    -moz-box-shadow: 10px 8px 6px -6px black;
+    box-shadow: 10px 10px 10px -6px black;
+}
