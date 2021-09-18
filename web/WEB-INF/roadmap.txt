@@ -1,5 +1,6 @@
 =HomePageServlet
-home=StartupServlet
+home=HomePageServlet
+homePage=homePage.html
 student=UserDashboardServlet
 createblog=CreateBlogServlet
 admin=AdminDashboardServlet
