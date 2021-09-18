@@ -1,0 +1,60 @@
+.navbar .navbar-brand img {
+    width: 50px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.navbar {
+    -webkit-box-shadow: 0px 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.xavalo img {
+    width: 100%;
+    object-fit: cover;
+    height: 300px;
+    -webkit-box-shadow: 0px 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+    position: relative;
+    filter: blur(0px) brightness(80%);
+    transition: ease-in-out .5s;
+}
+
+.xavalo:hover img {
+    filter: blur(3px) brightness(65%);
+}
+
+.xavalo h1 {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    opacity: 1;
+    transition: ease-in-out 1s;
+}
+
+.xavalo h2 {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transition: ease-in-out 1s;
+}
+
+.xavalo:hover h1 {
+    opacity: 0;
+}
+
+.xavalo:hover h2 {
+    opacity: 1;
+}
+
+.xavalo h1,
+h2 {
+    color: white;
+    font-family: 'Carattere', cursive;
+    font-size: 500%;
+}
