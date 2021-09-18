@@ -13,17 +13,33 @@
         <title>Sign Up</title>
     </head>
     <body>
-        <h1>Create New Account</h1>
-        <form action="create" method="POST">
-            Title (maximum 60 characters): <br/><input type="text" value="" name="title" maxlength="60" size="62"/> <br/>
-            Content:<br/> <textarea name="content" rows="10" cols="50">Enter</textarea><br/>
+        <h1>Create a Post</h1>
+        <form action="createBlog" method="POST">
+            <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
+            Title: <br/><input type="text" value="${param.title}" name="txtTitle" maxlength="60" size="62"/> <br/>
+            <c:if test="${not empty errors.titleLengthErr}">
+                <font color="red">
+                    ${errors.titleLengthErr}
+                </font><br/>
+            </c:if>
+            Content:<br/> <textarea name="txtContent" rows="10" cols="50">Enter</textarea><br/>
+            <c:if test="${not empty errors.contentLengthErr}">
+                <font color="red">
+                    ${errors.contentLengthErr}
+                </font><br/>
+            </c:if>
+                
+            <br/><input type="file" id="attachment" name="fileAttachment">
+            <input type="submit"><br/>
+            
             <select name="categoryBox">
-            <c:set var="dtoList" value="${sessionScope.CATEGORY}" />
+            <c:set var="dtoList" value="${sessionScope.CATEGORY}"/>
             <c:forEach var="dto" items="${dtoList}" varStatus="counter">
                 <c:if test="${not empty dto && dto.qty!=0}">
                     <option>${dto.categoryName}</option>
                 </c:if>
             </c:forEach>
+                    
             <input type="submit" value="Post" name="btnAction" />
             <input type="reset" value="Reset" /><br/>
             <a href="Home">Return to Home</a>

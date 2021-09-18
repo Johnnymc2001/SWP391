@@ -45,14 +45,14 @@ public class CreateBlogServlet extends HttpServlet {
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url = roadmap.get(HOME_PAGE);
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        String categoryID = request.getParameter("categoryID");
+        String title = request.getParameter("txtTitle");
+        String content = request.getParameter("txtContent");
+        String categoryID = request.getParameter("txtCategoryID");
         boolean hasAttachment = false;
-        if(request.getParameter("hasAttachment").equals("true")){
+        if(!request.getParameter("fileAttachment").isEmpty()){
             hasAttachment = true;
         }
-        String tags = request.getParameter("tags");
+        String tags = request.getParameter("txtTags");
         int studentID =  Integer.parseInt(request.getParameter("studentID"));
         CreateBlogError errors = new CreateBlogError();
         boolean foundErr = false;
