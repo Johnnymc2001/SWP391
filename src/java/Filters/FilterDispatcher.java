@@ -115,7 +115,11 @@ public class FilterDispatcher implements Filter {
 //                        + resource.substring(1)
 //                        + "Servlet";
 
-                if (resource.lastIndexOf(".html") > 0 || resource.lastIndexOf(".jsp") > 0 || resource.lastIndexOf(".css") > 0 || resource.lastIndexOf(".png") > 0 || resource.lastIndexOf(".jpg") > 0) {
+                if (resource.lastIndexOf(".html") > 0 || 
+                        resource.lastIndexOf(".jsp") > 0 || 
+                        resource.lastIndexOf(".css") > 0 || 
+                        resource.lastIndexOf(".png") > 0 || 
+                        resource.lastIndexOf(".jpg") > 0) {
                     url = resource;
                 } else {
                     String name = resource.substring(0, 1).toUpperCase() + resource.substring(1); // Login
