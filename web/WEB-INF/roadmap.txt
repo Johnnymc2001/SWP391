@@ -1,0 +1,11 @@
+=StartupServlet
+home=StartupServlet
+student=UserDashboardServlet
+createblog=CreateBlogServlet
+admin=AdminDashboardServlet
+mentor=MentorDashboardServlet
+blog=BlogDetailServlet
+login=LoginServlet
+loginPage=login.jsp
+register=RegisterServlet
+registerPage=register.jsp
