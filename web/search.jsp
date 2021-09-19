@@ -16,8 +16,12 @@
         <h1>Search Page</h1>
     </body>
 
-    <form action="search">
-        <input type="text" name="txtSearchValue"/>
+    <c:if test="${empty param.txtSearchValue}">
+        <c:set var="param.txtSearchValue" value=""/>
+    </c:if>
+    
+    <form action="search" border="1">
+        <input type="text" name="txtSearchValue" value="${param.txtSearchValue}"/>
         <input type="submit" name="Search"/>
     </form>
 

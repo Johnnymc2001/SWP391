@@ -5,13 +5,8 @@
  */
 package Controller;
 
-import DAO.BlogDTO;
-import DAO.BlogDAO;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import javax.servlet.ServletContext;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,12 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "SearchBlogServlet", urlPatterns = {"/SearchBlogServlet"})
-public class SearchBlogServlet extends HttpServlet {
-
-    private final String HOME_PAGE = "";
-    private final String SEARCH_PAGE = "search.jsp";
-
+@WebServlet(name = "HomePageServlet", urlPatterns = {"/HomePageServlet"})
+public class HomePageServlet extends HttpServlet {
+    private static final String HOME_PAGE = "homePage.html";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,30 +32,7 @@ public class SearchBlogServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        ServletContext sc = request.getServletContext();
-//        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-//        String url = roadmap.get(SEARCH_PAGE);
-        String searchValue = request.getParameter("txtSearchValue");
-
-        try {
-            if (searchValue == "" || searchValue == null) {
-
-            } else {
-                BlogDAO dao = new BlogDAO();
-                ArrayList<BlogDTO> list = dao.searchBlogUsingTitle(searchValue);
-//            if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
-//                list.forEach((blog) -> {
-//                    blog.setContent(blog.getContent().substring(0, 60) + "...");
-//                });
-//            }
-                request.setAttribute("SEARCH_RESULT", list);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(SEARCH_PAGE).forward(request, response);
-        }
+        request.getRequestDispatcher(HOME_PAGE).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
