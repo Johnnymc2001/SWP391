@@ -1,0 +1,116 @@
+.navbar .navbar-brand img {
+    width: 50px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.navbar {
+    -webkit-box-shadow: 0px 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.bckimg img {
+    width: 100%;
+    object-fit: cover;
+    height: 100vh;
+}
+
+.login_table {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgb(7, 46, 49, 0.8);
+    box-shadow: 10px 10px 10px -6px black;
+}
+
+.loginform {
+    padding: 2vh 4vw 2vh 4vw;
+}
+
+.loginform input[type="text"],
+input[type="password"] {
+    border-radius: 20px;
+    height: 50px;
+    width: 300px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid transparent;
+    transition: ease-in-out 0.2s;
+    color: white;
+}
+
+.loginform .btn {
+    border-radius: 20px;
+    height: 50px;
+    width: 300px;
+}
+
+.loginform input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+}
+
+.loginform input[type="text"]:hover,
+input[type="password"]:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.loginform h1 {
+    color: white;
+}
+
+::placeholder {
+    color: white;
+}
+
+.loginform .enter-field {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.button {
+    padding-top: 10px;
+}
+
+.loginform .form_footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+}
+
+.loginform .form_footer a:link {
+    color: white;
+    text-decoration: none;
+}
+
+.loginform .form_footer a:visited {
+    color: white;
+}
+
+.loginform .form_footer label:hover {
+    cursor: pointer;
+}
+
+.ortherschoice {
+    color: white;
+}
+
+.ortherschoice h3 {
+    padding: 4vh 0 4vh 0;
+}
+
+.ortherschoice .choices_btn{
+    padding-bottom: 2vh;
+}
+
+.ortherschoice .choices_btn .btn {
+    border-radius: 20px;
+    height: 50px;
+    width: 250px;
+}
