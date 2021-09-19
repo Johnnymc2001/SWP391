@@ -15,14 +15,41 @@
     <body>
         <h1>Search Page</h1>
     </body>
-    
+
     <form action="search">
         <input type="text" name="txtSearchValue"/>
         <input type="submit" name="Search"/>
     </form>
-    
+
     <c:set var="list" value="${requestScope.SEARCH_RESULT}"/>
-    <c:forEach items="${list}" varStatus="count">
-        AAA
-    </c:forEach>
+    <c:if test="${not empty list}">
+        <table>
+            <tr>
+                <td>
+                    ID
+                </td>
+                <td>
+                    Title
+                </td>
+                <td>
+                    Content
+                </td>
+            </tr>
+            <c:forEach var="dto" items="${list}"  varStatus="count">
+                <tr>
+                    <td>
+                        ${dto.blogID}
+                    </td>
+                    <td>
+                        ${dto.title}
+                    </td>
+                    <td>
+                        ${dto.content}
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
+    <c:if test="${empty list}">List is Empty!</c:if>
+
 </html>

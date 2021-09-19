@@ -206,7 +206,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public static ArrayList<BlogDTO> searchBlogUsingTitle(String searchTitle) throws SQLException {
+    public ArrayList<BlogDTO> searchBlogUsingTitle(String searchTitle) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -219,10 +219,10 @@ public class BlogDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID "
                         + "FROM Blog "
-                        + "WHERE ownerID LIKE ?";
+                        + "WHERE title LIKE ?";
 
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "*" + searchTitle + "*");
+                stm.setString(1, "%" + searchTitle + "%");
                 rs = stm.executeQuery();
 
                 while (rs.next()) {

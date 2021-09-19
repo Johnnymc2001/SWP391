@@ -47,7 +47,13 @@ public class SearchBlogServlet extends HttpServlet {
         String searchValue = request.getParameter("txtSearchValue");
 
         try {
-            ArrayList<BlogDTO> list = BlogDAO.searchBlogUsingTitle("A");
+            BlogDAO dao = new BlogDAO();
+            ArrayList<BlogDTO> list = dao.searchBlogUsingTitle(searchValue);
+//            if (!list.isEmpty()) {
+//                list.forEach((blog) -> {
+//                    blog.setContent(blog.getContent().substring(0, 40) + "...");
+//                });
+//            }
             request.setAttribute("SEARCH_RESULT", list);
             request.getRequestDispatcher(SEARCH_PAGE).forward(request, response);
         } catch (SQLException ex) {
