@@ -5,8 +5,6 @@
 }
 
 .navbar {
-    -webkit-box-shadow: 0px 8px 6px -6px black;
-    -moz-box-shadow: 0 8px 6px -6px black;
     box-shadow: 0 8px 6px -6px black;
 }
 
@@ -42,6 +40,25 @@ input[type="password"] {
     color: white;
 }
 
+.loginform input[type ="date"]{
+    border-radius: 20px;
+    height: 50px;
+    width: 300px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid transparent;
+    transition: ease-in-out 0.2s;
+    color: white;
+}
+
+.loginform input[type ="date"]:focus{
+    outline: none;
+}
+
+.loginform input[type ="date"]:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
 .loginform .btn {
     border-radius: 20px;
     height: 50px;
@@ -72,7 +89,7 @@ input[type="password"]:hover {
 }
 
 .button {
-    padding-top: 10px;
+    padding-top: 30px;
 }
 
 .loginform .form_footer {
@@ -105,7 +122,7 @@ input[type="password"]:hover {
     padding: 4vh 0 4vh 0;
 }
 
-.ortherschoice .choices_btn{
+.ortherschoice .choices_btn {
     padding-bottom: 2vh;
 }
 
