@@ -1,5 +1,18 @@
 .info_body {
-    background-color: #D4B499;
+    background-image: url("../Icon/Aboutusicon.jpg");
+    background-size: cover;
+}
+
+.navbar .navbar-brand img {
+    width: 50px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.navbar {
+    -webkit-box-shadow: 0px 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
 }
 
 .aboutus_header {
@@ -22,13 +35,34 @@
 
 .aboutus_header h1 {
     position: absolute;
-    top: 20%;
+    top: 25%;
     width: 100%;
     text-align: center;
 }
 
 .team_info {
     padding: 50px;
+}
+
+.team_info .web_introduce{
+    color: #345B63;
+    padding-bottom: 100px;
+}
+
+.team_info .web_introduce h2{
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.team_info .web_introduce h3{
+    box-shadow: 0px 0px 16px -6px black;
+    padding: 20px;
+}
+
+.team_info .devteam_title h1{
+    text-align: center;
+    padding-bottom: 100px;
+    color: #345B63;
 }
 
 .team_info .avatar img {
@@ -56,8 +90,8 @@
     text-align: center;
     color: white;
     top: 43%;
-    z-index: 1;
     opacity: 0;
+    z-index: 1;
     transition: ease-in-out 1s;
     font-family: 'Carattere', cursive;
 }
@@ -71,13 +105,19 @@
 .haotn,
 .longnnh,
 .tamt {
-    padding-bottom: 100px;
+    padding-bottom: 200px;
 }
 
 .team_info .content {
     color: #345B63;
     box-shadow: 10px 10px 10px -6px black;
     font-size: large;
+    font-style: italic;
+    transition: ease-in-out 0.5s;
+}
+
+.team_info .content:hover{
+    box-shadow: 10px 10px 10px -2px black;
 }
 
 .team_info .haotn .content{
@@ -86,10 +126,18 @@
     font-size: large;
 }
 
+.team_info .haotn .content:hover{
+    box-shadow: -10px 10px 10px -2px black;
+}
+
 .team_info .tamt .content{
     color: #345B63;
     box-shadow: -10px 10px 10px -6px black;
     font-size: large;
+}
+
+.team_info .tamt .content:hover{
+    box-shadow: -10px 10px 10px -2px black;
 }
 
 
@@ -116,4 +164,5 @@
     padding-bottom: 20px;
     background-color: #506D84;
     font-family: 'Carattere', cursive;
+    color: white;
 }
