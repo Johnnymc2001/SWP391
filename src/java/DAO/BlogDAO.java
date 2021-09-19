@@ -206,6 +206,58 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
+    public static ArrayList<BlogDTO> searchBlogUsingTitle(String searchTitle) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID "
+                        + "FROM Blog "
+                        + "WHERE ownerID LIKE ?";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "*" + searchTitle + "*");
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int blogID = rs.getInt("blogID");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    Date postDate = rs.getDate("postDate");
+                    String categoryID = rs.getString("categoryID");
+                    String status = rs.getString("status");
+                    int approvedByID = rs.getInt("approvedByID");
+                    Date approvedDate = rs.getDate("approvedDate");
+                    boolean hasAttachment = rs.getBoolean("hasAttachment");
+                    String tags = rs.getString("tags");
+                    int ownerID = rs.getInt("ownerID");
+
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID);
+                    blogList.add(dto);
+                }
+
+                return blogList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
     /**
      * Get all blog in the database
      *

@@ -122,7 +122,7 @@ public class FilterDispatcher implements Filter {
                         resource.lastIndexOf(".jpg") > 0) {
                     url = resource;
                 } else {
-                    String name = resource.substring(0, 1).toUpperCase() + resource.substring(1); // Login
+                    String name = resource;
                     url = roadmap.get(name);
                 }
             }
