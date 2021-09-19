@@ -141,7 +141,7 @@
 }
 
 
-@media only screen and (max-width: 578px) {
+@media only screen and (max-width: 768px) {
     .team_info .haotn .avatar {
         order: 1;
     }
