@@ -57,7 +57,7 @@ public class ImageUploadServlet extends HttpServlet {
 
                     AttachmentDTO dto = new AttachmentDTO(blogID, type, content, bytesImage);
 
-                    AttachmentDAO.uploadImage(dto);
+                    AttachmentDAO.createAttachment(dto);
                 }
             }
 

@@ -5,8 +5,12 @@
  */
 package Controller;
 
+import DAO.BlogDAO;
+import DAO.BlogDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "HomePageServlet", urlPatterns = {"/HomePageServlet"})
 public class HomePageServlet extends HttpServlet {
+
     private static final String HOME_PAGE = "homePage.html";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,8 +37,17 @@ public class HomePageServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            ArrayList<BlogDTO> list = BlogDAO.getAllBlogs();
+
+            request.setAttribute("SEARCH_RESULT", list);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
