@@ -51,17 +51,18 @@ public class CreateAccountServlet extends HttpServlet {
         String url = "register.jsp";
         
         try {
-              if (username.trim().length() < 6 || username.trim().length() > 20) {
+            
+              if (username==null||username.trim().length() < 6 || username.trim().length() > 20) {
                 foundError = true;
                 error.setUserNameLengthError("User name must be from 6-20 character");
-            } if (password.trim().length() < 6 || password.trim().length() > 30) {
+            } if (password==null||password.trim().length() < 6 || password.trim().length() > 30) {
                 foundError = true;
                 error.setPasswordLengthError("Password must be from 6-30 character");
-            } else if (!confirm_password.trim().equals(password.trim())) {
+            } else if (confirm_password==null||!confirm_password.trim().equals(password.trim())) {
                 foundError = true;
                 error.setConfirmNotMatched("Confirm Password is Not Matched");
             }
-            if (fullname.trim().length() < 6 || fullname.trim().length() > 20) {
+            if (fullname==null||fullname.trim().length() < 6 || fullname.trim().length() > 20) {
                 foundError = true;
                 error.setFullNameLengthError("Full Name must be from 6-20 character");
             }
@@ -75,7 +76,7 @@ public class CreateAccountServlet extends HttpServlet {
             }
          
         } finally {
-          response.sendRedirect(url);
+        request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

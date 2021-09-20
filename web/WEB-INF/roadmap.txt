@@ -10,4 +10,3 @@ admin=AdminDashboardServlet
 mentor=MentorDashboardServlet
 image=ImageUploadServlet
 createAccount=CreateAccountServlet
-
