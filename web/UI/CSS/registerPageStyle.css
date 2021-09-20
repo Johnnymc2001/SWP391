@@ -1,13 +1,3 @@
-.navbar .navbar-brand img {
-    width: 50px;
-    height: 30px;
-    border-radius: 50%;
-}
-
-.navbar {
-    box-shadow: 0 8px 6px -6px black;
-}
-
 .bckimg img {
     width: 100%;
     object-fit: cover;
@@ -40,7 +30,7 @@ input[type="password"] {
     color: white;
 }
 
-.loginform input[type ="date"]{
+.loginform input[type="date"] {
     border-radius: 20px;
     height: 50px;
     width: 300px;
@@ -51,11 +41,11 @@ input[type="password"] {
     color: white;
 }
 
-.loginform input[type ="date"]:focus{
+.loginform input[type="date"]:focus {
     outline: none;
 }
 
-.loginform input[type ="date"]:hover{
+.loginform input[type="date"]:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -92,42 +82,14 @@ input[type="password"]:hover {
     padding-top: 30px;
 }
 
-.loginform .form_footer {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: white;
-}
-
-.loginform .form_footer a:link {
-    color: white;
+.loginform a:link {
     text-decoration: none;
 }
 
-.loginform .form_footer a:visited {
+.loginform a:visited {
     color: white;
 }
 
-.loginform .form_footer label:hover {
-    cursor: pointer;
-}
-
-.ortherschoice {
-    color: white;
-}
-
-.ortherschoice h3 {
-    padding: 4vh 0 4vh 0;
-}
-
-.ortherschoice .choices_btn {
-    padding-bottom: 2vh;
-}
-
-.ortherschoice .choices_btn .btn {
-    border-radius: 20px;
-    height: 50px;
-    width: 250px;
+.loginform h6{
+    margin-top: 4vh;
 }

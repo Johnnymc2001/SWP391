@@ -5,26 +5,29 @@
  */
 package Controller;
 
-import DAO.BlogDAO;
-import DAO.BlogDTO;
+import DAO.AttachmentDAO;
+import DAO.AttachmentDTO;
+import Utils.ImageUtils;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "HomePageServlet", urlPatterns = {"/HomePageServlet"})
-public class HomePageServlet extends HttpServlet {
-
-    private static final String HOME_PAGE = "homePage.html";
+@MultipartConfig
+@WebServlet(name = "ImageUploadServlet", urlPatterns = {"/ImageUploadServlet"})
+public class ImageUploadServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,17 +40,50 @@ public class HomePageServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String header = request.getContentType();
+        
         try {
-            response.setContentType("text/html;charset=UTF-8");
-            ArrayList<BlogDTO> list = BlogDAO.getAllBlogs();
+            if (header.contains("multipart/form-data")) { // When Image Exists
+                Part part = request.getPart("file");
+                if (part != null) {
+                    InputStream data = part.getInputStream();
+                    System.out.println("UPLOAD IMAGE");
+                    
+                    int blogID = 2;
+                    String type = "IMAGE";
+                    String content = "";
+                    byte[] bytesImage = ImageUtils.InputStreamToBytes(data);
 
-            request.setAttribute("SEARCH_RESULT", list);
+                    AttachmentDTO dto = new AttachmentDTO(blogID, type, content, bytesImage);
 
-        } catch (SQLException ex) {
+                    AttachmentDAO.createAttachment(dto);
+                }
+            }
+
+            System.out.println("GET IMAGE");
+            ArrayList<AttachmentDTO> list = AttachmentDAO.getAllAttachments();
+            ArrayList<String> base64 = new ArrayList<>();
+
+            for (AttachmentDTO dto : list) {
+                System.out.println(dto.getData());
+                String b64 = ImageUtils.BytesToBase64(dto.getData());
+                base64.add(b64);
+            };
+
+//            byte[] b = list.get(1).getData();
+//            String b64 = Base64.getEncoder().encodeToString(b);
+//            base64.add(b64);
+            System.out.println(base64.size());
+
+            request.setAttribute("IMAGE", base64);
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+            request.getRequestDispatcher("image.jsp").forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

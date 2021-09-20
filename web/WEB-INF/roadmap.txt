@@ -8,3 +8,4 @@ register=RegisterAccountServlet
 student=StudentDashboardServlet
 admin=AdminDashboardServlet
 mentor=MentorDashboardServlet
+image=ImageUploadServlet
