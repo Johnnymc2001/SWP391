@@ -17,18 +17,53 @@ and open the template in the editor.
 </head>
 
 <body>
+<<<<<<< Updated upstream:web/register.html
+=======
+    
+      <c:set var="error" value="${requestScope.ERROR}"/>
+      
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="homePage.html">
+            <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo">
+            FPT Academy
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="homePage.html">Home</a>
+                <a class="nav-item nav-link" href="aboutUs.html">About us</a>
+            </div>
+        </div>
+    </nav>
+
+>>>>>>> Stashed changes:web/register.jsp
     <div class="bckimg">
         <img src="UI/Icon/selfmademan.jpg" alt="">
     </div>
 
     <div class="login_table">
-        <form class="loginform" name="login" action="RegisterServlet" method="POST">
+        <form class="loginform" name="login" action="createAccount" method="POST">
             <h1>Register</h1>
             <div class="enter-field">
                 <input type="text" id="username" placeholder="Username">
+                <c:if test="${not empty error.userNameLengthError}">
+
+                <font color="red">
+                ${error.userNameLengthError}<br/>
+                </font>
+            </c:if>
             </div>
             <div class="enter-field">
                 <input type="text" id="fullname" placeholder="Fullname">
+                 <c:if test="${not empty error.fullNameLengthError}">
+
+                <font color="red">
+                ${error.fullNameLengthError}<br/>
+                </font>
+            </c:if>
             </div>
             <div class="enter-field">
                 <input type="text" id="address" placeholder="Address">
@@ -38,9 +73,25 @@ and open the template in the editor.
             </div>
             <div class="enter-field">
                 <input type="password" id="password" placeholder="Password">
+                
+                  <c:if test="${not empty error.passwordLengthError}">
+
+                <font color="red">
+                ${error.passwordLengthError}<br/>
+                </font>
+            </c:if>
+                
             </div>
             <div class="enter-field">
                 <input type="password" id="confirm_password" placeholder="Confirm password">
+                
+                  <c:if test="${not empty error.confirmNotMatched}">
+
+                <font color="red">
+                ${error.confirmNotMatched}<br/>
+                </font>
+            </c:if>
+                
             </div>
             <div class="button">
                 <button type="submit" class="btn btn-outline-info">Register</button>

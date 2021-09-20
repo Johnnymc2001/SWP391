@@ -7,12 +7,13 @@ package DAO;
 
 
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class Account_Error {
+public class AccountError {
 
    private String userNameLengthError;
     private String passwordLengthError;
@@ -21,6 +22,7 @@ public class Account_Error {
     private String userNameExisted;
     private String accountIDExisted;
     private String phone;
+    private String email;
 
     public String getUserNameLengthError() {
         return userNameLengthError;
@@ -78,7 +80,7 @@ public class Account_Error {
         this.phone = phone;
     }
 
-    public Account_Error(String userNameLengthError, String passwordLengthError, String confirmNotMatched, String fullNameLengthError, String userNameExisted, String accountIDExisted, String phone) {
+    public AccountError(String userNameLengthError, String passwordLengthError, String confirmNotMatched, String fullNameLengthError, String userNameExisted, String accountIDExisted, String phone) {
         this.userNameLengthError = userNameLengthError;
         this.passwordLengthError = passwordLengthError;
         this.confirmNotMatched = confirmNotMatched;
@@ -88,9 +90,19 @@ public class Account_Error {
         this.phone = phone;
     }
 
-    public Account_Error() {
+    public AccountError() {
     }
     
-    
+    public static boolean checkValidEmail(String email) {
+        String regex = "([\\w\\d\\_\\-])+@[\\w]+\\.[\\w\\.]+";
+        Pattern pat = Pattern.compile(regex);
+        return pat.matcher(email).matches();
+    }
+
+    public static boolean checkValidPhoneNumber(String phone) {
+        String regex = "[\\d]{8,10}";
+        Pattern pat = Pattern.compile(regex);
+        return pat.matcher(phone).matches();
+    }
     
 }
