@@ -8,8 +8,6 @@ register=RegisterAccountServlet
 student=StudentDashboardServlet
 admin=AdminDashboardServlet
 mentor=MentorDashboardServlet
-<<<<<<< Updated upstream
 image=ImageUploadServlet
-=======
 createAccount=CreateAccountServlet
->>>>>>> Stashed changes
+

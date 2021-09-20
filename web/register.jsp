@@ -17,9 +17,6 @@ and open the template in the editor.
 </head>
 
 <body>
-<<<<<<< Updated upstream:web/register.html
-=======
-    
       <c:set var="error" value="${requestScope.ERROR}"/>
       
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,7 +36,6 @@ and open the template in the editor.
         </div>
     </nav>
 
->>>>>>> Stashed changes:web/register.jsp
     <div class="bckimg">
         <img src="UI/Icon/selfmademan.jpg" alt="">
     </div>
