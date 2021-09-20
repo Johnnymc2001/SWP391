@@ -21,7 +21,7 @@ import javax.servlet.annotation.MultipartConfig;
 @MultipartConfig
 public class AttachmentDAO {
 
-    public static boolean uploadImage(AttachmentDTO dto) throws SQLException {
+    public static boolean createAttachment(AttachmentDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
