@@ -18,12 +18,14 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author JohnnyMC
  */
+@MultipartConfig
 public class FilterDispatcher implements Filter {
     
     private static final boolean debug = true;
