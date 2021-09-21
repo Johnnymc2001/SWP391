@@ -1,9 +1,13 @@
 package Controller;
 
+import DAO.AttachmentDAO;
+import DAO.AttachmentDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
 import DAO.CreateBlogError;
+import Utils.ImageUtils;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -18,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -48,15 +53,14 @@ public class CreateBlogServlet extends HttpServlet {
         String title = request.getParameter("txtTitle");
         String content = request.getParameter("txtContent");
         String categoryID = request.getParameter("txtCategoryID");
-        boolean hasAttachment = false;
-        if(!request.getParameter("fileAttachment").isEmpty()){
-            hasAttachment = true;
-        }
+
         String tags = request.getParameter("txtTags");
         int studentID =  Integer.parseInt(request.getParameter("studentID"));
         CreateBlogError errors = new CreateBlogError();
         boolean foundErr = false;
-        
+        String header = request.getContentType();
+
+           
         try {
             //1. Check all user error
             if(title.trim().length() < 6 || title.trim().length() > 20) {
@@ -76,7 +80,7 @@ public class CreateBlogServlet extends HttpServlet {
             } else {
                 //4. Call DAO to insert to DB
                 Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-                BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, hasAttachment, tags, studentID);
+                BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID);
                 boolean result = BlogDAO.createBlog(dto);      
                 if(result){
                     url = roadmap.get(HOME_PAGE);

@@ -7,6 +7,7 @@ package DAO;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,14 +23,10 @@ public class BlogDTO implements Serializable {
     private String status;
     private int mentorID;
     private Date approvedDate;
-    private boolean hasAttachment;
     private String tags;
     private int studentID;
 
-    public BlogDTO() {
-    }
-
-    public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date date, boolean hasAttachment, String tags, int studentID) {
+    public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID) {
         this.blogID = blogID;
         this.title = title;
         this.content = content;
@@ -37,35 +34,44 @@ public class BlogDTO implements Serializable {
         this.categoryID = categoryID;
         this.status = status;
         this.mentorID = mentorID;
-        this.approvedDate = date;
-        this.hasAttachment = hasAttachment;
+        this.approvedDate = approvedDate;
         this.tags = tags;
         this.studentID = studentID;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, int mentorID, Date date, boolean hasAttachment, String tags, int studentID) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
         this.categoryID = categoryID;
         this.status = status;
         this.mentorID = mentorID;
-        this.approvedDate = date;
-        this.hasAttachment = hasAttachment;
+        this.approvedDate = approvedDate;
         this.tags = tags;
         this.studentID = studentID;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, boolean hasAttachment, String tags, int studentID) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, String tags, int studentID) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
         this.categoryID = categoryID;
-        this.status = "PENDING";
-        this.hasAttachment = hasAttachment;
+        this.status = status;
         this.tags = tags;
         this.studentID = studentID;
     }
+
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String tags, int studentID) {
+        this.title = title;
+        this.content = content;
+        this.postDate = postDate;
+        this.categoryID = categoryID;
+        status = "PENDING";
+        this.tags = tags;
+        this.studentID = studentID;
+    }
+
+
 
     public Date getPostDate() {
         return postDate;
@@ -131,14 +137,6 @@ public class BlogDTO implements Serializable {
         this.approvedDate = date;
     }
 
-    public boolean isHasAttachment() {
-        return hasAttachment;
-    }
-
-    public void setHasAttachment(boolean attachment) {
-        this.hasAttachment = attachment;
-    }
-
     public String getTags() {
         return tags;
     }
@@ -154,5 +152,4 @@ public class BlogDTO implements Serializable {
     public void setStudentID(int studentID) {
         this.studentID = studentID;
     }
-
 }

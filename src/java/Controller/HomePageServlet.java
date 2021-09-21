@@ -41,6 +41,12 @@ public class HomePageServlet extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             ArrayList<BlogDTO> list = BlogDAO.getAllBlogs();
 
+            if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
+                list.forEach((blog) -> {
+                    blog.setContent(blog.getContent().substring(0, 60) + "...");
+                });
+            }
+
             request.setAttribute("SEARCH_RESULT", list);
 
         } catch (SQLException ex) {

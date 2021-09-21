@@ -55,7 +55,14 @@
             <!--find a way to add attachment-->
             <c:if test="${dtoBL.category ==dtoCL.categoryID}">
                 <div>
-                    <img>${dtoAL.thumbnail}</img>
+                    <c:if test="${dtoBL.hasAttachment == true}">
+                        <c:set var="dtoBlogList" value="${sessionScope.ATTACHMENT_LIST}" />
+                        <c:forEach var="dtoAL" items="${dtoBlogList}">
+                            <c:if test="${dtoBL.blogID == dtoAL.blogID}">
+                                <img>${dtoAL.data}</img>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
                     <h3>${dtoBL.title}</h3>
                     <p>${dtoBL.approvedDate}</p>
                 </div>
