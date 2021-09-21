@@ -81,9 +81,7 @@ public class BlogDAO implements Serializable {
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
 
-                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
-
-                    dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
+                    dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID);
                 }
 
                 return dto;
@@ -133,9 +131,7 @@ public class BlogDAO implements Serializable {
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
 
-                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
-
-                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID);
                     blogList.add(dto);
                 }
 
@@ -186,9 +182,7 @@ public class BlogDAO implements Serializable {
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
 
-                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
-
-                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID);
                     blogList.add(dto);
                 }
 
@@ -239,9 +233,7 @@ public class BlogDAO implements Serializable {
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
                     
-                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
-
-                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID);
                     blogList.add(dto);
                 }
 
@@ -296,9 +288,7 @@ public class BlogDAO implements Serializable {
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
                     
-                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
-
-                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID);
                     blogList.add(dto);
                 }
 
