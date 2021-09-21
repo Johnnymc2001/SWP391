@@ -7,6 +7,7 @@ package Controller;
 
 
 //import DAO.AccountDAO;
+import DAO.AccountDAO;
 import DAO.AccountError;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,6 +72,7 @@ public class CreateAccountServlet extends HttpServlet {
 
                 request.setAttribute("ERROR", error);
             } else {
+                
 //                AccountDAO.createAccount(dto);
                url="login.html";
             }
