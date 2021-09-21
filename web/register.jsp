@@ -21,12 +21,6 @@ and open the template in the editor.
 
 <body>
       <c:set var="error" value="${requestScope.ERROR}"/>
-      
-    
-
-    <div class="bckimg">
-        <img src="UI/Icon/selfmademan.jpg" alt="">
-    </div>
 
     <div class="login_table">
         <form class="loginform" name="login" action="register" method="POST">
