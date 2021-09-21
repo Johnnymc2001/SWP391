@@ -154,7 +154,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public static ArrayList<BlogDTO> getAllBlogFromCategoryId(int categoryId) throws SQLException {
+    public static ArrayList<BlogDTO> getAllBlogFromCategoryId(String categoryId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -170,7 +170,7 @@ public class BlogDAO implements Serializable {
                         + "WHERE categoryID = ?";
 
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, categoryId);
+                stm.setString(1, categoryId);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
@@ -206,7 +206,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public ArrayList<BlogDTO> searchBlogUsingTitle(String searchTitle) throws SQLException {
+    public static ArrayList<BlogDTO> searchBlogUsingTitle(String searchTitle) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;

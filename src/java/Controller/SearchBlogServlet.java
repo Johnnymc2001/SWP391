@@ -45,18 +45,34 @@ public class SearchBlogServlet extends HttpServlet {
 //        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 //        String url = roadmap.get(SEARCH_PAGE);
         String searchValue = request.getParameter("txtSearchValue");
+        String searchType = request.getParameter("txtSearchType");
+        ArrayList<BlogDTO> list = new ArrayList<BlogDTO>();
 
         try {
             if (searchValue == "" || searchValue == null) {
+                if (searchValue != "" || searchValue != null) {
+                    System.out.println(searchValue);
+                    if (searchType != "" || searchType != null) {
+                        System.out.println(searchType);
+                        if (searchType.equals("title")) {
+                            list = BlogDAO.searchBlogUsingTitle(searchValue);
+                            System.out.println("H!");
+                        } else if (searchType.equals("category")) {
+                            list = BlogDAO.getAllBlogFromCategoryId(searchValue);
+                            System.out.println("C!");
+                        }
+                    } else {
 
-            } else {
-                BlogDAO dao = new BlogDAO();
-                ArrayList<BlogDTO> list = dao.searchBlogUsingTitle(searchValue);
+                    }
+
+                } else {
 //            if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
 //                list.forEach((blog) -> {
 //                    blog.setContent(blog.getContent().substring(0, 60) + "...");
 //                });
 //            }
+
+                }
                 request.setAttribute("SEARCH_RESULT", list);
             }
         } catch (SQLException ex) {
