@@ -95,7 +95,7 @@ public class AttachmentDAO {
         return null;
     }
     
-   public static ArrayList<AttachmentDTO> getAllAttachmentsFromBlogID(String blogId) throws SQLException {
+   public static ArrayList<AttachmentDTO> getAllAttachmentsFromBlogID(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -111,7 +111,7 @@ public class AttachmentDAO {
                         + "WHERE blogID = ?";
 
                 stm = con.prepareStatement(sql);
-                stm.setString(1, blogId);
+                stm.setInt(1, blogId);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {

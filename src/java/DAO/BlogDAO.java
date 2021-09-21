@@ -20,7 +20,7 @@ public class BlogDAO implements Serializable {
             con = DBHelpers.makeConnection();
             // 2. Create SQL String
             if (con != null) {
-                String sql = "INSERT INTO Blog (title, content, postDate, categoryID, status, hasAttachment, tags, ownerID) "
+                String sql = "INSERT INTO Blog (title, content, postDate, categoryID, status, tags, ownerID) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
@@ -29,9 +29,8 @@ public class BlogDAO implements Serializable {
                 stm.setDate(3, dto.getPostDate());
                 stm.setString(4, dto.getCategoryID());
                 stm.setString(5, "PENDING");
-                stm.setBoolean(6, dto.isHasAttachment());
-                stm.setString(7, dto.getTags());
-                stm.setInt(8, dto.getStudentID());
+                stm.setString(6, dto.getTags());
+                stm.setInt(7, dto.getStudentID());
 
                 int line = stm.executeUpdate();
 
@@ -61,7 +60,7 @@ public class BlogDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT blogID, title, content,postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID "
+                String sql = "SELECT blogID, title, content,postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
                         + "FROM Blog "
                         + "WHERE blogID = ?";
 
@@ -79,11 +78,12 @@ public class BlogDAO implements Serializable {
                     String status = rs.getString("status");
                     int approvedByID = rs.getInt("approvedByID");
                     Date approvedDate = rs.getDate("approvedDate");
-                    boolean hasAttachment = rs.getBoolean("hasAttachment");
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
 
-                    dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID);
+                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
+
+                    dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
                 }
 
                 return dto;
@@ -113,7 +113,7 @@ public class BlogDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID "
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
                         + "FROM Blog "
                         + "WHERE ownerID = ?";
 
@@ -130,11 +130,12 @@ public class BlogDAO implements Serializable {
                     String status = rs.getString("status");
                     int approvedByID = rs.getInt("approvedByID");
                     Date approvedDate = rs.getDate("approvedDate");
-                    boolean hasAttachment = rs.getBoolean("hasAttachment");
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
 
-                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID);
+                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
+
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
                     blogList.add(dto);
                 }
 
@@ -165,7 +166,7 @@ public class BlogDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID "
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
                         + "FROM Blog "
                         + "WHERE categoryID = ?";
 
@@ -182,11 +183,12 @@ public class BlogDAO implements Serializable {
                     String status = rs.getString("status");
                     int approvedByID = rs.getInt("approvedByID");
                     Date approvedDate = rs.getDate("approvedDate");
-                    boolean hasAttachment = rs.getBoolean("hasAttachment");
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
 
-                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID);
+                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
+
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
                     blogList.add(dto);
                 }
 
@@ -217,7 +219,7 @@ public class BlogDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID "
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
                         + "FROM Blog "
                         + "WHERE title LIKE ?";
 
@@ -234,11 +236,12 @@ public class BlogDAO implements Serializable {
                     String status = rs.getString("status");
                     int approvedByID = rs.getInt("approvedByID");
                     Date approvedDate = rs.getDate("approvedDate");
-                    boolean hasAttachment = rs.getBoolean("hasAttachment");
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
+                    
+                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
 
-                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID);
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
                     blogList.add(dto);
                 }
 
@@ -275,7 +278,7 @@ public class BlogDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID "
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
                         + "FROM Blog";
 
                 stm = con.prepareStatement(sql);
@@ -290,11 +293,12 @@ public class BlogDAO implements Serializable {
                     String status = rs.getString("status");
                     int approvedByID = rs.getInt("approvedByID");
                     Date approvedDate = rs.getDate("approvedDate");
-                    boolean hasAttachment = rs.getBoolean("hasAttachment");
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
+                    
+                    ArrayList<AttachmentDTO> attachmentList = AttachmentDAO.getAllAttachmentsFromBlogID(blogID);
 
-                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, hasAttachment, tags, ownerID);
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, attachmentList, tags, ownerID);
                     blogList.add(dto);
                 }
 
@@ -324,7 +328,7 @@ public class BlogDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "UPDATE Blog "
-                        + "SET title = ?, content = ?, postDate = ?, categoryID = ?, status = ?, approvedByID = ?, approvedDate = ?, hasAttachment = ?, tags = ?, ownerID = ?  "
+                        + "SET title = ?, content = ?, postDate = ?, categoryID = ?, status = ?, approvedByID = ?, approvedDate = ?, tags = ?, ownerID = ?  "
                         + "WHERE blogID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
@@ -336,11 +340,10 @@ public class BlogDAO implements Serializable {
                 stm.setString(5, dto.getStatus());
                 stm.setInt(6, dto.getMentorID());
                 stm.setDate(7, dto.getApprovedDate());
-                stm.setBoolean(8, dto.isHasAttachment());
-                stm.setString(9, dto.getTags());
-                stm.setInt(10, dto.getStudentID());
+                stm.setString(8, dto.getTags());
+                stm.setInt(9, dto.getStudentID());
 
-                stm.setInt(11, blogId);
+                stm.setInt(10, blogId);
                 int line = stm.executeUpdate();
 
                 return line > 0;

@@ -56,22 +56,21 @@ public class SearchBlogServlet extends HttpServlet {
                         System.out.println(searchType);
                         if (searchType.equals("title")) {
                             list = BlogDAO.searchBlogUsingTitle(searchValue);
-                            System.out.println("H!");
                         } else if (searchType.equals("category")) {
                             list = BlogDAO.getAllBlogFromCategoryId(searchValue);
-                            System.out.println("C!");
                         }
                     } else {
 
                     }
 
                 } else {
-//            if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
-//                list.forEach((blog) -> {
-//                    blog.setContent(blog.getContent().substring(0, 60) + "...");
-//                });
-//            }
 
+                }
+
+                if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
+                    list.forEach((blog) -> {
+                        blog.setContent(blog.getContent().substring(0, 60) + "...");
+                    });
                 }
                 request.setAttribute("SEARCH_RESULT", list);
             }
