@@ -32,7 +32,7 @@ and open the template in the editor.
         <form class="loginform" name="login" action="register" method="POST">
             <h1>Register</h1>
             <div class="enter-field">
-                <input type="text" id="username" placeholder="Username">
+                <input type="text" id="username" placeholder="Username" name ="username">
                 <c:if test="${not empty error.userNameLengthError}">
                     <br/>
                 <font color="red">
@@ -41,7 +41,7 @@ and open the template in the editor.
             </c:if>
             </div>
             <div class="enter-field">
-                <input type="text" id="fullname" placeholder="Fullname">
+                <input type="text" id="fullname" placeholder="Fullname" name ="fullname">
                  <c:if test="${not empty error.fullNameLengthError}">
 <br/>
                 <font color="red">
@@ -50,19 +50,19 @@ and open the template in the editor.
             </c:if>
             </div>
             <div class="enter-field">
-                <input type="text" id="address" placeholder="Address">
+                <input type="text" id="email" placeholder="Email" name="email">
             </div>
             <div class="enter-field">
-                <input type="text" id="phone" placeholder="Phone number">
+                <input type="text" id="phone" placeholder="Phone number" name ="phone">
             </div>
             <div class="enter-field">
-                <input type="text" id="address" placeholder="Address">
+                <input type="text" id="address" placeholder="Address" name ="address">
             </div>
             <div class="enter-field">
-                <input type="date" id="birthdate">
+                <input type="date" id="birthdate" name ="birthdate">
             </div>
             <div class="enter-field">
-                <input type="password" id="password" placeholder="Password">
+                <input type="password" id="password" placeholder="Password" name ="password">
                 
                   <c:if test="${not empty error.passwordLengthError}">
 <br/>
@@ -73,7 +73,7 @@ and open the template in the editor.
                 
             </div>
             <div class="enter-field">
-                <input type="password" id="confirm_password" placeholder="Confirm password">
+                <input type="password" id="confirm_password" placeholder="Confirm password" name="confirm_password">
                 
                   <c:if test="${not empty error.confirmNotMatched}">
 <br/>

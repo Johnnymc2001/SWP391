@@ -8,10 +8,18 @@ package Controller;
 
 //import DAO.AccountDAO;
 import DAO.AccountDAO;
+import DAO.AccountDTO;
 import DAO.AccountError;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -37,7 +45,7 @@ public class CreateAccountServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         ServletContext sc = request.getServletContext();
@@ -47,10 +55,13 @@ public class CreateAccountServlet extends HttpServlet {
         String address = request.getParameter("address");
         String password = request.getParameter("password");
         String confirm_password = request.getParameter("confirm_password");
+        String email = request.getParameter("emai");
+        String phone = request.getParameter("phone");
+        String birthdate = request.getParameter("birthdate");
        boolean foundError = false;
         AccountError error = new AccountError();
         String url = "register.jsp";
-        
+        System.out.println("birthdate: "+birthdate);
         try {
             
               if (username==null||username.trim().length() < 6 || username.trim().length() > 20) {
@@ -72,8 +83,19 @@ public class CreateAccountServlet extends HttpServlet {
 
                 request.setAttribute("ERROR", error);
             } else {
-                
-//                AccountDAO.createAccount(dto);
+
+//                   Date  date =new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);  
+                 java.sql.Date sqlDate;
+                  sqlDate = java.sql.Date.valueOf( birthdate );
+                AccountDTO dto = new AccountDTO();
+                dto.setAddress(address);
+                dto.setUsername(username);
+                dto.setPassword(password);
+                dto.setFullname(fullname);
+                dto.setPhone(phone);
+               dto.setBirthday(  sqlDate);
+              
+               AccountDAO.createAccount(dto);
                url="login.html";
             }
          
@@ -94,7 +116,13 @@ public class CreateAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CreateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -108,7 +136,13 @@ public class CreateAccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CreateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
