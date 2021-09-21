@@ -61,15 +61,16 @@ public class CreateBlogServlet extends HttpServlet {
         boolean foundErr = false;
         String header = request.getContentType();
 
-//        byte[] bytesImage = null;
-//
-//        if (header.contains("multipart/form-data")) { // When Image Exists
-//            Part part = request.getPart("fileAttachment");
-//            if (part != null) {
-//                InputStream data = part.getInputStream();
-//                bytesImage = ImageUtils.InputStreamToBytes(data);
-//            }
-//        }
+        byte[] bytesImage = null;
+
+        if (header.contains("multipart/form-data")) { // When Image Exists
+            Part part = request.getPart("fileAttachment");
+            if (part != null) {
+                InputStream data = part.getInputStream();
+                bytesImage = ImageUtils.InputStreamToBytes(data);
+            }
+        }
+        
         try {
             //1. Check all user error
             if (title.trim().length() < 6 || title.trim().length() > 20) {
@@ -92,7 +93,7 @@ public class CreateBlogServlet extends HttpServlet {
                 Date postDate = new Date(Calendar.getInstance().getTime().getTime());
                 BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID);
                 BlogDAO dao = new BlogDAO();
-                boolean result = dao.createBlog(dto, null);
+                boolean result = dao.createBlog(dto, bytesImage);
                 if (result) {
                     url = roadmap.get(HOME_PAGE);
                 }

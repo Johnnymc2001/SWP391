@@ -95,7 +95,7 @@ public class CreateAccountServlet extends HttpServlet {
                 dto.setPhone(phone);
                dto.setBirthday(  sqlDate);
               
-               AccountDAO.createAccount(dto);
+//               AccountDAO.createAccount(dto);
                url="login.html";
             }
          
