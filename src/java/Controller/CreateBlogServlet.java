@@ -76,7 +76,7 @@ public class CreateBlogServlet extends HttpServlet {
             } else {
                 //4. Call DAO to insert to DB
                 Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-                BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, hasAttachment, tags, studentID);
+                BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, tags, studentID);
                 boolean result = BlogDAO.createBlog(dto);      
                 if(result){
                     url = roadmap.get(HOME_PAGE);

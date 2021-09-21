@@ -68,8 +68,16 @@ public class BlogDTO implements Serializable {
         this.studentID = studentID;
     }
 
-    
-    
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, String tags, int studentID) {
+        this.title = title;
+        this.content = content;
+        this.postDate = postDate;
+        this.categoryID = categoryID;
+        this.status = status;
+        this.tags = tags;
+        this.studentID = studentID;
+    }
+
     public Date getPostDate() {
         return postDate;
     }
@@ -157,7 +165,5 @@ public class BlogDTO implements Serializable {
     public void setAttachmentList(ArrayList<AttachmentDTO> attachmentList) {
         this.attachmentList = attachmentList;
     }
-    
-    
 
 }
