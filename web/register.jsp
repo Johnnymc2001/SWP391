@@ -29,7 +29,7 @@ and open the template in the editor.
     </div>
 
     <div class="login_table">
-        <form class="loginform" name="login" action="createAccount" method="POST">
+        <form class="loginform" name="login" action="register" method="POST">
             <h1>Register</h1>
             <div class="enter-field">
                 <input type="text" id="username" placeholder="Username">
