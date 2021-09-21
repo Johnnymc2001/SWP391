@@ -68,6 +68,12 @@ and open the template in the editor.
                 <input type="text" id="address" placeholder="Address">
             </div>
             <div class="enter-field">
+                <input type="text" id="phone" placeholder="Phone number">
+            </div>
+            <div class="enter-field">
+                <input type="text" id="address" placeholder="Address">
+            </div>
+            <div class="enter-field">
                 <input type="date" id="birthdate">
             </div>
             <div class="enter-field">
