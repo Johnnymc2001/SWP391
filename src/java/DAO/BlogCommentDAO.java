@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class BlogCommentDAO implements Serializable {
 
-    public static boolean createBlogComment(BlogCommentDTO dto) throws SQLException {
+    public  boolean createBlogComment(BlogCommentDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         int line = 0;
@@ -56,7 +56,7 @@ public class BlogCommentDAO implements Serializable {
         return false;
     }
 
-    public static ArrayList<BlogCommentDTO> getAllBlogComment() throws SQLException {
+    public  ArrayList<BlogCommentDTO> getAllBlogComment() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -101,7 +101,7 @@ public class BlogCommentDAO implements Serializable {
         return null;
     }
 
-    public static BlogCommentDTO getBlogCommentFromCommentID(int commentId) throws SQLException {
+    public  BlogCommentDTO getBlogCommentFromCommentID(int commentId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -147,7 +147,7 @@ public class BlogCommentDAO implements Serializable {
         return null;
     }
 
-    public static ArrayList<BlogCommentDTO> getAllBlogCommentFromBlogID(int blogId) throws SQLException {
+    public  ArrayList<BlogCommentDTO> getAllBlogCommentFromBlogID(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -195,7 +195,7 @@ public class BlogCommentDAO implements Serializable {
         return null;
     }
 
-    public static boolean updateBlogComment(int commentId, BlogCommentDTO dto) throws SQLException {
+    public  boolean updateBlogComment(int commentId, BlogCommentDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -227,7 +227,7 @@ public class BlogCommentDAO implements Serializable {
         return false;
     }
 
-    public static boolean deleteBlogComment(int commentId) throws SQLException {
+    public  boolean deleteBlogComment(int commentId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 

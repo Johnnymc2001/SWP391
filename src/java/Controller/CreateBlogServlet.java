@@ -30,8 +30,9 @@ import javax.servlet.http.Part;
  */
 @WebServlet(name = "CreateBlogServlet", urlPatterns = {"/CreateBlogServlet"})
 public class CreateBlogServlet extends HttpServlet {
+
     private final String HOME_PAGE = "";
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,50 +47,60 @@ public class CreateBlogServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url = roadmap.get(HOME_PAGE);
         String title = request.getParameter("txtTitle");
         String content = request.getParameter("txtContent");
-        String categoryID = request.getParameter("txtCategoryID");
+        String categoryID = "DL";
 
         String tags = request.getParameter("txtTags");
-        int studentID =  Integer.parseInt(request.getParameter("studentID"));
+        int studentID = 2;
         CreateBlogError errors = new CreateBlogError();
         boolean foundErr = false;
         String header = request.getContentType();
 
-           
+//        byte[] bytesImage = null;
+//
+//        if (header.contains("multipart/form-data")) { // When Image Exists
+//            Part part = request.getPart("fileAttachment");
+//            if (part != null) {
+//                InputStream data = part.getInputStream();
+//                bytesImage = ImageUtils.InputStreamToBytes(data);
+//            }
+//        }
         try {
             //1. Check all user error
-            if(title.trim().length() < 6 || title.trim().length() > 20) {
+            if (title.trim().length() < 6 || title.trim().length() > 20) {
                 foundErr = true;
                 errors.setTitleLengthErr("Username is required from 6 to 20 characters");
             }
-            
-            if(content.trim().length() < 6 || content.trim().length() > 30) {
+
+            if (content.trim().length() < 6 || content.trim().length() > 30) {
                 foundErr = true;
                 errors.setContentLengthErr("Password is required from 6 to 30 characters");
-            } 
-            
+            }
+
             //2. Process
-            if(foundErr){
+            if (foundErr) {
                 //3. Send errors to users
                 request.setAttribute("CREATE_ERROR", errors);
+                url = "createBlog.jsp";
             } else {
                 //4. Call DAO to insert to DB
                 Date postDate = new Date(Calendar.getInstance().getTime().getTime());
                 BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID);
-                boolean result = BlogDAO.createBlog(dto);      
-                if(result){
+                BlogDAO dao = new BlogDAO();
+                boolean result = dao.createBlog(dto, null);
+                if (result) {
                     url = roadmap.get(HOME_PAGE);
                 }
             }
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("CreateBlogServlet _ SQL " + msg);
-        }finally{
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

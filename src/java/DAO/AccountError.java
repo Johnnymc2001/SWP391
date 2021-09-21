@@ -93,13 +93,13 @@ public class AccountError {
     public AccountError() {
     }
     
-    public static boolean checkValidEmail(String email) {
+    public  boolean checkValidEmail(String email) {
         String regex = "([\\w\\d\\_\\-])+@[\\w]+\\.[\\w\\.]+";
         Pattern pat = Pattern.compile(regex);
         return pat.matcher(email).matches();
     }
 
-    public static boolean checkValidPhoneNumber(String phone) {
+    public  boolean checkValidPhoneNumber(String phone) {
         String regex = "[\\d]{8,10}";
         Pattern pat = Pattern.compile(regex);
         return pat.matcher(phone).matches();

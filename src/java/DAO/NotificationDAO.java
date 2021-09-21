@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class NotificationDAO implements Serializable {
 
-    public static boolean createNotification(NotificationDTO dto) throws SQLException {
+    public  boolean createNotification(NotificationDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -56,7 +56,7 @@ public class NotificationDAO implements Serializable {
         return false;
     }
 
-    public static ArrayList<NotificationDTO> getAllNotification() throws SQLException {
+    public  ArrayList<NotificationDTO> getAllNotification() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -103,7 +103,7 @@ public class NotificationDAO implements Serializable {
         return null;
     }
 
-    public static ArrayList<NotificationDTO> getAllNotificationFromAccountID(int accountId) throws SQLException {
+    public  ArrayList<NotificationDTO> getAllNotificationFromAccountID(int accountId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -152,7 +152,7 @@ public class NotificationDAO implements Serializable {
         return null;
     }
 
-    public static NotificationDTO getNotificationFromNotificationID(int notificationId) throws SQLException {
+    public  NotificationDTO getNotificationFromNotificationID(int notificationId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -199,7 +199,7 @@ public class NotificationDAO implements Serializable {
         return null;
     }
 
-    public static boolean updateNotification(int notificationId, NotificationDTO dto) throws SQLException {
+    public  boolean updateNotification(int notificationId, NotificationDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -232,7 +232,7 @@ public class NotificationDAO implements Serializable {
         return false;
     }
 
-    public static boolean deleteNotification(int notificationId) throws SQLException {
+    public  boolean deleteNotification(int notificationId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 

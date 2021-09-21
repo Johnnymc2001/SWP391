@@ -57,9 +57,12 @@
                 <div>
                     <c:if test="${dtoBL.hasAttachment == true}">
                         <c:set var="dtoBlogList" value="${sessionScope.ATTACHMENT_LIST}" />
+                        
+                        
                         <c:forEach var="dtoAL" items="${dtoBlogList}">
                             <c:if test="${dtoBL.blogID == dtoAL.blogID}">
                                 <img>${dtoAL.data}</img>
+                                 <img src="data:image/jpg;base64,${base64}" width="240" height="300"/>
                             </c:if>
                         </c:forEach>
                     </c:if>

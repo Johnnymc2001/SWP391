@@ -42,14 +42,15 @@ public class ImageUploadServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String header = request.getContentType();
-        
+        AttachmentDAO dao = new AttachmentDAO();
+
         try {
             if (header.contains("multipart/form-data")) { // When Image Exists
                 Part part = request.getPart("file");
                 if (part != null) {
                     InputStream data = part.getInputStream();
                     System.out.println("UPLOAD IMAGE");
-                    
+
                     int blogID = 2;
                     String type = "IMAGE";
                     String content = "";
@@ -57,12 +58,12 @@ public class ImageUploadServlet extends HttpServlet {
 
                     AttachmentDTO dto = new AttachmentDTO(blogID, type, content, bytesImage);
 
-                    AttachmentDAO.createAttachment(dto);
+                    dao.createAttachment(dto);
                 }
             }
 
             System.out.println("GET IMAGE");
-            ArrayList<AttachmentDTO> list = AttachmentDAO.getAllAttachments();
+            ArrayList<AttachmentDTO> list = dao.getAllAttachments();
             ArrayList<String> base64 = new ArrayList<>();
 
             for (AttachmentDTO dto : list) {

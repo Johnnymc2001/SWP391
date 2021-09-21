@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class BlogRatingDAO implements Serializable {
 
-    public static boolean createBlogRating(BlogRatingDTO dto) throws SQLException {
+    public  boolean createBlogRating(BlogRatingDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         int line = 0;
@@ -56,7 +56,7 @@ public class BlogRatingDAO implements Serializable {
         return false;
     }
 
-    public static ArrayList<BlogRatingDTO> getAllBlogRating() throws SQLException {
+    public  ArrayList<BlogRatingDTO> getAllBlogRating() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -102,7 +102,7 @@ public class BlogRatingDAO implements Serializable {
         return null;
     }
 
-    public static BlogRatingDTO getBlogRatingFromRatingID(int ratingId) throws SQLException {
+    public  BlogRatingDTO getBlogRatingFromRatingID(int ratingId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -148,7 +148,7 @@ public class BlogRatingDAO implements Serializable {
         return null;
     }
 
-    public static ArrayList<BlogRatingDTO> getAllBlogRatingFromBlogID(int blogId) throws SQLException {
+    public  ArrayList<BlogRatingDTO> getAllBlogRatingFromBlogID(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -196,7 +196,7 @@ public class BlogRatingDAO implements Serializable {
         return null;
     }
 
-    public static boolean updateBlogRating(int ratingId, BlogRatingDTO dto) throws SQLException {
+    public  boolean updateBlogRating(int ratingId, BlogRatingDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -227,7 +227,7 @@ public class BlogRatingDAO implements Serializable {
         return false;
     }
 
-    public static boolean deleteBlogRating(int ratingId) throws SQLException {
+    public  boolean deleteBlogRating(int ratingId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 

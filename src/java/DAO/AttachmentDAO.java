@@ -21,7 +21,7 @@ import javax.servlet.annotation.MultipartConfig;
 @MultipartConfig
 public class AttachmentDAO {
 
-    public static boolean createAttachment(AttachmentDTO dto) throws SQLException {
+    public  boolean createAttachment(AttachmentDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -49,7 +49,7 @@ public class AttachmentDAO {
 
     }
 
-    public static ArrayList<AttachmentDTO> getAllAttachments() throws SQLException {
+    public  ArrayList<AttachmentDTO> getAllAttachments() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -95,7 +95,7 @@ public class AttachmentDAO {
         return null;
     }
     
-   public static ArrayList<AttachmentDTO> getAllAttachmentsFromBlogID(int blogId) throws SQLException {
+   public  ArrayList<AttachmentDTO> getAllAttachmentsFromBlogID(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;

@@ -47,6 +47,7 @@ public class SearchBlogServlet extends HttpServlet {
         String searchValue = request.getParameter("txtSearchValue");
         String searchType = request.getParameter("txtSearchType");
         ArrayList<BlogDTO> list = new ArrayList<BlogDTO>();
+        BlogDAO dao = new BlogDAO();
 
         try {
             if (searchValue == "" || searchValue == null) {
@@ -55,9 +56,9 @@ public class SearchBlogServlet extends HttpServlet {
                     if (searchType != "" || searchType != null) {
                         System.out.println(searchType);
                         if (searchType.equals("title")) {
-                            list = BlogDAO.searchBlogUsingTitle(searchValue);
+                            list = dao.searchBlogUsingTitle(searchValue);
                         } else if (searchType.equals("category")) {
-                            list = BlogDAO.getAllBlogFromCategoryId(searchValue);
+                            list = dao.getAllBlogFromCategoryId(searchValue);
                         }
                     } else {
 

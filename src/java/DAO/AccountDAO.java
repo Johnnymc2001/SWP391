@@ -19,7 +19,7 @@ public class AccountDAO implements Serializable {
      * @return true if success, false if failed
      * @throws SQLException
      */
-    public static boolean createAccount(AccountDTO dto) throws SQLException {
+    public boolean createAccount(AccountDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         int line = 0;
@@ -66,7 +66,7 @@ public class AccountDAO implements Serializable {
      * @return Return an integer if found, 0 if not found
      * @throws SQLException
      */
-    public static int getAccountIDByUsername(String username) throws SQLException {
+    public int getAccountIDByUsername(String username) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -117,7 +117,7 @@ public class AccountDAO implements Serializable {
      * @return AccountDTO if found, NULL if not found
      * @throws SQLException
      */
-    public static AccountDTO checkLogin(String usr, String pwd) throws SQLException {
+    public AccountDTO checkLogin(String usr, String pwd) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -170,7 +170,7 @@ public class AccountDAO implements Serializable {
         return null;
     }
 
-    public static AccountDTO getAccountFromAcoountID(int accountId) throws SQLException {
+    public AccountDTO getAccountFromAcoountID(int accountId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -226,7 +226,7 @@ public class AccountDAO implements Serializable {
      * @return ArrayList<AccountDTO> if found, NULL if not found
      * @throws SQLException
      */
-    public static ArrayList<AccountDTO> getAllAccount() throws SQLException {
+    public ArrayList<AccountDTO> getAllAccount() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;

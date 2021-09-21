@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class AwardDAO implements Serializable {
 
-    public static boolean createAward(AwardDTO dto) throws SQLException {
+    public  boolean createAward(AwardDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -38,7 +38,7 @@ public class AwardDAO implements Serializable {
         return false;
     }
 
-    public static AwardDTO getAwardFromAwardID(int awardId) throws SQLException {
+    public  AwardDTO getAwardFromAwardID(int awardId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -83,7 +83,7 @@ public class AwardDAO implements Serializable {
         return null;
     }
 
-    public static ArrayList<AwardDTO> getAwardFromBlogId(int blogId) throws SQLException {
+    public  ArrayList<AwardDTO> getAwardFromBlogId(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -134,7 +134,7 @@ public class AwardDAO implements Serializable {
      * @return ArrayList<BlogDTO> if found, NULL if not found
      * @throws SQLException
      */
-    public static ArrayList<AwardDTO> getAllAward() throws SQLException {
+    public  ArrayList<AwardDTO> getAllAward() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -178,7 +178,7 @@ public class AwardDAO implements Serializable {
         return null;
     }
 
-    public static boolean updateAward(int awardId, AwardDTO dto) throws SQLException {
+    public  boolean updateAward(int awardId, AwardDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -209,7 +209,7 @@ public class AwardDAO implements Serializable {
         return false;
     }
 
-    public static boolean deleteAward(int awardId) throws SQLException {
+    public  boolean deleteAward(int awardId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 

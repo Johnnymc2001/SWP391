@@ -11,7 +11,7 @@ import java.sql.Date;
 
 public class BlogDAO implements Serializable {
 
-    public static boolean createBlog(BlogDTO dto) throws SQLException {
+    public  boolean createBlog(BlogDTO dto, byte[] data) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -21,7 +21,7 @@ public class BlogDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "INSERT INTO Blog (title, content, postDate, categoryID, status, tags, ownerID) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, dto.getTitle());
@@ -33,6 +33,23 @@ public class BlogDAO implements Serializable {
                 stm.setInt(7, dto.getStudentID());
 
                 int line = stm.executeUpdate();
+
+                if (data != null) {
+                    AttachmentDTO attachmentDTO = null;
+
+                    try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            int id = (int) generatedKeys.getLong(1);
+
+                            attachmentDTO = new AttachmentDTO(id, "IMAGE", "", data);
+
+                        } else {
+                            throw new SQLException("Creating user failed, no ID obtained.");
+                        }
+                    }
+
+                    AttachmentDAO.createAttachment(attachmentDTO);
+                }
 
                 return line > 0;
             } // End connection
@@ -49,7 +66,7 @@ public class BlogDAO implements Serializable {
      * @return BlogDTO if found, null if not found
      * @throws SQLException
      */
-    public static BlogDTO getBlogFromBlogID(int blogId) throws SQLException {
+    public  BlogDTO getBlogFromBlogID(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -100,7 +117,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public static ArrayList<BlogDTO> getAllBlogFromAccountId(int accountId) throws SQLException {
+    public  ArrayList<BlogDTO> getAllBlogFromAccountId(int accountId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -151,7 +168,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public static ArrayList<BlogDTO> getAllBlogFromCategoryId(String categoryId) throws SQLException {
+    public  ArrayList<BlogDTO> getAllBlogFromCategoryId(String categoryId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -202,7 +219,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public static ArrayList<BlogDTO> searchBlogUsingTitle(String searchTitle) throws SQLException {
+    public  ArrayList<BlogDTO> searchBlogUsingTitle(String searchTitle) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -232,7 +249,7 @@ public class BlogDAO implements Serializable {
                     Date approvedDate = rs.getDate("approvedDate");
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
-                    
+
                     BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID);
                     blogList.add(dto);
                 }
@@ -259,7 +276,7 @@ public class BlogDAO implements Serializable {
      * @return ArrayList<BlogDTO> if found, NULL if not found
      * @throws SQLException
      */
-    public static ArrayList<BlogDTO> getAllBlogs() throws SQLException {
+    public  ArrayList<BlogDTO> getAllBlogs() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -287,7 +304,7 @@ public class BlogDAO implements Serializable {
                     Date approvedDate = rs.getDate("approvedDate");
                     String tags = rs.getString("tags");
                     int ownerID = rs.getInt("ownerID");
-                    
+
                     BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID);
                     blogList.add(dto);
                 }
@@ -308,7 +325,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public static boolean updateBlog(int blogId, BlogDTO dto) throws SQLException {
+    public  boolean updateBlog(int blogId, BlogDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -344,7 +361,7 @@ public class BlogDAO implements Serializable {
         return false;
     }
 
-    public static boolean deleteBlog(int blogId) throws SQLException {
+    public  boolean deleteBlog(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 

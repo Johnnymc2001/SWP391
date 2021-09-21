@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class CategoryDAO {
 
-    public static boolean createCategory(CategoryDTO dto) throws SQLException {
+    public  boolean createCategory(CategoryDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         int line = 0;
@@ -53,7 +53,7 @@ public class CategoryDAO {
         return false;
     }
 
-    public static ArrayList<CategoryDTO> getAllCategory() throws SQLException {
+    public  ArrayList<CategoryDTO> getAllCategory() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -96,7 +96,7 @@ public class CategoryDAO {
         return null;
     }
 
-    public static CategoryDTO getCategoryFromCategoryID(String categoryId) throws SQLException {
+    public  CategoryDTO getCategoryFromCategoryID(String categoryId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -139,7 +139,7 @@ public class CategoryDAO {
         return null;
     }
 
-    public static boolean updateCategory(String categoryId, CategoryDTO dto) throws SQLException {
+    public  boolean updateCategory(String categoryId, CategoryDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -167,7 +167,7 @@ public class CategoryDAO {
         return false;
     }
 
-    public static boolean deleteCategory(String categoryId) throws SQLException {
+    public  boolean deleteCategory(String categoryId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
