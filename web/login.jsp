@@ -1,9 +1,12 @@
+<%-- 
+    Document   : login
+    Created on : Sep 22, 2021, 9:22:23 AM
+    Author     : henry
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
 
 <head>
@@ -17,6 +20,7 @@ and open the template in the editor.
 </head>
 
 <body>
+    
     <div class="login_table">
         <form class="loginform" name="login" action="login" method="POST">
             <h1>Login</h1>
@@ -41,7 +45,7 @@ and open the template in the editor.
                 </div>
             </div>
         </form>
-        <form action="register.html">
+        <form action="register.jsp">
             <div class="ortherschoice">
                 <h3>-- Or --</h3>
                 <p class="choices_btn">
