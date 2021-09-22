@@ -37,7 +37,7 @@ public class RoadmapListener implements ServletContextListener {
             try {
                 System.out.println("=== URL MAPPING TABLE ===");
                 while ((line = br.readLine()) != null) {
-                    if (line.trim().length() >= 0 || !line.contains("#")) {
+                    if (line.trim().length() > 0 && !line.contains("#")) {
                         String split[] = line.split("=");
 
                         String src = split[0];
