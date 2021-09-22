@@ -12,9 +12,20 @@ register=CreateAccountServlet
 createBlog=CreateBlogServlet
 
 student=StudentDashboardServlet
-admin=AdminDashboardServlet
+
 mentor=MentorDashboardServlet
 image=ImageUploadServlet
+
+### ADMIN
+
+admin=AdminDashboardServlet
+admin/listAccount=AdminListAccountServlet
+admin/listBlog=AdminListBlogServlet
+admin/adminAction=AdminActionServlet
+
+admin/adminPage = admin.jsp
+admin/listAccount = adminListAccount.jsp
+admin/listBlog= adminListBlog.jsp
 
 #### JSP FILE
 
