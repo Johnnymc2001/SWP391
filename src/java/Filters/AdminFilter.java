@@ -5,11 +5,13 @@ package Filters;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import DAO.AccountDAO;
+import DAO.AccountDTO;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -109,29 +111,37 @@ public class AdminFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         String uri = req.getRequestURI();
-        String url;
+        String url = "home";
 
-        List<String> paths = Arrays.asList(uri.split("/"));
+        AccountDAO dao = new AccountDAO();
+        AccountDTO dto;
+        dto = (AccountDTO) req.getSession().getAttribute("LOGIN_ACCOUNT");
 
-        if (paths.size() <= 3) {
-            // Goto dashboard
-            System.out.println("Admin Dashboard!");
-            url = "admin";
-        } else {
-            // Check paths
-            String miniPath = paths.get(3);
-            if (null == miniPath) {
+        log(uri);
+        if (dto != null && dto.getRole().equals("ADMIN")) {
+
+            System.out.println("AUTH");
+            List<String> paths = Arrays.asList(uri.split("/"));
+
+            if (paths.size() <= 3) {
+                System.out.println("Admin Dashboard!");
                 url = "admin";
             } else {
-                url = "admin/" + paths.get(3);
-            }
-        }
+                // Check paths
+                String miniPath = paths.get(3);
+                if (null == miniPath) {
+                    url = "admin";
+                } else {
+                    url = "admin/" + paths.get(3);
+                }
 
-        try {
+            }
             url = roadmap.get(url);
             req.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
-
+        } else {
+            url = "home";
+            url = roadmap.get(url);
+            req.getRequestDispatcher(url).forward(request, response);
         }
     }
 

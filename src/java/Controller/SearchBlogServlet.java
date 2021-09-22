@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchBlogServlet extends HttpServlet {
 
     private final String HOME_PAGE = "";
-    private final String SEARCH_PAGE = "search.jsp";
+    private final String SEARCH_PAGE = "searchPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,6 +47,8 @@ public class SearchBlogServlet extends HttpServlet {
         String searchValue = request.getParameter("txtSearchValue");
         String searchType = request.getParameter("txtSearchType");
         ArrayList<BlogDTO> list = new ArrayList<BlogDTO>();
+        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+        String url = roadmap.get(SEARCH_PAGE);
         BlogDAO dao = new BlogDAO();
 
         try {
@@ -65,7 +67,7 @@ public class SearchBlogServlet extends HttpServlet {
                     }
 
                 } else {
-
+                    list = dao.searchBlogUsingTitle(searchValue);
                 }
 
                 if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
@@ -78,7 +80,7 @@ public class SearchBlogServlet extends HttpServlet {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            request.getRequestDispatcher(SEARCH_PAGE).forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
