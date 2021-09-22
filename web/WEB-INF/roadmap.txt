@@ -1,11 +1,27 @@
 =HomePageServlet
+
+### SERVLET FILE
+
 home=HomePageServlet
-createBlog=CreateBlogServlet
 blog=BlogDetailServlet
 search=SearchBlogServlet
+
 login=LoginServlet
 register=CreateAccountServlet
+
+createBlog=CreateBlogServlet
+
 student=StudentDashboardServlet
 admin=AdminDashboardServlet
 mentor=MentorDashboardServlet
 image=ImageUploadServlet
+
+#### JSP FILE
+
+homePage=homePage.jsp
+createBlogPage=createBlog.jsp
+searchPage=search.jsp
+imagePage=image.jsp
+
+loginPage=login.jsp
+registerPage=register.jsp

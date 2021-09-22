@@ -35,17 +35,22 @@ public class RoadmapListener implements ServletContextListener {
             BufferedReader br = new BufferedReader(fr);
 
             try {
+                System.out.println("=== URL MAPPING TABLE ===");
                 while ((line = br.readLine()) != null) {
-                    String split[] = line.split("=");
+                    if (line.trim().length() >= 0 || !line.contains("#")) {
+                        String split[] = line.split("=");
 
-                    String src = split[0];
-                    String dst = split[1];
+                        String src = split[0];
+                        String dst = split[1];
 
-                    if (src.equals("")) {
-                        src = "default";
+                        if (src.equals("")) {
+                            src = "default";
+                        }
+
+                        roadmap.put(src, dst);
+                        System.out.println(src + " ---> " + dst);
                     }
 
-                    roadmap.put(src, dst);
                 }
             } catch (IOException ex) {
                 context.log("RoadmapListener _ IO " + ex.getMessage());
@@ -70,6 +75,6 @@ public class RoadmapListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        
+
     }
 }
