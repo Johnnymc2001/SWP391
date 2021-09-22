@@ -47,8 +47,13 @@ public class BlogDAO implements Serializable {
                             throw new SQLException("Creating user failed, no ID obtained.");
                         }
                     }
+
                     AttachmentDAO dao = new AttachmentDAO();
                     dao.createAttachment(attachmentDTO);
+
+
+//                    AttachmentDAO.createAttachment(attachmentDTO);
+
                 }
 
                 return line > 0;

@@ -18,13 +18,13 @@ and open the template in the editor.
 
 <body>
     <div class="login_table">
-        <form class="loginform" name="login" action="LoginServlet" method="POST">
+        <form class="loginform" name="login" action="login" method="POST">
             <h1>Login</h1>
             <div class="enter-field">
-                <input type="text" id="username" placeholder="Username">
+                <input type="text" id="username" placeholder="Username" name ="username">
             </div>
             <div class="enter-field">
-                <input type="password" id="password" placeholder="Password">
+                <input type="password" id="password" placeholder="Password" name="password">
             </div>
             <div class="button">
                 <button type="submit" class="btn btn-outline-info">Login</button>
