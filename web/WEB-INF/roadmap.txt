@@ -32,7 +32,6 @@ admin/listBlog= adminListBlog.jsp
 homePage=homePage.jsp
 createBlogPage=createBlog.jsp
 searchPage=search.jsp
-searchPage2=searchPage.jsp
 imagePage=image.jsp
 
 loginPage=login.jsp

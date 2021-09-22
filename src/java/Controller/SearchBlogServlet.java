@@ -52,31 +52,27 @@ public class SearchBlogServlet extends HttpServlet {
         BlogDAO dao = new BlogDAO();
 
         try {
-            if (searchValue == "" || searchValue == null) {
-                if (searchValue != "" || searchValue != null) {
-                    System.out.println(searchValue);
-                    if (searchType != "" || searchType != null) {
-                        System.out.println(searchType);
-                        if (searchType.equals("title")) {
-                            list = dao.searchBlogUsingTitle(searchValue);
-                        } else if (searchType.equals("category")) {
-                            list = dao.getAllBlogFromCategoryId(searchValue);
-                        }
-                    } else {
-
+            if (null != searchValue && searchValue != "") {
+                if (null != searchType && searchType != "") {
+                    if (searchType.equals("title")) {
+                        list = dao.searchBlogUsingTitle(searchValue);
+                    } else if (searchType.equals("category")) {
+                        list = dao.getAllBlogFromCategoryId(searchValue);
                     }
-
                 } else {
                     list = dao.searchBlogUsingTitle(searchValue);
                 }
-
-                if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
-                    list.forEach((blog) -> {
-                        blog.setContent(blog.getContent().substring(0, 60) + "...");
-                    });
-                }
-                request.setAttribute("SEARCH_RESULT", list);
+            } else {
             }
+
+//                if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
+//                    list.forEach((blog) -> {
+//                        blog.setContent(blog.getContent().substring(0, 60) + "...");
+//                    });
+//                }
+
+            System.out.println(list);
+            request.setAttribute("SEARCH_RESULT", list);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -84,7 +80,7 @@ public class SearchBlogServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

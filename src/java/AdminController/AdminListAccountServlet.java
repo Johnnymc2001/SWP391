@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package AdminController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,10 +18,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminDashboardServlet", urlPatterns = {"/AdminDashboardServlet"})
-public class AdminDashboardServlet extends HttpServlet {
-    public final String ADMIN_PAGE = "admin.jsp";
-    
+@WebServlet(name = "AdminListAccountServlet", urlPatterns = {"/AdminListAccountServlet"})
+public class AdminListAccountServlet extends HttpServlet {
+
+    public final String SUCCESS = "adminListAccount.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,13 +35,12 @@ public class AdminDashboardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession session = request.getSession();
-        
-        
-        request.setAttribute(ADMIN_PAGE, this);
 
-        request.getRequestDispatcher(ADMIN_PAGE).forward(request, response);
+        HttpSession session = request.getSession();
+
+        request.setAttribute(SUCCESS, this);
+
+        request.getRequestDispatcher(SUCCESS).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
