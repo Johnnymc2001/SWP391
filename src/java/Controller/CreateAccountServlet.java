@@ -77,6 +77,8 @@ public class CreateAccountServlet extends HttpServlet {
             if (fullname==null||fullname.trim().length() < 6 || fullname.trim().length() > 20) {
                 foundError = true;
                 error.setFullNameLengthError("Full Name must be from 6-20 character");
+            } if (email==null || error.checkValidEmail(email)==false){
+                error.setEmailErrorFormat("Email is not valid");
             }
 
             if (foundError) {

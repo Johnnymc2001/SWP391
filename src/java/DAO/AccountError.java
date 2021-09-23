@@ -21,8 +21,8 @@ public class AccountError {
     private String fullNameLengthError;
     private String userNameExisted;
     private String accountIDExisted;
-    private String phone;
-    private String email;
+    private String phoneErrorFormat;
+    private String emailErrorFormat;
 
     public String getUserNameLengthError() {
         return userNameLengthError;
@@ -73,21 +73,22 @@ public class AccountError {
     }
 
     public String getPhone() {
-        return phone;
+        return phoneErrorFormat;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phoneErrorFormat = phone;
     }
 
-    public AccountError(String userNameLengthError, String passwordLengthError, String confirmNotMatched, String fullNameLengthError, String userNameExisted, String accountIDExisted, String phone) {
+    public AccountError(String userNameLengthError, String passwordLengthError, String confirmNotMatched, String fullNameLengthError, String userNameExisted, String accountIDExisted, String phone,String emailErrorFormat ) {
         this.userNameLengthError = userNameLengthError;
         this.passwordLengthError = passwordLengthError;
         this.confirmNotMatched = confirmNotMatched;
         this.fullNameLengthError = fullNameLengthError;
         this.userNameExisted = userNameExisted;
         this.accountIDExisted = accountIDExisted;
-        this.phone = phone;
+        this.phoneErrorFormat = phone;
+        this.emailErrorFormat=emailErrorFormat;
     }
 
     public AccountError() {
