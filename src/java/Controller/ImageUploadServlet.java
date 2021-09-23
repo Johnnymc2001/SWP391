@@ -5,8 +5,6 @@
  */
 package Controller;
 
-import DAO.AttachmentDAO;
-import DAO.AttachmentDTO;
 import Utils.ImageUtils;
 import java.io.IOException;
 import java.io.InputStream;
