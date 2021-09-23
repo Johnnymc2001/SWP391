@@ -72,7 +72,7 @@ public class SearchBlogServlet extends HttpServlet {
 //                }
 
             System.out.println(list);
-            request.setAttribute("SEARCH_RESULT", list);
+            request.setAttribute("BLOG_INFORMATION", list);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {

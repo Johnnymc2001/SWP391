@@ -32,6 +32,7 @@ import javax.servlet.http.Part;
 public class CreateBlogServlet extends HttpServlet {
 
     private final String HOME_PAGE = "";
+    private final String CREATE_PAGE = "createBlogPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -87,7 +88,7 @@ public class CreateBlogServlet extends HttpServlet {
             if (foundErr) {
                 //3. Send errors to users
                 request.setAttribute("CREATE_ERROR", errors);
-                url = "createBlog.jsp";
+                url = roadmap.get(CREATE_PAGE);
             } else {
                 //4. Call DAO to insert to DB
                 Date postDate = new Date(Calendar.getInstance().getTime().getTime());

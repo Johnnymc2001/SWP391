@@ -22,10 +22,15 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="homePage.html">
+        <a class="navbar-brand" href="home">
             <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo">
             FPT Academy
         </a>
+        <div>
+        <form action="createBlogPage">
+            <input type="submit" value="Create a Blog" />
+        </form>
+        </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,7 +42,6 @@
             </div>
         </div>
     </nav>
-
     <div>
         <div class="xavalo">
             <img src="UI/Icon/FPTCampus.jpg" alt="FPTCampus">
@@ -45,6 +49,7 @@
             <h2>Academic Blog for FPT</h2>
         </div>
     </div>
+    
     
     <section class="">
         <c:set var="dtoBlogList" value="${requestScope.BLOG_INFORMATION}" />
