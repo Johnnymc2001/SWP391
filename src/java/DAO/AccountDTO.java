@@ -40,6 +40,7 @@ public class AccountDTO implements Serializable {
         this.phone = phone;
         this.role = role;
         this.categoryID = categoryID;
+        this.status = status;
     }
 
     public AccountDTO(String username, String password, String fullname, String address, Date birthday, String email, String phone, String role, String categoryID, String status) {
@@ -52,6 +53,7 @@ public class AccountDTO implements Serializable {
         this.phone = phone;
         this.role = role;
         this.categoryID = categoryID;
+        this.status = status;
     }
 
     public int getAccountID() {

@@ -241,7 +241,7 @@ public class AccountDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role ,categoryID, status "
+                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status "
                         + "FROM Account";
 
                 stm = con.prepareStatement(sql);
@@ -279,7 +279,7 @@ public class AccountDAO implements Serializable {
         }
         return null;
     }
-    
+
     public boolean updateAccount(int accountID, AccountDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -294,7 +294,6 @@ public class AccountDAO implements Serializable {
                         + "WHERE accountID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
-
 
                 int line = stm.executeUpdate();
 
