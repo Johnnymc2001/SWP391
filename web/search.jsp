@@ -54,7 +54,7 @@
     </div>
 
     <div class="container-fluid">
-<!--        <div class="search-box col-md-5">
+        <div class="search-box col-md-5">
             <form action="search" method="POST">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -65,43 +65,43 @@
                         </select>
                     </div>
                     <input type="text" placeholder="Search..." class="form-control"
-                        aria-label="Search input with dropdown button"  value="${param.txtSearchValue}">
+                           aria-label="Search input with dropdown button"  value="${param.txtSearchValue}">
                     <div class="input-group-append">
                         <button class="btn btn-info" type="submit">Search</button>
                     </div>
                 </div>
             </form>
-        </div>-->
-<c:set var="list" value="${requestScope.SEARCH_RESULT}"/>
-    <c:if test="${not empty list}">
-        <table>
-            <tr>
-                <td>
-                    ID
-                </td>
-                <td>
-                    Title
-                </td>
-                <td>
-                    Content
-                </td>
-            </tr>
-            <c:forEach var="dto" items="${list}"  varStatus="count">
-                <tr>
-                    <td>
-                        ${dto.blogID}
-                    </td>
-                    <td>
-                        ${dto.title}
-                    </td>
-                    <td>
-                        ${dto.content}
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
-    <c:if test="${empty list}">List is Empty!</c:if>
+        </div>
+            <c:set var="list" value="${requestScope.SEARCH_RESULT}"/>
+                <c:if test="${not empty list}">
+                    <table>
+                        <tr>
+                            <td>
+                                ID
+                            </td>
+                            <td>
+                                Title
+                            </td>
+                            <td>
+                                Content
+                            </td>
+                        </tr>
+                        <c:forEach var="dto" items="${list}"  varStatus="count">
+                            <tr>
+                                <td>
+                                    ${dto.blogID}
+                                </td>
+                                <td>
+                                    ${dto.title}
+                                </td>
+                                <td>
+                                    ${dto.content}
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+                <c:if test="${empty list}">List is Empty!</c:if>
 
     </div>
 
