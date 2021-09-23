@@ -45,7 +45,7 @@
                 </div>
             </div>
         </form>
-        <form action="register.jsp">
+        <form action="registerPage">
             <div class="ortherschoice">
                 <h3>-- Or --</h3>
                 <p class="choices_btn">

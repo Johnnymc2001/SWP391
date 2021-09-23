@@ -42,7 +42,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
                 <!-- If user aren't login then show the login link -->
-                <a class="nav-item nav-link" href="login.html">Login</a>
+                <a class="nav-item nav-link" href="loginPage">Login</a>
                 <!-- If user already login then show user link which navigate to user profile page on click -->
                 <a class="nav-item nav-link" href="userProfile.html">Username</a>
             </div>

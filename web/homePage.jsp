@@ -33,7 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
                 <a class="nav-item nav-link" href="aboutUs.html">About us</a>
-                <a class="nav-item nav-link" href="login.jsp">Login</a>
+                <a class="nav-item nav-link" href="loginPage">Login</a>
             </div>
         </div>
     </nav>
