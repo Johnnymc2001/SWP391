@@ -18,9 +18,8 @@ image=ImageUploadServlet
 
 ### ADMIN
 
-admin=AdminDashboardServlet
 admin/dashboard=AdminDashboardServlet
-admin/redirect=AdminRedirectServlet
+admin/redirect=HomePageServlet
 
 admin/listAccount=AdminListAccountServlet
 admin/listBlog=AdminListBlogServlet
