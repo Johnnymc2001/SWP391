@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package Dead;
 
 import Utils.DBHelpers;
 import java.io.InputStream;

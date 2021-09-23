@@ -12,7 +12,7 @@ import java.sql.Date;
  *
  * @author JohnnyMC
  */
-public class AccountDTO implements Serializable{
+public class AccountDTO implements Serializable {
 
     private int accountID;
     private String username;
@@ -24,11 +24,12 @@ public class AccountDTO implements Serializable{
     private String phone;
     private String role;
     private String categoryID;
+    private String status;
 
     public AccountDTO() {
     }
 
-    public AccountDTO(int accountID, String username, String password, String fullname, String address, Date birthday, String email, String phone, String role, String categoryID) {
+    public AccountDTO(int accountID, String username, String password, String fullname, String address, Date birthday, String email, String phone, String role, String categoryID, String status) {
         this.accountID = accountID;
         this.username = username;
         this.password = password;
@@ -39,9 +40,10 @@ public class AccountDTO implements Serializable{
         this.phone = phone;
         this.role = role;
         this.categoryID = categoryID;
+        this.status = status;
     }
 
-    public AccountDTO(String username, String password, String fullname, String address, Date birthday, String email, String phone, String role, String categoryID) {
+    public AccountDTO(String username, String password, String fullname, String address, Date birthday, String email, String phone, String role, String categoryID, String status) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -51,6 +53,7 @@ public class AccountDTO implements Serializable{
         this.phone = phone;
         this.role = role;
         this.categoryID = categoryID;
+        this.status = status;
     }
 
     public int getAccountID() {
@@ -131,6 +134,14 @@ public class AccountDTO implements Serializable{
 
     public void setCategoryID(String categoryID) {
         this.categoryID = categoryID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

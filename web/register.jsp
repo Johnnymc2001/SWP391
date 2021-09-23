@@ -80,7 +80,7 @@ and open the template in the editor.
             <div class="button">
                 <button type="submit" class="btn btn-outline-info">Register</button>
             </div>
-            <h6><a href="login.jsp">Already have an account ?</a></h6>
+            <h6><a href="loginPage">Already have an account ?</a></h6>
         </form>
     </div>
 

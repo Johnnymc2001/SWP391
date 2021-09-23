@@ -54,7 +54,7 @@ public class HomePageServlet extends HttpServlet {
 //                    blog.setContent(blog.getContent().substring(0, 60) + "...");
 //                });
 //            }
-            request.setAttribute("SEARCH_RESULT", list);
+            request.setAttribute("BLOG_INFORMATION", list);
 
         } catch (SQLException ex) {
             ex.printStackTrace();

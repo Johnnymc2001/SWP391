@@ -9,40 +9,70 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sign Up</title>
+        <title>Home Page</title>
+        <link rel="icon" href="UI/Icon/Ficon.png" type="image/icon type">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="UI/CSS/createBlogPageStyle.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Create a Post</h1>
-        <form action="createBlog" method="POST">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="home">
+                <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo">
+                FPT Academy
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link" href="aboutUs.html">About us</a>
+                    <a class="nav-item nav-link" href="loginPage">Login</a>
+                </div>
+            </div>
+        </nav>
+        <div>
+            <div class="xavalo">
+                <img src="UI/Icon/FPTCampus.jpg" alt="FPTCampus">
+                <h1>Blog</h1>
+                <h2>Academic Blog for FPT</h2>
+            </div>
+        </div>
+        
+        </br><form action="createBlog" method="POST">
             <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
             Title: <br/><input type="text" value="${param.title}" name="txtTitle" maxlength="60" size="62"/> <br/>
             <c:if test="${not empty errors.titleLengthErr}">
                 <font color="red">
-                    ${errors.titleLengthErr}
+                ${errors.titleLengthErr}
                 </font><br/>
             </c:if>
             Content:<br/> <textarea name="txtContent" rows="10" cols="50">Enter</textarea><br/>
             <c:if test="${not empty errors.contentLengthErr}">
                 <font color="red">
-                    ${errors.contentLengthErr}
+                ${errors.contentLengthErr}
                 </font><br/>
             </c:if>
-                
+
             <br/><input type="file" id="attachment" name="fileAttachment">
-            <input type="submit"><br/>
-            
+
             <select name="categoryBox">
-            <c:set var="dtoList" value="${sessionScope.CATEGORY}"/>
-            <c:forEach var="dto" items="${dtoList}" varStatus="counter">
-                <c:if test="${not empty dto && dto.qty!=0}">
-                    <option>${dto.categoryName}</option>
-                </c:if>
-            </c:forEach>
-                    
-            <input type="submit" value="Post" name="btnAction" />
-            <input type="reset" value="Reset" /><br/>
-            <a href="Home">Return to Home</a>
+                <c:set var="dtoList" value="${sessionScope.CATEGORY}"/>
+                <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                    <c:if test="${not empty dto && dto.qty!=0}">
+                        <option>${dto.categoryName}</option>
+                    </c:if>
+                </c:forEach>
+
+                <input type="submit" value="Post"/>
+                <input type="reset" value="Reset" /><br/>
+                <a href="home">Return to Home</a>
         </form>
     </body>
 </html>

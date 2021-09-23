@@ -18,14 +18,16 @@ image=ImageUploadServlet
 
 ### ADMIN
 
-admin=AdminDashboardServlet
+admin/dashboard=AdminDashboardServlet
+admin/redirect=HomePageServlet
+
 admin/listAccount=AdminListAccountServlet
 admin/listBlog=AdminListBlogServlet
 admin/adminAction=AdminActionServlet
 
-admin/adminPage = admin.jsp
-admin/listAccount = adminListAccount.jsp
-admin/listBlog= adminListBlog.jsp
+admin/dashboardPage=admin.jsp
+admin/listAccountPage=adminListAccount.jsp
+admin/listBlogPage=adminListBlog.jsp
 
 #### JSP FILE
 

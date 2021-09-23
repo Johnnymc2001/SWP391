@@ -47,4 +47,8 @@
         <max-request-size>418018841</max-request-size>
         <file-size-threshold>1048576</file-size-threshold>
     </multipart-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page>
 </web-app>
