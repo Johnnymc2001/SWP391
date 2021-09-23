@@ -26,8 +26,8 @@
 
 <body>
     
-    <c:if test="${empty param.txtSearchValue}">
-        <c:set var="param.txtSearchValue" value="${empty param.txtSearchValue}"/>
+     <c:if test="${empty param.txtSearchValue}">
+        <c:set var="param.txtSearchValue" value=""/>
     </c:if>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -65,7 +65,7 @@
                         </select>
                     </div>
                     <input type="text" placeholder="Search..." class="form-control"
-                           aria-label="Search input with dropdown button"  value="${param.txtSearchValue}">
+                           aria-label="Search input with dropdown button"  value="${param.txtSearchValue}" name="txtSearchValue">
                     <div class="input-group-append">
                         <button class="btn btn-info" type="submit">Search</button>
                     </div>
