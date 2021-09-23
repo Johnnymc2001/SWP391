@@ -1,6 +1,5 @@
-
 package DAO;
-        
+
 import DAO.AccountDTO;
 import Utils.DBHelpers;
 import java.io.Serializable;
@@ -12,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AccountDAO implements Serializable {
+
     /**
      * Register New Account
      *
@@ -29,8 +29,8 @@ public class AccountDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "INSERT INTO Account (username, password, fullname, address, birthdate, email, phone, role ,categoryID) "
-                        + "VALUES (?,?,?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO Account (username, password, fullname, address, birthdate, email, phone, role ,categoryID, status) "
+                        + "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
                 stm = con.prepareStatement(sql);
 
@@ -42,7 +42,8 @@ public class AccountDAO implements Serializable {
                 stm.setString(6, dto.getEmail());
                 stm.setString(7, dto.getPhone());
                 stm.setString(8, dto.getRole());
-                stm.setString(9, dto.getRole() == "Mentor" ? dto.getCategoryID() : null);
+                stm.setString(9, "Mentor".equals(dto.getRole()) ? dto.getCategoryID() : null);
+                stm.setString(10, "AVAILABLE");
 
                 line = stm.executeUpdate();
                 return line != 0;
@@ -80,7 +81,7 @@ public class AccountDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT accountID "
                         + "FROM Account "
-                        + "WHERE username = ? ";
+                        + "WHERE username = ?";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
@@ -128,9 +129,9 @@ public class AccountDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role ,categoryID "
+                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role ,categoryID, status "
                         + "FROM Account "
-                        + "WHERE username = ? AND password = ?";
+                        + "WHERE username = ? AND password = ? ";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, usr);
@@ -150,8 +151,9 @@ public class AccountDAO implements Serializable {
                     String phone = rs.getString("phone");
                     String role = rs.getString("role");
                     String categoryID = "Mentor".equals(role) ? rs.getString("categoryID") : "None";
+                    String status = rs.getString("status");
 
-                    dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID);
+                    dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status);
                 }
 
                 return dto;
@@ -181,9 +183,9 @@ public class AccountDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role ,categoryID "
+                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role , categoryID, status "
                         + "FROM Account "
-                        + "Where accountID = ?";
+                        + "Where accountID = ? ";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, accountId);
@@ -201,7 +203,9 @@ public class AccountDAO implements Serializable {
                     String phone = rs.getString("phone");
                     String role = rs.getString("role");
                     String categoryID = "Mentor".equals(role) ? rs.getString("categoryID") : "None";
-                    dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID);
+                    String status = rs.getString("status");
+
+                    dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status);
                 }
 
                 return dto;
@@ -237,7 +241,7 @@ public class AccountDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role ,categoryID "
+                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role ,categoryID, status "
                         + "FROM Account";
 
                 stm = con.prepareStatement(sql);
@@ -254,7 +258,9 @@ public class AccountDAO implements Serializable {
                     String phone = rs.getString("phone");
                     String role = rs.getString("role");
                     String categoryID = "Mentor".equals(role) ? rs.getString("categoryID") : "None";
-                    AccountDTO dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID);
+                    String status = rs.getString("status");
+
+                    AccountDTO dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status);
                     accountList.add(dto);
                 }
 
@@ -272,5 +278,87 @@ public class AccountDAO implements Serializable {
             }
         }
         return null;
+    }
+    
+    public boolean updateAccount(int accountID, AccountDTO dto) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            // 1. Connect DB
+            con = DBHelpers.makeConnection();
+            // 2. Create SQL String
+            if (con != null) {
+                String sql = "UPDATE Account "
+                        + "SET username = ?, password = ?, fullname = ?, address = ?, birthday = ?, email = ?, phone = ?, role = ?, categoryID = ?, status = ?  "
+                        + "WHERE accountID = ?";
+                // 3. Create statement object
+                stm = con.prepareStatement(sql);
+
+
+                int line = stm.executeUpdate();
+
+                return line > 0;
+            } // End connection
+        } finally {
+
+        }
+        return false;
+    }
+
+    public boolean activateAccount(int accountID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            // 1. Connect DB
+            con = DBHelpers.makeConnection();
+            // 2. Create SQL String
+            if (con != null) {
+                String sql = "UPDATE Account "
+                        + "SET status = ?  "
+                        + "WHERE accountID = ?";
+                // 3. Create statement object
+                stm = con.prepareStatement(sql);
+
+                stm.setString(1, "AVAILABLE");
+                stm.setInt(2, accountID);
+
+                int line = stm.executeUpdate();
+
+                return line > 0;
+            } // End connection
+        } finally {
+
+        }
+        return false;
+    }
+
+    public boolean deactivateAccount(int accountID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            // 1. Connect DB
+            con = DBHelpers.makeConnection();
+            // 2. Create SQL String
+            if (con != null) {
+                String sql = "UPDATE Account "
+                        + "SET status = ?  "
+                        + "WHERE accountID = ?";
+                // 3. Create statement object
+                stm = con.prepareStatement(sql);
+
+                stm.setString(1, "UNAVAILABLE");
+                stm.setInt(2, accountID);
+
+                int line = stm.executeUpdate();
+
+                return line > 0;
+            } // End connection
+        } finally {
+
+        }
+        return false;
     }
 }

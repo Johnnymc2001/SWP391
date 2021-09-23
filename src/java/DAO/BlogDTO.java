@@ -25,8 +25,9 @@ public class BlogDTO implements Serializable {
     private Date approvedDate;
     private String tags;
     private int studentID;
+    private byte[] attachment;
 
-    public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID) {
+    public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID, byte[] attachment) {
         this.blogID = blogID;
         this.title = title;
         this.content = content;
@@ -37,9 +38,10 @@ public class BlogDTO implements Serializable {
         this.approvedDate = approvedDate;
         this.tags = tags;
         this.studentID = studentID;
+        this.attachment = attachment;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID, byte[] attachment) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
@@ -49,9 +51,10 @@ public class BlogDTO implements Serializable {
         this.approvedDate = approvedDate;
         this.tags = tags;
         this.studentID = studentID;
+        this.attachment = attachment;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, String tags, int studentID) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, String tags, int studentID, byte[] attachment) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
@@ -59,9 +62,10 @@ public class BlogDTO implements Serializable {
         this.status = status;
         this.tags = tags;
         this.studentID = studentID;
+        this.attachment = attachment;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String tags, int studentID) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String tags, int studentID, byte[] attachment) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
@@ -69,6 +73,7 @@ public class BlogDTO implements Serializable {
         status = "PENDING";
         this.tags = tags;
         this.studentID = studentID;
+        this.attachment = attachment;
     }
 
 
@@ -152,4 +157,14 @@ public class BlogDTO implements Serializable {
     public void setStudentID(int studentID) {
         this.studentID = studentID;
     }
+
+    public byte[] getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(byte[] attachment) {
+        this.attachment = attachment;
+    }
+    
+    
 }
