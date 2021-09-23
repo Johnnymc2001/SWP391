@@ -58,3 +58,62 @@ h2 {
     font-family: 'Carattere', cursive;
     font-size: 500%;
 }
+
+.header-bar {
+    height: 100px;
+}
+
+.container-fluid {
+    padding: 0 50px 0 50px;
+}
+
+.category-name {
+    padding: 0 0 20px 20px;
+}
+
+.blog-box {
+    padding: 20px;
+    text-align: center;
+    font-family: 'Inconsolata', monospace;
+}
+
+.pic-box {
+    background-color: rgba(128, 126, 126, 0.15);
+    text-align: center;
+}
+
+.pic-box h5 {
+    position: absolute;
+    top: 70%;
+    height: 25px;
+    width: 85%;
+    overflow: hidden;
+    color: white;
+    opacity: 0;
+    font-weight: 400;
+    transition: all 0.2s;
+}
+
+.pic-box:hover h5 {
+    opacity: 1;
+}
+
+.pic-box:hover img {
+    filter: brightness(90%);
+}
+
+.blog-box img {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    object-fit: cover;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.small-description {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 300;
+    align-items: center;
+}
