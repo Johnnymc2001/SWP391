@@ -19,13 +19,14 @@ image=ImageUploadServlet
 ### ADMIN
 
 admin=AdminDashboardServlet
+admin/dashboard=AdminDashboardServlet
 admin/redirect=AdminRedirectServlet
 
 admin/listAccount=AdminListAccountServlet
 admin/listBlog=AdminListBlogServlet
 admin/adminAction=AdminActionServlet
 
-admin/dashboard=admin.jsp
+admin/dashboardPage=admin.jsp
 admin/listAccountPage=adminListAccount.jsp
 admin/listBlogPage=adminListBlog.jsp
 
