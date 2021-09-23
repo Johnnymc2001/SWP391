@@ -45,7 +45,7 @@ public class SearchBlogServlet extends HttpServlet {
 //        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 //        String url = roadmap.get(SEARCH_PAGE);
         String searchValue = request.getParameter("txtSearchValue");
-        String searchType = request.getParameter("txtSearchType");
+        String searchCategory = request.getParameter("txtSearchCategory");
         ArrayList<BlogDTO> list = new ArrayList<BlogDTO>();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url = roadmap.get(SEARCH_PAGE);
@@ -53,16 +53,11 @@ public class SearchBlogServlet extends HttpServlet {
 
         try {
             if (null != searchValue && searchValue != "") {
-                if (null != searchType && searchType != "") {
-                    if (searchType.equals("title")) {
-                        list = dao.searchBlogUsingTitle(searchValue);
-                    } else if (searchType.equals("category")) {
-                        list = dao.getAllBlogFromCategoryId(searchValue);
-                    }
-                } else {
+                if (searchCategory.equals("ALL") || searchCategory.equals("")) {
                     list = dao.searchBlogUsingTitle(searchValue);
+                } else {
+                    list = dao.searchBlogUsingTitleAndCategoryID(searchValue, searchCategory);
                 }
-            } else {
             }
 
 //                if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
@@ -70,7 +65,6 @@ public class SearchBlogServlet extends HttpServlet {
 //                        blog.setContent(blog.getContent().substring(0, 60) + "...");
 //                    });
 //                }
-
             System.out.println(list);
             request.setAttribute("SEARCH_RESULT", list);
         } catch (SQLException ex) {
