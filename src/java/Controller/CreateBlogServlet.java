@@ -55,6 +55,7 @@ public class CreateBlogServlet extends HttpServlet {
         String title = request.getParameter("txtTitle");
         String content = request.getParameter("txtContent");
         String categoryID = "DL";
+        byte[] attachment = null;
 
         String tags = request.getParameter("txtTags");
         int studentID = 2;
@@ -92,9 +93,9 @@ public class CreateBlogServlet extends HttpServlet {
             } else {
                 //4. Call DAO to insert to DB
                 Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-                BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID);
+                BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID, attachment);
                 BlogDAO dao = new BlogDAO();
-                boolean result = dao.createBlog(dto, bytesImage);
+                boolean result = dao.createBlog(dto);
                 if (result) {
                     url = roadmap.get(HOME_PAGE);
                 }
