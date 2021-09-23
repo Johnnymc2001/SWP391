@@ -46,16 +46,12 @@
         </div>
     </div>
     
-    <c:set var="dtoCatList" value="${sessionScope.CATEGORY_LIST}" />
-    <c:forEach var="dtoCL" items="${dtoCatList}">
-        <h1>${dtoCL.categoryName}</h1>
     <section class="">
-        <c:set var="dtoBlogList" value="${sessionScope.BLOG_INFORMATION}" />
+        <c:set var="dtoBlogList" value="${requestScope.BLOG_INFORMATION}" />
         <c:forEach var="dtoBL" items="${dtoBlogList}">
             <!--find a way to add attachment-->
-            <c:if test="${dtoBL.category ==dtoCL.categoryID}">
                 <div>
-                    <c:if test="${dtoBL.hasAttachment == true}">
+                   <%-- <c:if test="${dtoBL.hasAttachment == true}">
                         <c:set var="dtoBlogList" value="${sessionScope.ATTACHMENT_LIST}" />
                         
                         
@@ -65,14 +61,13 @@
                                  <img src="data:image/jpg;base64,${base64}" width="240" height="300"/>
                             </c:if>
                         </c:forEach>
-                    </c:if>
+                    </c:if>--%>
                     <h3>${dtoBL.title}</h3>
                     <p>${dtoBL.approvedDate}</p>
                 </div>
-            </c:if>
-        </c:forEach>
+                </c:forEach>
     </section>    
-    </c:forEach>
+    
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
