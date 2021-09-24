@@ -7,8 +7,9 @@ package Controller;
 
 import DAO.BlogDAO;
 import DAO.BlogDTO;
+import DAO.CategoryDAO;
+import DAO.CategoryDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,15 +47,20 @@ public class HomePageServlet extends HttpServlet {
             url = roadmap.get(HOME_PAGE);
 
             response.setContentType("text/html;charset=UTF-8");
-            BlogDAO dao = new BlogDAO();
-            ArrayList<BlogDTO> list = dao.getAllBlogs();
 
 //            if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
 //                list.forEach((blog) -> {
 //                    blog.setContent(blog.getContent().substring(0, 60) + "...");
 //                });
 //            }
-            request.setAttribute("BLOG_INFORMATION", list);
+            BlogDAO dao = new BlogDAO();
+            ArrayList<BlogDTO> blogList = dao.getAllBlogs();
+
+            CategoryDAO catDao = new CategoryDAO();
+            ArrayList<CategoryDTO> catList = catDao.getAllCategory();
+
+            request.setAttribute("CATEGORY_LIST", catList);
+            request.setAttribute("BLOG_LIST", blogList);
 
         } catch (SQLException ex) {
             ex.printStackTrace();

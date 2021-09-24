@@ -117,32 +117,34 @@ public class AdminFilter implements Filter {
         AccountDTO dto;
         dto = (AccountDTO) req.getSession().getAttribute("LOGIN_ACCOUNT");
 
-        log(uri);
-        if (dto != null && dto.getRole().equals("ADMIN")) {
+//        if (dto != null && dto.getRole().equals("ADMIN")) {
+        url = "admin";
+        List<String> paths = Arrays.asList(uri.split("/"));
+        String lastChar = uri.substring(uri.length() - 1);
 
-            System.out.println("AUTH");
-            List<String> paths = Arrays.asList(uri.split("/"));
-
-            if (paths.size() <= 3) {
-                System.out.println("Admin Dashboard!");
-                url = "admin";
+        if (paths.size() <= 3) {
+            if (!"/".equals(lastChar)) {
+                res.sendRedirect("admin/");
+                return;
             } else {
-                // Check paths
-                String miniPath = paths.get(3);
-                if (null == miniPath) {
-                    url = "admin";
-                } else {
-                    url = "admin/" + paths.get(3);
-                }
-
+                url += "/dashboard";
             }
-            url = roadmap.get(url);
-            req.getRequestDispatcher(url).forward(request, response);
         } else {
-            url = "home";
-            url = roadmap.get(url);
-            req.getRequestDispatcher(url).forward(request, response);
+            for (int i = 3; i < paths.size(); i++) {
+                url += "/" + paths.get(i);
+            }
+
         }
+        
+//        System.out.println(url);
+
+        url = roadmap.get(url);
+        req.getRequestDispatcher(url).forward(request, response);
+//        } else {
+//            url = "home";
+//            url = roadmap.get(url);
+//            req.getRequestDispatcher(url).forward(request, response);
+//        }
     }
 
     /**

@@ -76,7 +76,7 @@ public class CategoryDAO {
                     String categoryID = rs.getString("categoryID");
                     String categoryName = rs.getString("categoryName");
 
-                    dto = new CategoryDTO();
+                    dto = new CategoryDTO(categoryID, categoryName);
                     categoryList.add(dto);
                 }
 
@@ -120,7 +120,7 @@ public class CategoryDAO {
                     String categoryID = rs.getString("categoryID");
                     String categoryName = rs.getString("categoryName");
 
-                    dto = new CategoryDTO();
+                     dto = new CategoryDTO(categoryID, categoryName);
                 }
 
                 return dto;

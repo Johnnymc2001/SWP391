@@ -7,6 +7,8 @@ package AdminController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +20,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminDashboardServlet", urlPatterns = {"/AdminDashboardServlet"})
+@WebServlet(name = "AdminDashboardServlet", urlPatterns = {"/admin/AdminDashboardServlet"})
 public class AdminDashboardServlet extends HttpServlet {
 
-    public final String SUCCESS = "admin.jsp";
+    public final String SUCCESS = "admin/dashboardPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,11 +38,11 @@ public class AdminDashboardServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        HttpSession session = request.getSession();
+        ServletContext sc = request.getServletContext();
+        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
-        request.setAttribute(SUCCESS, this);
-
-        request.getRequestDispatcher(SUCCESS).forward(request, response);
+        String url = roadmap.get(SUCCESS);
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
