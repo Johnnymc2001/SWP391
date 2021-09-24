@@ -79,6 +79,8 @@ public class CreateAccountServlet extends HttpServlet {
                 error.setFullNameLengthError("Full Name must be from 6-20 character");
             } if (email==null || error.checkValidEmail(email)==false){
                 error.setEmailErrorFormat("Email is not valid");
+            } if ( phone==null || error.checkValidPhoneNumber(phone)==false){
+                error.setPhoneErrorFormat("Phone is not valid");
             }
 
             if (foundError) {

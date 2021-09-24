@@ -72,13 +72,23 @@ public class AccountError {
         this.accountIDExisted = accountIDExisted;
     }
 
-    public String getPhone() {
+
+    public String getPhoneErrorFormat() {
         return phoneErrorFormat;
     }
 
-    public void setPhone(String phone) {
-        this.phoneErrorFormat = phone;
+    public void setPhoneErrorFormat(String phoneErrorFormat) {
+        this.phoneErrorFormat = phoneErrorFormat;
     }
+
+    public String getEmailErrorFormat() {
+        return emailErrorFormat;
+    }
+
+    public void setEmailErrorFormat(String emailErrorFormat) {
+        this.emailErrorFormat = emailErrorFormat;
+    }
+    
 
     public AccountError(String userNameLengthError, String passwordLengthError, String confirmNotMatched, String fullNameLengthError, String userNameExisted, String accountIDExisted, String phone,String emailErrorFormat ) {
         this.userNameLengthError = userNameLengthError;
