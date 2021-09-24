@@ -290,10 +290,22 @@ public class AccountDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "UPDATE Account "
-                        + "SET username = ?, password = ?, fullname = ?, address = ?, birthday = ?, email = ?, phone = ?, role = ?, categoryID = ?, status = ?  "
+                        + "SET username = ?, password = ?, fullname = ?, address = ?, birthdate = ?, email = ?, phone = ?, role = ?, categoryID = ?, status = ?  "
                         + "WHERE accountID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
+
+                stm.setString(1, dto.getUsername());
+                stm.setString(2, dto.getPassword());
+                stm.setString(3, dto.getFullname());
+                stm.setString(4, dto.getAddress());
+                stm.setDate(5, dto.getBirthday());
+                stm.setString(6, dto.getEmail());
+                stm.setString(7, dto.getPhone());
+                stm.setString(8, dto.getRole());
+                stm.setString(9, "Mentor".equals(dto.getRole()) ? dto.getCategoryID() : null);
+                stm.setString(10, dto.getStatus());
+                stm.setInt(11, accountID);
 
                 int line = stm.executeUpdate();
 
