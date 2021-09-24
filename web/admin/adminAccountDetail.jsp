@@ -111,8 +111,8 @@
                                 <!--<input type="text" name="role" value="${account.role}"></input>-->
                             </div>
                             <div class="col-sm-6">
-                                Category
-                                <select name="category" id="categorySelect">
+                                <label for="categorySelect">Category</label>
+                                <select name="category" id="categorySelect" hidden>
                                     <c:forEach var="item" items="${catList}">
                                         <option value="${item.categoryID}"
                                                 <c:if test="${account.categoryID eq item.categoryID}">
