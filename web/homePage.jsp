@@ -61,7 +61,7 @@
             </div>
             <div class="row">
                 <c:forEach var="dtoBL" items="${dtoBlogList}">
-                    <c:if test="${dtoBL.categoryID == dtoCL.categoryID}">
+                    <c:if test="${dtoBL.categoryID eq dtoCL.categoryID}">
                         <div class="blog-box col-sm-6 col-md-4 col-lg-3">
                             <div class="pic-box">
                                 <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
