@@ -33,6 +33,13 @@ and open the template in the editor.
                 ${error.userNameLengthError}<br/>
                 </font>
             </c:if>
+                  <c:if test="${not empty error.userNameExisted}">
+                    <br/>
+                <font color="red">
+                ${error.userNameExisted}<br/>
+                </font>
+            </c:if>
+                
             </div>
             <div class="enter-field">
                 <input type="text" id="fullname" placeholder="Fullname" name ="fullname">

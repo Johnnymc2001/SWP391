@@ -63,11 +63,14 @@ public class CreateAccountServlet extends HttpServlet {
         System.out.println("birthdate: " + birthdate);
           AccountDAO dao = new AccountDAO();
         try {
-             int i = dao.getAccountIDByUsername(username);
             
-            if (i>0) {
+            // KIEM TRA CAC LOI KHI TAO TAI KHOAN MOI
+             int i = dao.getAccountIDByUsername(username);
+             System.out.println("AccountID: "+i);
+            
+            if (i!=0) {
                  foundError = true;
-                 error.setAccountIDExisted("Account Existed");
+                 error.setUserNameExisted("Account Existed");
             }
                 if (username == null || username.trim().length() < 6 || username.trim().length() > 20) {
                     foundError = true;
@@ -114,7 +117,7 @@ public class CreateAccountServlet extends HttpServlet {
                     url = "login.html";
                 }
 
-            
+            System.out.println("username duplicate : " +error.getUserNameExisted());
 
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

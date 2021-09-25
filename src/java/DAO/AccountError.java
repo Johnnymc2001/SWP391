@@ -5,7 +5,6 @@
  */
 package DAO;
 
-
 import java.sql.Date;
 import java.util.regex.Pattern;
 
@@ -15,12 +14,12 @@ import java.util.regex.Pattern;
  */
 public class AccountError {
 
-   private String userNameLengthError;
+    private String userNameLengthError;
     private String passwordLengthError;
     private String confirmNotMatched;
     private String fullNameLengthError;
     private String userNameExisted;
-    private String accountIDExisted;
+
     private String phoneErrorFormat;
     private String emailErrorFormat;
 
@@ -64,15 +63,6 @@ public class AccountError {
         this.userNameExisted = userNameExisted;
     }
 
-    public String getAccountIDExisted() {
-        return accountIDExisted;
-    }
-
-    public void setAccountIDExisted(String accountIDExisted) {
-        this.accountIDExisted = accountIDExisted;
-    }
-
-
     public String getPhoneErrorFormat() {
         return phoneErrorFormat;
     }
@@ -88,32 +78,31 @@ public class AccountError {
     public void setEmailErrorFormat(String emailErrorFormat) {
         this.emailErrorFormat = emailErrorFormat;
     }
-    
 
-    public AccountError(String userNameLengthError, String passwordLengthError, String confirmNotMatched, String fullNameLengthError, String userNameExisted, String accountIDExisted, String phone,String emailErrorFormat ) {
+    public AccountError(String userNameLengthError, String passwordLengthError, String confirmNotMatched, String fullNameLengthError, String userNameExisted, String phone, String emailErrorFormat) {
         this.userNameLengthError = userNameLengthError;
         this.passwordLengthError = passwordLengthError;
         this.confirmNotMatched = confirmNotMatched;
         this.fullNameLengthError = fullNameLengthError;
         this.userNameExisted = userNameExisted;
-        this.accountIDExisted = accountIDExisted;
+
         this.phoneErrorFormat = phone;
-        this.emailErrorFormat=emailErrorFormat;
+        this.emailErrorFormat = emailErrorFormat;
     }
 
     public AccountError() {
     }
-    
-    public  boolean checkValidEmail(String email) {
+
+    public boolean checkValidEmail(String email) {
         String regex = "([\\w\\d\\_\\-])+@[\\w]+\\.[\\w\\.]+";
         Pattern pat = Pattern.compile(regex);
         return pat.matcher(email).matches();
     }
 
-    public  boolean checkValidPhoneNumber(String phone) {
+    public boolean checkValidPhoneNumber(String phone) {
         String regex = "[\\d]{8,10}";
         Pattern pat = Pattern.compile(regex);
         return pat.matcher(phone).matches();
     }
-    
+
 }
