@@ -111,40 +111,43 @@ public class AdminFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         String uri = req.getRequestURI();
-        String url = "home";
+        String url = "SWP391_Project";
 
         AccountDAO dao = new AccountDAO();
         AccountDTO dto;
-        dto = (AccountDTO) req.getSession().getAttribute("LOGIN_ACCOUNT");
+        dto = (AccountDTO) req.getSession().getAttribute("USER");
 
-//        if (dto != null && dto.getRole().equals("ADMIN")) {
-        url = "admin";
-        List<String> paths = Arrays.asList(uri.split("/"));
-        String lastChar = uri.substring(uri.length() - 1);
+        if (null != dto && dto.getRole().equals("Admin")) {
+            url = "admin";
+            List<String> paths = Arrays.asList(uri.split("/"));
+            String lastChar = uri.substring(uri.length() - 1);
 
-        if (paths.size() <= 3) {
-            if (!"/".equals(lastChar)) {
-                res.sendRedirect("admin/");
-                return;
+            if (paths.size() <= 3) {
+                if (!"/".equals(lastChar)) {
+                    res.sendRedirect("admin/");
+                    return;
+                } else {
+                    url += "/dashboard";
+                }
             } else {
-                url += "/dashboard";
-            }
-        } else {
-            for (int i = 3; i < paths.size(); i++) {
-                url += "/" + paths.get(i);
+                for (int i = 3; i < paths.size(); i++) {
+                    url += "/" + paths.get(i);
+                }
+
             }
 
-        }
-        
 //        System.out.println(url);
+            url = roadmap.get(url);
+            req.getRequestDispatcher(url).forward(request, response);
+        } else {
+            for (int i = 0; i < uri.length(); i++) {
+                if (uri.charAt(i) == '/') {
+                    url = "../" + url;
+                }
+            }
 
-        url = roadmap.get(url);
-        req.getRequestDispatcher(url).forward(request, response);
-//        } else {
-//            url = "home";
-//            url = roadmap.get(url);
-//            req.getRequestDispatcher(url).forward(request, response);
-//        }
+            res.sendRedirect(url);
+        }
     }
 
     /**

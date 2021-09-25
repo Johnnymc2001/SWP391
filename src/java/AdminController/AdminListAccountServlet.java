@@ -46,11 +46,13 @@ public class AdminListAccountServlet extends HttpServlet {
             ServletContext sc = request.getServletContext();
             HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
+            String maxPageItemString = request.getParameter("maxPageItem");
+            
+
             AccountDAO dao = new AccountDAO();
             ArrayList<AccountDTO> listAccount = dao.getAllAccount();
 
             request.setAttribute("LIST", listAccount);
-            System.out.println(listAccount.get(0).getStatus());
 
             String url = roadmap.get(SUCCESS);
             request.getRequestDispatcher(url).forward(request, response);

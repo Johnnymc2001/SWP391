@@ -32,14 +32,13 @@ public class BlogDAO implements Serializable {
                 stm.setString(6, dto.getTags());
                 stm.setInt(7, dto.getStudentID());
                 if (dto.getAttachment() != null) {
-                   stm.setBytes(8, dto.getAttachment());
+                    stm.setBytes(8, dto.getAttachment());
                 } else {
                     stm.setBytes(8, null);
                 }
 
                 int line = stm.executeUpdate();
 
-                
                 return line > 0;
             } // End connection
         } catch (Exception ex) {
@@ -264,7 +263,7 @@ public class BlogDAO implements Serializable {
         }
         return null;
     }
-    
+
     public ArrayList<BlogDTO> searchBlogUsingTitleAndCategoryID(String searchTitle, String categoryId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -436,8 +435,8 @@ public class BlogDAO implements Serializable {
         }
         return false;
     }
-    
-        public boolean deactivateBlog(int blogId) throws SQLException {
+
+    public boolean deactivateBlog(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 

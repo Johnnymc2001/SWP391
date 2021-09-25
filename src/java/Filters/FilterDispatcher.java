@@ -120,7 +120,7 @@ public class FilterDispatcher implements Filter {
 
                 if (resource.lastIndexOf(".html") > 0
                         || resource.lastIndexOf(".css") > 0
-                        || resource.lastIndexOf(".js") > 0
+                        || (resource.lastIndexOf(".js") > 0 && resource.lastIndexOf(".jsp") < 0)
                         || resource.lastIndexOf(".png") > 0
                         || resource.lastIndexOf(".jpg") > 0) {
                     url = resource;

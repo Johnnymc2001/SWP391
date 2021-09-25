@@ -5,6 +5,8 @@ package Filters;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import DAO.AccountDAO;
+import DAO.AccountDTO;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -103,34 +105,50 @@ public class StudentFiilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
-        HashMap<String, String> roadmap = (HashMap<String, String>) request.getServletContext().getAttribute("ROADMAP");
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
+        {
 
-        String uri = req.getRequestURI();
-        String url;
+            HashMap<String, String> roadmap = (HashMap<String, String>) request.getServletContext().getAttribute("ROADMAP");
+            HttpServletRequest req = (HttpServletRequest) request;
+            HttpServletResponse res = (HttpServletResponse) response;
 
-        List<String> paths = Arrays.asList(uri.split("/"));
+            String uri = req.getRequestURI();
+            String url = "SWP391_Project";
 
-        if (paths.size() <= 3) {
-            // Goto dashboard
-            System.out.println("Student Dashboard!");
-            url = "student";
-        } else {
-            // Check paths
-            String miniPath = paths.get(3);
-            if (null == miniPath) {
+            AccountDAO dao = new AccountDAO();
+            AccountDTO dto;
+            dto = (AccountDTO) req.getSession().getAttribute("USER");
+
+            if (null != dto && dto.getRole().equals("Student")) {
                 url = "student";
+                List<String> paths = Arrays.asList(uri.split("/"));
+                String lastChar = uri.substring(uri.length() - 1);
+
+                if (paths.size() <= 3) {
+                    if (!"/".equals(lastChar)) {
+                        res.sendRedirect("student/");
+                        return;
+                    } else {
+                        url += "/dashboard";
+                    }
+                } else {
+                    for (int i = 3; i < paths.size(); i++) {
+                        url += "/" + paths.get(i);
+                    }
+
+                }
+
+//        System.out.println(url);
+                url = roadmap.get(url);
+                req.getRequestDispatcher(url).forward(request, response);
             } else {
-                url = "student/" + paths.get(3);
+                for (int i = 0; i < uri.length(); i++) {
+                    if (uri.charAt(i) == '/') {
+                        url = "../" + url;
+                    }
+                }
+
+                res.sendRedirect(url);
             }
-        }
-
-        try {
-            url = roadmap.get(url);
-            req.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
-
         }
     }
 
