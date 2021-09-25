@@ -5,7 +5,6 @@
  */
 package Controller;
 
-
 //import DAO.AccountDAO;
 import DAO.AccountDAO;
 import DAO.AccountDTO;
@@ -58,58 +57,67 @@ public class CreateAccountServlet extends HttpServlet {
         String email = request.getParameter("emai");
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
-       boolean foundError = false;
+        boolean foundError = false;
         AccountError error = new AccountError();
         String url = "register.jsp";
-        System.out.println("birthdate: "+birthdate);
+        System.out.println("birthdate: " + birthdate);
+          AccountDAO dao = new AccountDAO();
         try {
+             int i = dao.getAccountIDByUsername(username);
             
-              if (username==null||username.trim().length() < 6 || username.trim().length() > 20) {
-                foundError = true;
-                error.setUserNameLengthError("User name must be from 6-20 character");
-            } if (password==null||password.trim().length() < 6 || password.trim().length() > 30) {
-                foundError = true;
-                error.setPasswordLengthError("Password must be from 6-30 character");
-            } else if (confirm_password==null||!confirm_password.trim().equals(password.trim())) {
-                foundError = true;
-                error.setConfirmNotMatched("Confirm Password is Not Matched");
+            if (i>0) {
+                 foundError = true;
+                 error.setAccountIDExisted("Account Existed");
             }
-            if (fullname==null||fullname.trim().length() < 6 || fullname.trim().length() > 20) {
-                foundError = true;
-                error.setFullNameLengthError("Full Name must be from 6-20 character");
-            } if (email==null || error.checkValidEmail(email)==false){
-                error.setEmailErrorFormat("Email is not valid");
-            } if ( phone==null || error.checkValidPhoneNumber(phone)==false){
-                error.setPhoneErrorFormat("Phone is not valid");
-            }
+                if (username == null || username.trim().length() < 6 || username.trim().length() > 20) {
+                    foundError = true;
+                    error.setUserNameLengthError("User name must be from 6-20 character");
+                }
+                if (password == null || password.trim().length() < 6 || password.trim().length() > 30) {
+                    foundError = true;
+                    error.setPasswordLengthError("Password must be from 6-30 character");
+                } else if (confirm_password == null || !confirm_password.trim().equals(password.trim())) {
+                    foundError = true;
+                    error.setConfirmNotMatched("Confirm Password is Not Matched");
+                }
+                if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20) {
+                    foundError = true;
+                    error.setFullNameLengthError("Full Name must be from 6-20 character");
+                }
+                if (email == null || error.checkValidEmail(email) == false) {
+                    error.setEmailErrorFormat("Email is not valid");
+                }
+                if (phone == null || error.checkValidPhoneNumber(phone) == false) {
+                    error.setPhoneErrorFormat("Phone is not valid");
+                }
 
-            if (foundError) {
+                if (foundError) {
 
-                request.setAttribute("ERROR", error);
-            } else {
+                    request.setAttribute("ERROR", error);
+                } else {
 
 //                   Date  date =new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);  
-                 java.sql.Date sqlDate;
-                  sqlDate = java.sql.Date.valueOf( birthdate );
-                AccountDTO dto = new AccountDTO();
-                dto.setAddress(address);
-                dto.setUsername(username);
-                dto.setPassword(password);
-                dto.setFullname(fullname);
-                dto.setPhone(phone);
-               dto.setBirthday(  sqlDate);
+                    java.sql.Date sqlDate;
+                    sqlDate = java.sql.Date.valueOf(birthdate);
+                    AccountDTO dto = new AccountDTO();
+                    dto.setAddress(address);
+                    dto.setUsername(username);
+                    dto.setPassword(password);
+                    dto.setFullname(fullname);
+                    dto.setPhone(phone);
+                    dto.setBirthday(sqlDate);
 
-              
 //               AccountDAO.createAccount(dto);
+                  
+                    dao.createAccount(dto);
 
-                 AccountDAO dao = new AccountDAO();                      
-               dao.createAccount(dto);
+                    url = "login.html";
+                }
 
-               url="login.html";
-            }
-         
+            
+
         } finally {
-        request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
