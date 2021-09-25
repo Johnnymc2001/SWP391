@@ -16,8 +16,7 @@
     <body>
         <h1>Admin CategoryManage</h1>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <c:set var="list" value="${requestScope.LIST}"/>
                     ${requestScope.MESSAGE}
                     <table>
@@ -43,15 +42,22 @@
 
                     </table>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     Add new Category
-                    <form action="categoryManage" method="GET">
-                        <input type="text" name="categoryid"/>
-                        <input type="text" name="categoryname"/>
-                        <td><input type="submit" name="submitAction" value="Add"/></td>
-                    </form>
+                    <table>
+                        <tr>
+                            <td>Category ID</td>
+                            <td>Category Name</td>
+                        </tr>
+                        <tr>
+                        <form action="categoryManage" method="GET">
+                            <td><input type="text" name="categoryid"/></td>
+                            <td><input type="text" name="categoryname"/></td>
+                            <td><input type="submit" name="submitAction" value="Add"/></td>
+                        </form>
+                        </tr>
+                    </table>
                 </div>
-            </div>
         </div>
         <script type="text/javascript" src="../UI/script/adminListAccount.js"></script>
     </body>

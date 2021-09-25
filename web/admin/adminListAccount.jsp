@@ -21,16 +21,17 @@
                     <c:set var="list" value="${requestScope.LIST}"/>
                     <table>
                         <tr>
-                            <td>AccountID</td>
+                            <!--<td>AccountID</td>-->
                             <td>Username</td>
                             <td>Fullname</td>
-                            <td></td>
+                            <td>Role</td>
                         </tr>
                         <c:forEach var="dto" items="${list}">
                             <tr>
-                                <td>${dto.accountID}</td>
+                                <!--<td>${dto.accountID}</td>-->
                                 <td>${dto.username}</td>
                                 <td>${dto.fullname}</td>
+                                <td>${dto.role}</td>
                                 <td><button value="${dto.accountID}">Edit</button></td>
 
                             </tr>
@@ -42,6 +43,11 @@
                     <iframe src="accountDetail?accountid=1" width="100%" height="600px" style="border:none;"></iframe>
                 </div>
             </div>
+                    
+                    <select name="maxPageItem" onchange="changeMaxPageItem(this)">
+                <option>5</option>
+                <option>10</option>
+            </select>
         </div>
         <script type="text/javascript" src="../UI/script/adminListAccount.js"></script>
     </body>

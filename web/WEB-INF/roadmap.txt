@@ -1,20 +1,34 @@
 =HomePageServlet
 
-### SERVLET FILE
+### MAIN FILE
 
 home=HomePageServlet
+homePage=homePage.jsp
+
 blog=BlogDetailServlet
+blogPage=blogDetail.jsp
+
 search=SearchBlogServlet
+searchPage=search.jsp
 
 login=LoginServlet
+loginPage=login.jsp
+
 register=CreateAccountServlet
+registerPage=register.jsp
 
 createBlog=CreateBlogServlet
+createBlogPage=createBlog.jsp
 
-student=StudentDashboardServlet
+### STUDENT
 
-mentor=MentorDashboardServlet
-image=ImageUploadServlet
+student/dashboard=StudentDashboardServlet
+student/dashboardPage=student.jsp
+
+### MENTOR
+
+mentor/dashboard=MentorDashboardServlet
+mentor/dashboardPage=mentor.jsp
 
 ### ADMIN
 
@@ -36,13 +50,3 @@ admin/accountDetailPage=adminAccountDetail.jsp
 
 admin/categoryManage=AdminCategoryManageServlet
 admin/categoryManagePage=adminCategoryManage.jsp
-
-#### JSP FILE
-
-homePage=homePage.jsp
-createBlogPage=createBlog.jsp
-searchPage=search.jsp
-imagePage=image.jsp
-
-loginPage=login.jsp
-registerPage=register.jsp
