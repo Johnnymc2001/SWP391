@@ -7,6 +7,7 @@ package AdminController;
 
 import DAO.AccountDAO;
 import DAO.AccountDTO;
+import DAO.AccountError;
 import DAO.CategoryDAO;
 import DAO.CategoryDTO;
 import java.io.IOException;
@@ -70,12 +71,58 @@ public class AdminAccountDetailServlet extends HttpServlet {
                 String categoryID = "Mentor".equals(role) ? request.getParameter("category") : null;
                 String status = dto.getStatus();
 
-                AccountDTO newDto = new AccountDTO(username, password, fullname, address, sqlDate, email, phone, role, categoryID, status);
-                accDao.updateAccount(accountID, newDto);
+                boolean foundError = false;
+
+                if (!username.trim().matches("[a-zA-Z0-9]{6,20}")) {
+                    request.setAttribute("ERROR_USERNAME", "Username must be from 6 to 20 characters and only contains character and numbers!");
+                    foundError = true;
+                } else {
+                    if (!dto.getUsername().equals(username)) {
+                        int id = accDao.getAccountIDByUsername(username);
+                        if (id != 0) {
+                            request.setAttribute("ERROR_USERNAME", "Username is existed!");
+                            foundError = true;
+                        }
+                    }
+                }
+
+                if (!password.trim().matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}")) {
+                    request.setAttribute("ERROR_PASSWORD", "Password must be from 8 to 20 characters and contains at least 1 uppercase, 1 lowercase, 1 number and 1 special characters!!");
+                    foundError = true;
+                }
+
+                if (!fullname.matches("([\\ a-zA-Z]){4,}")) {
+                    request.setAttribute("ERROR_FULLNAME", "Fullname must be more than 4 characters and must not contains any special characters and number!");
+                    foundError = true;
+                }
+
+                if (!address.matches("([\\ a-zA-Z0-9]){4,}")) {
+                    request.setAttribute("ERROR_ADDRESS", "Address must be more than 4 characters and must not contains any special characters and number!");
+                    foundError = true;
+                }
+
+                if (!email.matches("([\\w\\d\\_\\-])+@[\\w]+\\.[\\w\\.]+")) {
+                    request.setAttribute("ERROR_EMAIL", "Email Address is in incorrect format");
+                    foundError = true;
+                }
+
+                if (!phone.matches("([0-9]){8,12}")) {
+                    request.setAttribute("ERROR_PHONE", "Phone must be more than 8 number and less than 12 number!");
+                    foundError = true;
+                }
+
+                if (!foundError) {
+                    AccountDTO newDto = new AccountDTO(username, password, fullname, address, sqlDate, email, phone, role, categoryID, status);
+                    accDao.updateAccount(accountID, newDto);
+                    request.setAttribute("MESSAGE", "Update Successfully!");
+                }
+
             } else if ("Enable".equals(action)) {
                 accDao.activateAccount(accountID);
+                request.setAttribute("MESSAGE", "Account Activated!");
             } else if ("Disable".equals(action)) {
                 accDao.deactivateAccount(accountID);
+                request.setAttribute("MESSAGE", "Account Dectivated!");
             }
 
             AccountDTO dto = accDao.getAccountFromAcoountID(accountID);

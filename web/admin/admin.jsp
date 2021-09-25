@@ -13,6 +13,7 @@
     </head>
     <body>
         <h1>Admin Dashboard</h1>
-        <a href="listAccount">Go the Accounts</a>
+        <a href="listAccount">Manage Accounts</a>
+        <a href="categoryManage">Manage Categories</a>
     </body>
 </html>

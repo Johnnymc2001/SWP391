@@ -34,6 +34,9 @@ admin/listAccountPage=adminListAccount.jsp
 admin/accountDetail=AdminAccountDetailServlet
 admin/accountDetailPage=adminAccountDetail.jsp
 
+admin/categoryManage=AdminCategoryManageServlet
+admin/categoryManagePage=adminCategoryManage.jsp
+
 #### JSP FILE
 
 homePage=homePage.jsp

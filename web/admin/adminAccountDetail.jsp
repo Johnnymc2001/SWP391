@@ -32,16 +32,16 @@
                     <div class="row">
                         <div class="col-sm-6">
                         </div>
-<!--                        <div class="col-sm-6">
-                            <button id="editButton" onclick="toggle(this)">Edit</button>
-                        </div>-->
+                        <!--                        <div class="col-sm-6">
+                                                    <button id="editButton" onclick="toggle(this)">Edit</button>
+                                                </div>-->
                     </div>
                     <form action="accountDetail" method="POST">
 
                         <div class="row">
                             <div class="col-sm-6">
-                                AccountID
-                                <input type="text" name="accountid" value="${account.accountID}"></input>
+                                AccountID : ${account.accountID}
+                                <input type="hidden" name="accountid" value="${account.accountID}"></input>
                             </div>
                             <div class="col-sm-6">
                                 <input type="submit" name="submitAction" value="Update"></button>
@@ -52,52 +52,53 @@
                                 <c:if test="${account.status == 'UNAVAILABLE'}">
                                     <input type="submit" name="submitAction" value="Enable"></button>
                                 </c:if>
+                                ${requestScope.MESSAGE}
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6">
-                                Username
-                                <input type="text" name="username" value="${account.username}"></input>
+                                Username<br/>${requestScope.ERROR_USERNAME}
+                                <input type="text" name="username" id="username" value="${account.username}" required/>
                             </div>
                             <div class="col-sm-6">
-                                Password
-                                <input type="password" name="password" value="${account.password}"></input>
+                                Password<br/>${requestScope.ERROR_PASSWORD}
+                                <input type="text" name="password" id="password" value="${account.password}" required/>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6">
-                                Fullname
-                                <input type="text" name="fullname" value="${account.fullname}"></input>
+                                Fullname<br/>${requestScope.ERROR_FULLNAME}
+                                <input type="text" name="fullname" id="fullname" value="${account.fullname}" required></input>
                             </div>
                             <div class="col-sm-6">
-                                Birthday
-                                <input type="date" name="birthday" value="${account.birthday}"></input>
+                                Birthday<br/>
+                                <input type="date" name="birthday" id="birthday" value="${account.birthday}" required></input>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-12">
-                                Address
-                                <input type="text" name="address" value="${account.address}"></input>
+                                Address<br/>${requestScope.ERROR_ADDRESS}
+                                <input type="text" name="address" id="address" value="${account.address}" required></input>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6">
-                                Email
-                                <input type="email" name="email" value="${account.email}"></input>
+                                Email<br/>${requestScope.ERROR_EMAIL}
+                                <input type="text" name="email" id="email"value="${account.email}" required></input>
                             </div>
                             <div class="col-sm-6">
-                                Phone
-                                <input type="text" name="phone" value="${account.phone}"></input>
+                                Phone<br/>${requestScope.ERROR_PHONE}
+                                <input type="text" name="phone" id="phone" value="${account.phone}" required></input>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6">
-                                Role
+                                Role<br/>
                                 <select name="role" id="roleSelect" onchange="changeRole(this);">
                                     <c:forEach var="item" items="${roleList}">
                                         <option value="${item}" 
@@ -111,7 +112,7 @@
                                 <!--<input type="text" name="role" value="${account.role}"></input>-->
                             </div>
                             <div class="col-sm-6">
-                                <label for="categorySelect">Category</label>
+                                Category<br/>
                                 <select name="category" id="categorySelect" hidden>
                                     <c:forEach var="item" items="${catList}">
                                         <option value="${item.categoryID}"

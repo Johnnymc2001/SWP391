@@ -50,7 +50,6 @@ public class AdminListAccountServlet extends HttpServlet {
             ArrayList<AccountDTO> listAccount = dao.getAllAccount();
 
             request.setAttribute("LIST", listAccount);
-            request.getSession().setAttribute("HI", "GOOD");
             System.out.println(listAccount.get(0).getStatus());
 
             String url = roadmap.get(SUCCESS);
