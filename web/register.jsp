@@ -52,9 +52,25 @@ and open the template in the editor.
             </div>
             <div class="enter-field">
                 <input type="text" id="email" placeholder="Email" name="email">
+                
+                          <c:if test="${not empty error.emailErrorFormat}">
+<br/>
+                <font color="red">
+                ${error.emailErrorFormat}<br/>
+                </font>
+            </c:if>
+                
             </div>
             <div class="enter-field">
                 <input type="text" id="phone" placeholder="Phone number" name ="phone">
+                
+                                       <c:if test="${not empty error.phoneErrorFormat}">
+<br/>
+                <font color="red">
+                ${error.phoneErrorFormat}<br/>
+                </font>
+            </c:if>
+                
             </div>
             <div class="enter-field">
                 <input type="text" id="address" placeholder="Address" name ="address">
