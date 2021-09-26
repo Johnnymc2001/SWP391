@@ -33,8 +33,11 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
                 <form action="search" class="form-inline" method="POST">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value="">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="">Search</button>
+                    <div class="search-navbar">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                            value="">
+                        <button class="btn btn-outline-success" type="submit" value="">Search</button>
+                    </div>
                 </form>
                 <a class="nav-item nav-link" href="aboutUs.html">About us</a>
                 <a class="nav-item nav-link" href="login.jsp">Login</a>
