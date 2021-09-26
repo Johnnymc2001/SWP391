@@ -111,7 +111,7 @@ public class AdminFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         String uri = req.getRequestURI();
-        String url = "SWP391_Project";
+        String url = request.getServletContext().getContextPath();
 
         AccountDAO dao = new AccountDAO();
         AccountDTO dto;
@@ -145,7 +145,6 @@ public class AdminFilter implements Filter {
                     url = "../" + url;
                 }
             }
-
             res.sendRedirect(url);
         }
     }

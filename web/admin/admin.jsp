@@ -16,15 +16,20 @@
     <body>
         <h1>Admin Dashboard</h1>
         <div class="container-fluid">
-                <div class="col-sm-12">
-                    <a href="listAccount">Manage Accounts</a>
-                    <iframe src="listAccount" width="100%" height="400px" style="border:none;"></iframe>
-                </div>
+            <div class="col-sm-12">
+                <a href="accountList">Manage Accounts</a>
+                <iframe src="accountList" width="100%" height="600px" style="border:none;"></iframe>
+            </div>
 
-                <div class="col-sm-12">
-                    <a href="categoryManage">Manage Categories</a>
-                    <iframe src="categoryManage" width="100%" height="400px" style="border:none;"></iframe>
-                </div>
+            <div class="col-sm-12">
+                <a href="categoryManage">Manage Categories</a>
+                <iframe src="categoryManage" width="100%" height="400px" style="border:none;"></iframe>
+            </div>
+
+            <div class="col-sm-12">
+                <a href="blogList">Manage Blogs</a>
+                <iframe src="blogList" width="100%" height="400px" style="border:none;"></iframe>
+            </div>
         </div>
 
     </body>

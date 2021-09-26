@@ -43,12 +43,12 @@
                     <iframe src="accountDetail?accountid=1" width="100%" height="600px" style="border:none;"></iframe>
                 </div>
             </div>
-                    
-                    <select name="maxPageItem" onchange="changeMaxPageItem(this)">
+
+            <select name="maxPageItem" onchange="changeMaxPageItem(this)">
                 <option>5</option>
                 <option>10</option>
             </select>
         </div>
-        <script type="text/javascript" src="../UI/script/adminListAccount.js"></script>
+        <script type="text/javascript" src="../UI/script/adminAccountList.js"></script>
     </body>
 </html>

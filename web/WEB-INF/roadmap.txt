@@ -37,13 +37,13 @@ admin/dashboardPage=admin.jsp
 
 admin/redirect=HomePageServlet
 
-admin/listBlog=AdminListBlogServlet
-admin/listBlogPage=adminListBlog.jsp
+admin/blogList=AdminBlogListServlet
+admin/blogListPage=adminBlogList.jsp
 
 admin/adminAction=AdminActionServlet
 
-admin/listAccount=AdminListAccountServlet
-admin/listAccountPage=adminListAccount.jsp
+admin/accountList=AdminAccountListServlet
+admin/accountListPage=adminAccountList.jsp
 
 admin/accountDetail=AdminAccountDetailServlet
 admin/accountDetailPage=adminAccountDetail.jsp

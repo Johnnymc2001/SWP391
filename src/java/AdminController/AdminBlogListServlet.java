@@ -7,6 +7,8 @@ package AdminController;
 
 import DAO.AccountDAO;
 import DAO.AccountDTO;
+import DAO.BlogDAO;
+import DAO.BlogDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -18,16 +20,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminListAccountServlet", urlPatterns = {"/admin/AdminListAccountServlet"})
-public class AdminListAccountServlet extends HttpServlet {
+@WebServlet(name = "AdminBlogListServlet", urlPatterns = {"/admin/AdminBlogListServlet"})
+public class AdminBlogListServlet extends HttpServlet {
 
-    public final String SUCCESS = "admin/listAccountPage";
+    public final String SUCCESS = "admin/blogListPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,25 +41,40 @@ public class AdminListAccountServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        ServletContext sc = request.getServletContext();
+        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+
+        BlogDAO blogDao = new BlogDAO();
+        AccountDAO accDao = new AccountDAO();
         try {
-            response.setContentType("text/html;charset=UTF-8");
+            ArrayList<BlogDTO> blogList = blogDao.getAllBlogs();
+            HashMap<Integer, AccountDTO> accCache = new HashMap<>();
 
-            ServletContext sc = request.getServletContext();
-            HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+            HashMap<BlogDTO, AccountDTO> list = new HashMap<>();
 
-            String maxPageItemString = request.getParameter("maxPageItem");
+            for (BlogDTO dto : blogList) {
+                int accId = dto.getStudentID();
+                AccountDTO acc = accCache.get(accId);
+
+                if (acc == null) {
+                    acc = accDao.getAccountFromAcoountID(accId);
+                    accCache.put(accId, acc); // Store account in cache
+                }
+                
+                list.put(dto, acc);
+            }
             
+            request.setAttribute("LIST", list);
 
-            AccountDAO dao = new AccountDAO();
-            ArrayList<AccountDTO> listAccount = dao.getAllAccount();
-
-            request.setAttribute("LIST", listAccount);
-
-            String url = roadmap.get(SUCCESS);
-            request.getRequestDispatcher(url).forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
+        String url = roadmap.get(SUCCESS);
+        request.getRequestDispatcher(url).forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
