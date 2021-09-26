@@ -10,6 +10,11 @@
     box-shadow: 0 8px 6px -6px black;
 }
 
+.search-navbar{
+    width: 100%;
+    display: flex;
+}
+
 .xavalo img {
     width: 100%;
     object-fit: cover;
@@ -69,6 +74,12 @@ h2 {
 
 .category-name {
     padding: 0 0 20px 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .category-name h1{
+        font-size: 8vw;
+    }
 }
 
 .blog-box {
