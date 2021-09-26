@@ -31,7 +31,7 @@
         </c:if>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="home">
+            <a class="navbar-brand" href="homePage.html">
                 <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo">
                 FPT Academy
             </a>
@@ -53,30 +53,30 @@
             <img src="UI/Icon/hallwayfpt.jpg" alt="">
         </div>
 
-        <div class="search-box col-md-5">
-            <form action="search" method="POST">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Category</label>
+        <div class="container-fluid">
+            <div class="search-box col-md-5">
+                <form action="search" method="POST">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <select class="custom-select" id="inputGroupSelect01">
+                                <option name="choice" value="all" selected>All</option>
+                                <option name="choice" value="title">Title</option>
+                                <option name="choice" value="category">Category</option>
+                            </select>
+                        </div>
+                        <input type="text" placeholder="Search..." class="form-control"
+                               aria-label="Search input with dropdown button" id="search-title" value="${param.txtSearchValue}" name="txtSearchValue">
+                        <select class="custom-select" id="search-category">
+                            <option selected>Category 1</option>
+                            <option value="2">Category 2</option>
+                            <option value="3">Category 3</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit">Search</button>
+                        </div>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>All</option>
-                        <option name="search-option" value="categoryID">Category 1</option>
-                    </select>
-                </div>
-                <div class="input-group mb-3">
-                    <input type="text" placeholder="Search..." class="form-control"
-                           aria-label="Search input with dropdown button" id="search-title" value="${param.txtSearchValue}" name="txtSearchValue">
-                    <div class="input-group-append">
-                        <button class="btn btn-info" type="submit">Search</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="header-bar"></div>
-
-        <div class="container-fluid">           
+                </form>
+            </div>
             <c:set var="list" value="${requestScope.SEARCH_RESULT}"/>
             <c:if test="${not empty list}">
                 <table>
