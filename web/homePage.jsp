@@ -22,7 +22,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="homePage.html">
+        <a class="navbar-brand" href="home">
             <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo">
             FPT Academy
         </a>
@@ -34,8 +34,7 @@
             <div class="navbar-nav ml-auto">
                 <form action="search" class="form-inline" method="POST">
                     <div class="search-navbar">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                            value="">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" value="">
                         <button class="btn btn-outline-success" type="submit" value="">Search</button>
                     </div>
                 </form>
