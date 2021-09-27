@@ -603,8 +603,7 @@ public class BlogDAO implements Serializable {
             if (con != null) {
                 String sql = "UPDATE Blog "
                         + "SET title = ?, content = ?, postDate = ?, categoryID = ?, status = ?, approvedByID = ?, approvedDate = ?, tags = ?, ownerID = ?, attachment = ?  "
-                        + "WHERE blogID = ? "
-                        + "ORDER BY postDate DESC";
+                        + "WHERE blogID = ? ";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
 
@@ -620,6 +619,34 @@ public class BlogDAO implements Serializable {
                 stm.setBytes(10, dto.getAttachment());
 
                 stm.setInt(11, blogId);
+                int line = stm.executeUpdate();
+
+                return line > 0;
+            } // End connection
+        } finally {
+
+        }
+        return false;
+    }
+
+    public boolean setBlogStatusUsingBlogID(int blogId, String status) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            // 1. Connect DB
+            con = DBHelpers.makeConnection();
+            // 2. Create SQL String
+            if (con != null) {
+                String sql = "UPDATE Blog "
+                        + "SET status = ?  "
+                        + "WHERE blogID = ? ";
+                // 3. Create statement object
+                stm = con.prepareStatement(sql);
+
+                stm.setString(1, status);
+
+                stm.setInt(2, blogId);
                 int line = stm.executeUpdate();
 
                 return line > 0;

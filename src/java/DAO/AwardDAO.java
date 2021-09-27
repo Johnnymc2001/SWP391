@@ -51,7 +51,8 @@ public class AwardDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT awardID, blogID, awardType, date, awardBy "
                         + "FROM Award "
-                        + "WHERE awardID = ?";
+                        + "WHERE awardID = ? "
+                        + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, awardId);
@@ -96,7 +97,8 @@ public class AwardDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT awardID, blogID, awardType, date, awardBy "
                         + "FROM Award "
-                        + "WHERE blogID = ?";
+                        + "WHERE blogID = ? "
+                        + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, blogId);
@@ -146,7 +148,8 @@ public class AwardDAO implements Serializable {
 
             if (con != null) {
                 String sql = "SELECT awardID, blogID, awardType, date, awardBy "
-                        + "FROM Award";
+                        + "FROM Award "
+                        + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
 
