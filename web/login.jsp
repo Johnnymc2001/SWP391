@@ -59,6 +59,14 @@
                         ${error.usernameNotExist}<br/>
                         </font>
                     </c:if>
+                        
+                      <c:if test ="${not empty LOGIN_FAIL}">
+                        <br/>
+                        <font color="red">
+                        ${LOGIN_FAIL}<br/>
+                        </font>
+                    </c:if>  
+                        
                     
                 </div>
                 <div class="button">
