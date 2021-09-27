@@ -2,7 +2,6 @@ package Controller;
 
 import DAO.BlogDAO;
 import DAO.BlogDTO;
-import DAO.CreateBlogError;
 import Utils.ImageUtils;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,7 +56,6 @@ public class CreateBlogServlet extends HttpServlet {
 
         String tags = request.getParameter("txtTags");
         int studentID = 2;
-        CreateBlogError errors = new CreateBlogError();
         boolean foundErr = false;
         String header = request.getContentType();
 
