@@ -39,7 +39,7 @@
                     </div>
                 </form>
                 <a class="nav-item nav-link" href="aboutUs.html">About us</a>
-                <a class="nav-item nav-link" href="login.jsp">Login</a>
+                <a class="nav-item nav-link" href="loginPage">Login</a>
             </div>
         </div>
     </nav>
