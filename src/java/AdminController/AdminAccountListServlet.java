@@ -11,7 +11,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.stream.Collectors;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,15 +49,49 @@ public class AdminAccountListServlet extends HttpServlet {
             ServletContext sc = request.getServletContext();
             HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
-            String maxPageItemString = request.getParameter("maxPageItem");
-            
+//            String maxPageItemString = request.getParameter("maxPageItem");
+            String pageString = request.getParameter("page");
+            String searchValue = request.getParameter("txtSearchValue");
+            String searchAccountType = request.getParameter("txtAccountType");
 
             AccountDAO dao = new AccountDAO();
             ArrayList<AccountDTO> listAccount = dao.getAllAccount();
 
-            request.setAttribute("LIST", listAccount);
+            int maxPageItem = 4;
+            int page;
 
+//            if (null != maxPageItemString) {
+//                maxPageItem = Integer.parseInt(maxPageItemString);
+//            } else {
+//                maxPageItem = 5;
+//            }
+            if (null != pageString) {
+                page = Integer.parseInt(pageString);
+            } else {
+                page = 1;
+            }
+
+            int pageItemCount = 0;
+
+            ArrayList<AccountDTO> list = new ArrayList<>();
+            
+            if (null != searchValue) {
+                listAccount.removeIf(acc -> !acc.getUsername().contains(searchValue));         
+            }
+            
+            if (null != searchAccountType && !"All".equals(searchAccountType)) {
+                listAccount.removeIf(acc -> !acc.getRole().contains(searchAccountType));       
+            }
+            
+            for (int i = (page - 1) * maxPageItem; i < listAccount.size() && pageItemCount < maxPageItem; i++) {
+                pageItemCount++;
+                list.add(listAccount.get(i));
+            }
+
+            request.setAttribute("LIST", list);
+            request.setAttribute("PAGE_COUNT", (int) Math.ceil((double) listAccount.size() / (double) maxPageItem));
             String url = roadmap.get(SUCCESS);
+
             request.getRequestDispatcher(url).forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace();

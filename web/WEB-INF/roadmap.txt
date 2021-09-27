@@ -37,8 +37,8 @@ admin/dashboardPage=admin.jsp
 
 admin/redirect=HomePageServlet
 
-admin/blogList=AdminBlogListServlet
-admin/blogListPage=adminBlogList.jsp
+### admin/commentDetail=AdminCommentDetailServlet
+### admin/commentDetailPage=adminCommentDetail.jsp
 
 admin/adminAction=AdminActionServlet
 

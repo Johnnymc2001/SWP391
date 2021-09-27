@@ -117,7 +117,7 @@ public class AdminFilter implements Filter {
         AccountDTO dto;
         dto = (AccountDTO) req.getSession().getAttribute("USER");
 
-        if (null != dto && dto.getRole().equals("Admin")) {
+//        if (null != dto && dto.getRole().equals("Admin")) {
             url = "admin";
             List<String> paths = Arrays.asList(uri.split("/"));
             String lastChar = uri.substring(uri.length() - 1);
@@ -139,14 +139,14 @@ public class AdminFilter implements Filter {
 //        System.out.println(url);
             url = roadmap.get(url);
             req.getRequestDispatcher(url).forward(request, response);
-        } else {
-            for (int i = 0; i < uri.length(); i++) {
-                if (uri.charAt(i) == '/') {
-                    url = "../" + url;
-                }
-            }
-            res.sendRedirect(url);
-        }
+//        } else {
+//            for (int i = 0; i < uri.length(); i++) {
+//                if (uri.charAt(i) == '/') {
+//                    url = "../" + url;
+//                }
+//            }
+//            res.sendRedirect(url);
+//        }
     }
 
     /**
