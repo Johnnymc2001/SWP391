@@ -1,6 +1,6 @@
 <%-- 
-    Document   : admin
-    Created on : Sep 22, 2021, 10:16:58 AM
+    Document   : mentor
+    Created on : Sep 27, 2021, 7:14:43 AM
     Author     : JohnnyMC
 --%>
 
@@ -17,19 +17,15 @@
         <h1>Admin Dashboard</h1>
         <div class="container-fluid">
             <div class="col-sm-12">
-                <a href="accountList">Manage Accounts</a>
+                <a href="accountList">Manage Pending Blog</a>
                 <iframe src="accountList" width="100%" height="600px" style="border:none;"></iframe>
             </div>
 
             <div class="col-sm-12">
-                <a href="categoryManage">Manage Categories</a>
+                <a href="categoryManage">Manage Awards</a>
                 <iframe src="categoryManage" width="100%" height="400px" style="border:none;"></iframe>
             </div>
-
-            <div class="col-sm-12">
-                <a href="blogList">Manage Blogs</a>
-                <iframe src="blogList" width="100%" height="400px" style="border:none;"></iframe>
-            </div>
+            
         </div>
 
     </body>

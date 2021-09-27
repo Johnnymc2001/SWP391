@@ -78,8 +78,8 @@ public class AdminAccountDetailServlet extends HttpServlet {
                     foundError = true;
                 } else {
                     if (!dto.getUsername().equals(username)) {
-                        int id = accDao.getAccountIDByUsername(username);
-                        if (id != 0) {
+                        AccountDTO acc = accDao.getAccountFromUsername(username);
+                        if (acc != null) {
                             request.setAttribute("ERROR_USERNAME", "Username is existed!");
                             foundError = true;
                         }

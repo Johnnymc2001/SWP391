@@ -112,7 +112,7 @@ public class StudentFiilter implements Filter {
             HttpServletResponse res = (HttpServletResponse) response;
 
             String uri = req.getRequestURI();
-            String url = "SWP391_Project";
+            String url = request.getServletContext().getContextPath();
 
             AccountDAO dao = new AccountDAO();
             AccountDTO dto;

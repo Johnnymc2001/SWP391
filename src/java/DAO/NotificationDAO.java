@@ -69,7 +69,8 @@ public class NotificationDAO implements Serializable {
 
             if (con != null) {
                 String sql = "SELECT notificationID, ownerID, isRead, type, content, date "
-                        + "FROM Notification ";
+                        + "FROM Notification "
+                        + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
 
@@ -165,7 +166,8 @@ public class NotificationDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT notificationID, ownerID, isRead, type, content, date "
                         + "FROM Notification "
-                        + "WHERE notificationID = ?";
+                        + "WHERE notificationID = ? "
+                        + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, notificationId);

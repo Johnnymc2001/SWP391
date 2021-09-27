@@ -28,7 +28,7 @@ public class BlogDAO implements Serializable {
                 stm.setString(2, dto.getContent());
                 stm.setDate(3, dto.getPostDate());
                 stm.setString(4, dto.getCategoryID());
-                stm.setString(5, "PENDING");
+                stm.setString(5, dto.getStatus());
                 stm.setString(6, dto.getTags());
                 stm.setInt(7, dto.getStudentID());
                 if (dto.getAttachment() != null) {
@@ -121,7 +121,8 @@ public class BlogDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment "
                         + "FROM Blog "
-                        + "WHERE ownerID = ?";
+                        + "WHERE ownerID = ? "
+                        + "ORDER BY postDate DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, accountId);
@@ -173,7 +174,8 @@ public class BlogDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment "
                         + "FROM Blog "
-                        + "WHERE categoryID = ?";
+                        + "WHERE categoryID = ? "
+                        + "ORDER BY postDate DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, categoryId);
@@ -212,7 +214,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public ArrayList<BlogDTO> searchBlogUsingTitle(String searchTitle) throws SQLException {
+    public ArrayList<BlogDTO> getAllBlogLikeTitle(String searchTitle) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -225,7 +227,8 @@ public class BlogDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment "
                         + "FROM Blog "
-                        + "WHERE title LIKE ?";
+                        + "WHERE title LIKE ? "
+                        + "ORDER BY postDate DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchTitle + "%");
@@ -264,7 +267,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public ArrayList<BlogDTO> searchBlogUsingTitleAndCategoryID(String searchTitle, String categoryId) throws SQLException {
+    public ArrayList<BlogDTO> getAllBlogLikeTitleAndFromCategoryID(String searchTitle, String categoryId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -277,10 +280,225 @@ public class BlogDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment "
                         + "FROM Blog "
-                        + "WHERE title LIKE ? AND categoryID = ?";
+                        + "WHERE title LIKE ? AND categoryID = ? "
+                        + "ORDER BY postDate DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchTitle + "%");
+                stm.setString(2, categoryId);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int blogID = rs.getInt("blogID");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    Date postDate = rs.getDate("postDate");
+                    String categoryID = rs.getString("categoryID");
+                    String status = rs.getString("status");
+                    int approvedByID = rs.getInt("approvedByID");
+                    Date approvedDate = rs.getDate("approvedDate");
+                    String tags = rs.getString("tags");
+                    int ownerID = rs.getInt("ownerID");
+                    byte[] attachment = rs.getBytes("attachment");
+
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment);
+                    blogList.add(dto);
+                }
+
+                return blogList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<BlogDTO> getAllAvailableBlog() throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment "
+                        + "FROM Blog "
+                        + "WHERE status = ? "
+                        + "ORDER BY postDate DESC";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "AVAILABLE");
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int blogID = rs.getInt("blogID");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    Date postDate = rs.getDate("postDate");
+                    String categoryID = rs.getString("categoryID");
+                    String status = rs.getString("status");
+                    int approvedByID = rs.getInt("approvedByID");
+                    Date approvedDate = rs.getDate("approvedDate");
+                    String tags = rs.getString("tags");
+                    int ownerID = rs.getInt("ownerID");
+                    byte[] attachment = rs.getBytes("attachment");
+
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment);
+                    blogList.add(dto);
+                }
+
+                return blogList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<BlogDTO> getAllPendingBlog() throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment "
+                        + "FROM Blog "
+                        + "WHERE status = ? "
+                        + "ORDER BY postDate DESC";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "PENDING");
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int blogID = rs.getInt("blogID");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    Date postDate = rs.getDate("postDate");
+                    String categoryID = rs.getString("categoryID");
+                    String status = rs.getString("status");
+                    int approvedByID = rs.getInt("approvedByID");
+                    Date approvedDate = rs.getDate("approvedDate");
+                    String tags = rs.getString("tags");
+                    int ownerID = rs.getInt("ownerID");
+                    byte[] attachment = rs.getBytes("attachment");
+
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment);
+                    blogList.add(dto);
+                }
+
+                return blogList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<BlogDTO> getAllAvailableBlogFromCategoryID(String categoryId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment "
+                        + "FROM Blog "
+                        + "WHERE status = ? AND categoryID = ? "
+                        + "ORDER BY postDate DESC";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "AVAIABLE");
+                stm.setString(2, categoryId);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int blogID = rs.getInt("blogID");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    Date postDate = rs.getDate("postDate");
+                    String categoryID = rs.getString("categoryID");
+                    String status = rs.getString("status");
+                    int approvedByID = rs.getInt("approvedByID");
+                    Date approvedDate = rs.getDate("approvedDate");
+                    String tags = rs.getString("tags");
+                    int ownerID = rs.getInt("ownerID");
+                    byte[] attachment = rs.getBytes("attachment");
+
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment);
+                    blogList.add(dto);
+                }
+
+                return blogList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<BlogDTO> getAllPendingBlogFromCategoryID(String categoryId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment "
+                        + "FROM Blog "
+                        + "WHERE status = ? AND categoryID = ? "
+                        + "ORDER BY postDate DESC";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "PENDING");
                 stm.setString(2, categoryId);
                 rs = stm.executeQuery();
 
@@ -335,7 +553,8 @@ public class BlogDAO implements Serializable {
 
             if (con != null) {
                 String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment "
-                        + "FROM Blog";
+                        + "FROM Blog "
+                        + "ORDER BY postDate DESC";
 
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
@@ -384,7 +603,7 @@ public class BlogDAO implements Serializable {
             if (con != null) {
                 String sql = "UPDATE Blog "
                         + "SET title = ?, content = ?, postDate = ?, categoryID = ?, status = ?, approvedByID = ?, approvedDate = ?, tags = ?, ownerID = ?, attachment = ?  "
-                        + "WHERE blogID = ?";
+                        + "WHERE blogID = ? ";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
 
@@ -400,6 +619,34 @@ public class BlogDAO implements Serializable {
                 stm.setBytes(10, dto.getAttachment());
 
                 stm.setInt(11, blogId);
+                int line = stm.executeUpdate();
+
+                return line > 0;
+            } // End connection
+        } finally {
+
+        }
+        return false;
+    }
+
+    public boolean setBlogStatusUsingBlogID(int blogId, String status) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            // 1. Connect DB
+            con = DBHelpers.makeConnection();
+            // 2. Create SQL String
+            if (con != null) {
+                String sql = "UPDATE Blog "
+                        + "SET status = ?  "
+                        + "WHERE blogID = ? ";
+                // 3. Create statement object
+                stm = con.prepareStatement(sql);
+
+                stm.setString(1, status);
+
+                stm.setInt(2, blogId);
                 int line = stm.executeUpdate();
 
                 return line > 0;

@@ -62,13 +62,14 @@ public class CreateAccountServlet extends HttpServlet {
         String url = "register.jsp";
         System.out.println("birthdate: " + birthdate);
           AccountDAO dao = new AccountDAO();
+          
         try {
-            
+            AccountDTO user = dao.getAccountFromUsername("username");
             // KIEM TRA CAC LOI KHI TAO TAI KHOAN MOI
-             int i = dao.getAccountIDByUsername(username);
-             System.out.println("AccountID: "+i);
+//             int i = dao.getAccountIDByUsername(username);
+             System.out.println("AccountID: "+user);
             
-            if (i!=0) {
+            if (user!=null) {
                  foundError = true;
                  error.setUserNameExisted("Account Existed");
             }

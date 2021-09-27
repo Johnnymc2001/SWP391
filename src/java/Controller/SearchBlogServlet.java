@@ -54,9 +54,9 @@ public class SearchBlogServlet extends HttpServlet {
         try {
             if (null != searchValue && searchValue != "") {
                 if (searchCategory.equals("ALL") || searchCategory.equals("")) {
-                    list = dao.searchBlogUsingTitle(searchValue);
+                    list = dao.getAllBlogLikeTitle(searchValue);
                 } else {
-                    list = dao.searchBlogUsingTitleAndCategoryID(searchValue, searchCategory);
+                    list = dao.getAllBlogLikeTitleAndFromCategoryID(searchValue, searchCategory);
                 }
             }
 

@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class BlogRatingDAO implements Serializable {
 
-    public  boolean createBlogRating(BlogRatingDTO dto) throws SQLException {
+    public boolean createBlogRating(BlogRatingDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         int line = 0;
@@ -56,7 +56,7 @@ public class BlogRatingDAO implements Serializable {
         return false;
     }
 
-    public  ArrayList<BlogRatingDTO> getAllBlogRating() throws SQLException {
+    public ArrayList<BlogRatingDTO> getAllBlogRating() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -69,7 +69,8 @@ public class BlogRatingDAO implements Serializable {
 
             if (con != null) {
                 String sql = "SELECT ratingID, blogID, date, rate, ownerID "
-                        + "FROM BlogRating ";
+                        + "FROM BlogRating "
+                        + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
 
@@ -102,7 +103,7 @@ public class BlogRatingDAO implements Serializable {
         return null;
     }
 
-    public  BlogRatingDTO getBlogRatingFromRatingID(int ratingId) throws SQLException {
+    public BlogRatingDTO getBlogRatingFromRatingID(int ratingId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -115,7 +116,8 @@ public class BlogRatingDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT ratingID, blogID, date, rate, ownerID "
                         + "FROM BlogRating "
-                        + "WHERE ratingId = ?";
+                        + "WHERE ratingId = ? "
+                        + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, ratingId);
@@ -148,7 +150,7 @@ public class BlogRatingDAO implements Serializable {
         return null;
     }
 
-    public  ArrayList<BlogRatingDTO> getAllBlogRatingFromBlogID(int blogId) throws SQLException {
+    public ArrayList<BlogRatingDTO> getAllBlogRatingFromBlogID(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -162,7 +164,8 @@ public class BlogRatingDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT ratingID, blogID, date, rate, ownerID "
                         + "FROM BlogRating "
-                        + "WHERE blogID = ?";
+                        + "WHERE blogID = ? "
+                        + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, blogId);
@@ -196,7 +199,7 @@ public class BlogRatingDAO implements Serializable {
         return null;
     }
 
-    public  boolean updateBlogRating(int ratingId, BlogRatingDTO dto) throws SQLException {
+    public boolean updateBlogRating(int ratingId, BlogRatingDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -227,7 +230,7 @@ public class BlogRatingDAO implements Serializable {
         return false;
     }
 
-    public  boolean deleteBlogRating(int ratingId) throws SQLException {
+    public boolean deleteBlogRating(int ratingId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
