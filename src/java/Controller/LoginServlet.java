@@ -63,19 +63,35 @@ public class LoginServlet extends HttpServlet {
                 AccountDAO dao = new AccountDAO();
                 AccountDTO curUser = new AccountDTO();
                 curUser = dao.checkLogin(username, password);
+                System.out.println();
 
-                if (curUser == null) {
+                if (curUser == null ) {
                     foundError = true;
                     error.setUsernameNotExist("User Name or Password is Invalid ");
                        request.setAttribute("LOGIN_ERROR", error);
+                      
+                        System.out.println(curUser.getStatus());
+                     
                 }
-
-
-                if (curUser!=null) {
+                
+                if (curUser.getStatus().equals("UNAVAILABLE")){
+                    foundError = true;
+                      request.setAttribute("LOGIN_FAIL", "Your Account is not AVAILABLE anymore " );
+                         System.out.println("Your Account is not AVAILABLE anymore");
+                }else {
                     url = roadmap.get("homePage");
-                      HttpSession session = request.getSession(true);
-                        session.setAttribute("USER", curUser);
+                    HttpSession session = request.getSession(true);
+                       session.setAttribute("USER", curUser);
                 }
+                
+              
+
+
+//                if (curUser!=null ) {
+//                    url = roadmap.get("homePage");
+//                      HttpSession session = request.getSession(true);
+//                        session.setAttribute("USER", curUser);
+//                }
 
                 System.out.println("curUser: " + curUser.getUsername()+ "-"+curUser.getPassword());
                 System.out.println(url);
