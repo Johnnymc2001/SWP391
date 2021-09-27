@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-sm-6">
                                 Password<br/>${requestScope.ERROR_PASSWORD}
-                                <input type="text" name="password" id="password" value="${account.password}" required/>
+                                <input type="password" name="password" id="password" value="${account.password}" onfocus="togglePasswordShow(this, 'text')" onblur="togglePasswordShow(this, 'password')" required/>
                             </div>
                         </div>
 

@@ -15,7 +15,9 @@ function changeRole(selector) {
 }
 
 changeRole(roleSelect);
-
+function togglePasswordShow(input, type) {
+    input.type = type;
+}
 //const usernameRegex = new RegExp("[a-zA-Z0-9]{6,30}");
 //const usernameInput = form.querySelector("#username");
 //

@@ -73,28 +73,27 @@ public class CreateBlogServlet extends HttpServlet {
         
         try {
             //1. Check all user error
-            if (title.trim().length() < 6 || title.trim().length() > 20) {
+            if (title.trim().length() < 6 || title.trim().length() > 60) {
                 foundErr = true;
-                errors.setTitleLengthErr("Username is required from 6 to 20 characters");
+                request.setAttribute("ERROR_TITLE","title is required from 6 to 60 characters");
             }
 
-            if (content.trim().length() < 6 || content.trim().length() > 30) {
+            if (content.trim().length() < 10) {
                 foundErr = true;
-                errors.setContentLengthErr("Password is required from 6 to 30 characters");
+                request.setAttribute("ERROR_CONTENT","Content is required at least 10 characters");
             }
 
             //2. Process
             if (foundErr) {
-                //3. Send errors to users
-                request.setAttribute("CREATE_ERROR", errors);
                 url = roadmap.get(CREATE_PAGE);
-            } else {
+            } else{
                 //4. Call DAO to insert to DB
                 Date postDate = new Date(Calendar.getInstance().getTime().getTime());
                 BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID, attachment);
                 BlogDAO dao = new BlogDAO();
                 boolean result = dao.createBlog(dto);
                 if (result) {
+                    request.setAttribute("MESSAGE", "Your have been created, waiting for mentor to approve...");
                     url = roadmap.get(HOME_PAGE);
                 }
             }

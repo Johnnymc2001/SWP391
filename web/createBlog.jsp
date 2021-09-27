@@ -48,18 +48,13 @@
         </br><form action="createBlog" method="POST">
             <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
             Title: <br/><input type="text" value="${param.title}" name="txtTitle" maxlength="60" size="62"/> <br/>
-            <c:if test="${not empty errors.titleLengthErr}">
                 <font color="red">
-                ${errors.titleLengthErr}
+                ${requestScope.ERROR_TITLE}
                 </font><br/>
-            </c:if>
             Content:<br/> <textarea name="txtContent" rows="10" cols="50">Enter</textarea><br/>
-            <c:if test="${not empty errors.contentLengthErr}">
-                <font color="red">
-                ${errors.contentLengthErr}
+             <font color="red">
+                ${requestScope.ERROR_CONTENT}
                 </font><br/>
-            </c:if>
-
             <br/><input type="file" id="attachment" name="fileAttachment">
 
             <select name="categoryBox">
