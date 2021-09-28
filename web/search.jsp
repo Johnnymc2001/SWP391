@@ -61,7 +61,8 @@
                     </div>
                     <select class="custom-select" id="inputGroupSelect01">
                         <option selected>All</option>
-                        <option name="search-option" value="categoryID">Category 1</option>
+                        <option name="search-option" value="categoryID">Title</option>
+                        <option name="search-option" value="categoryID">Category</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
