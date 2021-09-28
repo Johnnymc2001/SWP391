@@ -61,117 +61,6 @@ public class AccountDAO implements Serializable {
     }
 
     /**
-     * Get account ID using username
-     *
-     * @param username Username of the account
-     * @return Return an integer if found, 0 if not found
-     * @throws SQLException
-     */
-    public AccountDTO getAccountFromUsername(String usr) throws SQLException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-
-        try {
-            AccountDTO dto = null;
-
-            con = DBHelpers.makeConnection();
-
-            if (con != null) {
-                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role , categoryID, status "
-                        + "FROM Account "
-                        + "Where username = ? ";
-
-                stm = con.prepareStatement(sql);
-                stm.setString(1, usr);
-
-                rs = stm.executeQuery();
-
-                while (rs.next()) {
-                    int accountID = rs.getInt("accountID");
-                    String username = rs.getString("username");
-                    String password = rs.getString("password");
-                    String fullname = rs.getString("fullname");
-                    String address = rs.getString("address");
-                    Date birthdate = rs.getDate("birthdate");
-                    String email = rs.getString("email");
-                    String phone = rs.getString("phone");
-                    String role = rs.getString("role");
-                    String categoryID = "Mentor".equals(role) ? rs.getString("categoryID") : "None";
-                    String status = rs.getString("status");
-
-                    dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status);
-                }
-
-                return dto;
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return null;
-    }
-
-    public AccountDTO getAccountFromAcoountID(int accountId) throws SQLException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-
-        try {
-            AccountDTO dto = null;
-
-            con = DBHelpers.makeConnection();
-
-            if (con != null) {
-                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role , categoryID, status "
-                        + "FROM Account "
-                        + "Where accountID = ? ";
-
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, accountId);
-
-                rs = stm.executeQuery();
-
-                while (rs.next()) {
-                    int accountID = rs.getInt("accountID");
-                    String username = rs.getString("username");
-                    String password = rs.getString("password");
-                    String fullname = rs.getString("fullname");
-                    String address = rs.getString("address");
-                    Date birthdate = rs.getDate("birthdate");
-                    String email = rs.getString("email");
-                    String phone = rs.getString("phone");
-                    String role = rs.getString("role");
-                    String categoryID = "Mentor".equals(role) ? rs.getString("categoryID") : "None";
-                    String status = rs.getString("status");
-
-                    dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status);
-                }
-
-                return dto;
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return null;
-    }
-
-    /**
      * Check for login using combination of username and password
      *
      * @param usr Username
@@ -234,6 +123,119 @@ public class AccountDAO implements Serializable {
     }
 
     /**
+     * Get account using username
+     *
+     * @param usr Username of the account
+     * @return Return an account if found, null if not found
+     * @throws SQLException
+     */
+    public AccountDTO getAccountFromUsername(String usr) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            AccountDTO dto = null;
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role , categoryID, status "
+                        + "FROM Account "
+                        + "Where username = ? "
+                        + "ORDER BY role";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, usr);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int accountID = rs.getInt("accountID");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String fullname = rs.getString("fullname");
+                    String address = rs.getString("address");
+                    Date birthdate = rs.getDate("birthdate");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String role = rs.getString("role");
+                    String categoryID = "Mentor".equals(role) ? rs.getString("categoryID") : "None";
+                    String status = rs.getString("status");
+
+                    dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status);
+                }
+
+                return dto;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public AccountDTO getAccountFromAcoountID(int accountId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            AccountDTO dto = null;
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role , categoryID, status "
+                        + "FROM Account "
+                        + "Where accountID = ? "
+                        + "ORDER BY role";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, accountId);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int accountID = rs.getInt("accountID");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String fullname = rs.getString("fullname");
+                    String address = rs.getString("address");
+                    Date birthdate = rs.getDate("birthdate");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String role = rs.getString("role");
+                    String categoryID = "Mentor".equals(role) ? rs.getString("categoryID") : "None";
+                    String status = rs.getString("status");
+
+                    dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status);
+                }
+
+                return dto;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    /**
      * Get all account in the database
      *
      * @return ArrayList<AccountDTO> if found, NULL if not found
@@ -251,7 +253,8 @@ public class AccountDAO implements Serializable {
 
             if (con != null) {
                 String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status "
-                        + "FROM Account";
+                        + "FROM Account "
+                        + "ORDER BY role";
 
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();

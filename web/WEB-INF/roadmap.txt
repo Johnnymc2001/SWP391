@@ -20,6 +20,7 @@ registerPage=register.jsp
 createBlog=CreateBlogServlet
 createBlogPage=createBlog.jsp
 
+
 ### STUDENT
 
 student/dashboard=StudentDashboardServlet
@@ -29,6 +30,18 @@ student/dashboardPage=student.jsp
 
 mentor/dashboard=MentorDashboardServlet
 mentor/dashboardPage=mentor.jsp
+
+mentor/blogPendingList=MentorBlogPendingListServlet
+mentor/blogPendingListPage=mentorBlogPendingList.jsp
+
+mentor/blogPendingDetail=MentorBlogPendingListServlet
+mentor/blogPendingDetailPage=mentorBlogPendingList.jsp
+
+mentor/awardList=MentorAwardListServlet
+mentor/awardListPage=mentorAwardList.jsp
+
+mentor/awardDetail=MentorAwardListServlet
+mentor/awardDetailPage=mentorAwardList.jsp
 
 ### ADMIN
 
