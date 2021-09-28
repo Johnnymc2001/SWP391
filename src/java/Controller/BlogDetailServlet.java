@@ -29,10 +29,10 @@ import javax.servlet.http.Part;
  * @author Admin
  */
 @WebServlet(name = "CreateBlogServlet", urlPatterns = {"/CreateBlogServlet"})
-public class CreateBlogServlet extends HttpServlet {
+public class BlogDetailServlet extends HttpServlet {
 
     private final String HOME_PAGE = "default";
-    private final String CREATE_PAGE = "createBlogPage";
+    private final String DETAIL_PAGE = "blogPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,71 +51,24 @@ public class CreateBlogServlet extends HttpServlet {
 
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-        String url;
-        String title = request.getParameter("txtTitle");
-        String content = request.getParameter("txtContent");
-        String categoryID = request.getParameter("categoryBox");
-
-        String tags = request.getParameter("txtTags");
-        int studentID = 2;
-        boolean foundErr = false;
-        String header = request.getContentType();
-
-        byte[] bytesImage = null;
-
-        CategoryDAO catDao = new CategoryDAO();
-        ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-
-        request.setAttribute("CATEGORY_LIST", catList);
+        String url = null;
+        int blogID = Integer.parseInt(request.getParameter("txtBlogID"));
 
         try {
-            if (null == title) {
-                url = roadmap.get(CREATE_PAGE);
-            } else {
-                System.out.println(header);
-                if (null != header && header.contains("multipart/form-data")) { // When Image Exists
-                    Part part = request.getPart("fileAttachment");
-                    System.out.println(part+" Ok con de");
-                    if (part.getSize()>0) {
-                        InputStream data = part.getInputStream();
-                        bytesImage = ImageUtils.InputStreamToBytes(data);
-                    }
-                }
-                //1. Check all user error
-                if (title.trim().length() < 6 || title.trim().length() > 60) {
-                    foundErr = true;
-                    request.setAttribute("ERROR_TITLE", "title is required from 6 to 60 characters");
-                }
-
-                if (content.trim().length() < 10) {
-                    foundErr = true;
-                    request.setAttribute("ERROR_CONTENT", "Content is required at least 10 characters");
-                }
-                if (foundErr) {
-                    url = roadmap.get(CREATE_PAGE);
-                } else {
-                    //4. Call DAO to insert to DB
-                    Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-                    BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID, bytesImage);
-                    BlogDAO dao = new BlogDAO();
-                    boolean result = dao.createBlog(dto);
-                    if (result) {
-                        request.setAttribute("MESSAGE", "Your have been created, waiting for mentor to approve...");
-                        url = roadmap.get(HOME_PAGE);
-                        response.sendRedirect(url);
-                    } else {
-                        url = roadmap.get(CREATE_PAGE);
-                    }
-                }
+            BlogDAO blogDao = new BlogDAO();
+            BlogDTO blog = blogDao.getBlogFromBlogID(blogID);
+            request.setAttribute("BLOG_DETAIL", blog);
+            if (null == blog) {
+                url = roadmap.get(HOME_PAGE);
+            }else{
+                url = roadmap.get(DETAIL_PAGE);
             }
-            
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("CreateBlogServlet _ SQL " + msg);
         } finally {
-            
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 
@@ -134,9 +87,9 @@ public class CreateBlogServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CreateBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BlogDetailServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(CreateBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BlogDetailServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -154,9 +107,9 @@ public class CreateBlogServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CreateBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BlogDetailServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(CreateBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BlogDetailServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

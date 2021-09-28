@@ -62,7 +62,7 @@
                 <c:forEach var="dto" items="${dtoList}" varStatus="counter">
                         <option value="${dto.categoryID}">${dto.categoryName}</option>
                 </c:forEach>
-
+                        
                 <input type="submit" value="Post"/>
                 <input type="reset" value="Reset" /><br/>
                 <a href="home">Return to Home</a>

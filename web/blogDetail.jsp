@@ -62,76 +62,32 @@
     <div class="header-bar"></div>
 
     <div class="container-fluid">
-        <c:set var="dtoBlogList" value="${requestScope.BLOG_LIST}" />
-        <c:forEach var="dtoCL" items="${dtoCategoryList}">
-            <c:if test="${BlogDAO.getAllBlogFromCategoryId(dtoCL.categoryID).size() != null}">
+        <c:set var="dtoBlogDetail" value="${requestScope.BLOG_DETAIL}" />
+        <c:forEach var="dtoBD" items="${dtoBlogDetail}">
+            <c:if test="${not empty dtoBD}">
                 <div class="category-name">
-                    <h1>${dtoCL.categoryName}</h1>
-                </div>
-                <div class="row">
-                    <c:forEach var="dtoBL" items="${dtoBlogList}">
-                        <c:if test="${dtoBL.categoryID eq dtoCL.categoryID}">
-                            <div class="blog-box col-sm-6 col-md-4 col-lg-3">
-                                <div class="pic-box">
-                                    <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
-                                    <h5>${dtoBL.title}</h5>
-                                </div>
-                                <div class="small-description">
-                                    <h4>${dtoBL.studentID}</h4>
-                                    <h6>${dtoBL.approvedDate}</h6>
-                                </div>
-                            </div>
-                        </c:if>
-                    </c:forEach>
+                    <h1>${dtoBD.title}</h1>
+                    <h4>${dtoBD.studentID}</h4>
+                    <h5>${dtoBD.approvedDate}</h5>
+                    <c:set var="image" value="${requestScope.BASE64IMG}" />
+                    <img src="data:image/png;base64, ${image}" alt="Blog thumbnail"/>
+                    <p>${dtoBD.content}</p>
                 </div>
             </c:if>
         </c:forEach>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <%--<section class="">
-           <c:set var="dtoBlogList" value="${requestScope.BLOG_LIST}" />
-           <c:forEach var="dtoBL" items="${dtoBlogList}">
-               find a way to add attachment
-                   <div>
-     <c:if test="${dtoBL.hasAttachment == true}">
-         <c:set var="dtoBlogList" value="${sessionScope.ATTACHMENT_LIST}" />
-         
-         
-         <c:forEach var="dtoAL" items="${dtoBlogList}">
-             <c:if test="${dtoBL.blogID == dtoAL.blogID}">
-                 <img>${dtoAL.data}</img>
-                  <img src="data:image/jpg;base64,${base64}" width="240" height="300"/>
-             </c:if>
-         </c:forEach>
-     </c:if>
-    <h3>${dtoBL.title}</h3>
-    <p>${dtoBL.approvedDate}</p>
 </div>
-</c:forEach>
-</section>--%>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+</script>
 </body>
 
 </html>
