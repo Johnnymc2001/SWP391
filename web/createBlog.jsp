@@ -58,7 +58,7 @@
             <br/><input type="file" id="attachment" name="fileAttachment">
 
             <select name="categoryBox">
-                <c:set var="dtoList" value="${sessionScope.CATEGORY}"/>
+                <c:set var="dtoList" value="${sessionScope.CATEGORY_LIST}"/>
                 <c:forEach var="dto" items="${dtoList}" varStatus="counter">
                     <c:if test="${not empty dto && dto.qty!=0}">
                         <option>${dto.categoryName}</option>
