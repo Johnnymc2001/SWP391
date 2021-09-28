@@ -53,14 +53,26 @@ public class HomePageServlet extends HttpServlet {
 //                    blog.setContent(blog.getContent().substring(0, 60) + "...");
 //                });
 //            }
-            BlogDAO dao = new BlogDAO();
-            ArrayList<BlogDTO> blogList = dao.getAllBlogs();
+            BlogDAO blogDao = new BlogDAO();
+            ArrayList<BlogDTO> blogList = blogDao.getAllBlogs();
 
             CategoryDAO catDao = new CategoryDAO();
             ArrayList<CategoryDTO> catList = catDao.getAllCategory();
 
-            request.setAttribute("CATEGORY_LIST", catList);
-            request.setAttribute("BLOG_LIST", blogList);
+            HashMap<CategoryDTO, ArrayList<BlogDTO>> list = new HashMap<>();
+
+            for (CategoryDTO catDto : catList) {
+                ArrayList<BlogDTO> tempBlogList = blogDao.getAllAvailableBlogFromCategoryID(catDto.getCategoryID());
+                if (tempBlogList.size() > 0) {
+                    list.put(catDto, tempBlogList);
+                } else {
+//                    list.put(catDto, null);
+                }
+            }
+
+//            request.setAttribute("CATEGORY_LIST", catList);
+//            request.setAttribute("BLOG_LIST", blogList);
+            request.setAttribute("MAP", list);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
