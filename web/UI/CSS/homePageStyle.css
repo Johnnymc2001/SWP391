@@ -10,19 +10,22 @@
     box-shadow: 0 8px 6px -6px black;
 }
 
-.search-navbar{
+.search-navbar {
     width: 100%;
     display: flex;
 }
 
-.xavalo img {
+.belownav {
+    position: relative;
+}
+
+.belownav img {
     width: 100%;
     object-fit: cover;
     height: 300px;
     -webkit-box-shadow: 0px 8px 6px -6px black;
     -moz-box-shadow: 0 8px 6px -6px black;
     box-shadow: 0 8px 6px -6px black;
-    position: relative;
     filter: blur(0px) brightness(80%);
     transition: ease-in-out .5s;
 }
@@ -33,7 +36,7 @@
 
 .xavalo h1 {
     position: absolute;
-    top: 25%;
+    top: 45%;
     width: 100%;
     text-align: center;
     opacity: 1;
@@ -42,7 +45,7 @@
 
 .xavalo h2 {
     position: absolute;
-    top: 25%;
+    top: 45%;
     width: 100%;
     text-align: center;
     opacity: 0;
@@ -77,7 +80,7 @@ h2 {
 }
 
 @media screen and (max-width: 768px) {
-    .category-name h1{
+    .category-name h1 {
         font-size: 8vw;
     }
 }
@@ -127,4 +130,96 @@ h2 {
     justify-content: space-between;
     font-weight: 300;
     align-items: center;
+}
+
+.action {
+    position: relative;
+}
+
+.action .profile-avatar img {
+    width: 3rem;
+    border-radius: 50%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.action .profile-avatar img:hover {
+    cursor: pointer;
+}
+
+.action .menu {
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: 20px;
+    margin-top: 1rem;
+    width: 15rem;
+    opacity: 0;
+    /* display: none; */
+    transition: all .3s;
+    position: absolute;
+    background-color: #343a40;
+    z-index: 1;
+    right: 0;
+}
+
+.action .profile-avatar:hover+.menu {
+    opacity: 1;
+    /* display: block; */
+}
+
+
+.action .menu:hover {
+    opacity: 1;
+    /* display: block; */
+}
+
+
+@media only screen and (max-width: 992px) {
+    .action .menu {
+        background-color: transparent;
+        position: relative;
+        width: 100%;
+        opacity: 1;
+        /* display: block; */
+    }
+
+    .action .profile-avatar img {
+        margin-left: 0;
+        transform: translateX(0);
+    }
+}
+
+.action .menu ul li {
+    border-top: 1px gray solid;
+    list-style: none;
+    padding: 0.5rem;
+}
+
+.action .menu ul,
+.action .menu li {
+    padding: 0;
+    margin: 0;
+}
+
+.action .menu h3,
+span,
+a {
+    font-family: 'Inconsolata', monospace;
+    color: white;
+}
+
+.action .menu ul li img {
+    width: 2rem;
+    margin-right: 1rem;
+}
+
+.action .menu ul li img:hover {
+    cursor: pointer;
+}
+
+
+.action .menu a:link,
+a:visited {
+    color: white;
+    text-decoration: none;
 }
