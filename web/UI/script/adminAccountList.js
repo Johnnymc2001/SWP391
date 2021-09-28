@@ -1,11 +1,26 @@
-const buttonList = document.querySelectorAll("button");
+//const buttonList = document.querySelectorAll("button");
 const iframe = document.querySelector("iframe");
-buttonList.forEach((button) => {
-    button.addEventListener("click", function () {
-        const value = button.value;
-        window.location.href = "accountDetail?accountid=" + value;
-    });
-});
+
+//buttonList.forEach((button) => {
+//    button.addEventListener("click", function () {
+//        const value = button.value;
+//        window.location.href = "accountDetail?accountid=" + value;
+//    });
+//});
+
+//function modifyAccount(id) {
+//    window.location.href = "accountDetail?accountid=" + id;
+//}
+async function deactivateAccount(id) {
+    await fetch("accountDetail?accountid=" + id + "&submitAction=Disable");
+    window.location.href = "accountList";
+}
+
+async function activateAccount(id) {
+    await fetch("accountDetail?accountid=" + id + "&submitAction=Enable");
+    window.location.href = "accountList";
+}
+
 
 function findGetParameter(parameterName) {
     var result = null,
