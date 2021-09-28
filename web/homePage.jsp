@@ -20,6 +20,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
+<c:set var="user" value="${sessionScope.USER}"/>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="home">
@@ -39,7 +41,12 @@
                     </div>
                 </form>
                 <a class="nav-item nav-link" href="aboutUs.html">About us</a>
-                <a class="nav-item nav-link" href="loginPage">Login</a>
+                <c:if test="${empty user}">
+                    <a class="nav-item nav-link" href="loginPage">Login</a>
+                </c:if>
+                <c:if test="${not empty user}">
+
+                </c:if>
             </div>
         </div>
     </nav>
@@ -58,25 +65,27 @@
         <c:set var="dtoCategoryList" value="${requestScope.CATEGORY_LIST}" />
         <c:set var="dtoBlogList" value="${requestScope.BLOG_LIST}" />
         <c:forEach var="dtoCL" items="${dtoCategoryList}">
-            <div class="category-name">
-                <h1>${dtoCL.categoryName}</h1>
-            </div>
-            <div class="row">
-                <c:forEach var="dtoBL" items="${dtoBlogList}">
-                    <c:if test="${dtoBL.categoryID eq dtoCL.categoryID}">
-                        <div class="blog-box col-sm-6 col-md-4 col-lg-3">
-                            <div class="pic-box">
-                                <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
-                                <h5>${dtoBL.title}</h5>
+            <c:if test="${BlogDAO.getAllBlogFromCategoryId(dtoCL.categoryID).size() != null}">
+                <div class="category-name">
+                    <h1>${dtoCL.categoryName}</h1>
+                </div>
+                <div class="row">
+                    <c:forEach var="dtoBL" items="${dtoBlogList}">
+                        <c:if test="${dtoBL.categoryID eq dtoCL.categoryID}">
+                            <div class="blog-box col-sm-6 col-md-4 col-lg-3">
+                                <div class="pic-box">
+                                    <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
+                                    <h5>${dtoBL.title}</h5>
+                                </div>
+                                <div class="small-description">
+                                    <h4>${dtoBL.studentID}</h4>
+                                    <h6>${dtoBL.approvedDate}</h6>
+                                </div>
                             </div>
-                            <div class="small-description">
-                                <h4>${dtoBL.studentID}</h4>
-                                <h6>${dtoBL.approvedDate}</h6>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </c:if>
         </c:forEach>
     </div>
 
