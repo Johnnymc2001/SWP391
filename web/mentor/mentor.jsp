@@ -17,13 +17,13 @@
         <h1>Admin Dashboard</h1>
         <div class="container-fluid">
             <div class="col-sm-12">
-                <a href="accountList">Manage Pending Blog</a>
-                <iframe src="accountList" width="100%" height="600px" style="border:none;"></iframe>
+                <a href="blogPending">Manage Blog Pending</a>
+                <iframe src="blogPending" width="100%" height="600px" style="border:none;"></iframe>
             </div>
 
             <div class="col-sm-12">
-                <a href="categoryManage">Manage Awards</a>
-                <iframe src="categoryManage" width="100%" height="400px" style="border:none;"></iframe>
+                <a href="awardList">Manage Award</a>
+                <iframe src="awardList" width="100%" height="400px" style="border:none;"></iframe>
             </div>
             
         </div>

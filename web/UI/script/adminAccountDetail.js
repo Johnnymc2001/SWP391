@@ -8,16 +8,24 @@ const categorySelect = document.querySelector("#categorySelect")
 function changeRole(selector) {
     const value = selector.value;
     if (value === "Mentor") {
-        categorySelect.hidden = false;
+        categorySelect.disabled = false;
     } else {
-        categorySelect.hidden = true;
+        categorySelect.disabled = true;
     }
 }
 
 changeRole(roleSelect);
-function togglePasswordShow(input, type) {
-    input.type = type;
-}
+
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password');
+
+togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye / eye slash icon
+    this.classList.toggle('bi-eye');
+});
 //const usernameRegex = new RegExp("[a-zA-Z0-9]{6,30}");
 //const usernameInput = form.querySelector("#username");
 //
