@@ -65,6 +65,7 @@ public class HomePageServlet extends HttpServlet {
                 ArrayList<BlogDTO> tempBlogList = blogDao.getAllAvailableBlogFromCategoryID(catDto.getCategoryID());
                 if (tempBlogList.size() > 0) {
                     list.put(catDto, tempBlogList);
+                    System.out.println(tempBlogList.size());
                 } else {
 //                    list.put(catDto, null);
                 }

@@ -25,11 +25,6 @@
                 <a href="categoryManage">Manage Categories</a>
                 <iframe src="categoryManage" width="100%" height="400px" style="border:none;"></iframe>
             </div>
-
-            <div class="col-sm-12">
-                <a href="blogList">Manage Blogs</a>
-                <iframe src="blogList" width="100%" height="400px" style="border:none;"></iframe>
-            </div>
         </div>
 
     </body>

@@ -57,7 +57,7 @@ public class AdminAccountListServlet extends HttpServlet {
             AccountDAO dao = new AccountDAO();
             ArrayList<AccountDTO> listAccount = dao.getAllAccount();
 
-            int maxPageItem = 4;
+            int maxPageItem = 10;
             int page;
 
 //            if (null != maxPageItemString) {

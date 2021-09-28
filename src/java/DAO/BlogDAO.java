@@ -21,7 +21,7 @@ public class BlogDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "INSERT INTO Blog (title, content, postDate, categoryID, status, tags, ownerID, attachment) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, dto.getTitle());
@@ -444,7 +444,7 @@ public class BlogDAO implements Serializable {
                         + "ORDER BY postDate DESC";
 
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "AVAIABLE");
+                stm.setString(1, "APPROVED");
                 stm.setString(2, categoryId);
                 rs = stm.executeQuery();
 
