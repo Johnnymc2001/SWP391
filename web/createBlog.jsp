@@ -45,24 +45,22 @@
             </div>
         </div>
         
-        </br><form action="createBlog" method="POST">
+        </br><form action="createBlog" method="POST" enctype='multipart/form-data'>
             <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
-            Title: <br/><input type="text" value="${param.title}" name="txtTitle" maxlength="60" size="62"/> <br/>
+            Title: <br/><input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="60" size="62"/> <br/>
                 <font color="red">
                 ${requestScope.ERROR_TITLE}
                 </font><br/>
-            Content:<br/> <textarea name="txtContent" rows="10" cols="50">Enter</textarea><br/>
+            Content:<br/> <textarea value="${param.txtContent}" name="txtContent" rows="10" cols="50">Enter</textarea><br/>
              <font color="red">
                 ${requestScope.ERROR_CONTENT}
                 </font><br/>
             <br/><input type="file" id="attachment" name="fileAttachment">
 
             <select name="categoryBox">
-                <c:set var="dtoList" value="${sessionScope.CATEGORY_LIST}"/>
+                <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
                 <c:forEach var="dto" items="${dtoList}" varStatus="counter">
-                    <c:if test="${not empty dto && dto.qty!=0}">
-                        <option>${dto.categoryName}</option>
-                    </c:if>
+                        <option value="${dto.categoryID}">${dto.categoryName}</option>
                 </c:forEach>
 
                 <input type="submit" value="Post"/>
