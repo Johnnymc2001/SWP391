@@ -62,9 +62,7 @@
     <div class="header-bar"></div>
 
     <div class="container-fluid">
-        <c:set var="dtoBlogDetail" value="${requestScope.BLOG_DETAIL}" />
-        <c:forEach var="dtoBD" items="${dtoBlogDetail}">
-            <c:if test="${not empty dtoBD}">
+        <c:set var="dtoBD" value="${requestScope.BLOG_DETAIL}" />
                 <div class="category-name">
                     <h1>${dtoBD.title}</h1>
                     <h4>${dtoBD.studentID}</h4>
@@ -73,8 +71,6 @@
                     <img src="data:image/png;base64, ${image}" alt="Blog thumbnail"/>
                     <p>${dtoBD.content}</p>
                 </div>
-            </c:if>
-        </c:forEach>
     </div>
 </div>
 

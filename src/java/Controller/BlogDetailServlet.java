@@ -56,7 +56,7 @@ public class BlogDetailServlet extends HttpServlet {
 
         try {
             BlogDAO blogDao = new BlogDAO();
-            BlogDTO blog = blogDao.getBlogFromBlogID(blogID);
+            BlogDTO blog = blogDao.getBlogFromBlogID(2);
             request.setAttribute("BLOG_DETAIL", blog);
             if (null == blog) {
                 url = roadmap.get(HOME_PAGE);
