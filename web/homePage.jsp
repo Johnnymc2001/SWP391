@@ -76,34 +76,39 @@
 <div class="header-bar"></div>
 
 <div class="container-fluid">
-    <c:set var="map" value="${requestScope.MAP}" />
-    <c:forEach var="index" items="${map}">
+    <c:set var="catBlogMap" value="${requestScope.CAT_TO_BLOG_MAP}" />
+
+    <c:forEach var="index" items="${catBlogMap}">
         <div class="category-name">
             <h1>${index.key.categoryName}</h1>
         </div>
         <div class="row">
             <c:forEach var="dtoBL" items="${index.value}">
                 <div class="blog-box col-sm-6 col-md-4 col-lg-3">
-                    <div class="pic-box"
-                         <c:url var="blogDetail" value="blog">
-                             <c:param name="txtBlogID" value="${dtoBL.blogID}"/>
-                             <c:param name="txtStudentID" value="${dtoBL.studentID}"/>
-                         </c:url>>
+                    <div class="pic-box">
+                        <c:url var="blogDetail" value="blog">
+                            <c:param name="txtBlogID" value="${dtoBL.blogID}"/>
+                            <c:param name="txtStudentID" value="${dtoBL.studentID}"/>
+                        </c:url>
                         <a href="${blogDetail}">
-                            <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
-                            <h5>${dtoBL.title}</h5>
+                            <c:if test="${not empty dtoBL.base64}">
+                                <img src="data:image/png;base64, ${dtoBL.base64}" alt="Pic" />
+                            </c:if>
+                            <c:if test="${empty dtoBL.base64}">
+                                <img src="UI/Icon/selfmademan.jpg" alt="Pic" />
+                            </c:if>
                         </a>
                     </div>
-                    <div class="small-description">
-                        <h4>${dtoBL.studentID}</h4>
-                        <h6>${dtoBL.approvedDate}</h6>
-                    </div>
+                    <h5>${dtoBL.title}</h5>
+                </div>
+                <div class="small-description">
+                    <h4>${dtoBL.studentID}</h4>
+                    <h6>${dtoBL.approvedDate}</h6>
                 </div>
             </c:forEach>
         </div>
     </c:forEach>
 </div>
-
 
 
 

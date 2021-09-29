@@ -26,6 +26,15 @@ public class BlogDTO implements Serializable {
     private String tags;
     private int studentID;
     private byte[] attachment;
+    private String base64;
+
+    public String getBase64() {
+        return base64;
+    }
+
+    public void setBase64(String base64) {
+        this.base64 = base64;
+    }
 
     public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID, byte[] attachment) {
         this.blogID = blogID;

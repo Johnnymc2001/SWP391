@@ -234,13 +234,7 @@ public class AccountDAO implements Serializable {
         }
         return null;
     }
-
-    /**
-     * Get all account in the database
-     *
-     * @return ArrayList<AccountDTO> if found, NULL if not found
-     * @throws SQLException
-     */
+    
     public ArrayList<AccountDTO> getAllAccount() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -257,6 +251,66 @@ public class AccountDAO implements Serializable {
                         + "ORDER BY role";
 
                 stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int accountID = rs.getInt("accountID");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String fullname = rs.getString("fullname");
+                    String address = rs.getString("address");
+                    Date birthdate = rs.getDate("birthdate");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String role = rs.getString("role");
+                    String categoryID = "Mentor".equals(role) ? rs.getString("categoryID") : "None";
+                    String status = rs.getString("status");
+
+                    AccountDTO dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status);
+                    accountList.add(dto);
+                }
+
+                return accountList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get all account in the database
+     *
+     * @return ArrayList if found, NULL if not found
+     * @throws SQLException
+     */
+    public ArrayList<AccountDTO> getAllAccountFromRole(String searchRole) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<AccountDTO> accountList = new ArrayList<AccountDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status "
+                        + "FROM Account "
+                        + "WHERE role = ? "
+                        + "ORDER BY role";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, searchRole);
+                
                 rs = stm.executeQuery();
 
                 while (rs.next()) {

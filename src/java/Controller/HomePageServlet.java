@@ -9,6 +9,7 @@ import DAO.BlogDAO;
 import DAO.BlogDTO;
 import DAO.CategoryDAO;
 import DAO.CategoryDTO;
+import Utils.ImageUtils;
 import static Utils.ImageUtils.BytesToBase64;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -55,17 +56,23 @@ public class HomePageServlet extends HttpServlet {
 //                });
 //            }
             BlogDAO blogDao = new BlogDAO();
-            ArrayList<BlogDTO> blogList = blogDao.getAllBlogs();
+//            ArrayList<BlogDTO> blogList = blogDao.getAllAvailableBlog();
 
             CategoryDAO catDao = new CategoryDAO();
             ArrayList<CategoryDTO> catList = catDao.getAllCategory();
 
-            HashMap<CategoryDTO, ArrayList<BlogDTO>> list = new HashMap<>();
+            HashMap<CategoryDTO, ArrayList<BlogDTO>> catToBlogMap = new HashMap<>();
+            HashMap<Integer, String> blogIdToImageMap = new HashMap<>();
 
             for (CategoryDTO catDto : catList) {
                 ArrayList<BlogDTO> tempBlogList = blogDao.getAllAvailableBlogFromCategoryID(catDto.getCategoryID());
                 if (tempBlogList.size() > 0) {
-                    list.put(catDto, tempBlogList);
+                    for (BlogDTO blog : tempBlogList) {
+                        if (null != blog.getAttachment()) {
+                            blog.setBase64(ImageUtils.BytesToBase64(blog.getAttachment()));
+                        }
+                    }
+                    catToBlogMap.put(catDto, tempBlogList);
                     System.out.println(tempBlogList.size());
                 } else {
 //                    list.put(catDto, null);
@@ -74,7 +81,7 @@ public class HomePageServlet extends HttpServlet {
 
 //            request.setAttribute("CATEGORY_LIST", catList);
 //            request.setAttribute("BLOG_LIST", blogList);
-            request.setAttribute("MAP", list);
+            request.setAttribute("CAT_TO_BLOG_MAP", catToBlogMap);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
