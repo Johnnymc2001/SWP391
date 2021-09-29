@@ -112,6 +112,7 @@
 
 <div class="container-fluid">
     <c:set var="catBlogMap" value="${requestScope.CAT_TO_BLOG_MAP}" />
+    <c:set var="blogImageMap" value="${requestScope.BLOG_TO_IMAGE_MAP}" />
 
     <c:forEach var="index" items="${catBlogMap}">
         <div class="category-name">
@@ -126,10 +127,12 @@
                             <c:param name="txtStudentID" value="${dtoBL.studentID}"/>
                         </c:url>
                         <a href="${blogDetail}">
-                            <c:if test="${not empty dtoBL.base64}">
-                                <img src="data:image/png;base64, ${dtoBL.base64}" alt="Pic" />
+                            <c:set var="image" value="${blogImageMap[dtoBL]}"/>
+                            
+                            <c:if test="${not empty image}">
+                                <img src="data:image/png;base64, ${image}" alt="Pic" />
                             </c:if>
-                            <c:if test="${empty dtoBL.base64}">
+                            <c:if test="${empty image}">
                                 <img src="UI/Icon/selfmademan.jpg" alt="Pic" />
                             </c:if>
                         </a>

@@ -1,6 +1,8 @@
 package Controller;
 
 import DAO.AccountDTO;
+import DAO.AttachmentDAO;
+import DAO.AttachmentDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
 import DAO.CategoryDAO;
@@ -59,13 +61,13 @@ public class CreateBlogServlet extends HttpServlet {
         String categoryID = request.getParameter("categoryBox");
 
         String tags = request.getParameter("txtTags");
-        
+
         AccountDTO student = (AccountDTO) request.getSession().getAttribute("USER");
         int studentID = student.getAccountID();
-        
+
         String header = request.getContentType();
-        byte[] bytesImage = null;
-        
+        String base64Image = null;
+
         boolean foundErr = false;
 
         CategoryDAO catDao = new CategoryDAO();
@@ -79,9 +81,10 @@ public class CreateBlogServlet extends HttpServlet {
             } else {
                 if (null != header && header.contains("multipart/form-data")) { // When Image Exists
                     Part part = request.getPart("fileAttachment");
-                    if (part.getSize()>0) {
+                    if (part.getSize() > 0) {
                         InputStream data = part.getInputStream();
-                        bytesImage = ImageUtils.InputStreamToBytes(data);
+                        byte[] bytesImage = ImageUtils.InputStreamToBytes(data);
+                        base64Image = ImageUtils.BytesToBase64(bytesImage);
                     }
                 }
                 //1. Check all user error
@@ -99,10 +102,16 @@ public class CreateBlogServlet extends HttpServlet {
                 } else {
                     //4. Call DAO to insert to DB
                     Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-                    BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID, bytesImage);
+                    BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID);
+                    AttachmentDAO attDao = new AttachmentDAO();
+
                     BlogDAO dao = new BlogDAO();
                     int result = dao.createBlog(dto);
                     if (result > 0) {
+                        if (null != base64Image) {
+                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BASE64", base64Image , null));
+                        }
+                        
                         request.setAttribute("MESSAGE", "Your have been created, waiting for mentor to approve...");
                         url = roadmap.get(HOME_PAGE);
                         response.sendRedirect(url);
@@ -111,14 +120,14 @@ public class CreateBlogServlet extends HttpServlet {
                     }
                 }
             }
-            
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
+
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("CreateBlogServlet _ SQL " + msg);
         } finally {
-            
+
         }
     }
 
