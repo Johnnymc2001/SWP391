@@ -33,6 +33,9 @@ blogCommentPage=blogComment.jsp
 student/dashboard=StudentDashboardServlet
 student/dashboardPage=student.jsp
 
+notification=NotificationServlet
+notificationPage=notification.jsp
+
 ### MENTOR
 
 mentor/dashboard=MentorDashboardServlet

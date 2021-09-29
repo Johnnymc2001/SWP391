@@ -22,7 +22,7 @@
                 <tr>
                     <th>NO</th>
 
-                    <th>Content</th>
+                    <th>Notification</th>
                 </tr>
 
                 <c:forEach items="${noti}"  var="dto" varStatus="counter">
