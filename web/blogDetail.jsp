@@ -66,7 +66,7 @@
         <h1>${dtoBD.title}</h1>
         <h4>by ${dtoBD.studentID}</h4>
         <h5>${dtoBD.approvedDate}</h5>
-        <div class="thumbnail-box">
+        <div>
         <c:if test="${empty dtoBD.attachment}">
             <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
         </c:if>

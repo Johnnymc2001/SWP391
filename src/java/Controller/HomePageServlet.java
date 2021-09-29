@@ -9,6 +9,7 @@ import DAO.BlogDAO;
 import DAO.BlogDTO;
 import DAO.CategoryDAO;
 import DAO.CategoryDTO;
+import static Utils.ImageUtils.BytesToBase64;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;

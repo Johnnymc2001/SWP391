@@ -84,9 +84,15 @@
         <div class="row">
             <c:forEach var="dtoBL" items="${index.value}">
                 <div class="blog-box col-sm-6 col-md-4 col-lg-3">
-                    <div class="pic-box">
-                        <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
-                        <h5>${dtoBL.title}</h5>
+                    <div class="pic-box"
+                         <c:url var="blogDetail" value="blog">
+                             <c:param name="txtBlogID" value="${dtoBL.blogID}"/>
+                             <c:param name="txtStudentID" value="${dtoBL.studentID}"/>
+                         </c:url>>
+                        <a href="${blogDetail}">
+                            <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
+                            <h5>${dtoBL.title}</h5>
+                        </a>
                     </div>
                     <div class="small-description">
                         <h4>${dtoBL.studentID}</h4>

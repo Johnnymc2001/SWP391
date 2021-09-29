@@ -45,11 +45,11 @@ public class BlogDetailServlet extends HttpServlet {
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url = null;
-//        int blogID = Integer.parseInt(request.getParameter("txtBlogID"));
+        int blogID = Integer.parseInt(request.getParameter("txtBlogID"));
 
         try {
             BlogDAO blogDao = new BlogDAO();
-            BlogDTO blog = blogDao.getBlogFromBlogID(2);
+            BlogDTO blog = blogDao.getBlogFromBlogID(blogID);
             request.setAttribute("BLOG_DETAIL", blog);
             if (null == blog) {
                 url = roadmap.get(HOME_PAGE);
