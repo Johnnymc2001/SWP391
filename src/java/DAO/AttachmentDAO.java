@@ -142,7 +142,7 @@ public class AttachmentDAO {
         return null;
     }
 
-    public boolean updateAttachmentFromAttachmentID(int awardId, AttachmentDTO dto) throws SQLException {
+    public boolean updateAttachmentFromAttachmentID(int attachmentId, AttachmentDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -152,17 +152,17 @@ public class AttachmentDAO {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "UPDATE Attachment "
-                        + "SET blogID = ?, awardType = ?, date = ?, awardBy = ? "
-                        + "WHERE awardID = ?";
+                        + "SET blogID = ?, type = ?, dataText = ?, dataBinary = ? "
+                        + "WHERE attachmentID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
 
                 stm.setInt(1, dto.getBlogID());
-                stm.setString(2, dto.getAwardType());
-                stm.setDate(3, dto.getDate());
-                stm.setInt(4, dto.getAwardBy());
+                stm.setString(2, dto.getType());
+                stm.setString(3, dto.getDataText());
+                stm.setBytes(4, dto.getDataBinary());
 
-                stm.setInt(5, awardId);
+                stm.setInt(5, attachmentId);
                 int line = stm.executeUpdate();
 
                 return line > 0;
@@ -183,7 +183,7 @@ public class AttachmentDAO {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "DELETE FROM Attachment "
-                        + "WHERE awardID = ?";
+                        + "WHERE blogID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, blogId);
