@@ -77,10 +77,8 @@ public class CreateBlogServlet extends HttpServlet {
             if (null == title) {
                 url = roadmap.get(CREATE_PAGE);
             } else {
-                System.out.println(header);
                 if (null != header && header.contains("multipart/form-data")) { // When Image Exists
                     Part part = request.getPart("fileAttachment");
-                    System.out.println(part+" Ok con de");
                     if (part.getSize()>0) {
                         InputStream data = part.getInputStream();
                         bytesImage = ImageUtils.InputStreamToBytes(data);

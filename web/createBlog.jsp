@@ -45,7 +45,7 @@
             </div>
         </div>
         
-        </br><form action="createBlog" method="POST" enctype='multipart/form-data'>
+        <form action="createBlog" method="POST" enctype='multipart/form-data'>
             <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
             Title: <br/><input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="60" size="62"/> <br/>
                 <font color="red">

@@ -14,17 +14,20 @@
     </head>
     <body>
         <section>
-            <form action="createBlog" method="POST">
+            <form action="comment" method="POST">
                 <div>
                     <textarea name="content">Comment</textarea>
+                    <font color="red">
+                    ${requestScope.ERROR_COMMENT}
+                    </font><br/>
                     <input type="submit" value="comment">
                 </div>
             </form>
             <div>
-                <c:set var="dtoCMList" value="${requestScope.COMMENT_LIST}"/>
-                <c:forEach var="dtoCM" items="dtoCMList">
-                    <h4>${dtoCM.studentID}</h4>
-                    <p>${dtoCM.content}</p>
+                <c:set var="dtoCmMAP" value="${requestScope.COMMENT_MAP}"/>
+                <c:forEach var="dtoCm" items="${dtoCmMAP}">
+                    <h4>${dtoCm.value.fullname}</h4>
+                    <p>${dtoCm.key.content}</p>
                 </c:forEach>
             </div>
         </section>

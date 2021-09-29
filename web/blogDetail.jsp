@@ -79,20 +79,6 @@
     </div>
 </div>
 
-<section>
-    <div>
-        <textarea>Comment</textarea>
-        <input value="">
-    </div>
-    <div>
-        <c:set var="dtoCMList" value="${requestScope.COMMENT_LIST}"/>
-        <c:forEach var="dtoCM" items="dtoCMList">
-            <h4>${dtoCM.studentID}</h4>
-            <p>${dtoCM.content}</p>
-        </c:forEach>
-    </div>
-</section>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

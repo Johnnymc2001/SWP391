@@ -45,7 +45,13 @@ public class BlogDetailServlet extends HttpServlet {
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url = null;
-        int blogID = Integer.parseInt(request.getParameter("txtBlogID"));
+        String txtBlogID = request.getParameter("txtBlogID");
+        int blogID;
+        if (null != txtBlogID) {
+            blogID = Integer.parseInt(txtBlogID);
+        } else {
+            blogID= 2;
+        }
 
         try {
             BlogDAO blogDao = new BlogDAO();
@@ -55,10 +61,10 @@ public class BlogDetailServlet extends HttpServlet {
                 url = roadmap.get(HOME_PAGE);
                 response.sendRedirect(url);
             } else {
-                if (null != blog.getAttachment()) {
-                    String base64img = BytesToBase64(blog.getAttachment());
-                    request.setAttribute("BASE64IMG", base64img);
-                }
+//                if (null != blog.getAttachment()) {
+//                    String base64img = BytesToBase64(blog.getAttachment());
+//                    request.setAttribute("BASE64IMG", base64img);
+//                }
                 url = roadmap.get(COMMENT_PAGE);
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);

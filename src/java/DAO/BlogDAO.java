@@ -106,7 +106,6 @@ public class BlogDAO implements Serializable {
                     byte[] attachment = rs.getBytes("attachment");
 
                     dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, attachment);
-                    System.out.println(dto.toString());
                 }
 
                 return dto;

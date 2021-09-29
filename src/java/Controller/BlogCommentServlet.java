@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AccountDAO;
 import DAO.AccountDTO;
 import DAO.BlogCommentDAO;
 import DAO.BlogCommentDTO;
@@ -28,7 +29,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-@WebServlet(name = "BlogDetailServlet", urlPatterns = {"/BlogDetailServlet"})
+@WebServlet(name = "BlogCommentServlet", urlPatterns = {"/BlogCommentServlet"})
 public class BlogCommentServlet extends HttpServlet {
 
     private final String HOME_PAGE = "default";
@@ -52,34 +53,52 @@ public class BlogCommentServlet extends HttpServlet {
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url = null;
-        
+
         String content = request.getParameter("content");
-//        String blogID = request.getParameter("blogID");
-        AccountDTO curUser= (AccountDTO) request.getSession().getAttribute("USER");
-        int ownerID = curUser.getAccountID();
+//          int blogID = Integer.parseInt(request.getParameter("txtBlogID"));
+
+        int blogID = 21;
+        int ownerID;
+        AccountDTO curUser = (AccountDTO) request.getSession().getAttribute("USER");
+
+        if (null != curUser) {
+            ownerID = curUser.getAccountID();
+        } else {
+            ownerID = 2;
+        }
+
         BlogCommentDAO dao = new BlogCommentDAO();
 
         try {
-
-            if (content.length() < 15) {
-                request.setAttribute("CONTENT_ERROR", "Your content need to exceed 15 character");
-            } else {
-                java.sql.Date sqlDate;
-                Date commentDate = new Date(Calendar.getInstance().getTime().getTime());
-                BlogCommentDTO dto = new BlogCommentDTO(ownerID, commentDate, content, ownerID);
-                dao.createBlogComment(dto);
+            if (null != content) {
+                if (content.trim().length() < 4) {
+                    request.setAttribute("ERROR_COMMENT", "Your comment need at least 4 character");
+                } else {
+                    Date commentDate = new Date(Calendar.getInstance().getTime().getTime());
+                    BlogCommentDTO dto = new BlogCommentDTO(blogID, commentDate, content, ownerID);
+                    dao.createBlogComment(dto);
+                }
             }
             BlogCommentDAO commentDao = new BlogCommentDAO();
             ArrayList<BlogCommentDTO> commentList = commentDao.getAllBlogComment();
+            System.out.println(" COMMMEEENNTTTTTT!!!!!!!!!" + commentList.toString());
+            AccountDAO accountDao = new AccountDAO();
+            
+            HashMap<BlogCommentDTO,AccountDTO> CommentToAccountMap = new HashMap<>(); 
+            for(BlogCommentDTO comment:commentList){
+                CommentToAccountMap.put(comment, accountDao.getAccountFromAcoountID(comment.getOwnerID()));
+            }
+            
             if (null == commentList) {
                 url = roadmap.get(HOME_PAGE);
                 response.sendRedirect(url);
             } else {
-                request.setAttribute("COMMENT_LIST", commentList);
+                request.setAttribute("COMMENT_MAP", CommentToAccountMap);
                 url = roadmap.get(COMMENT_PAGE);
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
+
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("CreateBlogServlet _ SQL " + msg);

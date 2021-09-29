@@ -23,8 +23,8 @@ createBlogPage=createBlog.jsp
 blogDetail=BlogDetailServlet
 blogDetailPage=blogDetail.jsp
 
-comment=CommentServlet
-commentPage=comment.jsp
+comment=BlogCommentServlet
+commentPage=commentPage.jsp
 
 blogComment=BlogCommentServlet
 blogCommentPage=blogComment.jsp
