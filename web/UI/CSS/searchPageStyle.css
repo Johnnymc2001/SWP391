@@ -99,3 +99,89 @@ html {
     font-weight: 300;
     align-items: center;
 }
+
+.action {
+    overflow: hidden;
+}
+
+.action .profile-avatar img {
+    width: 3rem;
+    border-radius: 50%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.action .profile-avatar a img:hover {
+    cursor: pointer;
+}
+
+.action .menu {
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: 20px;
+    margin-top: 0.6rem;
+    width: 15rem;
+    background-color: #343a40;
+    z-index: 5;
+    position: absolute;
+    right: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.action:hover .menu {
+    visibility: visible;
+}
+
+.action .menu:hover {
+    visibility: visible;
+}
+
+@media only screen and (max-width: 992px) {
+    .action .menu {
+        background-color: transparent;
+        position: relative;
+        width: 100%;
+        visibility: visible;
+    }
+
+    .action .profile-avatar img {
+        margin-left: 0;
+        transform: translateX(0);
+    }
+}
+
+.action .menu ul li {
+    border-top: 1px gray solid;
+    list-style: none;
+    padding: 0.5rem;
+}
+
+.action .menu ul,
+.action .menu li {
+    padding: 0;
+    margin: 0;
+}
+
+.action .menu h3,
+span,
+a {
+    font-family: 'Inconsolata', monospace;
+    color: white;
+}
+
+.action .menu ul li img {
+    width: 2rem;
+    margin-right: 1rem;
+}
+
+.action .menu ul li img:hover {
+    cursor: pointer;
+}
+
+
+.action .menu a:link,
+a:visited {
+    color: white;
+    text-decoration: none;
+}

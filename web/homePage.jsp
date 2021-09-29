@@ -98,13 +98,14 @@
                                 <img src="UI/Icon/selfmademan.jpg" alt="Pic" />
                             </c:if>
                         </a>
+                        <h5>${dtoBL.title}</h5>
                     </div>
-                    <h5>${dtoBL.title}</h5>
+                    <div class="small-description">
+                        <h4>${dtoBL.studentID}</h4>
+                        <h6>${dtoBL.approvedDate}</h6>
+                    </div>
                 </div>
-                <div class="small-description">
-                    <h4>${dtoBL.studentID}</h4>
-                    <h6>${dtoBL.approvedDate}</h6>
-                </div>
+
             </c:forEach>
         </div>
     </c:forEach>

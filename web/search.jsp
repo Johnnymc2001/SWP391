@@ -26,6 +26,8 @@
 
     <body>
 
+        <c:set var="user" value="${sessionScope.USER}"/>
+
         <c:if test="${empty param.txtSearchValue}">
             <c:set var="param.txtSearchValue" value=""/>
         </c:if>
@@ -41,10 +43,29 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
+                    <!--About us page-->
+                    <a class="nav-item nav-link" href="aboutUs.html">About us</a>
                     <!-- If user aren't login then show the login link -->
-                    <a class="nav-item nav-link" href="loginPage">Login</a>
+                    <c:if test="${empty user}">
+                        <a class="nav-item nav-link" href="loginPage">Login</a>
+                    </c:if>
                     <!-- If user already login then show user link which navigate to user profile page on click -->
-                    <a class="nav-item nav-link" href="userProfile.html">Username</a>
+                    <c:if test="${not empty user}">
+                        <div class="action">
+                            <div class="profile-avatar">
+                                <img src="UI/Icon/placeholder-avatar.png" alt="avatar">
+                            </div>
+                            <div class="menu">
+                                <h3>${user.fullname}</h3>
+                                <span>${user.role}</span>
+                                <ul>
+                                    <li><img src="UI/Icon/profile-icon.png" alt=""><a href="">Profile</a></li>
+                                    <li><img src="UI/Icon/createblog-icon.png" alt=""><a href="">Create blog</a></li>
+                                    <li><img src="UI/Icon/logout-icon.png" alt=""><a href="">Log out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </nav>
