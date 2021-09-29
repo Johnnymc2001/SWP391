@@ -63,14 +63,19 @@
 
     <div class="container-fluid">
         <c:set var="dtoBD" value="${requestScope.BLOG_DETAIL}" />
-                <div class="category-name">
-                    <h1>${dtoBD.title}</h1>
-                    <h4>${dtoBD.studentID}</h4>
-                    <h5>${dtoBD.approvedDate}</h5>
-                    <c:set var="image" value="${requestScope.BASE64IMG}" />
-                    <img src="data:image/png;base64, ${image}" alt="Blog thumbnail"/>
-                    <p>${dtoBD.content}</p>
-                </div>
+        <h1>${dtoBD.title}</h1>
+        <h4>by ${dtoBD.studentID}</h4>
+        <h5>${dtoBD.approvedDate}</h5>
+        <div class="thumbnail-box">
+        <c:if test="${empty dtoBD.attachment}">
+            <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
+        </c:if>
+        <c:if test="${not empty dtoBD.attachment}">
+            <c:set var="image" value="${requestScope.BASE64IMG}" />
+            <img src="data:image/png;base64, ${image}" alt="Blog thumbnail"/>
+        </c:if>
+        </div>
+        <p>${dtoBD.content}</p>
     </div>
 </div>
 

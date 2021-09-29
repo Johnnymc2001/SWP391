@@ -2,15 +2,9 @@ package Controller;
 
 import DAO.BlogDAO;
 import DAO.BlogDTO;
-import DAO.CategoryDAO;
-import DAO.CategoryDTO;
-import Utils.ImageUtils;
+import static Utils.ImageUtils.BytesToBase64;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,13 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "CreateBlogServlet", urlPatterns = {"/CreateBlogServlet"})
+@WebServlet(name = "BlogDetailServlet", urlPatterns = {"/BlogDetailServlet"})
 public class BlogDetailServlet extends HttpServlet {
 
     private final String HOME_PAGE = "default";
@@ -52,7 +45,7 @@ public class BlogDetailServlet extends HttpServlet {
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url = null;
-        int blogID = Integer.parseInt(request.getParameter("txtBlogID"));
+//        int blogID = Integer.parseInt(request.getParameter("txtBlogID"));
 
         try {
             BlogDAO blogDao = new BlogDAO();
@@ -60,15 +53,21 @@ public class BlogDetailServlet extends HttpServlet {
             request.setAttribute("BLOG_DETAIL", blog);
             if (null == blog) {
                 url = roadmap.get(HOME_PAGE);
-            }else{
+                response.sendRedirect(url);
+            } else {
+                if (null != blog.getAttachment()) {
+                    String base64img = BytesToBase64(blog.getAttachment());
+                    request.setAttribute("BASE64IMG", base64img);
+                }
                 url = roadmap.get(DETAIL_PAGE);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("CreateBlogServlet _ SQL " + msg);
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+
         }
     }
 

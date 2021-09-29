@@ -165,6 +165,11 @@ public class BlogDTO implements Serializable {
     public void setAttachment(byte[] attachment) {
         this.attachment = attachment;
     }
+
+    @Override
+    public String toString() {
+        return "BlogDTO{" + "blogID=" + blogID + ", title=" + title + ", content=" + content + ", postDate=" + postDate + ", categoryID=" + categoryID + ", status=" + status + ", mentorID=" + mentorID + ", approvedDate=" + approvedDate + ", tags=" + tags + ", studentID=" + studentID + ", attachment=" + attachment + '}';
+    }
     
     
 }
