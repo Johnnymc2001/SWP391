@@ -50,8 +50,8 @@
                             <img src="UI/Icon/placeholder-avatar.png" alt="avatar">
                         </div>
                         <div class="menu">
-                            <h3>Student name</h3>
-                            <span>Student of FPT</span>
+                            <h3>${user.fullname}</h3>
+                            <span>${user.role}</span>
                             <ul>
                                 <li><img src="UI/Icon/profile-icon.png" alt=""><a href="">Profile</a></li>
                                 <li><img src="UI/Icon/createblog-icon.png" alt=""><a href="">Create blog</a></li>
