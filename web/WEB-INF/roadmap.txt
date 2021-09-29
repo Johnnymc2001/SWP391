@@ -20,6 +20,11 @@ registerPage=register.jsp
 createBlog=CreateBlogServlet
 createBlogPage=createBlog.jsp
 
+blogDetail=BlogDetailServlet
+blogDetailPage=blogDetail.jsp
+
+comment=CommentServlet
+commentPage=comment.jsp
 
 ### STUDENT
 
