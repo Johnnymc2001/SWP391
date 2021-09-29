@@ -30,7 +30,7 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "INSERT INTO BlogComment (blogID, date, content, ownerID)"
+                String sql = "INSERT INTO BlogComment (blogID, date, content, ownerID) "
                         + "VALUES (?, ?, ? ,?)";
 
                 stm = con.prepareStatement(sql);
