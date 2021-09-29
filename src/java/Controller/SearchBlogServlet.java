@@ -7,6 +7,8 @@ package Controller;
 
 import DAO.BlogDTO;
 import DAO.BlogDAO;
+import DAO.CategoryDAO;
+import DAO.CategoryDTO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,17 +48,20 @@ public class SearchBlogServlet extends HttpServlet {
 //        String url = roadmap.get(SEARCH_PAGE);
         String searchValue = request.getParameter("txtSearchValue");
         String searchCategory = request.getParameter("txtSearchCategory");
-        ArrayList<BlogDTO> list = new ArrayList<BlogDTO>();
+        ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+
         String url = roadmap.get(SEARCH_PAGE);
         BlogDAO dao = new BlogDAO();
+        CategoryDAO catDao = new CategoryDAO();
 
         try {
+            ArrayList<CategoryDTO> catList = catDao.getAllCategory();
             if (null != searchValue && searchValue != "") {
                 if (searchCategory.equals("ALL") || searchCategory.equals("")) {
-                    list = dao.getAllBlogLikeTitle(searchValue);
+                    blogList = dao.getAllBlogLikeTitle(searchValue);
                 } else {
-                    list = dao.getAllBlogLikeTitleAndFromCategoryID(searchValue, searchCategory);
+                    blogList = dao.getAllBlogLikeTitleAndFromCategoryID(searchValue, searchCategory);
                 }
             }
 
@@ -65,8 +70,8 @@ public class SearchBlogServlet extends HttpServlet {
 //                        blog.setContent(blog.getContent().substring(0, 60) + "...");
 //                    });
 //                }
-            System.out.println(list);
-            request.setAttribute("BLOG_INFORMATION", list);
+            request.setAttribute("CAT_LIST", catList);
+            request.setAttribute("BLOG_LIST", blogList);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
