@@ -103,8 +103,8 @@ public class CreateBlogServlet extends HttpServlet {
                     Date postDate = new Date(Calendar.getInstance().getTime().getTime());
                     BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID, bytesImage);
                     BlogDAO dao = new BlogDAO();
-                    boolean result = dao.createBlog(dto);
-                    if (result) {
+                    int result = dao.createBlog(dto);
+                    if (result > 0) {
                         request.setAttribute("MESSAGE", "Your have been created, waiting for mentor to approve...");
                         url = roadmap.get(HOME_PAGE);
                         response.sendRedirect(url);

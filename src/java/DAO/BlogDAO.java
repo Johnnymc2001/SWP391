@@ -8,10 +8,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import Utils.DBHelpers;
 import java.sql.Date;
+import java.sql.Statement;
 
 public class BlogDAO implements Serializable {
 
-    public boolean createBlog(BlogDTO dto) throws SQLException {
+    /**
+     * Create blog
+     *
+     * @param dto BlogDTO
+     * @return Id of created Blog if success, 0 if failed
+     * @throws SQLException
+     */
+    public int createBlog(BlogDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -23,7 +31,7 @@ public class BlogDAO implements Serializable {
                 String sql = "INSERT INTO Blog (title, content, postDate, categoryID, status, tags, ownerID, attachment) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 // 3. Create statement object
-                stm = con.prepareStatement(sql);
+                stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 stm.setString(1, dto.getTitle());
                 stm.setString(2, dto.getContent());
                 stm.setDate(3, dto.getPostDate());
@@ -39,14 +47,22 @@ public class BlogDAO implements Serializable {
 
                 int line = stm.executeUpdate();
 
-                return line > 0;
+                if (line > 0) {
+                    ResultSet keys = stm.getGeneratedKeys();
+                    if (keys.next()) {
+                        int key = (int) stm.getGeneratedKeys().getLong(1);
+                        System.out.println(key);
+                        return key;
+                    }
+                    return 0;
+                }
             } // End connection
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
 
         }
-        return false;
+        return 0;
     }
 
     /**

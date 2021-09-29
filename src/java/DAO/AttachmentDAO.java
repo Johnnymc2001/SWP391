@@ -21,7 +21,7 @@ import javax.servlet.annotation.MultipartConfig;
 @MultipartConfig
 public class AttachmentDAO {
 
-    public  boolean createAttachment(AttachmentDTO dto) throws SQLException {
+    public boolean createAttachment(AttachmentDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -29,14 +29,14 @@ public class AttachmentDAO {
 
             con = DBHelpers.makeConnection();
             if (con != null) {
-                String sql = "INSERT INTO Attachment (blogID, type, content, data) "
+                String sql = "INSERT INTO Attachment (blogID, type, dataText, dataBinary) "
                         + "VALUES (?, ?, ?, ?)";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, dto.getBlogID());
                 stm.setString(2, dto.getType());
-                stm.setString(3, dto.getContent());
-                stm.setBytes(4, dto.getData());
+                stm.setString(3, dto.getDataText());
+                stm.setBytes(4, dto.getDataBinary());
 
                 int line = stm.executeUpdate();
 
@@ -49,7 +49,7 @@ public class AttachmentDAO {
 
     }
 
-    public  ArrayList<AttachmentDTO> getAllAttachments() throws SQLException {
+    public ArrayList<AttachmentDTO> getAllAttachments() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -60,7 +60,7 @@ public class AttachmentDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT attachmentID, blogID, type, content, data "
+                String sql = "SELECT attachmentID, blogID, type, dataText, dataBinary "
                         + "FROM Attachment ";
 
                 stm = con.prepareStatement(sql);
@@ -71,9 +71,9 @@ public class AttachmentDAO {
                     int attachmentID = rs.getInt("attachmentID");
                     int blogID = rs.getInt("blogID");
                     String type = rs.getString("type");
-                    String content = rs.getString("content");
-                    byte[] data = rs.getBytes("data");
-                    AttachmentDTO dto = new AttachmentDTO(attachmentID, blogID, type, content, data);
+                    String dataText = rs.getString("dataText");
+                    byte[] dataBinary = rs.getBytes("dataBinary");
+                    AttachmentDTO dto = new AttachmentDTO(attachmentID, blogID, type, dataText, dataBinary);
                     listAttachments.add(dto);
                 }
 
@@ -94,8 +94,8 @@ public class AttachmentDAO {
         }
         return null;
     }
-    
-   public  ArrayList<AttachmentDTO> getAllAttachmentsFromBlogID(int blogId) throws SQLException {
+
+    public ArrayList<AttachmentDTO> getAllAttachmentsFromBlogID(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -106,7 +106,7 @@ public class AttachmentDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT attachmentID, blogID, type, content, data "
+                String sql = "SELECT attachmentID, blogID, type, dataText, dataBinary "
                         + "FROM Attachment "
                         + "WHERE blogID = ?";
 
@@ -118,9 +118,9 @@ public class AttachmentDAO {
                     int attachmentID = rs.getInt("attachmentID");
                     int blogID = rs.getInt("blogID");
                     String type = rs.getString("type");
-                    String content = rs.getString("content");
-                    byte[] data = rs.getBytes("data");
-                    AttachmentDTO dto = new AttachmentDTO(attachmentID, blogID, type, content, data);
+                    String dataText = rs.getString("dataText");
+                    byte[] dataBinary = rs.getBytes("dataBinary");
+                    AttachmentDTO dto = new AttachmentDTO(attachmentID, blogID, type, dataText, dataBinary);
                     listAttachments.add(dto);
                 }
 

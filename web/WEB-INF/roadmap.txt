@@ -26,6 +26,8 @@ blogDetailPage=blogDetail.jsp
 comment=CommentServlet
 commentPage=comment.jsp
 
+blogComment=BlogCommentServlet
+blogCommentPage=blogComment.jsp
 ### STUDENT
 
 student/dashboard=StudentDashboardServlet

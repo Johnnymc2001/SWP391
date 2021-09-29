@@ -18,22 +18,22 @@ public class AttachmentDTO {
     private int attachmentID;
     private int blogID;
     private String type;
-    private String content;
-    private byte[] data;
+    private String dataText;
+    private byte[] dataBinary;
 
-    public AttachmentDTO(int attachmentID, int blogID, String type, String content, byte[] data) {
+    public AttachmentDTO(int attachmentID, int blogID, String type, String dataText, byte[] dataBinary) {
         this.attachmentID = attachmentID;
         this.blogID = blogID;
         this.type = type;
-        this.content = content;
-        this.data = data;
+        this.dataText = dataText;
+        this.dataBinary = dataBinary;
     }
 
-    public AttachmentDTO(int blogID, String type, String content, byte[] data) {
+    public AttachmentDTO(int blogID, String type, String dataText, byte[] dataBinary) {
         this.blogID = blogID;
         this.type = type;
-        this.content = content;
-        this.data = data;
+        this.dataText = dataText;
+        this.dataBinary = dataBinary;
     }
 
     public int getAttachmentID() {
@@ -60,21 +60,22 @@ public class AttachmentDTO {
         this.type = type;
     }
 
-    public String getContent() {
-        return content;
+    public String getDataText() {
+        return dataText;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDataText(String dataText) {
+        this.dataText = dataText;
     }
 
-    public byte[] getData() {
-        return data;
+    public byte[] getDataBinary() {
+        return dataBinary;
     }
 
-    public void setData(byte[] data) {
-        this.data = data;
+    public void setDataBinary(byte[] dataBinary) {
+        this.dataBinary = dataBinary;
     }
+    
     
     
 
