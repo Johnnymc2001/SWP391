@@ -45,20 +45,55 @@
                     <a class="nav-item nav-link" href="loginPage">Login</a>
                 </c:if>
                 <c:if test="${not empty user}">
-                    <div class="action">
-                        <div class="profile-avatar">
-                            <img src="UI/Icon/placeholder-avatar.png" alt="avatar">
+                    <c:if test="${user.role == 'Student'}">
+                        <div class="action">
+                            <div class="profile-avatar">
+                                <img src="UI/Icon/placeholder-avatar.png" alt="avatar">
+                            </div>
+                            <div class="menu">
+                                <h3>${user.fullname}</h3>
+                                <span>${user.role}</span>
+                                <ul>
+                                    <li><img src="UI/Icon/profile-icon.png" alt=""><a href="student/dashboard">Profile</a></li>
+                                    <li><img src="UI/Icon/createblog-icon.png" alt=""><a href="createBlogPage">Create Blog</a></li>
+                                    <li><img src="UI/Icon/logout-icon.png" alt=""><a href="">Log out</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="menu">
-                            <h3>${user.fullname}</h3>
-                            <span>${user.role}</span>
-                            <ul>
-                                <li><img src="UI/Icon/profile-icon.png" alt=""><a href="">Profile</a></li>
-                                <li><img src="UI/Icon/createblog-icon.png" alt=""><a href="">Create blog</a></li>
-                                <li><img src="UI/Icon/logout-icon.png" alt=""><a href="">Log out</a></li>
-                            </ul>
+                    </c:if>
+                    <c:if test="${user.role == 'Mentor'}">
+                        <div class="action">
+                            <div class="profile-avatar">
+                                <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
+                            </div>
+                            <div class="menu">
+                                <h3>${user.fullname}</h3>
+                                <span>${user.role}</span>
+                                <ul>
+                                    <li><img src="UI/Icon/profile-icon.png" alt=""><a href="mentor/dashboard">Profile</a></li>
+                                    <li><img src="UI/Icon/approved-icon.png" alt=""><a href="mentor/blogPendingList">Pending Blogs</a></li>
+                                    <li><img src="UI/Icon/createblog-icon.png" alt="createBlogPage"><a href="">Create Blog</a></li>
+                                    <li><img src="UI/Icon/logout-icon.png" alt=""><a href="">Log out</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    </c:if>
+                    <c:if test="${user.role == 'Admin'}">
+                        <div class="action">
+                            <div class="profile-avatar">
+                                <img src="UI/Icon/admin-icon.png" alt="avatar">
+                            </div>
+                            <div class="menu">
+                                <h3>${user.fullname}</h3>
+                                <span>${user.role}</span>
+                                <ul>
+                                    <li><img src="UI/Icon/profile-icon.png" alt=""><a href="">Profile</a></li>
+                                    <li><img src="UI/Icon/accounts-icon.png" alt=""><a href="admin/dashboard">Accounts</a></li>
+                                    <li><img src="UI/Icon/logout-icon.png" alt=""><a href="">Log out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </c:if>
                 </c:if>
             </div>
         </div>
