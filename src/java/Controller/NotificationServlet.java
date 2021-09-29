@@ -12,9 +12,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,8 +46,15 @@ public class NotificationServlet extends HttpServlet {
 //        String content = request.getParameter("content");
 //        String isRead = request.getParameter("");
           AccountDTO curUser= (AccountDTO) request.getSession().getAttribute("USER");
-          String url = "notification.jsp";
+       ServletContext sc = request.getServletContext();
+            HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+          String url = "notificationPage";
         try {
+            
+            if (curUser==null){
+               url="home";
+            }
+            
             NotificationDAO dao = new NotificationDAO();
             ArrayList<NotificationDTO> listNotification= dao.getAllNotificationFromAccountID(curUser.getAccountID());
             if (listNotification!=null){
@@ -56,8 +65,9 @@ public class NotificationServlet extends HttpServlet {
             }
      
         }finally {
+            url=roadmap.get(url);
                   RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+                 rd.forward(request, response);
           
             }
     }
