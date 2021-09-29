@@ -5,8 +5,16 @@
  */
 package Controller;
 
+import DAO.AccountDTO;
+import DAO.NotificationDAO;
+import DAO.NotificationDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,16 +38,27 @@ public class NotificationServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String content = request.getParameter("content");
-        String isRead = request.getParameter("");
+    
+//        String content = request.getParameter("content");
+//        String isRead = request.getParameter("");
+          AccountDTO curUser= (AccountDTO) request.getSession().getAttribute("USER");
+          String url = "notification.jsp";
         try {
-            
+            NotificationDAO dao = new NotificationDAO();
+            ArrayList<NotificationDTO> listNotification= dao.getAllNotificationFromAccountID(curUser.getAccountID());
+            if (listNotification!=null){
+                request.setAttribute("LIST_NOTIFICATION", listNotification);
+              for (NotificationDTO dto : listNotification) {
+                  System.out.println(dto);
+              }
+            }
      
         }finally {
-                
+                  RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+          
             }
     }
 
@@ -55,7 +74,11 @@ public class NotificationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(NotificationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -69,7 +92,11 @@ public class NotificationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(NotificationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

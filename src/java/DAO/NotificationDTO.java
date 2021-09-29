@@ -87,6 +87,11 @@ public class NotificationDTO implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "NotificationDTO{" + "notificationID=" + notificationID + ", ownerID=" + ownerID + ", isRead=" + isRead + ", type=" + type + ", content=" + content + ", date=" + date + '}';
+    }
     
     
 }
