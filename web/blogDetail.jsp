@@ -67,17 +67,31 @@
         <h4>by ${dtoBD.studentID}</h4>
         <h5>${dtoBD.approvedDate}</h5>
         <div>
-        <c:if test="${empty dtoBD.attachment}">
-            <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
-        </c:if>
-        <c:if test="${not empty dtoBD.attachment}">
-            <c:set var="image" value="${requestScope.BASE64IMG}" />
-            <img src="data:image/png;base64, ${image}" alt="Blog thumbnail"/>
-        </c:if>
+            <c:if test="${empty dtoBD.attachment}">
+                <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
+            </c:if>
+            <c:if test="${not empty dtoBD.attachment}">
+                <c:set var="image" value="${requestScope.BASE64IMG}" />
+                <img src="data:image/png;base64, ${image}" alt="Blog thumbnail"/>
+            </c:if>
         </div>
         <p>${dtoBD.content}</p>
     </div>
 </div>
+
+<section>
+    <div>
+        <textarea>Comment</textarea>
+        <input value="">
+    </div>
+    <div>
+        <c:set var="dtoCMList" value="${requestScope.COMMENT_LIST}"/>
+        <c:forEach var="dtoCM" items="dtoCMList">
+            <h4>${dtoCM.studentID}</h4>
+            <p>${dtoCM.content}</p>
+        </c:forEach>
+    </div>
+</section>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

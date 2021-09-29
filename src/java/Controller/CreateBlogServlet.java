@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AccountDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
 import DAO.CategoryDAO;
@@ -22,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -57,11 +59,14 @@ public class CreateBlogServlet extends HttpServlet {
         String categoryID = request.getParameter("categoryBox");
 
         String tags = request.getParameter("txtTags");
-        int studentID = 2;
-        boolean foundErr = false;
+        
+        AccountDTO student = (AccountDTO) request.getSession().getAttribute("USER");
+        int studentID = student.getAccountID();
+        
         String header = request.getContentType();
-
         byte[] bytesImage = null;
+        
+        boolean foundErr = false;
 
         CategoryDAO catDao = new CategoryDAO();
         ArrayList<CategoryDTO> catList = catDao.getAllCategory();
