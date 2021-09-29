@@ -74,7 +74,7 @@
                 </div>
                 <div class="form_footer">
                     <div class="checkbox_rmb">
-                        <input type="checkbox" id="rememberme">
+                        <input type="checkbox" id="rememberme" name="chk-box">
                         <label for="rememberme">
                             <span class="label-text">Remember me</span>
                         </label>
