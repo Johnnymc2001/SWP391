@@ -32,6 +32,13 @@
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
+         <div>
+        <form action="createBlogPage">
+            <input type="submit" value="Create a Blog" />
+        </form>
+        </div>
+        
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
                 <form action="search" class="form-inline" method="POST">

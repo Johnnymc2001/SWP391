@@ -21,11 +21,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "BlogCommentServlet", urlPatterns = {"/BlogCommentServlet"})
+@WebServlet(name = "BlogDetailServlet", urlPatterns = {"/BlogDetailServlet"})
 public class BlogDetailServlet extends HttpServlet {
 
     private final String HOME_PAGE = "default";
-    private final String COMMENT_PAGE = "commentPage";
+    private final String BLOGDETAIL_PAGE = "blogPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,7 +65,7 @@ public class BlogDetailServlet extends HttpServlet {
 //                    String base64img = BytesToBase64(blog.getAttachment());
 //                    request.setAttribute("BASE64IMG", base64img);
 //                }
-                url = roadmap.get(COMMENT_PAGE);
+                url = roadmap.get(BLOGDETAIL_PAGE);
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }

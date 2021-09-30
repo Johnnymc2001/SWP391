@@ -67,13 +67,13 @@
         <h4>by ${dtoBD.studentID}</h4>
         <h5>${dtoBD.approvedDate}</h5>
         <div>
-            <c:if test="${empty dtoBD.attachment}">
+            <%--<c:if test="${empty dtoBD.attachment}">--%>
                 <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
-            </c:if>
+            <%--</c:if>
             <c:if test="${not empty dtoBD.attachment}">
                 <c:set var="image" value="${requestScope.BASE64IMG}" />
                 <img src="data:image/png;base64, ${image}" alt="Blog thumbnail"/>
-            </c:if>
+            </c:if>--%>
         </div>
         <p>${dtoBD.content}</p>
     </div>
