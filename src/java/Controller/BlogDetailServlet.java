@@ -1,10 +1,14 @@
 package Controller;
 
+import DAO.AttachmentDAO;
+import DAO.AttachmentDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
+import Utils.ImageUtils;
 import static Utils.ImageUtils.BytesToBase64;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +54,7 @@ public class BlogDetailServlet extends HttpServlet {
         if (null != txtBlogID) {
             blogID = Integer.parseInt(txtBlogID);
         } else {
-            blogID= 2;
+            blogID = 2;
         }
 
         try {
@@ -61,10 +65,26 @@ public class BlogDetailServlet extends HttpServlet {
                 url = roadmap.get(HOME_PAGE);
                 response.sendRedirect(url);
             } else {
-//                if (null != blog.getAttachment()) {
-//                    String base64img = BytesToBase64(blog.getAttachment());
-//                    request.setAttribute("BASE64IMG", base64img);
-//                }
+                AttachmentDAO attDao = new AttachmentDAO();
+                ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(blog.getBlogID());
+                if (attList.size() > 0) {
+                    AttachmentDTO attachment = attList.get(0);
+                    String base64Image = "";
+                    System.out.println(attachment.toString());
+                    if ("IMAGE/BINARY".equals(attachment.getType())) {
+                        base64Image = ImageUtils.BytesToBase64(attachment.getDataBinary());
+                    }
+
+                    if ("IMAGE/BASE64".equals(attachment.getType())) {
+                        base64Image = attachment.getDataText();
+                    }
+
+                    System.out.println(base64Image);
+
+                    if (null != base64Image) {
+                        request.setAttribute("IMAGE", base64Image);
+                    }
+                }
                 url = roadmap.get(BLOGDETAIL_PAGE);
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
