@@ -34,7 +34,7 @@
         </button>
         
          <div>
-        <form action="createBlogPage">
+        <form action="create">
             <input type="submit" value="Create a Blog" />
         </form>
         </div>

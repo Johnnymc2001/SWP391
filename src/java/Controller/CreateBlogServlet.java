@@ -38,7 +38,8 @@ import javax.servlet.http.Part;
 public class CreateBlogServlet extends HttpServlet {
 
     private final String HOME_PAGE = "default";
-    private final String CREATE_PAGE = "createBlogPage";
+    private final String CREATE_PAGE = "createPage";
+    private final String ERROR_PAGE = "404.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,8 +66,12 @@ public class CreateBlogServlet extends HttpServlet {
         String tags = request.getParameter("txtTags");
 
         AccountDTO student = (AccountDTO) request.getSession().getAttribute("USER");
-        int studentID = student.getAccountID();
-//        int studentID = 2;
+        int studentID=0;
+        if(null == student){
+            studentID = student.getAccountID();
+        }else{
+            response.sendRedirect(ERROR_PAGE);
+        }
 
         String header = request.getContentType();
         byte[] bytesImage = null;
@@ -83,16 +88,16 @@ public class CreateBlogServlet extends HttpServlet {
             if (null == title) {
                 url = roadmap.get(CREATE_PAGE);
             } else {
-                if (null != header && header.contains("multipart/form-data")) { // When Image Exists
-                    Part part = request.getPart("fileAttachment");
-                    if (part.getSize() > 0) {
-                        InputStream data = part.getInputStream();
-                        base64Image = ImageUtils.resizeImageFromInputStream(data, 1280, 720);
-                        
-//                        bytesImage = ImageUtils.InputStreamToBytes(data);
-//                        base64Image = ImageUtils.BytesToBase64(bytesImage);
-                    }
-                }
+//                if (null != header && header.contains("multipart/form-data")) { // When Image Exists
+//                    Part part = request.getPart("fileAttachment");
+//                    if (part.getSize() > 0) {
+//                        InputStream data = part.getInputStream();
+//                        base64Image = ImageUtils.resizeImageFromInputStream(data, 1280, 720);
+//                        
+////                        bytesImage = ImageUtils.InputStreamToBytes(data);
+////                        base64Image = ImageUtils.BytesToBase64(bytesImage);
+//                    }
+//                }
                 //1. Check all user error
                 if (title.trim().length() < 6 || title.trim().length() > 60) {
                     foundErr = true;
@@ -109,14 +114,14 @@ public class CreateBlogServlet extends HttpServlet {
                     //4. Call DAO to insert to DB
                     Date postDate = new Date(Calendar.getInstance().getTime().getTime());
                     BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID);
-                    AttachmentDAO attDao = new AttachmentDAO();
+//                    AttachmentDAO attDao = new AttachmentDAO();
 
                     BlogDAO dao = new BlogDAO();
                     int result = dao.createBlog(dto);
                     if (result > 0) {
-                        if (null != base64Image) {
-                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BASE64", base64Image , null));
-                        }
+//                        if (null != base64Image) {
+//                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BASE64", base64Image , null));
+//                        }
                         
 //                        if (null != bytesImage) {
 //                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BINARY", null , bytesImage));
