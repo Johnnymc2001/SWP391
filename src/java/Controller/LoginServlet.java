@@ -79,7 +79,7 @@ public class LoginServlet extends HttpServlet {
                       request.setAttribute("LOGIN_FAIL", "Your Account is not AVAILABLE anymore " );
                          System.out.println("Your Account is not AVAILABLE anymore");
                 }else {
-                    url = roadmap.get("homePage");
+                    url = roadmap.get("home");
                     HttpSession session = request.getSession(true);
                        session.setAttribute("USER", curUser);
                 }
