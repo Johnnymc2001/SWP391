@@ -17,17 +17,12 @@ loginPage=login.jsp
 register=CreateAccountServlet
 registerPage=register.jsp
 
-createBlog=CreateBlogServlet
-createBlogPage=createBlog.jsp
-
-blogDetail=BlogDetailServlet
-blogDetailPage=blogDetail.jsp
+create=CreateBlogServlet
+createPage=createBlog.jsp
 
 comment=BlogCommentServlet
 commentPage=commentPage.jsp
 
-blogComment=BlogCommentServlet
-blogCommentPage=blogComment.jsp
 ### STUDENT
 
 student/dashboard=StudentDashboardServlet
