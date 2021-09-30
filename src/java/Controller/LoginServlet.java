@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,7 +80,10 @@ public class LoginServlet extends HttpServlet {
                       request.setAttribute("LOGIN_FAIL", "Your Account is not AVAILABLE anymore " );
                          System.out.println("Your Account is not AVAILABLE anymore");
                 }else {
-                    url = roadmap.get("homePage");
+                    Cookie cookie = new Cookie(username, password);
+                cookie.setMaxAge(60 * 5);
+                response.addCookie(cookie);
+                    url = roadmap.get("home");
                     HttpSession session = request.getSession(true);
                        session.setAttribute("USER", curUser);
                 }
@@ -97,7 +101,8 @@ public class LoginServlet extends HttpServlet {
                 System.out.println(url);
             }
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+//            request.getRequestDispatcher(url).forward(request, response);
+           response.sendRedirect(url);
         }
     }
 
