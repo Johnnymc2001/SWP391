@@ -36,16 +36,18 @@ public class ImageUtils {
         return Base64.getEncoder().encodeToString(b);
     }
 
-    public static String resizeImageFromInputStream(InputStream is, int width, int height) throws IOException {
+    public static String resizeImageFromInputStream(InputStream is) throws IOException {
         BufferedImage image = ImageIO.read(is);
-            Image tmp = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = resized.createGraphics();
-            g2d.drawImage(tmp, 0, 0, null);
-            g2d.dispose();
-    
-//        BufferedImage scaledImage = new BufferedImage((width), (height), BufferedImage.SCALE_SMOOTH);
 
+//        int image_w = image.getWidth();
+//        int image_h = image.getWidth();
+        Image tmp = image.getScaledInstance(960, 540, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(960, 540, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+
+//        BufferedImage scaledImage = new BufferedImage((width), (height), BufferedImage.SCALE_SMOOTH);
 //        final AffineTransform at = AffineTransform.getScaleInstance(2.0, 2.0);
 //        final AffineTransformOp ato = new AffineTransformOp(at, AffineTransformOp.TYPE_BICUBIC);
 //
@@ -53,6 +55,6 @@ public class ImageUtils {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ImageIO.write(resized, "png", os);                          // Passing: ​(RenderedImage im, String formatName, OutputStream output)
         return Base64.getEncoder().encodeToString(os.toByteArray());
-        
+
     }
 }
