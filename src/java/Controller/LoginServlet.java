@@ -101,7 +101,8 @@ public class LoginServlet extends HttpServlet {
                 System.out.println(url);
             }
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+//            request.getRequestDispatcher(url).forward(request, response);
+           response.sendRedirect(url);
         }
     }
 
