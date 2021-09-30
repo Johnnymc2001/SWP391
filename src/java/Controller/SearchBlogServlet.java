@@ -58,7 +58,7 @@ public class SearchBlogServlet extends HttpServlet {
         try {
             ArrayList<CategoryDTO> catList = catDao.getAllCategory();
             if (null != searchValue && searchValue != "") {
-                if (searchCategory.equals("ALL") || searchCategory.equals("")) {
+                if (searchCategory.equals("All") || searchCategory.equals("")) {
                     blogList = dao.getAllBlogLikeTitle(searchValue);
                 } else {
                     blogList = dao.getAllBlogLikeTitleAndFromCategoryID(searchValue, searchCategory);

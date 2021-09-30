@@ -31,6 +31,10 @@
         <c:if test="${empty param.txtSearchValue}">
             <c:set var="param.txtSearchValue" value=""/>
         </c:if>
+        
+        <c:set var="catList" value="${requestScope.CAT_LIST}"/>
+        <c:set var="blogList" value="${requestScope.BLOG_LIST}"/>
+        
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="home">
@@ -80,10 +84,16 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Category</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>All</option>
-                        <option name="search-option" value="categoryID">Title</option>
-                        <option name="search-option" value="categoryID">Category</option>
+                    <select class="custom-select" id="inputGroupSelect01" name="txtSearchCategory">
+                        <option>All</option>
+                        <c:forEach var="cat" items="${catList}">
+                            <c:if test="${cat.categoryID == param.txtSearchCategory}">
+                                <option value="${cat.categoryID}" selected>${cat.categoryName}</option>
+                            </c:if>
+                            <c:if test="${cat.categoryID != param.txtSearchCategory}">
+                                <option value="${cat.categoryID}">${cat.categoryName}</option>
+                            </c:if>
+                        </c:forEach>
                     </select>
                 </div>
                 <div class="input-group mb-3">
@@ -99,8 +109,7 @@
         <div class="header-bar"></div>
 
         <div class="container-fluid">           
-            <c:set var="list" value="${requestScope.SEARCH_RESULT}"/>
-            <c:if test="${not empty list}">
+            <c:if test="${not empty blogList}">
                 <table>
                     <tr>
                         <td>
@@ -113,7 +122,7 @@
                             Content
                         </td>
                     </tr>
-                    <c:forEach var="dto" items="${list}"  varStatus="count">
+                    <c:forEach var="dto" items="${blogList}"  varStatus="count">
                         <tr>
                             <td>
                                 ${dto.blogID}
@@ -128,7 +137,7 @@
                     </c:forEach>
                 </table>
             </c:if>
-            <c:if test="${empty list}">List is Empty!</c:if>
+            <c:if test="${empty blogList}">List is Empty!</c:if>
 
         </div>
 
