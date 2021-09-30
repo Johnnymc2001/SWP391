@@ -143,6 +143,11 @@ public class AccountDTO implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "AccountDTO{" + "accountID=" + accountID + ", username=" + username + ", password=" + password + ", fullname=" + fullname + ", address=" + address + ", birthday=" + birthday + ", email=" + email + ", phone=" + phone + ", role=" + role + ", categoryID=" + categoryID + ", status=" + status + '}';
+    }
     
     
 

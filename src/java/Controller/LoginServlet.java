@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(cookie);
                     url = roadmap.get("home");
                     HttpSession session = request.getSession(true);
-                       session.setAttribute("USER", curUser);
+                    session.setAttribute("USER", curUser);
                 }
                 
               

@@ -62,7 +62,7 @@
                                 <span>${user.role}</span>
                                 <ul>
                                     <li><img src="UI/Icon/profile-icon.png" alt=""><a href="student/dashboard">Profile</a></li>
-                                    <li><img src="UI/Icon/createblog-icon.png" alt=""><a href="createBlogPage">Create Blog</a></li>
+                                    <li><img src="UI/Icon/createblog-icon.png" alt=""><a href="create">Create Blog</a></li>
                                     <li><img src="UI/Icon/logout-icon.png" alt=""><a href="">Log out</a></li>
                                 </ul>
                             </div>
