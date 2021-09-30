@@ -66,7 +66,8 @@ public class CategoryDAO {
 
             if (con != null) {
                 String sql = "SELECT categoryID, categoryName "
-                        + "FROM Category ";
+                        + "FROM Category "
+                        + "ORDER BY categoryID DESC";
 
                 stm = con.prepareStatement(sql);
 
@@ -109,7 +110,8 @@ public class CategoryDAO {
             if (con != null) {
                 String sql = "SELECT categoryID, categoryName "
                         + "FROM Category "
-                        + "WHERE categoryID = ?";
+                        + "WHERE categoryID = ? "
+                        + "ORDER BY categoryID DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, categoryId);
