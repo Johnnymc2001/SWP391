@@ -117,7 +117,7 @@ public class MentorFilter implements Filter {
             AccountDTO dto;
             dto = (AccountDTO) req.getSession().getAttribute("USER");
 
-            if (null != dto && dto.getRole().equals("Mentor")) {
+//            if (null != dto && dto.getRole().equals("Mentor")) {
                 url = "mentor";
                 List<String> paths = Arrays.asList(uri.split("/"));
                 String lastChar = uri.substring(uri.length() - 1);
@@ -139,15 +139,15 @@ public class MentorFilter implements Filter {
 //        System.out.println(url);
                 url = roadmap.get(url);
                 req.getRequestDispatcher(url).forward(request, response);
-            } else {
-                for (int i = 0; i < uri.length(); i++) {
-                    if (uri.charAt(i) == '/') {
-                        url = "../" + url;
-                    }
-                }
-
-                res.sendRedirect(url);
-            }
+//            } else {
+//                for (int i = 0; i < uri.length(); i++) {
+//                    if (uri.charAt(i) == '/') {
+//                        url = "../" + url;
+//                    }
+//                }
+//
+//                res.sendRedirect(url);
+//            }
         }
     }
 

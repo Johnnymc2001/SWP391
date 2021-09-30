@@ -54,9 +54,7 @@ public class AdminAccountListServlet extends HttpServlet {
             String searchValue = request.getParameter("txtSearchValue");
             String searchAccountType = request.getParameter("txtAccountType");
 
-            AccountDAO dao = new AccountDAO();
-            ArrayList<AccountDTO> listAccount = dao.getAllAccount();
-           
+            AccountDAO accDao = new AccountDAO();
 
             int maxPageItem = 10;
             int page;
@@ -75,15 +73,18 @@ public class AdminAccountListServlet extends HttpServlet {
             int pageItemCount = 0;
 
             ArrayList<AccountDTO> list = new ArrayList<>();
-            
-            if (null != searchValue) {
-                listAccount.removeIf(acc -> !acc.getUsername().contains(searchValue));         
-            }
-            
+            ArrayList<AccountDTO> listAccount = null;
+
             if (null != searchAccountType && !"All".equals(searchAccountType)) {
-                listAccount.removeIf(acc -> !acc.getRole().contains(searchAccountType));       
+                listAccount = accDao.getAllAccountFromRole(searchAccountType);
+            } else {
+                listAccount = accDao.getAllAccount();
             }
-            
+
+            if (null != searchValue) {
+                listAccount.removeIf(acc -> !acc.getUsername().contains(searchValue));
+            }
+
             for (int i = (page - 1) * maxPageItem; i < listAccount.size() && pageItemCount < maxPageItem; i++) {
                 pageItemCount++;
                 list.add(listAccount.get(i));

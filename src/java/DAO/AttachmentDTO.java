@@ -75,6 +75,11 @@ public class AttachmentDTO {
     public void setDataBinary(byte[] dataBinary) {
         this.dataBinary = dataBinary;
     }
+
+    @Override
+    public String toString() {
+        return "AttachmentDTO{" + "attachmentID=" + attachmentID + ", blogID=" + blogID + ", type=" + type + ", dataText=" + dataText + ", dataBinary=" + dataBinary + '}';
+    }
     
     
     

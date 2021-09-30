@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package MentorController;
 
-import DAO.BlogDTO;
 import DAO.BlogDAO;
-import DAO.CategoryDAO;
-import DAO.CategoryDTO;
+import DAO.BlogDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,11 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "SearchBlogServlet", urlPatterns = {"/SearchBlogServlet"})
-public class SearchBlogServlet extends HttpServlet {
-
-    private final String HOME_PAGE = "";
-    private final String SEARCH_PAGE = "searchPage";
+@WebServlet(name = "MentorBlogPendingServlet", urlPatterns = {"/MentorBlogPendingServlet"})
+public class MentorBlogPendingServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,45 +35,19 @@ public class SearchBlogServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        ServletContext sc = request.getServletContext();
-//        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-//        String url = roadmap.get(SEARCH_PAGE);
-        String searchValue = request.getParameter("txtSearchValue");
-        String searchCategory = request.getParameter("txtSearchCategory");
-        ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
-        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-
-        String url = roadmap.get(SEARCH_PAGE);
-        BlogDAO dao = new BlogDAO();
-        CategoryDAO catDao = new CategoryDAO();
 
         try {
-            ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-            if (null != searchValue && searchValue != "") {
-                if (searchCategory.equals("ALL") || searchCategory.equals("")) {
-                    blogList = dao.getAllBlogLikeTitle(searchValue);
-                } else {
-                    blogList = dao.getAllBlogLikeTitleAndFromCategoryID(searchValue, searchCategory);
-                }
-            }
+            response.setContentType("text/html;charset=UTF-8");
+            BlogDAO blogDao = new BlogDAO();
+            ArrayList<BlogDTO> blogList = blogDao.getAllPendingBlog();
 
-//                if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
-//                    list.forEach((blog) -> {
-//                        blog.setContent(blog.getContent().substring(0, 60) + "...");
-//                    });
-//                }
-            request.setAttribute("CAT_LIST", catList);
-            request.setAttribute("BLOG_LIST", blogList);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
