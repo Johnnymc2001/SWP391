@@ -75,7 +75,6 @@ public class HomePageServlet extends HttpServlet {
                         if (attList.size() > 0) {
                             AttachmentDTO attachment = attList.get(0);
                             String image = "";
-                            System.out.println(attachment.toString());
                             if ("IMAGE/BINARY".equals(attachment.getType())) {
                                 image = ImageUtils.BytesToBase64(attachment.getDataBinary());
                             }
@@ -96,7 +95,6 @@ public class HomePageServlet extends HttpServlet {
                         }
                     }
                     catToBlogMap.put(catDto, tempBlogList);
-                    System.out.println(tempBlogList.size());
                 } else {
 //                    list.put(catDto, null);
                 }
