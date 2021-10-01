@@ -74,20 +74,24 @@ public class HomePageServlet extends HttpServlet {
                         ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(blog.getBlogID());
                         if (attList.size() > 0) {
                             AttachmentDTO attachment = attList.get(0);
-                            String base64Image = "";
+                            String image = "";
                             System.out.println(attachment.toString());
                             if ("IMAGE/BINARY".equals(attachment.getType())) {
-                                base64Image = ImageUtils.BytesToBase64(attachment.getDataBinary());
+                                image = ImageUtils.BytesToBase64(attachment.getDataBinary());
                             }
 
                             if ("IMAGE/BASE64".equals(attachment.getType())) {
-                                base64Image = attachment.getDataText();
+                                image = attachment.getDataText();
                             }
                             
-                            System.out.println(base64Image);
+                            if ("IMAGE/URL".equals(attachment.getType())) {
+                                image = attachment.getDataText();
+                            }
                             
-                            if (null != base64Image) {
-                                blogToImageMap.put(blog, base64Image);
+                            System.out.println(image);
+                            
+                            if (null != image) {
+                                blogToImageMap.put(blog, image);
                             }
                         }
                     }

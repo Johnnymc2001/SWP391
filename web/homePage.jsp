@@ -137,7 +137,7 @@
                             <c:set var="image" value="${blogImageMap[dtoBL]}"/>
                             
                             <c:if test="${not empty image}">
-                                <img src="data:image/png;base64, ${image}" alt="Pic" />
+                                <img src="${image}" alt="Pic" />
                             </c:if>
                             <c:if test="${empty image}">
                                 <img src="UI/Icon/selfmademan.jpg" alt="Pic" />

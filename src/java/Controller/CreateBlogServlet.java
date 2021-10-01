@@ -124,7 +124,8 @@ public class CreateBlogServlet extends HttpServlet {
                     int result = dao.createBlog(dto);
                     if (result > 0) {
                         if (null != base64Image) {
-                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BASE64", base64Image , null));
+                            ImageUtils.uploadImage(base64Image, result);
+//                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BASE64", base64Image , null));
                         }
 
 //                        if (null != bytesImage) {

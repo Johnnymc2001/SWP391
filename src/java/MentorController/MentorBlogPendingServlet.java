@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +23,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "MentorBlogPendingServlet", urlPatterns = {"/MentorBlogPendingServlet"})
+@WebServlet(name = "MentorBlogPendingServlet", urlPatterns = {"/mentor/MentorBlogPendingServlet"})
 public class MentorBlogPendingServlet extends HttpServlet {
+
+    public final String SUCCESS = "mentor/mentorBlogPendingPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,6 +42,9 @@ public class MentorBlogPendingServlet extends HttpServlet {
 
         try {
             response.setContentType("text/html;charset=UTF-8");
+            ServletContext sc = request.getServletContext();
+            HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+
             BlogDAO blogDao = new BlogDAO();
             ArrayList<BlogDTO> blogList = blogDao.getAllPendingBlog();
 

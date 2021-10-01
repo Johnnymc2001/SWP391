@@ -20,7 +20,6 @@ import javax.servlet.annotation.MultipartConfig;
  */
 @MultipartConfig
 public class AttachmentDAO {
-
     public boolean createAttachment(AttachmentDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
