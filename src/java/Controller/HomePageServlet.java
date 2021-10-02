@@ -75,13 +75,13 @@ public class HomePageServlet extends HttpServlet {
                         if (attList.size() > 0) {
                             AttachmentDTO attachment = attList.get(0);
                             String image = "";
-                            if ("IMAGE/BINARY".equals(attachment.getType())) {
-                                image = ImageUtils.BytesToBase64(attachment.getDataBinary());
-                            }
-
-                            if ("IMAGE/BASE64".equals(attachment.getType())) {
-                                image = attachment.getDataText();
-                            }
+//                            if ("IMAGE/BINARY".equals(attachment.getType())) {
+//                                image = ImageUtils.BytesToBase64(attachment.getDataBinary());
+//                            }
+//
+//                            if ("IMAGE/BASE64".equals(attachment.getType())) {
+//                                image = attachment.getDataText();
+//                            }
                             
                             if ("IMAGE/URL".equals(attachment.getType())) {
                                 image = attachment.getDataText();
