@@ -56,12 +56,24 @@ a:hover {
     width: 4rem;
 }
 
-.header-left .options-link {
+.header-left .options-btn {
     margin-left: 5rem;
 }
 
-.header-left .options-link a {
-    margin: 0 2rem;
+.header-left .options-btn button {
+    padding: 0.5rem;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+}
+
+.header-left .options-btn .active-btn {
+    background: orange;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.35);
+}
+
+.header-left .options-btn a {
+    margin: 0 1rem;
 }
 
 .header-right {
