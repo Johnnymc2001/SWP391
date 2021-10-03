@@ -10,10 +10,13 @@ import DAO.AttachmentDAO;
 import DAO.AttachmentDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
+import DAO.CategoryDAO;
+import DAO.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -53,7 +56,7 @@ public class BlogEditServlet extends HttpServlet {
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         int blogID = 0;
         String url = "";
-         boolean foundErr = false;
+        boolean foundErr = false;
         String button = request.getParameter("btAction");
         if (null != txtBlogID) {
             blogID = Integer.parseInt(txtBlogID);
@@ -82,8 +85,6 @@ public class BlogEditServlet extends HttpServlet {
                     String categoryID = request.getParameter("categoryBox");
 //                    String tags = request.getParameter("txtTags");
 
-                   
-
                     if (title.trim().length() < 6 || title.trim().length() > 60) {
                         foundErr = true;
                         request.setAttribute("ERROR_TITLE", "title is required from 6 to 60 characters");
@@ -106,7 +107,8 @@ public class BlogEditServlet extends HttpServlet {
 
                         //4. Call DAO to insert to DB
                         Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-
+                        CategoryDAO catDao = new CategoryDAO();
+                        ArrayList<CategoryDTO> catList = catDao.getAllCategory();
                         blogEdit.setPostDate(postDate);
                         blogEdit.setContent(content);
                         blogEdit.setCategoryID(categoryID);
