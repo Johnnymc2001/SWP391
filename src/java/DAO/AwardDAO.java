@@ -1,17 +1,24 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package DAO;
 
 import Utils.DBHelpers;
-import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AwardDAO implements Serializable {
+/**
+ *
+ * @author JohnnyMC
+ */
+public class AwardDAO {
 
-    public  boolean createAward(AwardDTO dto) throws SQLException {
+    public boolean createAward(AwardDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -19,14 +26,12 @@ public class AwardDAO implements Serializable {
 
             con = DBHelpers.makeConnection();
             if (con != null) {
-                String sql = "INSERT INTO Award (blogID, awardType, date, awardBy) "
-                        + "VALUES (?, ?, ?, ?)";
+                String sql = "INSERT INTO Award (awardName, effectiveDay) "
+                        + "VALUES (?, ?)";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, dto.getBlogID());
-                stm.setString(2, dto.getAwardType());
-                stm.setDate(3, dto.getDate());
-                stm.setInt(4, dto.getAwardBy());
+                stm.setString(1, dto.getAwardName());
+                stm.setInt(2, dto.getEffectiveDay());
 
                 int line = stm.executeUpdate();
 
@@ -38,7 +43,7 @@ public class AwardDAO implements Serializable {
         return false;
     }
 
-    public  AwardDTO getAwardFromAwardID(int awardId) throws SQLException {
+    public AwardDTO getAwardFromAwardID(int awardId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -49,10 +54,9 @@ public class AwardDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT awardID, blogID, awardType, date, awardBy "
+                String sql = "SELECT awardID, awardName, effectiveDay "
                         + "FROM Award "
-                        + "WHERE awardID = ? "
-                        + "ORDER BY date DESC";
+                        + "WHERE awardID = ? ";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, awardId);
@@ -61,11 +65,9 @@ public class AwardDAO implements Serializable {
 
                 while (rs.next()) {
                     int awardID = rs.getInt("awardID");
-                    int blogID = rs.getInt("blogID");
-                    String awardType = rs.getString("awardType");
-                    Date date = rs.getDate("date");
-                    int awardBy = rs.getInt("awardBy");
-                    dto = new AwardDTO(awardID, blogID, awardType, date, awardBy);
+                    String awardname = rs.getString("awardName");
+                    int effectiveDay = rs.getInt("effectiveDay");
+                    dto = new AwardDTO(awardID, awardname, effectiveDay);
                 }
 
                 return dto;
@@ -84,7 +86,7 @@ public class AwardDAO implements Serializable {
         return null;
     }
 
-    public  ArrayList<AwardDTO> getAwardFromBlogId(int blogId) throws SQLException {
+    public ArrayList<AwardDTO> getAllAward() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -95,22 +97,19 @@ public class AwardDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT awardID, blogID, awardType, date, awardBy "
+                String sql = "SELECT awardID, awardName, effectiveDay "
                         + "FROM Award "
-                        + "WHERE blogID = ? "
                         + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, blogId);
+
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
                     int awardID = rs.getInt("awardID");
-                    int blogID = rs.getInt("blogID");
-                    String awardType = rs.getString("awardType");
-                    Date date = rs.getDate("date");
-                    int awardBy = rs.getInt("awardBy");
-                    AwardDTO dto = new AwardDTO(awardID, blogID, awardType, date, awardBy);
+                    String awardname = rs.getString("awardName");
+                    int effectiveDay = rs.getInt("effectiveDay");
+                    AwardDTO dto = new AwardDTO(awardID, awardname, effectiveDay);
                     awardList.add(dto);
                 }
 
@@ -130,58 +129,7 @@ public class AwardDAO implements Serializable {
         return null;
     }
 
-    /**
-     * Get all blog in the database
-     *
-     * @return ArrayList<BlogDTO> if found, NULL if not found
-     * @throws SQLException
-     */
-    public  ArrayList<AwardDTO> getAllAward() throws SQLException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-
-        try {
-            ArrayList<AwardDTO> awardList = new ArrayList<AwardDTO>();
-
-            con = DBHelpers.makeConnection();
-
-            if (con != null) {
-                String sql = "SELECT awardID, blogID, awardType, date, awardBy "
-                        + "FROM Award "
-                        + "ORDER BY date DESC";
-
-                stm = con.prepareStatement(sql);
-
-                rs = stm.executeQuery();
-
-                while (rs.next()) {
-                    int awardID = rs.getInt("awardID");
-                    int blogID = rs.getInt("blogID");
-                    String awardType = rs.getString("awardType");
-                    Date date = rs.getDate("date");
-                    int awardBy = rs.getInt("awardBy");
-                    AwardDTO dto = new AwardDTO(awardID, blogID, awardType, date, awardBy);
-                    awardList.add(dto);
-                }
-
-                return awardList;
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return null;
-    }
-
-    public  boolean updateAward(int awardId, AwardDTO dto) throws SQLException {
+    public boolean updateAward(int awardId, AwardDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -191,17 +139,15 @@ public class AwardDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "UPDATE Award "
-                        + "SET blogID = ?, awardType = ?, date = ?, awardBy = ? "
+                        + "SET awardName = ?, effectiveDay = ? "
                         + "WHERE awardID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
 
-                stm.setInt(1, dto.getBlogID());
-                stm.setString(2, dto.getAwardType());
-                stm.setDate(3, dto.getDate());
-                stm.setInt(4, dto.getAwardBy());
+                stm.setString(1, dto.getAwardName());
+                stm.setInt(2, dto.getEffectiveDay());
 
-                stm.setInt(5, awardId);
+                stm.setInt(3, awardId);
                 int line = stm.executeUpdate();
 
                 return line > 0;
@@ -212,7 +158,7 @@ public class AwardDAO implements Serializable {
         return false;
     }
 
-    public  boolean deleteAward(int awardId) throws SQLException {
+    public boolean deleteAwardList(int awardId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 

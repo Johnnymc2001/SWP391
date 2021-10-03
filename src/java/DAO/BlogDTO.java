@@ -7,6 +7,7 @@ package DAO;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -70,8 +71,6 @@ public class BlogDTO implements Serializable {
         this.tags = tags;
         this.studentID = studentID;
     }
-
-
 
     public Date getPostDate() {
         return postDate;
@@ -153,12 +152,24 @@ public class BlogDTO implements Serializable {
         this.studentID = studentID;
     }
 
+    public ArrayList<String> getAllImage() throws SQLException {
+        AttachmentDAO attDao = new AttachmentDAO();
+        ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(this.getBlogID());
+        ArrayList<String> imageUrlList = new ArrayList<>();
+
+        if (attList.size() > 0) {
+            for (AttachmentDTO dto : attList) {
+                if ("IMAGE/URL".equals(dto.getType())) {
+                    imageUrlList.add(dto.getDataText());
+                }
+            }
+        }
+        return imageUrlList;
+    }
+
     @Override
     public String toString() {
         return "BlogDTO{" + "blogID=" + blogID + ", title=" + title + ", content=" + content + ", postDate=" + postDate + ", categoryID=" + categoryID + ", status=" + status + ", mentorID=" + mentorID + ", approvedDate=" + approvedDate + ", tags=" + tags + ", studentID=" + studentID + '}';
     }
 
- 
-    
-    
 }

@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -92,12 +93,24 @@ public class CreateBlogServlet extends HttpServlet {
             } else {
                 if (null != header && header.contains("multipart/form-data")) { // When Image Exists
                     Part part = request.getPart("fileAttachment");
-                    if (part.getSize() > 0) {
-                        InputStream data = part.getInputStream();
-                        base64Image = ImageUtils.resizeImageFromInputStream(data);
-                        
+                    System.out.println(part.getSize());
+                    if (part.getSize() > 0 && part.getSize() < 4194304) {
+                        ArrayList<String> allowedFileType = new ArrayList<>(Arrays.asList("jpg", "png", "jpeg"));
+                        String fileName = part.getSubmittedFileName();
+                        String[] fileTypeSplit = fileName.split("\\.");
+                        String fileType = fileTypeSplit[fileTypeSplit.length - 1];
+
+                        if (!allowedFileType.contains(fileType)) {
+                            request.setAttribute("ERROR_UPLOAD", "You can only upload .jpg, .png, .jpeg");
+                        } else {
+                            InputStream data = part.getInputStream();
+                            base64Image = ImageUtils.resizeImageFromInputStream(data);
+                        }
 //                        bytesImage = ImageUtils.InputStreamToBytes(data);
 //                        base64Image = ImageUtils.BytesToBase64(bytesImage);
+                    } else {
+                        request.setAttribute("ERROR_UPLOAD", "Max file size is 4MB!");
+
                     }
                 }
                 //1. Check all user error
@@ -110,6 +123,7 @@ public class CreateBlogServlet extends HttpServlet {
                     foundErr = true;
                     request.setAttribute("ERROR_CONTENT", "Content is required at least 10 characters");
                 }
+
                 if (foundErr) {
                     url = roadmap.get(CREATE_PAGE);
                     RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -124,7 +138,9 @@ public class CreateBlogServlet extends HttpServlet {
                     int result = dao.createBlog(dto);
                     if (result > 0) {
                         if (null != base64Image) {
-                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BASE64", base64Image , null));
+                            boolean bool = ImageUtils.uploadImage(base64Image, result);
+
+//                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BASE64", base64Image , null));
                         }
 
 //                        if (null != bytesImage) {
