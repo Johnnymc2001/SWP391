@@ -13,17 +13,18 @@
     </head>
     <body>
 
-        <form action="edit" method="POST" enctype='multipart/form-data'>
-            <c:set var="edit" value="${requestScope.BLOG_EDIT}"/>
+        <form action="edit" method="POST" enctype='multipart/form-data'> 
 
-            Title: <br/><input type="text" value="${edit.title}" name="txtTitle" maxlength="60" size="62"/> <br/>
+            <c:set var="editBlog" value="${requestScope.BLOG_EDIT}"/>
+
+            Title: <br/><input type="text" value="${editBlog.title}" name="txtTitle" maxlength="60" size="62"/> <br/>
             <c:if test="${not empty ERROR_TITLE}" 
                   <font color="red">
                 ${requestScope.ERROR_TITLE}
                 </font><br/>
             </c:if>
 
-            Title: <br/><input type="text" value="${edit.content}" name="txtContent" maxlength="60" size="62"/> <br/>
+            Title: <br/><input type="text" value="${editBlog.content}" name="txtContent" maxlength="60" size="62"/> <br/>
             <c:if test="${not empty ERROR_CONTENT}" 
                   <font color="red">
                 ${requestScope.ERROR_CONTENT}
@@ -36,9 +37,9 @@
                     <option value="${dto.categoryID}">${dto.categoryName}</option>
                 </c:forEach>
 
-                <input type="submit" value="Edit" name="btAction"/>
+                <input type="submit" value="Update" name="btAction"/>
                 <input type="reset" value="Reset" /><br/>
                 <a href="home">Return to Home</a>
-
-                </body>
-                </html>
+        </form> 
+    </body>
+</html>

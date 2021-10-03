@@ -52,31 +52,38 @@ public class BlogEditServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String txtBlogID = request.getParameter("txtBlogID");
+        System.out.println("current blogid : " + txtBlogID);
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         int blogID = 0;
         String url = "";
         boolean foundErr = false;
         String button = request.getParameter("btAction");
+        System.out.println("button: "+button);
         if (null != txtBlogID) {
             blogID = Integer.parseInt(txtBlogID);
             BlogDAO blogDao = new BlogDAO();
             BlogDTO blogEdit = blogDao.getBlogFromBlogID(blogID);
             if (null == blogEdit) {
                 //dieu huong 404
+                RequestDispatcher rd = request.getRequestDispatcher("404.html");
+                rd.forward(request, response);
+                System.out.println("url tai blog edit servlet: " + url);
             } else {
-                if (null == button || button.equals("Edit")) {
-
+                if ( button.equals("Edit")) {
                     request.setAttribute("BLOG_EDIT", blogEdit);
-                    url = "edit.jsp";
+                    url = roadmap.get("editPage");
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                    System.out.println("url tai blog edit servlet: " + url);
 
                 } else if (button.equals("Update")) {
+
                     HttpSession session = request.getSession(true);
                     AccountDTO curUser = (AccountDTO) session.getAttribute("USER");
                     if (null != curUser) {
                         if (curUser.getAccountID() != blogEdit.getBlogID()) {
                             request.setAttribute("INVALID_USER", "You can not edit this blog !!! ");
-
                         }
                     }
 
@@ -101,6 +108,7 @@ public class BlogEditServlet extends HttpServlet {
 
                     if (foundErr) {
                         url = roadmap.get("editPage");
+                        System.out.println("url tai blog edit servlet: " + url);
                         RequestDispatcher rd = request.getRequestDispatcher(url);
                         rd.forward(request, response);
                     } else {
@@ -119,7 +127,7 @@ public class BlogEditServlet extends HttpServlet {
                         url = roadmap.get("blogPage");
                         RequestDispatcher rd = request.getRequestDispatcher(url);
                         rd.forward(request, response);
-
+                        System.out.println("url tai blog edit servlet: " + url);
                     }
                     //ktrta rang buoc : id ton tai , title ,...  
                     // dieu huong sang blogDetail 
