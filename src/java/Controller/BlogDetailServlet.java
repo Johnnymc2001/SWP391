@@ -48,7 +48,7 @@ public class BlogDetailServlet extends HttpServlet {
 
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-        String url = null;
+        String url;
         String txtBlogID = request.getParameter("txtBlogID");
         int blogID;
         if (null != txtBlogID) {
