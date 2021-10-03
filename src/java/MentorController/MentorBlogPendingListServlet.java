@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AdminController;
+package MentorController;
 
 import DAO.AccountDAO;
 import DAO.AccountDTO;
+import DAO.BlogDAO;
+import DAO.BlogDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.stream.Collectors;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,11 +26,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminAccountListServlet", urlPatterns = {"/admin/AdminAccountListServlet"})
-public class AdminAccountListServlet extends HttpServlet {
+@WebServlet(name = "MentorBlogPendingListServlet", urlPatterns = {"/mentor/MentorBlogPendingListServlet"})
+public class MentorBlogPendingListServlet extends HttpServlet {
 
-    public final String SUCCESS = "admin/accountListPage";
-
+    public final String SUCCESS =  "mentor/blogPendingList";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,20 +42,22 @@ public class AdminAccountListServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String url = SUCCESS;
         try {
             response.setContentType("text/html;charset=UTF-8");
-
             ServletContext sc = request.getServletContext();
             HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+            url = roadmap.get(url);
 
-//            String maxPageItemString = request.getParameter("maxPageItem");
             String pageString = request.getParameter("page");
-            String searchValue = request.getParameter("txtSearchValue");
-            String searchAccountType = request.getParameter("txtAccountType");
+            BlogDAO blogDao = new BlogDAO();
 
-            AccountDAO accDao = new AccountDAO();
-
-            int maxPageItem = 10;
+            
+             
+            ArrayList<BlogDTO> blogList = blogDao.getAllPendingBlogFromCategoryID(pageString);
+            ArrayList<BlogDTO> returnList = new ArrayList<>();
+            
+            int maxPageItem = 5;
             int page;
 
 //            if (null != maxPageItemString) {
@@ -70,31 +71,18 @@ public class AdminAccountListServlet extends HttpServlet {
                 page = 1;
             }
 
-
-            ArrayList<AccountDTO> list = new ArrayList<>();
-            ArrayList<AccountDTO> listAccount = null;
-
-            if (null != searchAccountType && !"All".equals(searchAccountType)) {
-                listAccount = accDao.getAllAccountFromRole(searchAccountType);
-            } else {
-                listAccount = accDao.getAllAccount();
+            
+            for (int i = (page - 1) * maxPageItem; i < blogList.size() && returnList.size() < maxPageItem; i++) {
+                returnList.add(blogList.get(i));
             }
+            
+            request.setAttribute("PENDING_BLOG_LIST", returnList);
+            request.setAttribute("PAGE_COUNT", (int) Math.ceil((double) blogList.size() / (double) maxPageItem));
 
-            if (null != searchValue) {
-                listAccount.removeIf(acc -> !acc.getUsername().contains(searchValue));
-            }
-
-            for (int i = (page - 1) * maxPageItem; i < listAccount.size() && list.size() < maxPageItem; i++) {
-                list.add(listAccount.get(i));
-            }
-
-            request.setAttribute("LIST", list);
-            request.setAttribute("PAGE_COUNT", (int) Math.ceil((double) listAccount.size() / (double) maxPageItem));
-            String url = roadmap.get(SUCCESS);
-
-            request.getRequestDispatcher(url).forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

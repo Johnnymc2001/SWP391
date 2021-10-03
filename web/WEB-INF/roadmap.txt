@@ -42,14 +42,14 @@ mentor/dashboardPage=mentor.jsp
 mentor/blogPendingList=MentorBlogPendingListServlet
 mentor/blogPendingListPage=mentorBlogPendingList.jsp
 
-mentor/blogPendingDetail=MentorBlogPendingListServlet
-mentor/blogPendingDetailPage=mentorBlogPendingList.jsp
+mentor/blogPendingDetail=MentorBlogPendingDetailServlet
+mentor/blogPendingDetailPage=mentorBlogPendingDetail.jsp
 
 mentor/awardList=MentorAwardListServlet
 mentor/awardListPage=mentorAwardList.jsp
 
-mentor/awardDetail=MentorAwardListServlet
-mentor/awardDetailPage=mentorAwardList.jsp
+mentor/awardDetail=MentorAwardDetailServlet
+mentor/awardDetailPage=mentorAwardDetail.jsp
 
 ### ADMIN
 

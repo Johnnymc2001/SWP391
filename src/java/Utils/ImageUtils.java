@@ -7,6 +7,8 @@ package Utils;
 
 import DAO.AttachmentDAO;
 import DAO.AttachmentDTO;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -18,10 +20,8 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
 //import com.cloudinary.*;
 //import com.cloudinary.utils.ObjectUtils;
-import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -57,18 +57,18 @@ public class ImageUtils {
         try {
             String finalImageData = "data:image/png;base64," + base64;
             
-//            Map authConfig = ObjectUtils.asMap(
-//                    "cloud_name", "swpgogogo",
-//                    "api_key", "274465474966931",
-//                    "api_secret", "XfhGKe_VQyV8X1tdnNwDuvlf47k",
-//                    "secure", true);
+            Map authConfig = ObjectUtils.asMap(
+                    "cloud_name", "swpgogogo",
+                    "api_key", "274465474966931",
+                    "api_secret", "XfhGKe_VQyV8X1tdnNwDuvlf47k",
+                    "secure", true);
             
-//            Map uploadConfig = ObjectUtils.asMap(
-//                    "folder", "attachments");
+            Map uploadConfig = ObjectUtils.asMap(
+                    "folder", "attachments");
             
-//            Cloudinary cloudinary = new Cloudinary(authConfig);
+            Cloudinary cloudinary = new Cloudinary(authConfig);
             System.out.println("New file is being uploading....");
-//            Map uploadResult = cloudinary.uploader().upload(finalImageData, uploadConfig);
+            Map uploadResult = cloudinary.uploader().upload(finalImageData, uploadConfig);
             System.out.println("File uploaded! [URL : " + uploadResult.get("secure_url") + " ]");
             return uploadResult;
         } catch (Exception ex) {
