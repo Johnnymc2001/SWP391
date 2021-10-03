@@ -64,6 +64,7 @@
     <div class="container-fluid">
         <c:set var="dtoBD" value="${requestScope.BLOG_DETAIL}" />
         <h1>${dtoBD.title}</h1>
+        <input type="hidden" name ="blogID" value="${dtoBD.blogID}">
         <h4>by ${dtoBD.studentID}</h4>
         <h5>${dtoBD.approvedDate}</h5>
         <div>
@@ -75,6 +76,11 @@
                 <img src="data:image/png;base64, ${Image}" alt="Blog thumbnail"/>
             </c:if>
         </div>
+
+        <c:url var="blogEdit" value="edit">
+            <c:param name="txtBlogID" value="${dtoBL.blogID}"/>
+        </c:url>   
+
         <p>${dtoBD.content}</p>
     </div>
 </div>
