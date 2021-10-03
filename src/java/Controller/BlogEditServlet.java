@@ -80,7 +80,7 @@ public class BlogEditServlet extends HttpServlet {
                     String title = request.getParameter("txtTitle");
                     String content = request.getParameter("txtContent");
                     String categoryID = request.getParameter("categoryBox");
-                    String tags = request.getParameter("txtTags");
+//                    String tags = request.getParameter("txtTags");
 
                    
 
@@ -110,7 +110,7 @@ public class BlogEditServlet extends HttpServlet {
                         blogEdit.setPostDate(postDate);
                         blogEdit.setContent(content);
                         blogEdit.setCategoryID(categoryID);
-                        blogEdit.setTags(tags);
+//                        blogEdit.setTags(tags);
                         blogEdit.setTitle(title);
 
                         blogDao.updateBlog(blogID, blogEdit);
