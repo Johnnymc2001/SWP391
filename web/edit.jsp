@@ -12,6 +12,33 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+
+        <form action="edit" method="POST" enctype='multipart/form-data'>
+            <c:set var="edit" value="${requestScope.BLOG_EDIT}"/>
+
+            Title: <br/><input type="text" value="${edit.title}" name="txtTitle" maxlength="60" size="62"/> <br/>
+            <c:if test="${not empty ERROR_TITLE}" 
+                  <font color="red">
+                ${requestScope.ERROR_TITLE}
+                </font><br/>
+            </c:if>
+
+            Title: <br/><input type="text" value="${edit.content}" name="txtContent" maxlength="60" size="62"/> <br/>
+            <c:if test="${not empty ERROR_CONTENT}" 
+                  <font color="red">
+                ${requestScope.ERROR_CONTENT}
+                </font><br/>
+            </c:if>
+
+            <select name="categoryBox">
+                <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
+                <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                    <option value="${dto.categoryID}">${dto.categoryName}</option>
+                </c:forEach>
+
+                <input type="submit" value="Edit" name="btAction"/>
+                <input type="reset" value="Reset" /><br/>
+                <a href="home">Return to Home</a>
+
+                </body>
+                </html>
