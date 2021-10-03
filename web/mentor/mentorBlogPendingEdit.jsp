@@ -14,19 +14,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Mentor Dashboard</h1>
-        <div class="container-fluid">
-            <div class="col-sm-12">
-                <a href="blogPendingList">Manage Blog Pending</a>
-                <iframe src="blogPendingList" width="100%" height="600px" style="border:none;"></iframe>
-            </div>
-
-<!--            <div class="col-sm-12">
-                <a href="awardList">Manage Award</a>
-                <iframe src="awardList" width="100%" height="400px" style="border:none;"></iframe>
-            </div>-->
+        <h1>Mentor BlogPendingEdit</h1>
+        <form>
+            <input tpye="text" name="title" value="${blog.title}">
+            <input type="text" name="content" value="${blog.content}">
             
-        </div>
+        </form>
 
     </body>
 </html>

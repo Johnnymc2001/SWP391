@@ -72,6 +72,9 @@ public class BlogDTO implements Serializable {
         this.studentID = studentID;
     }
 
+    public BlogDTO() {
+    }
+
     public Date getPostDate() {
         return postDate;
     }
