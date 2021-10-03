@@ -3,7 +3,7 @@
     Created on : Sep 27, 2021, 9:31:52 PM
     Author     : JohnnyMC
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +12,6 @@
         <title>Mentor BlogPendingList</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <c:set var="blogList" 
     </body>
 </html>
