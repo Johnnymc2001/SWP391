@@ -91,7 +91,12 @@ public class BlogEditServlet extends HttpServlet {
                     if (content.trim().length() < 10) {
                         foundErr = true;
                         request.setAttribute("ERROR_CONTENT", "Content is required at least 10 characters");
+                    } if (!blogEdit.getStatus().equals("AVAILABLE ")){
+                        foundErr = true;
+                        request.setAttribute("STATUS_ERROR", "you can not edit your blog due to blog status is not availible ");
                     }
+                    
+                    
                     if (foundErr) {
                         url = roadmap.get("editPage");
                         RequestDispatcher rd = request.getRequestDispatcher(url);
