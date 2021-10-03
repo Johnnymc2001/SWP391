@@ -53,6 +53,7 @@ public class BlogEditServlet extends HttpServlet {
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         int blogID = 0;
         String url = "";
+         boolean foundErr = false;
         String button = request.getParameter("btAction");
         if (null != txtBlogID) {
             blogID = Integer.parseInt(txtBlogID);
@@ -81,7 +82,7 @@ public class BlogEditServlet extends HttpServlet {
                     String categoryID = request.getParameter("categoryBox");
                     String tags = request.getParameter("txtTags");
 
-                    boolean foundErr = false;
+                   
 
                     if (title.trim().length() < 6 || title.trim().length() > 60) {
                         foundErr = true;
@@ -91,12 +92,12 @@ public class BlogEditServlet extends HttpServlet {
                     if (content.trim().length() < 10) {
                         foundErr = true;
                         request.setAttribute("ERROR_CONTENT", "Content is required at least 10 characters");
-                    } if (!blogEdit.getStatus().equals("AVAILABLE ")){
+                    }
+                    if (!blogEdit.getStatus().equals("AVAILABLE ")) {
                         foundErr = true;
                         request.setAttribute("STATUS_ERROR", "you can not edit your blog due to blog status is not availible ");
                     }
-                    
-                    
+
                     if (foundErr) {
                         url = roadmap.get("editPage");
                         RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -113,8 +114,10 @@ public class BlogEditServlet extends HttpServlet {
                         blogEdit.setTitle(title);
 
                         blogDao.updateBlog(blogID, blogEdit);
-                        url =roadmap.get("blogPage");
-                        
+                        url = roadmap.get("blogPage");
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                        rd.forward(request, response);
+
                     }
                     //ktrta rang buoc : id ton tai , title ,...  
                     // dieu huong sang blogDetail 

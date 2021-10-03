@@ -23,6 +23,9 @@ createPage=createBlog.jsp
 comment=BlogCommentServlet
 commentPage=commentPage.jsp
 
+edit=BlogEditServlet
+editPage=edit.jsp
+
 ### STUDENT
 
 student/dashboard=StudentDashboardServlet
