@@ -5,15 +5,19 @@
  */
 package MentorController;
 
-import DAO.AwardDAO;
-import DAO.AwardDTO;
 import DAO.AwardListDAO;
+import DAO.AwardListDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< Updated upstream
+=======
+import javax.servlet.RequestDispatcher;
+>>>>>>> Stashed changes
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +42,7 @@ public class AwardServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -46,6 +51,7 @@ public class AwardServlet extends HttpServlet {
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url;
         String txtBlogID = request.getParameter("txtBlogID");
+        String txtUserID = request.getParameter("txtUserID");
         String txtAwardID = request.getParameter("txtAwardID");
         int blogID;
         if (null != txtBlogID) {
@@ -54,21 +60,28 @@ public class AwardServlet extends HttpServlet {
             blogID = 2;
         }
         int awardID;
-        if (null != txtBlogID) {
+        if (null != txtAwardID) {
             awardID = Integer.parseInt(txtAwardID);
         } else {
             awardID = 1;
         }
+        int userID;
+        if (null != txtUserID) {
+            userID = Integer.parseInt(txtUserID);
+        } else {
+            userID = 1;
+        }
         try {
-//            AwardListDAO ALdao = new AwardListDAO();
-//            AwardListDTO ALdto = 
-//            AwardDAO Adao = new AwardDAO();
-//            AwardDTO Adto = Adao.getAwardFromAwardID(awardID);
-//            if (null != ALdao.getAwardListFromBlogId(blogID)) {
-//                AwardDTO ALdto = ALdao.createAwardList(Adto);
-//            }
+            AwardListDAO ALdao = new AwardListDAO();
+            Date date = new Date(Calendar.getInstance().getTime().getTime());
+            ALdao.createAwardList(new AwardListDTO(blogID, awardID, date, userID));
+        } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            log("AwardServlet _ SQL " + msg);
         } finally {
-
+            url = roadmap.get(BLOGDETAIL_PAGE);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 
