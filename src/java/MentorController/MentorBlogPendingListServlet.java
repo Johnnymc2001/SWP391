@@ -29,8 +29,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "MentorBlogPendingListServlet", urlPatterns = {"/mentor/MentorBlogPendingListServlet"})
 public class MentorBlogPendingListServlet extends HttpServlet {
 
-    public final String SUCCESS =  "mentor/blogPendingList";
-    
+    public final String SUCCESS = "mentor/blogPendingListPage";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,21 +42,22 @@ public class MentorBlogPendingListServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = SUCCESS;
+
         try {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext sc = request.getServletContext();
             HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+            HttpSession session = request.getSession();
+            String url = SUCCESS;
             url = roadmap.get(url);
 
             String pageString = request.getParameter("page");
             BlogDAO blogDao = new BlogDAO();
-
+            AccountDTO account = (AccountDTO) session.getAttribute("USER");
             
-             
-            ArrayList<BlogDTO> blogList = blogDao.getAllPendingBlogFromCategoryID(pageString);
+            ArrayList<BlogDTO> blogList = blogDao.getAllPendingBlogFromCategoryID(account.getCategoryID());
             ArrayList<BlogDTO> returnList = new ArrayList<>();
-            
+
             int maxPageItem = 5;
             int page;
 
@@ -71,22 +72,19 @@ public class MentorBlogPendingListServlet extends HttpServlet {
                 page = 1;
             }
 
-            
             for (int i = (page - 1) * maxPageItem; i < blogList.size() && returnList.size() < maxPageItem; i++) {
                 returnList.add(blogList.get(i));
             }
-            
+
             request.setAttribute("PENDING_BLOG_LIST", returnList);
             request.setAttribute("PAGE_COUNT", (int) Math.ceil((double) blogList.size() / (double) maxPageItem));
-
+            request.getRequestDispatcher(url).forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

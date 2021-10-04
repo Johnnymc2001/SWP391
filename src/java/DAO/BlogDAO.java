@@ -117,7 +117,8 @@ public class BlogDAO implements Serializable {
         }
         return null;
     }
-
+    
+    // List Blog By Specification
     public ArrayList<BlogDTO> getAllBlogFromAccountId(int accountId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -379,7 +380,8 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public ArrayList<BlogDTO> getAllBlogWithMostAward(int maxBlog) throws SQLException {
+    // Stored Procedure
+    public ArrayList<BlogDTO> getAllApprovedBlogWithMostAward(int maxBlog) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -391,7 +393,7 @@ public class BlogDAO implements Serializable {
 
             if (con != null) {
                 String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
-                        + "FROM getAllBlogWithMostAward(?) "
+                        + "FROM getAllApprovedBlogWithMostAward(?) "
                         + "WHERE status = ? ";
 
                 stm = con.prepareStatement(sql);
@@ -431,7 +433,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public ArrayList<BlogDTO> getAllBlogWithHighestRating(int maxBlog) throws SQLException {
+    public ArrayList<BlogDTO> getAllApprovedBlogWithHighestRating(int maxBlog) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -443,7 +445,110 @@ public class BlogDAO implements Serializable {
 
             if (con != null) {
                 String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
-                        + "FROM getAllBlogWithHighestRating(?) "
+                        + "FROM getAllApprovedBlogWithHighestRating(?) "
+                        + "WHERE status = ? ";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, maxBlog);
+                stm.setString(2, "AVAILABLE");
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int blogID = rs.getInt("blogID");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    Date postDate = rs.getDate("postDate");
+                    String categoryID = rs.getString("categoryID");
+                    String status = rs.getString("status");
+                    int approvedByID = rs.getInt("approvedByID");
+                    Date approvedDate = rs.getDate("approvedDate");
+                    String tags = rs.getString("tags");
+                    int ownerID = rs.getInt("ownerID");
+
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID);
+                    blogList.add(dto);
+                }
+
+                return blogList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+    
+    public ArrayList<BlogDTO> getAllApprovedBlogWithMostAwardAndHighestRating(int maxBlog) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
+                        + "FROM getAllApprovedBlogWithMostAwardAndHighestRating(?) "
+                        + "WHERE status = ? ";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, maxBlog);
+                stm.setString(2, "AVAILABLE");
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int blogID = rs.getInt("blogID");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    Date postDate = rs.getDate("postDate");
+                    String categoryID = rs.getString("categoryID");
+                    String status = rs.getString("status");
+                    int approvedByID = rs.getInt("approvedByID");
+                    Date approvedDate = rs.getDate("approvedDate");
+                    String tags = rs.getString("tags");
+                    int ownerID = rs.getInt("ownerID");
+
+                    BlogDTO dto = new BlogDTO(blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID);
+                    blogList.add(dto);
+                }
+
+                return blogList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+    public ArrayList<BlogDTO> getAllApprovedBlogWithHighestComment(int maxBlog) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
+                        + "FROM getAllApprovedBlogWithHighestComment(?) "
                         + "WHERE status = ? ";
 
                 stm = con.prepareStatement(sql);
@@ -483,7 +588,8 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public ArrayList<BlogDTO> getAllAvailableBlog() throws SQLException {
+    // Available And Pending Blog
+    public ArrayList<BlogDTO> getAllApprovedBlog() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -587,7 +693,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public ArrayList<BlogDTO> getAllAvailableBlogFromCategoryID(String categoryId) throws SQLException {
+    public ArrayList<BlogDTO> getAllApprovedBlogFromCategoryID(String categoryId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -659,6 +765,8 @@ public class BlogDAO implements Serializable {
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "PENDING");
                 stm.setString(2, categoryId);
+                
+                System.out.println(sql);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
@@ -813,7 +921,7 @@ public class BlogDAO implements Serializable {
         return false;
     }
 
-    public boolean activateBlog(int blogId) throws SQLException {
+    public boolean approveBlog(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -827,7 +935,7 @@ public class BlogDAO implements Serializable {
                         + "WHERE blogID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "AVAILABLE");
+                stm.setString(1, "APPROVED");
                 stm.setInt(2, blogId);
                 int line = stm.executeUpdate();
 
@@ -839,7 +947,7 @@ public class BlogDAO implements Serializable {
         return false;
     }
 
-    public boolean deactivateBlog(int blogId) throws SQLException {
+    public boolean disapproveBlog(int blogId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -853,7 +961,7 @@ public class BlogDAO implements Serializable {
                         + "WHERE blogID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "UNAVAILABLE");
+                stm.setString(1, "DISAPPROVED");
                 stm.setInt(2, blogId);
                 int line = stm.executeUpdate();
 

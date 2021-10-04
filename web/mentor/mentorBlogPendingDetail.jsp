@@ -4,6 +4,7 @@
     Author     : JohnnyMC
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,10 +16,17 @@
     </head>
     <body>
         <h1>Mentor BlogPendingEdit</h1>
+        ${requestScope.MESSAGE}
+        <c:set var="blog" value="${requestScope.BLOG}"/>
         <form>
-            <input tpye="text" name="title" value="${blog.title}">
+            <input type="hidden" name="blogid" value="${blog.blogID}">
+            ${requestScope.ERROR_TITLE}<br/>
+            <input type="text" name="title" value="${blog.title}"><br/>
+            ${requestScope.ERROR_TITLE}<br/>
             <input type="text" name="content" value="${blog.content}">
-            
+            <input type="submit" name="submitAction" value="Update"/>
+            <input type="submit" name="submitAction" value="Approve"/>
+            <input type="submit" name="submitAction" value="Disapprove"/>
         </form>
 
     </body>
