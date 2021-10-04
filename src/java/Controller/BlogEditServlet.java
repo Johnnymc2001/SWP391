@@ -59,7 +59,7 @@ public class BlogEditServlet extends HttpServlet {
         String url = "";
         boolean foundErr = false;
         String button = request.getParameter("btAction");
-        System.out.println("button: "+button);
+        System.out.println("button: " + button);
         if (null != txtBlogID) {
             blogID = Integer.parseInt(txtBlogID);
             BlogDAO blogDao = new BlogDAO();
@@ -70,21 +70,21 @@ public class BlogEditServlet extends HttpServlet {
                 rd.forward(request, response);
                 System.out.println("url tai blog edit servlet: " + url);
             } else {
-                if ( button.equals("Edit")) {
+                if (button.equals("Edit")) {
                     request.setAttribute("BLOG_EDIT", blogEdit);
-                      CategoryDAO catDao = new CategoryDAO();
-                        ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-                         request.setAttribute("CATEGORY_LIST", catList);
-                    System.out.println("blogEdit stdID: "+blogEdit.getStudentID());
+                    CategoryDAO catDao = new CategoryDAO();
+                    ArrayList<CategoryDTO> catList = catDao.getAllCategory();
+                    request.setAttribute("CATEGORY_LIST", catList);
+                    System.out.println("blogEdit stdID: " + blogEdit.getStudentID());
                     url = roadmap.get("editPage");
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
                     System.out.println("url tai blog edit servlet: " + url);
 
                 } else if (button.equals("Update")) {
-  CategoryDAO catDao = new CategoryDAO();
-                        ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-                         request.setAttribute("CATEGORY_LIST", catList);
+                    CategoryDAO catDao = new CategoryDAO();
+                    ArrayList<CategoryDTO> catList = catDao.getAllCategory();
+                    request.setAttribute("CATEGORY_LIST", catList);
                     HttpSession session = request.getSession(true);
                     AccountDTO curUser = (AccountDTO) session.getAttribute("USER");
                     if (null != curUser) {
@@ -95,7 +95,7 @@ public class BlogEditServlet extends HttpServlet {
 
                     String title = request.getParameter("txtTitle");
                     String content = request.getParameter("txtContent");
-                    System.out.println("new content: " +content);
+                    System.out.println("new content: " + content);
                     String categoryID = request.getParameter("categoryBox");
 //                    String tags = request.getParameter("txtTags");
 
@@ -115,22 +115,19 @@ public class BlogEditServlet extends HttpServlet {
 
                     if (foundErr) {
                         url = roadmap.get("editPage");
-                         request.setAttribute("BLOG_EDIT", blogEdit);
+                        request.setAttribute("BLOG_EDIT", blogEdit);
                         System.out.println("url tai blog edit servlet: " + url);
                         RequestDispatcher rd = request.getRequestDispatcher(url);
                         rd.forward(request, response);
                     } else {
 
                         //4. Call DAO to insert to DB
-                       
-                      
-                      
                         blogEdit.setContent(content);
                         blogEdit.setCategoryID(categoryID);
 //                        blogEdit.setTags(tags);
                         blogEdit.setTitle(title);
 
-                        boolean flag=blogDao.updateBlog(blogID, blogEdit);
+                        boolean flag = blogDao.updateBlog(blogID, blogEdit);
                         System.out.println(flag);
                         url = roadmap.get("blogPage");
                         RequestDispatcher rd = request.getRequestDispatcher(url);

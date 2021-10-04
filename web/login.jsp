@@ -29,18 +29,7 @@
                 <h1>Login</h1>
                 <div class="enter-field">
                     <input type="text" id="username" placeholder="Username" name ="username">
-                    <c:if test ="${not empty error.usernameNullError}">
-                        <br/>
-                        <font color="red">
-                        ${error.usernameNullError}<br/>
-                        </font>
-                    </c:if>
-                    <c:if test ="${not empty error.usernameNotExist}">
-                        <br/>
-                        <font color="red">
-                        ${error.usernameNotExist}<br/>
-                        </font>
-                    </c:if>
+                 
 
 
                 </div>
