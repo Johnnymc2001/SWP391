@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,16 +17,18 @@
         <form action="edit" method="POST" enctype='multipart/form-data'> 
 
             <c:set var="editBlog" value="${requestScope.BLOG_EDIT}"/>
+            
+              <input type="hidden" name ="txtBlogID" value="${editBlog.blogID}">
 
             Title: <br/><input type="text" value="${editBlog.title}" name="txtTitle" maxlength="60" size="62"/> <br/>
-            <c:if test="${not empty ERROR_TITLE}" 
+            <c:if test="${not empty ERROR_TITLE}" >
                   <font color="red">
                 ${requestScope.ERROR_TITLE}
                 </font><br/>
             </c:if>
 
-            Title: <br/><input type="text" value="${editBlog.content}" name="txtContent" maxlength="60" size="62"/> <br/>
-            <c:if test="${not empty ERROR_CONTENT}" 
+            Content <br/><input type="text" value="${editBlog.content}" name="txtContent" maxlength="60" size="62"/> <br/>
+            <c:if test="${not empty ERROR_CONTENT}" >
                   <font color="red">
                 ${requestScope.ERROR_CONTENT}
                 </font><br/>

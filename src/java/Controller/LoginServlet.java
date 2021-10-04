@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
                      
                 }
                 
-                if (curUser.getStatus().equals("UNAVAILABLE")){
+                else if (curUser.getStatus().equals("UNAVAILABLE")){
                     foundError = true;
                       request.setAttribute("LOGIN_FAIL", "Your Account is not AVAILABLE anymore " );
                          System.out.println("Your Account is not AVAILABLE anymore");

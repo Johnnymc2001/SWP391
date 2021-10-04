@@ -72,13 +72,19 @@ public class BlogEditServlet extends HttpServlet {
             } else {
                 if ( button.equals("Edit")) {
                     request.setAttribute("BLOG_EDIT", blogEdit);
+                      CategoryDAO catDao = new CategoryDAO();
+                        ArrayList<CategoryDTO> catList = catDao.getAllCategory();
+                         request.setAttribute("CATEGORY_LIST", catList);
+                    System.out.println("blogEdit stdID: "+blogEdit.getStudentID());
                     url = roadmap.get("editPage");
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
                     System.out.println("url tai blog edit servlet: " + url);
 
                 } else if (button.equals("Update")) {
-
+  CategoryDAO catDao = new CategoryDAO();
+                        ArrayList<CategoryDTO> catList = catDao.getAllCategory();
+                         request.setAttribute("CATEGORY_LIST", catList);
                     HttpSession session = request.getSession(true);
                     AccountDTO curUser = (AccountDTO) session.getAttribute("USER");
                     if (null != curUser) {
@@ -89,6 +95,7 @@ public class BlogEditServlet extends HttpServlet {
 
                     String title = request.getParameter("txtTitle");
                     String content = request.getParameter("txtContent");
+                    System.out.println("new content: " +content);
                     String categoryID = request.getParameter("categoryBox");
 //                    String tags = request.getParameter("txtTags");
 
@@ -101,29 +108,30 @@ public class BlogEditServlet extends HttpServlet {
                         foundErr = true;
                         request.setAttribute("ERROR_CONTENT", "Content is required at least 10 characters");
                     }
-                    if (!blogEdit.getStatus().equals("AVAILABLE ")) {
+                    if (!blogEdit.getStatus().equals("APPROVED")) {
                         foundErr = true;
                         request.setAttribute("STATUS_ERROR", "you can not edit your blog due to blog status is not availible ");
                     }
 
                     if (foundErr) {
                         url = roadmap.get("editPage");
+                         request.setAttribute("BLOG_EDIT", blogEdit);
                         System.out.println("url tai blog edit servlet: " + url);
                         RequestDispatcher rd = request.getRequestDispatcher(url);
                         rd.forward(request, response);
                     } else {
 
                         //4. Call DAO to insert to DB
-                        Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-                        CategoryDAO catDao = new CategoryDAO();
-                        ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-                        blogEdit.setPostDate(postDate);
+                       
+                      
+                      
                         blogEdit.setContent(content);
                         blogEdit.setCategoryID(categoryID);
 //                        blogEdit.setTags(tags);
                         blogEdit.setTitle(title);
 
-                        blogDao.updateBlog(blogID, blogEdit);
+                        boolean flag=blogDao.updateBlog(blogID, blogEdit);
+                        System.out.println(flag);
                         url = roadmap.get("blogPage");
                         RequestDispatcher rd = request.getRequestDispatcher(url);
                         rd.forward(request, response);
