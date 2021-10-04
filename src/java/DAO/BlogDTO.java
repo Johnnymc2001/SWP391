@@ -155,6 +155,20 @@ public class BlogDTO implements Serializable {
         this.studentID = studentID;
     }
 
+    public String getFirstImage() throws SQLException {
+        AttachmentDAO attDao = new AttachmentDAO();
+        ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(this.getBlogID());
+        String image = null;
+
+        if (attList.size() > 0) {
+            if ("IMAGE/URL".equals(attList.get(0).getType())) {
+                image = attList.get(0).getDataText();
+            }
+        }
+        
+        return image;
+    }
+
     public ArrayList<String> getAllImage() throws SQLException {
         AttachmentDAO attDao = new AttachmentDAO();
         ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(this.getBlogID());
