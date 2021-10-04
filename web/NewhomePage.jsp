@@ -18,7 +18,7 @@
                 integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
         <!-- this is external css -->
-        <link rel="stylesheet" href="UI/CSS/homePage.css">
+        <link rel="stylesheet" href="UI/CSS/NewhomePageStyle.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <!-- this is script -->
@@ -81,7 +81,6 @@
                                 <div class="personal-menu">
                                     <a href="mentor/dashboard"><li>Profile</li></a>
                                     <a href="mentor/blogPendingList"><li>Pending Blog</li></a>
-                                    <a href="createPage"><li>Create Blog</li></a>
                                     <a href="logout"><li>Log out</li></a>
                                 </div>
                             </c:if>
@@ -101,10 +100,10 @@
                                 </c:if>
                                 <!-- public menu -->
                                 <div class="public-menu">
-                                    <li><a href="home">Home</a></li>
-                                    <li><a href="search">Search</a></li>
-                                    <li><a href="about">About</a></li>
-                                    <li><a href="contact">Contact</a></li>
+                                    <a href="home"><li>Home</li></a>
+                                    <a href="search"><li>Search</li></a>
+                                    <a href="about"><li>About</li></a>
+                                    <a href="contact"><li>Contact</li></a>
                                 </div>
                             </ul>
                         </c:if>
