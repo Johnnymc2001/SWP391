@@ -46,6 +46,9 @@ blogPendingListPage=mentorBlogPendingList.jsp
 blogPendingDetail=MentorBlogPendingDetailServlet
 blogPendingDetailPage=mentorBlogPendingDetail.jsp
 
+mentorBlogList=MentorBlogListServlet
+mentorBlogListPage=mentorBlogList.jsp
+
 awardList=MentorAwardListServlet
 awardListPage=mentorAwardList.jsp
 
