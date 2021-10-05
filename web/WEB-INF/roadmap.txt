@@ -48,8 +48,8 @@ blogPendingDetailPage=mentorBlogPendingDetail.jsp
 awardList=MentorAwardListServlet
 awardListPage=mentorAwardList.jsp
 
-awardDetail=MentorAwardDetailServlet
-awardDetailPage=mentorAwardDetail.jsp
+award=MentorAwardServlet
+awardPage=mentorAwardDetail.jsp
 
 ### ADMIN
 

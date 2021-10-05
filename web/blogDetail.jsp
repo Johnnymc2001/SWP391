@@ -64,7 +64,12 @@
     <div class="container-fluid">
         <c:set var="dtoBD" value="${requestScope.BLOG_DETAIL}" />
         <h1>${dtoBD.title}</h1>
-
+        <%--<c:if test="${user.role=='Mentor'}">--%>
+        <form action="award">
+            <input type="hidden" value="${dtoBD.blogID}" name="txtBlogID"/>
+            <input type="submit" value="Give Blog Award" />
+        </form>
+        <%--</c:if>--%>
         <h4>by ${dtoBD.studentID}</h4>
         <h5>${dtoBD.approvedDate}</h5>
         <div>

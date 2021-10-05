@@ -5,6 +5,7 @@
  */
 package MentorController;
 
+import DAO.AccountDTO;
 import DAO.AwardDAO;
 import DAO.AwardListDAO;
 import DAO.AwardListDTO;
@@ -27,11 +28,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "MentorAwardListServlet", urlPatterns = {"/MentorAwardListServlet"})
-public class MentorAwardListServlet extends HttpServlet {
+@WebServlet(name = "MentorAwardServlet", urlPatterns = {"/MentorAwardServlet"})
+public class MentorAwardServlet extends HttpServlet {
 
-    private final String BLOGDETAIL_PAGE = "blogPage";
-    private final String AWARD_PAGE = "mentor/awardListPage";
+    private final String BLOGDETAIL = "blog";
+    private final String AWARD_PAGE = "awardPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,7 +51,6 @@ public class MentorAwardListServlet extends HttpServlet {
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url;
         String txtBlogID = request.getParameter("txtBlogID");
-        String txtUserID = request.getParameter("txtUserID");
         String txtAwardID = request.getParameter("txtAwardID");
         int blogID;
         if (null != txtBlogID) {
@@ -58,32 +58,36 @@ public class MentorAwardListServlet extends HttpServlet {
         } else {
             blogID = 2;
         }
-        int awardID=0;
-        if (null != txtAwardID) {
-            awardID = Integer.parseInt(txtAwardID);
-        } else {
-            url =  roadmap.get(AWARD_PAGE);
+        int awardID = 0;
+        if (null == txtAwardID) {
+            url = roadmap.get(AWARD_PAGE);
             AwardDAO Adao = new AwardDAO();
-            request.setAttribute("AllAward", Adao.getAllAward());
-            response.sendRedirect(url);
-        }
-        int userID;
-        if (null != txtUserID) {
-            userID = Integer.parseInt(txtUserID);
+            System.out.println(Adao.getAllAward().toString());
+            request.setAttribute("ALL_AWARD", Adao.getAllAward());
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+            return;
         } else {
-            userID = 1;
+
+//            try {
+                awardID = Integer.parseInt(txtAwardID);
+//            } catch (NumberFormatException ex) {
+//
+//            }
         }
         try {
+            AccountDTO account = (AccountDTO) request.getSession().getAttribute("User");
             AwardListDAO ALdao = new AwardListDAO();
             Date date = new Date(Calendar.getInstance().getTime().getTime());
-            ALdao.createAwardList(new AwardListDTO(blogID, awardID, date, userID));
-            url = roadmap.get(BLOGDETAIL_PAGE);
+            ALdao.createAwardList(new AwardListDTO(blogID, awardID, date, account.getAccountID()));
+            url = roadmap.get(BLOGDETAIL);
+
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("AwardServlet _ SQL " + msg);
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -101,7 +105,7 @@ public class MentorAwardListServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MentorAwardListServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MentorAwardServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,7 +123,7 @@ public class MentorAwardListServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MentorAwardListServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MentorAwardServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
