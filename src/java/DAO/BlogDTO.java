@@ -164,6 +164,8 @@ public class BlogDTO implements Serializable {
             if ("IMAGE/URL".equals(attList.get(0).getType())) {
                 image = attList.get(0).getDataText();
             }
+        } else {
+            image = "UI/Icon/selfmademan.jpg";
         }
         
         return image;

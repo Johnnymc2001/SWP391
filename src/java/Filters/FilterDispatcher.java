@@ -129,16 +129,15 @@ public class FilterDispatcher implements Filter {
                     url = roadmap.get(name);
                 }
             }
+            
             if (url == null) {
                 url = roadmap.get("default");
             }
+            
+            System.out.println(url);
+            RequestDispatcher rd = req.getRequestDispatcher(url);
+            rd.forward(request, response);
 
-            if (url != null) {
-                RequestDispatcher rd = req.getRequestDispatcher(url);
-                rd.forward(request, response);
-            } else {
-                chain.doFilter(request, response);
-            }
         } catch (Throwable t) {
             log("FilterDispatcher _ Throwable " + t.getMessage());
         } finally {

@@ -1,8 +1,8 @@
 package Controller;
 
+import DAO.AccountDAO;
 import DAO.AccountDTO;
 import DAO.AttachmentDAO;
-import DAO.AttachmentDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
 import DAO.CategoryDAO;
@@ -19,7 +19,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -59,6 +58,14 @@ public class CreateBlogServlet extends HttpServlet {
 
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+
+        AccountDAO accDao = new AccountDAO();
+        HttpSession session = request.getSession();
+        AccountDTO account = (AccountDTO) session.getAttribute("USER");
+        if (null == account || !account.getRole().equals("Student") && !account.getRole().equals("Mentor")) {
+            response.sendRedirect(sc.getContextPath());
+            return;
+        }
         String url;
         String title = request.getParameter("txtTitle");
         String content = request.getParameter("txtContent");
@@ -66,7 +73,6 @@ public class CreateBlogServlet extends HttpServlet {
 
         String tags = request.getParameter("txtTags");
 
-        AccountDTO student = (AccountDTO) request.getSession().getAttribute("USER");
         int studentID = 2;
 //        if (null != student) {
 //            studentID = student.getAccountID();
@@ -132,7 +138,7 @@ public class CreateBlogServlet extends HttpServlet {
                     //4. Call DAO to insert to DB
                     Date postDate = new Date(Calendar.getInstance().getTime().getTime());
                     BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID);
-                    AttachmentDAO attDao = new AttachmentDAO();
+                    
 
                     BlogDAO dao = new BlogDAO();
                     int result = dao.createBlog(dto);

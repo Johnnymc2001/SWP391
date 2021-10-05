@@ -98,8 +98,7 @@ public class AwardDAO {
 
             if (con != null) {
                 String sql = "SELECT awardID, awardName, effectiveDay "
-                        + "FROM Award "
-                        + "ORDER BY date DESC";
+                        + "FROM Award ";
 
                 stm = con.prepareStatement(sql);
 

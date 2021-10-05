@@ -5,15 +5,18 @@
  */
 package MentorController;
 
+import DAO.AccountDTO;
 import DAO.AwardDAO;
-import DAO.AwardDTO;
 import DAO.AwardListDAO;
+import DAO.AwardListDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,10 +28,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "AwardServlet", urlPatterns = {"/AwardServlet"})
-public class AwardServlet extends HttpServlet {
+@WebServlet(name = "MentorAwardServlet", urlPatterns = {"/MentorAwardServlet"})
+public class MentorAwardServlet extends HttpServlet {
 
-    private final String BLOGDETAIL_PAGE = "blogPage";
+    private final String BLOGDETAIL = "blog";
+    private final String AWARD_PAGE = "awardPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,6 +42,7 @@ public class AwardServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -53,22 +58,35 @@ public class AwardServlet extends HttpServlet {
         } else {
             blogID = 2;
         }
-        int awardID;
-        if (null != txtBlogID) {
-            awardID = Integer.parseInt(txtAwardID);
+        int awardID = 0;
+        if (null == txtAwardID) {
+            url = roadmap.get(AWARD_PAGE);
+            AwardDAO Adao = new AwardDAO();
+            System.out.println(Adao.getAllAward().toString());
+            request.setAttribute("ALL_AWARD", Adao.getAllAward());
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+            return;
         } else {
-            awardID = 1;
+
+//            try {
+                awardID = Integer.parseInt(txtAwardID);
+//            } catch (NumberFormatException ex) {
+//
+//            }
         }
         try {
-//            AwardListDAO ALdao = new AwardListDAO();
-//            AwardListDTO ALdto = 
-//            AwardDAO Adao = new AwardDAO();
-//            AwardDTO Adto = Adao.getAwardFromAwardID(awardID);
-//            if (null != ALdao.getAwardListFromBlogId(blogID)) {
-//                AwardDTO ALdto = ALdao.createAwardList(Adto);
-//            }
-        } finally {
+            AccountDTO account = (AccountDTO) request.getSession().getAttribute("User");
+            AwardListDAO ALdao = new AwardListDAO();
+            Date date = new Date(Calendar.getInstance().getTime().getTime());
+            ALdao.createAwardList(new AwardListDTO(blogID, awardID, date, account.getAccountID()));
+            url = roadmap.get(BLOGDETAIL);
 
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            log("AwardServlet _ SQL " + msg);
         }
     }
 
@@ -87,7 +105,7 @@ public class AwardServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AwardServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MentorAwardServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -105,7 +123,7 @@ public class AwardServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AwardServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MentorAwardServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

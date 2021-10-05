@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+}
+
+.page-row {
+    min-height: 100%;
+}
+
+.phone-pic {
+    width: 100%;
+}
+
+h1 {
+    color: #203656;
+    padding: 0;
+}
+
+.avatar {
+    width: 9rem;
+    background: transparent;
+    border-radius: 50%;
+}
+
+.enter-field input {
+    border: none;
+    border-bottom: 1px orange solid;
+    width: 100%;
+    background: transparent;
+}
+
+.enter-field input:focus {
+    outline: none;
+}
+
+.login-form .enter-field #username:focus+.username-label,
+.login-form .enter-field #password:focus+.password-label,
+.login-form .enter-field #username:valid+.username-label,
+.login-form .enter-field #password:valid+.password-label {
+    transform: translateY(-150%);
+    color: orange;
+}
+
+.enter-field {
+    position: relative;
+    padding: 3rem 0 1rem 0;
+}
+
+.login-form .enter-field .username-label,
+.login-form .enter-field .password-label {
+    position: absolute;
+    left: 0;
+    transition: all 0.5s;
+}
+
+.footer-link .remember-me,
+.footer-link .forgot-link {
+    padding: 0.5rem;
+}
+
+.footer-link {
+    padding: 1rem 0;
+}
+
+.forgot-link a {
+    text-decoration: none;
+    color: #203656;
+    transition: all 0.2s;
+}
+
+.forgot-link a:hover {
+    margin: 0 0 0 10px;
+    color: orange;
+}
+
+.login-btn,
+.register-btn {
+    background-color: transparent;
+    padding: 0.5rem;
+    width: 50%;
+    border-radius: 40px;
+    border: 1px orange solid;
+    background: orange;
+    transition: all 0.3;
+}
+
+.wave {
+    position: fixed;
+    max-width: 100%;
+    min-height: 100%;
+    z-index: -100;
+    left: 0;
+}
+
+.remember-me label:hover {
+    cursor: pointer;
+}
+
+.login-table .goto-register {
+    background: transparent;
+    margin: 1rem 0 0 0;
+    border: none;
+    text-decoration: underline;
+    transition: all 0.2s;
+}
+
+.login-table .goto-register:hover {
+    color: orange;
+    transform: translateX(5px);
+}
+
+.login-table,
+.register-table {
+    text-align: center;
+    padding: 0 5rem;
+}
+
+.register-form .enter-field {
+    position: relative;
+    padding: 2rem 0.5rem 1rem;
+}
+
+.register-form label {
+    position: absolute;
+    left: 0.5rem;
+    transition: all 0.5s;
+}
+
+.register-form input:focus+label,
+.register-form input:valid+label {
+    transform: translateY(-100%);
+    color: orange;
+}
+
+.register-form .register-btn {
+    margin: 1rem 0 0 0;
+}
+
+.register-table .return-login {
+    background: transparent;
+    margin: 1rem 0 0 0;
+    border: none;
+    text-decoration: underline;
+    transition: all 0.2s;
+}
+
+.register-table .return-login:hover {
+    color: orange;
+    transform: translateX(-5px);
+}
+
+.activated {
+    display: block;
+}
+
+.deactivated {
+    display: none;
+}
+
+.open-eye,
+.close-eye{
+    position: absolute;
+    right: 0;
+    bottom: 25%;
+}

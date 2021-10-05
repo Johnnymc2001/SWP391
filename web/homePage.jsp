@@ -139,28 +139,31 @@
                                             <button id="recent-button" class="recent-button" onclick="recent()">Recent</button>
                                         </div>
                                         <div class="popular-box">
-                                            <div class="box-content">
-                                                <div class="content-img">
-                                                    <a href=""><img src="UI/Icon/Haotn.jpg" alt=""></a>
+                                            <c:forEach var="blog" items="${requestScope.MOST_AWARD_AND_RATE}">
+                                                <div class="box-content">
+                                                    <div class="content-img">
+                                                        <a href=""><img src="${blog.getFirstImage()}" alt=""></a>
+                                                    </div>
+                                                    <div class="content-text">
+                                                        <h6><a href="">${blog.title}</a></h6>
+                                                        <p>${blog.postDate}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="content-text">
-                                                    <h6><a href="">This is a very, very, very long blog's title</a></h6>
-                                                    <p>11/10/2001</p>
-                                                </div>
-                                            </div>
-                   
+                                            </c:forEach>
+
                                         </div>
                                         <div class="recent-box">
-                                            <div class="box-content">
-                                                <div class="content-img">
-                                                    <a href=""><img src="UI/Icon/Khoatd.png" alt=""></a>
+                                            <c:forEach var="blog" items="${requestScope.MOST_RECENT}">
+                                                <div class="box-content">
+                                                    <div class="content-img">
+                                                        <a href=""><img src="${blog.getFirstImage()}" alt=""></a>
+                                                    </div>
+                                                    <div class="content-text">
+                                                        <h6><a href="">${blog.title}</a></h6>
+                                                        <p>${blog.postDate}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="content-text">
-                                                    <h6><a href="">This is a very, very, very long blog's title</a></h6>
-                                                    <p>11/10/2001</p>
-                                                </div>
-                                            </div>
-                               
+                                            </c:forEach>
                                         </div>
                                     </div>
                                 </div>

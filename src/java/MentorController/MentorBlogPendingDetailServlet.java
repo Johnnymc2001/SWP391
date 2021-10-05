@@ -26,11 +26,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "MentorBlogPendingDetailServlet", urlPatterns = {"/mentor/MentorBlogPendingDetailServlet"})
+@WebServlet(name = "MentorBlogPendingDetailServlet", urlPatterns = {"/MentorBlogPendingDetailServlet"})
 public class MentorBlogPendingDetailServlet extends HttpServlet {
 
-    public final String PENDING_EDIT = "mentor/blogPendingDetailPage";
-    public final String PENDING_LIST = "mentor/blogPendingList";
+    public final String PENDING_EDIT = "mentorBlogPendingDetailPage";
+    public final String PENDING_LIST = "mentorBlogPendingList";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,13 +48,14 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
-        HttpSession session = request.getSession();
-//        AccountDTO account = (AccountDTO) session.getAttribute("USER");
-
         AccountDAO accDao = new AccountDAO();
+        HttpSession session = request.getSession();
         AccountDTO account = (AccountDTO) session.getAttribute("USER");
+        if (null == account || !account.getRole().equals("Mentor")) {
+            response.sendRedirect(sc.getContextPath());
+            return;
+        }
 
- 
 
         BlogDAO blogDao = new BlogDAO();
         BlogDTO blog = null;

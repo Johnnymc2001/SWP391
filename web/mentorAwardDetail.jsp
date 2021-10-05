@@ -62,50 +62,13 @@
     <div class="header-bar"></div>
 
     <div class="container-fluid">
-        <c:set var="dtoBD" value="${requestScope.BLOG_DETAIL}" />
-        <h1>${dtoBD.title}</h1>
-        <%--<c:if test="${user.role=='Mentor'}">--%>
-        <form action="award">
-            <input type="hidden" value="${dtoBD.blogID}" name="txtBlogID"/>
-            <input type="submit" value="Give Blog Award" />
-        </form>
-        <%--</c:if>--%>
-        <h4>by ${dtoBD.studentID}</h4>
-        <h5>${dtoBD.approvedDate}</h5>
-        <div>
-            <c:set var="Image" value="${requestScope.IMAGE}"/>
-            <c:if test="${empty Image}">
-                <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
-            </c:if>
-            <c:if test="${not empty Image}">
-                <img src="data:image/png;base64, ${Image}" alt="Blog thumbnail"/>
-            </c:if>
-        </div>
-            
-            
-        <c:if test="${ empty USER}">
-            <font color="red">
-            Please login to edit this blog !!
-            </font><br/>
-        </c:if>
+        <c:set var="dtoList" value="${requestScope.ALL_AWARD}" />  
+        <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+            <p>${dto.awardID}</p>
+            <input type="checkbox"  name="awardCbox" value="${dto.awardID}">${dto.awardName}</input>
+        </c:forEach>
 
-        <c:if test="${not empty USER}">
-            <form action="edit" method="POST"> 
-                <input type="hidden" name ="txtBlogID" value="${dtoBD.blogID}">
-                <input type="submit" value="Edit" name="btAction"/>
-                <c:if test="${ empty USER}">
-                    <font color="red">
-                    Please login to edit this blog !!
-                    </font><br/>
-                </c:if>
-            </form>     
-        </c:if>
-
-
-
-
-
-        <p>${dtoBD.content}</p>
+        <input type="submit" value="Award"/>
     </div>
 </div>
 

@@ -1,155 +1,260 @@
 <%-- 
-    Document   : searchPage
-    Created on : Sep 22, 2021, 10:02:28 AM
+    Document   : newsearchPage
+    Created on : Oct 4, 2021, 5:44:57 PM
     Author     : henry
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
     <head>
-        <title>Search Page</title>
-        <!-- this is title icon -->
-        <link rel="icon" href="UI/Icon/Ficon.png" type="image/icon type">
-        <!-- this is bootstrap 4 -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <!-- this is external css file -->
-        <link rel="stylesheet" href="UI/CSS/searchPageStyle.css">
-        <!-- this is fontawsome icon -->
-        <script src="https://kit.fontawesome.com/93823b4ff2.js" crossorigin="anonymous"></script>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Search</title>
+        <!-- this is bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+        </script>
+        <!-- this is external css -->
+        <link rel="stylesheet" href="UI/CSS/NewsearchPageStyle.css">
+        <!-- this is script -->
+        <script src="UI/script/searchPage.js"></script>
+        <!-- this is fontawsome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+        <!-- this is swiperjs -->
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     </head>
 
     <body>
 
         <c:set var="user" value="${sessionScope.USER}"/>
-
         <c:if test="${empty param.txtSearchValue}">
             <c:set var="param.txtSearchValue" value=""/>
         </c:if>
-        
-        <c:set var="catList" value="${requestScope.CAT_LIST}"/>
-        <c:set var="blogList" value="${requestScope.BLOG_LIST}"/>
-        
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="home">
-                <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo">
-                FPT Academy
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ml-auto">
-                    <!--About us page-->
-                    <a class="nav-item nav-link" href="aboutUs.html">About us</a>
-                    <!-- If user aren't login then show the login link -->
-                    <c:if test="${empty user}">
-                        <a class="nav-item nav-link" href="loginPage">Login</a>
-                    </c:if>
-                    <!-- If user already login then show user link which navigate to user profile page on click -->
-                    <c:if test="${not empty user}">
-                        <div class="action">
-                            <div class="profile-avatar">
-                                <img src="UI/Icon/placeholder-avatar.png" alt="avatar">
+        <!-- THIS IS NAVBAR -->
+        <div class="container-fluid">
+            <header id="header-default">
+                <div class="row justify-content-end">
+                    <div class="site-logo col-lg-8">
+                        <a href="home"><img src="UI/Icon/FPTLogo.jpg" alt="">FPT Academy</a>
+                    </div>
+                    <div class="drop-menu col-lg-2">
+                        <c:if test="${not empty user}">
+                            <a href="search"><button class="search-button"><i class="fas fa-search"></i></button></a>
+                            <button type="button" class="menu-button dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                ${user.fullname}
+                            </button>
+                            <c:if test="${user.role == 'Student'}">
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <div class="menu-wrapper">
+                                        <!-- this is user img -->
+                                        <div class="avatar">
+                                            <img src="UI/Icon/profile-icon.png" alt="avatar">
+                                            <p>${user.fullname}</p>
+                                        </div>
+                                        <!-- personal menu -->
+                                        <div class="personal-menu">
+                                            <a href="student/dashboard"><li>Profile</li></a>
+                                            <a href="createPage"><li>Create Blog</li></a>
+                                            <a href="logout"><li>Log out</li></a>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${user.role == 'Mentor'}">
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <div class="menu-wrapper">
+                                                <!-- this is user img -->
+                                                <div class="avatar">
+                                                    <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
+                                                    <p>${user.fullname}</p>
+                                                </div>
+                                                <!-- personal menu -->
+                                                <div class="personal-menu">
+                                                    <a href="mentor/dashboard"><li>Profile</li></a>
+                                                    <a href="mentor/blogPendingList"><li>Pending Blog</li></a>
+                                                    <a href="logout"><li>Log out</li></a>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${user.role == 'Admin'}">
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <div class="menu-wrapper">
+                                                        <!-- this is user img -->
+                                                        <div class="avatar">
+                                                            <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
+                                                            <p>${user.fullname}</p>
+                                                        </div>
+                                                        <!-- personal menu -->
+                                                        <div class="personal-menu">
+                                                            <a href="admin/dashboard"><li>Dashboard</li></a>
+                                                            <a href="admin/accountList"><li>Manage Accounts</li></a>
+                                                            <a href="logout"><li>Log out</li></a>
+                                                        </div>
+                                                    </c:if>
+                                                    <!-- public menu -->
+                                                    <div class="public-menu">
+                                                        <a href="home"><li>Home</li></a>
+                                                        <a href="search"><li>Search</li></a>
+                                                        <a href="about"><li>About</li></a>
+                                                        <a href="contact"><li>Contact</li></a>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </c:if>
+                                        <c:if test="${empty user}">
+                                            <a href="loginPage">Login</a>
+                                        </c:if>
+                                    </div>
                             </div>
-                            <div class="menu">
-                                <h3>${user.fullname}</h3>
-                                <span>${user.role}</span>
-                                <ul>
-                                    <li><img src="UI/Icon/profile-icon.png" alt=""><a href="">Profile</a></li>
-                                    <li><img src="UI/Icon/createblog-icon.png" alt=""><a href="">Create blog</a></li>
-                                    <li><img src="UI/Icon/logout-icon.png" alt=""><a href="">Log out</a></li>
-                                </ul>
+                            </header>
+                    </div>
+
+                    <div id="search-bar" class="search-bar">
+                        <div class="box">
+                            <form action="search" method="GET" class="search-form">
+                                <input name="txtSearchValue" value="${param.txtSearchValue}" type="text" id="search-input" class="search-input"
+                                       required="">
+                                <label class="search-label" for="search-input">Search</label>
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Swiper -->
+                    <div class="card-slider">
+                        <div class="swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/selfmademan.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/FPTCampus.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/hallwayfpt.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/FPTCampus.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/selfmademan.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/selfmademan.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+
+                    <div id="search-result-container" class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <c:set var="blogs" value="${requestScope.BLOG_LIST}"/>
+                                <c:forEach var="dto" items="${blogs}">
+                                    <div class="post-box">
+                                        <div class="author-inform">
+                                            <ul>
+                                                <li><a href="">Author name</a></li>
+                                                <li>11/10/2001</li>
+                                                <li>comment(10)</li>
+                                            </ul>
+                                        </div>
+                                        <h1 class="blog-title"><a href="">${dto.title}</a></h1>
+                                        <div class="img-link">
+                                            <a href=""><img src="UI/Icon/selfmademan.jpg" alt=""></a>
+                                        </div>
+                                        <p>${dto.content}
+                                        </p>
+                                        <div class="blog-detail">
+                                            <a href="">link to blog detail</a>
+                                        </div>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
-                    </c:if>
-                </div>
-            </div>
-        </nav>
-
-        <div class="upper-img">
-            <img src="UI/Icon/hallwayfpt.jpg" alt="">
-        </div>
-
-        <div class="search-box col-md-5">
-            <form action="search" method="POST">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Category</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01" name="txtSearchCategory">
-                        <option>All</option>
-                        <c:forEach var="cat" items="${catList}">
-                            <c:if test="${cat.categoryID == param.txtSearchCategory}">
-                                <option value="${cat.categoryID}" selected>${cat.categoryName}</option>
-                            </c:if>
-                            <c:if test="${cat.categoryID != param.txtSearchCategory}">
-                                <option value="${cat.categoryID}">${cat.categoryName}</option>
-                            </c:if>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="input-group mb-3">
-                    <input type="text" placeholder="Search..." class="form-control"
-                           aria-label="Search input with dropdown button" id="search-title" value="${param.txtSearchValue}" name="txtSearchValue">
-                    <div class="input-group-append">
-                        <button class="btn btn-info" type="submit">Search</button>
+
+                    <nav id="pagination-box" aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <!-- previous button -->
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <!-- end previousr button -->
+
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+                            <!-- next button -->
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <!-- end next button -->
+                        </ul>
+                    </nav>
+
+                    <!-- FOOTER -->
+                    <div class="web-footer">
+                        <p>2021 Henry. FE by Henry</p>
+                        <button onclick="goTop()">Back to top</button>
                     </div>
-                </div>
-            </form>
-        </div>
 
-        <div class="header-bar"></div>
-
-        <div class="container-fluid">           
-            <c:if test="${not empty blogList}">
-                <table>
-                    <tr>
-                        <td>
-                            ID
-                        </td>
-                        <td>
-                            Title
-                        </td>
-                        <td>
-                            Content
-                        </td>
-                    </tr>
-                    <c:forEach var="dto" items="${blogList}"  varStatus="count">
-                        <tr>
-                            <td>
-                                ${dto.blogID}
-                            </td>
-                            <td>
-                                ${dto.title}
-                            </td>
-                            <td>
-                                ${dto.content}
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </c:if>
-            <c:if test="${empty blogList}">List is Empty!</c:if>
-
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-        </script>
-    </body>
-
-</html>
+                    <!-- this is js for swiper -->
+                    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+                    <script type="module">
+                        var swiper = new Swiper('.swiper', {
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                        // init: false,
+                        pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                        },
+                        breakpoints: {
+                        640: {
+                        slidesPerView: 1,
+                        spaceBetween: 30,
+                        },
+                        768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                        },
+                        968: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                        },
+                        1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                        },
+                        }
+                        });
+                    </script>
+                    </body>
+                    </html>

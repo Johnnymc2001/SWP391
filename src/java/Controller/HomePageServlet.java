@@ -59,7 +59,7 @@ public class HomePageServlet extends HttpServlet {
 //            }
             BlogDAO blogDao = new BlogDAO();
             
-            // Most Award And Rate
+            // Most Award And Rate [Popular]
             ArrayList<BlogDTO> mostAwardAndRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
             
             // Most Award 
@@ -71,42 +71,16 @@ public class HomePageServlet extends HttpServlet {
             // Most Comment
             ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(5);
             
-            // Recent
-            ArrayList<BlogDTO> recent = blogDao.getAllApprovedBlog();
+            // Recent [Recent]
+            ArrayList<BlogDTO> recent = blogDao.getAllApprovedBlog(5);
             
             request.setAttribute("MOST_AWARD_AND_RATE", mostAwardAndRate);
-            request.setAttribute("MOST_AWARD", sc);
-            request.setAttribute("MOST_RATE", sc);
-            request.setAttribute("MOST_COMMENT", sc);
-            request.setAttribute("MOST_RECENT", sc);
+            request.setAttribute("MOST_AWARD", mostAward);
+            request.setAttribute("MOST_RATE", mostRate);
+            request.setAttribute("MOST_COMMENT", mostComment);
+            request.setAttribute("MOST_RECENT", recent);      
             
-
-//            CategoryDAO catDao = new CategoryDAO();
-//            ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-
-//            HashMap<CategoryDTO, ArrayList<BlogDTO>> catToBlogMap = new HashMap<>();
-//            HashMap<BlogDTO, String> blogToImageMap = new HashMap<>();
-
-//            AttachmentDAO attDao = new AttachmentDAO();
-//            for (CategoryDTO catDto : catList) {
-//                ArrayList<BlogDTO> tempBlogList = blogDao.getAllAvailableBlogFromCategoryID(catDto.getCategoryID());
-//                if (tempBlogList.size() > 0) {
-//                    for (BlogDTO blog : tempBlogList) {
-//                        ArrayList<String> attList = blog.getAllImage();
-//                        if (attList.size() > 0) {   
-//                            if (null != attList) {
-//                                blogToImageMap.put(blog, attList.get(0));
-//                            }
-//                        }
-//                    }
-//                    catToBlogMap.put(catDto, tempBlogList);
-//                } else {
-////                    list.put(catDto, null);
-//                }
-//            }
-
-//            request.setAttribute("CAT_TO_BLOG_MAP", catToBlogMap);
-//            request.setAttribute("BLOG_TO_IMAGE_MAP", blogToImageMap);
+            System.out.println(mostAwardAndRate);
 
         } catch (SQLException ex) {
             ex.printStackTrace();

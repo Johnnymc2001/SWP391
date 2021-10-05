@@ -5,8 +5,9 @@
  */
 package MentorController;
 
+import DAO.AccountDAO;
+import DAO.AccountDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,15 +15,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "MentorDashboardServlet", urlPatterns = {"/mentor/MentorDashboardServlet"})
-public class MentorDashboardServlet extends HttpServlet {
+@WebServlet(name = "MentorServlet", urlPatterns = {"/MentorServlet"})
+public class MentorServlet extends HttpServlet {
 
-    public final String SUCCESS = "mentor/dashboardPage";
+    public final String SUCCESS = "mentorPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,6 +40,13 @@ public class MentorDashboardServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+        AccountDAO accDao = new AccountDAO();
+        HttpSession session = request.getSession();
+        AccountDTO account = (AccountDTO) session.getAttribute("USER");
+        if (null == account || !account.getRole().equals("Mentor")) {
+            response.sendRedirect(sc.getContextPath());
+            return;
+        }
 
         String url = roadmap.get(SUCCESS);
         request.getRequestDispatcher(url).forward(request, response);
