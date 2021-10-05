@@ -155,6 +155,16 @@ public class BlogDTO implements Serializable {
         this.studentID = studentID;
     }
 
+    public AccountDTO getAccount() {
+        AccountDAO accDao = new AccountDAO();
+        try {
+            return accDao.getAccountFromAcoountID(this.studentID);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
     public String getFirstImage() throws SQLException {
         AttachmentDAO attDao = new AttachmentDAO();
         ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(this.getBlogID());

@@ -58,30 +58,43 @@ public class HomePageServlet extends HttpServlet {
 //                });
 //            }
             BlogDAO blogDao = new BlogDAO();
-            
+
             // Most Award And Rate [Popular]
             ArrayList<BlogDTO> mostAwardAndRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
-            
+            request.setAttribute("MOST_AWARD_AND_RATE", mostAwardAndRate);
+
             // Most Award 
             ArrayList<BlogDTO> mostAward = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
-            
+            BlogDTO mostAwardFirst = mostAward.remove(0);
+            request.setAttribute("MOST_AWARD_FIRST", mostAwardFirst);
+            request.setAttribute("MOST_AWARD", mostAward);
+
             // Most Rate
             ArrayList<BlogDTO> mostRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
-            
+            request.setAttribute("MOST_RATE", mostRate);
+
             // Most Comment
-            ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(5);
-            
+            ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(6);
+            BlogDTO mostCommentFirst = mostComment.remove(0);
+            BlogDTO mostCommentSecond = mostComment.remove(0);
+            ArrayList<BlogDTO> mostCommentRow1 = new ArrayList<>();
+            mostCommentRow1.add(mostComment.remove(0));
+            mostCommentRow1.add(mostComment.remove(0));
+            ArrayList<BlogDTO> mostCommentRow2 = new ArrayList<>();
+            mostCommentRow2.add(mostComment.remove(0));
+            mostCommentRow2.add(mostComment.remove(0));
+
+            request.setAttribute("MOST_COMMENT_FIRST", mostCommentFirst);
+            request.setAttribute("MOST_COMMENT_SECOND", mostCommentSecond);
+            request.setAttribute("MOST_COMMENT_ROW_1", mostCommentRow1);
+            request.setAttribute("MOST_COMMENT_ROW_2", mostCommentRow2);
+
             // Recent [Recent]
             ArrayList<BlogDTO> recent = blogDao.getAllApprovedBlog(5);
-            
-            request.setAttribute("MOST_AWARD_AND_RATE", mostAwardAndRate);
-            request.setAttribute("MOST_AWARD", mostAward);
-            request.setAttribute("MOST_RATE", mostRate);
-            request.setAttribute("MOST_COMMENT", mostComment);
-            request.setAttribute("MOST_RECENT", recent);      
-            
-            System.out.println(mostAwardAndRate);
+            request.setAttribute("MOST_RECENT", recent);
 
+            // Landing Post [Epic]
+//            request.setAttribute("LANDING_BLOG", sc);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
