@@ -19,53 +19,56 @@
         <link rel="stylesheet" href="UI/CSS/createBlogPageStyle.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script> </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="home">
-                <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo">
-                FPT Academy
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" href="aboutUs.html">About us</a>
-                    <a class="nav-item nav-link" href="loginPage">Login</a>
-                </div>
-            </div>
-        </nav>
-        <div>
-            <div class="xavalo">
-                <img src="UI/Icon/FPTCampus.jpg" alt="FPTCampus">
-                <h1>Blog</h1>
-                <h2>Academic Blog for FPT</h2>
-            </div>
-        </div>
         
+
         <form action="create" method="POST" enctype='multipart/form-data'>
-            <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
-            Title: <br/><input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="60" size="62"/> <br/>
+            <div>
+                <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
+                Title: <br/><input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="60" size="62"/> <br/>
+                
+                <select name="categoryBox">
+                    <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
+                    <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                        <option value="${dto.categoryID}">${dto.categoryName}</option>
+                    </c:forEach>
+                </select>
+                    
                 <font color="red">
                 ${requestScope.ERROR_TITLE}
                 </font><br/>
-            Content:<br/> <textarea value="${param.txtContent}" name="txtContent" rows="10" cols="50">Enter</textarea><br/>
-             <font color="red">
-                ${requestScope.ERROR_CONTENT}
-                </font><br/>
-            <br/><input type="file" id="attachment" name="fileAttachment">
 
-            <select name="categoryBox">
-                <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
-                <c:forEach var="dto" items="${dtoList}" varStatus="counter">
-                        <option value="${dto.categoryID}">${dto.categoryName}</option>
-                </c:forEach>
-                        
-                <input type="submit" value="Post"/>
-                <input type="reset" value="Reset" /><br/>
-                <a href="home">Return to Home</a>
+                Thumbnail: <br/><input type="file" id="attachment" name="fileAttachment">
+                <font color="red">
+                ${requestScope.ERROR_UPLOAD}
+                </font><br/>
+            </div>
+            <br/>
+            <textarea id="summernote" name="txtContent"></textarea>
+            <script>
+                $('#summernote').summernote({
+                    placeholder: 'Hello Bootstrap 4',
+                    tabsize: 2,
+                    height: 300
+                });
+            </script>
+
+            <br/>
+            <font color="red">
+            ${requestScope.ERROR_CONTENT}
+            </font><br/>
+
+            <input type="submit" value="Post"/>
+            <input type="reset" value="Reset" /><br/>
+            <a href="home">Return to Home</a>
         </form>
     </body>
 </html>
