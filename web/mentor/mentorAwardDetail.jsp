@@ -63,10 +63,10 @@
 
     <div class="container-fluid">
         <c:set var="dtoBD" value="${requestScope.BLOG_DETAIL}" />
-        <form action="mentor/awardList">
-            <input type="submit" value="Give Blog an Award" />
+        <form action="mentor/awardListPage">
+            <input type="submit" value="Give Blog Award" />
         </form>
-        <br/>
+        
         <h1>${dtoBD.title}</h1>
       
         <h4>by ${dtoBD.studentID}</h4>

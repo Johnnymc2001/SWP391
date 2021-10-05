@@ -5,6 +5,7 @@
  */
 package MentorController;
 
+import DAO.AwardDAO;
 import DAO.AwardListDAO;
 import DAO.AwardListDTO;
 import java.io.IOException;
@@ -26,10 +27,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "AwardServlet", urlPatterns = {"/AwardServlet"})
-public class AwardServlet extends HttpServlet {
+@WebServlet(name = "MentorAwardListServlet", urlPatterns = {"/MentorAwardListServlet"})
+public class MentorAwardListServlet extends HttpServlet {
 
     private final String BLOGDETAIL_PAGE = "blogPage";
+    private final String AWARD_PAGE = "mentor/awardListPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,11 +58,14 @@ public class AwardServlet extends HttpServlet {
         } else {
             blogID = 2;
         }
-        int awardID;
+        int awardID=0;
         if (null != txtAwardID) {
             awardID = Integer.parseInt(txtAwardID);
         } else {
-            awardID = 1;
+            url =  roadmap.get(AWARD_PAGE);
+            AwardDAO Adao = new AwardDAO();
+            request.setAttribute("AllAward", Adao.getAllAward());
+            response.sendRedirect(url);
         }
         int userID;
         if (null != txtUserID) {
@@ -72,14 +77,13 @@ public class AwardServlet extends HttpServlet {
             AwardListDAO ALdao = new AwardListDAO();
             Date date = new Date(Calendar.getInstance().getTime().getTime());
             ALdao.createAwardList(new AwardListDTO(blogID, awardID, date, userID));
-        } catch (SQLException ex) {
-            String msg = ex.getMessage();
-            log("AwardServlet _ SQL " + msg);
-        } finally {
             url = roadmap.get(BLOGDETAIL_PAGE);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        }
+        } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            log("AwardServlet _ SQL " + msg);
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -97,7 +101,7 @@ public class AwardServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AwardServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MentorAwardListServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -115,7 +119,7 @@ public class AwardServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AwardServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MentorAwardListServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
