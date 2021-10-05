@@ -33,26 +33,25 @@
         <form action="create" method="POST" enctype='multipart/form-data'>
             <div>
                 <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
-                Title: <br/><input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="60" size="62"/> <br/>
-                
+                Title: <br/><input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="60" size="62"/> <br/> 
+                <font color="red">
+                ${requestScope.ERROR_TITLE}
+                </font><br/>
+
                 <select name="categoryBox">
                     <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
                     <c:forEach var="dto" items="${dtoList}" varStatus="counter">
                         <option value="${dto.categoryID}">${dto.categoryName}</option>
                     </c:forEach>
                 </select>
-                    
-                <font color="red">
-                ${requestScope.ERROR_TITLE}
-                </font><br/>
-
+                
                 Thumbnail: <br/><input type="file" id="attachment" name="fileAttachment">
                 <font color="red">
                 ${requestScope.ERROR_UPLOAD}
                 </font><br/>
             </div>
             <br/>
-            <textarea id="summernote" name="txtContent"></textarea>
+            <textarea id="summernote" name="txtContent">${param.txtContent}</textarea>
             <script>
                 $('#summernote').summernote({
                     placeholder: 'Hello Bootstrap 4',
@@ -60,7 +59,7 @@
                     height: 300
                 });
             </script>
-
+            
             <br/>
             <font color="red">
             ${requestScope.ERROR_CONTENT}

@@ -2,13 +2,11 @@ package Controller;
 
 import DAO.AccountDAO;
 import DAO.AccountDTO;
-import DAO.AttachmentDAO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
 import DAO.CategoryDAO;
 import DAO.CategoryDTO;
 import Utils.ImageUtils;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
