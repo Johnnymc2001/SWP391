@@ -48,7 +48,9 @@ public class SearchBlogServlet extends HttpServlet {
 //        String url = roadmap.get(SEARCH_PAGE);
         String searchValue = request.getParameter("txtSearchValue");
         String searchCategory = request.getParameter("txtSearchCategory");
+        String pageString = request.getParameter("page");
         ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
+        ArrayList<BlogDTO> returnList = new ArrayList<BlogDTO>();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
         String url = roadmap.get(SEARCH_PAGE);
@@ -65,11 +67,24 @@ public class SearchBlogServlet extends HttpServlet {
                 }
             }
 
-//                if (!list.isEmpty()) {                                                 // Rút gọn content nếu cần
-//                    list.forEach((blog) -> {
-//                        blog.setContent(blog.getContent().substring(0, 60) + "...");
-//                    });
-//                }
+            int maxPageItem = 5;
+            int page;
+
+//            if (null != maxPageItemString) {
+//                maxPageItem = Integer.parseInt(maxPageItemString);
+//            } else {
+//                maxPageItem = 5;
+//            }
+            if (null != pageString) {
+                page = Integer.parseInt(pageString);
+            } else {
+                page = 1;
+            }
+
+            for (int i = (page - 1) * maxPageItem; i < blogList.size() && returnList.size() < maxPageItem; i++) {
+                returnList.add(blogList.get(i));
+            }
+
             request.setAttribute("CAT_LIST", catList);
             request.setAttribute("BLOG_LIST", blogList);
         } catch (SQLException ex) {

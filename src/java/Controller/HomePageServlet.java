@@ -59,7 +59,7 @@ public class HomePageServlet extends HttpServlet {
 //            }
             BlogDAO blogDao = new BlogDAO();
             
-            // Most Award And Rate
+            // Most Award And Rate [Popular]
             ArrayList<BlogDTO> mostAwardAndRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
             
             // Most Award 
@@ -71,14 +71,16 @@ public class HomePageServlet extends HttpServlet {
             // Most Comment
             ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(5);
             
-            // Recent
-            ArrayList<BlogDTO> recent = blogDao.getAllApprovedBlog();
+            // Recent [Recent]
+            ArrayList<BlogDTO> recent = blogDao.getAllApprovedBlog(5);
             
             request.setAttribute("MOST_AWARD_AND_RATE", mostAwardAndRate);
-            request.setAttribute("MOST_AWARD", sc);
-            request.setAttribute("MOST_RATE", sc);
-            request.setAttribute("MOST_COMMENT", sc);
-            request.setAttribute("MOST_RECENT", sc);      
+            request.setAttribute("MOST_AWARD", mostAward);
+            request.setAttribute("MOST_RATE", mostRate);
+            request.setAttribute("MOST_COMMENT", mostComment);
+            request.setAttribute("MOST_RECENT", recent);      
+            
+            System.out.println(mostAwardAndRate);
 
         } catch (SQLException ex) {
             ex.printStackTrace();

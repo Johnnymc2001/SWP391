@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "MentorBlogPendingListServlet", urlPatterns = {"/MentorBlogPendingListServlet"})
 public class MentorBlogPendingListServlet extends HttpServlet {
 
-    public final String SUCCESS = "mentorBlogPendingListPage";
+    public final String SUCCESS = "blogPendingListPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,14 +47,21 @@ public class MentorBlogPendingListServlet extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext sc = request.getServletContext();
             HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-            HttpSession session = request.getSession();
+
             String url = SUCCESS;
             url = roadmap.get(url);
 
             String pageString = request.getParameter("page");
             BlogDAO blogDao = new BlogDAO();
+
+            AccountDAO accDao = new AccountDAO();
+            HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("USER");
-            
+            if (null == account || !account.getRole().equals("Mentor")) {
+                response.sendRedirect(sc.getContextPath());
+                return;
+            }
+
             ArrayList<BlogDTO> blogList = blogDao.getAllPendingBlogFromCategoryID(account.getCategoryID());
             ArrayList<BlogDTO> returnList = new ArrayList<>();
 
