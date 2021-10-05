@@ -14,10 +14,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< Updated upstream
-=======
 import javax.servlet.RequestDispatcher;
->>>>>>> Stashed changes
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
