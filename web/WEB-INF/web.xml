@@ -8,22 +8,6 @@
         <filter-name>FilterDispatcher</filter-name>
         <filter-class>Filters.FilterDispatcher</filter-class>
     </filter>
-    <filter>
-        <filter-name>StudentFiilter</filter-name>
-        <filter-class>Filters.StudentFiilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>MentorFilter</filter-name>
-        <filter-class>Filters.MentorFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>StudentFiilter</filter-name>
-        <url-pattern>/student/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>MentorFilter</filter-name>
-        <url-pattern>/mentor/*</url-pattern>
-    </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>

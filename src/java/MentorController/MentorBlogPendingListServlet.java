@@ -26,10 +26,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "MentorBlogPendingListServlet", urlPatterns = {"/mentor/MentorBlogPendingListServlet"})
+@WebServlet(name = "MentorBlogPendingListServlet", urlPatterns = {"/MentorBlogPendingListServlet"})
 public class MentorBlogPendingListServlet extends HttpServlet {
 
-    public final String SUCCESS = "mentor/blogPendingListPage";
+    public final String SUCCESS = "mentorBlogPendingListPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

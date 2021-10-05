@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "MentorDashboardServlet", urlPatterns = {"/mentor/MentorDashboardServlet"})
-public class MentorDashboardServlet extends HttpServlet {
+@WebServlet(name = "MentorServlet", urlPatterns = {"/MentorServlet"})
+public class MentorServlet extends HttpServlet {
 
-    public final String SUCCESS = "mentor/dashboardPage";
+    public final String SUCCESS = "mentorPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

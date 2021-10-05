@@ -65,21 +65,6 @@
                                     <c:if test="${user.role == 'Mentor'}">
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <div class="menu-wrapper">
-                                            <!-- this is user img -->
-                                            <div class="avatar">
-                                                <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
-                                                <p>${user.fullname}</p>
-                                            </div>
-                                            <!-- personal menu -->
-                                            <div class="personal-menu">
-                                                <a href="mentor/dashboard"><li>Profile</li></a>
-                                                <a href="mentor/blogPendingList"><li>Pending Blog</li></a>
-                                                <a href="logout"><li>Log out</li></a>
-                                            </div>
-                                        </c:if>
-                                        <c:if test="${user.role == 'Admin'}">
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <div class="menu-wrapper">
                                                 <!-- this is user img -->
                                                 <div class="avatar">
                                                     <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
@@ -87,249 +72,189 @@
                                                 </div>
                                                 <!-- personal menu -->
                                                 <div class="personal-menu">
-                                                    <a href="admin/dashboard"><li>Dashboard</li></a>
-                                                    <a href="admin/accountList"><li>Manage Accounts</li></a>
+                                                    <a href="mentor/dashboard"><li>Profile</li></a>
+                                                    <a href="mentor/blogPendingList"><li>Pending Blog</li></a>
                                                     <a href="logout"><li>Log out</li></a>
                                                 </div>
                                             </c:if>
-                                            <!-- public menu -->
-                                            <div class="public-menu">
-                                                <a href="home"><li>Home</li></a>
-                                                <a href="search"><li>Search</li></a>
-                                                <a href="about"><li>About</li></a>
-                                                <a href="contact"><li>Contact</li></a>
-                                            </div>
-                                            </div>
-                                        </ul>
-                                    </c:if>
-                                    <c:if test="${empty user}">
-                                        <a href="loginPage">Login</a>
-                                    </c:if>
+                                            <c:if test="${user.role == 'Admin'}">
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <div class="menu-wrapper">
+                                                        <!-- this is user img -->
+                                                        <div class="avatar">
+                                                            <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
+                                                            <p>${user.fullname}</p>
+                                                        </div>
+                                                        <!-- personal menu -->
+                                                        <div class="personal-menu">
+                                                            <a href="admin/dashboard"><li>Dashboard</li></a>
+                                                            <a href="admin/accountList"><li>Manage Accounts</li></a>
+                                                            <a href="logout"><li>Log out</li></a>
+                                                        </div>
+                                                    </c:if>
+                                                    <!-- public menu -->
+                                                    <div class="public-menu">
+                                                        <a href="home"><li>Home</li></a>
+                                                        <a href="search"><li>Search</li></a>
+                                                        <a href="about"><li>About</li></a>
+                                                        <a href="contact"><li>Contact</li></a>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </c:if>
+                                        <c:if test="${empty user}">
+                                            <a href="loginPage">Login</a>
+                                        </c:if>
+                                    </div>
                             </div>
+                            </header>
                     </div>
-            </header>
-        </div>
 
-        <div id="search-bar" class="search-bar">
-            <div class="box">
-                <form action="search" method="POST" class="search-form">
-                    <input name="txtSearchValue" value="${param.txtSearchValue}" type="text" id="search-input" class="search-input"
-                           required="">
-                    <label class="search-label" for="search-input">Search</label>
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-        </div>
+                    <div id="search-bar" class="search-bar">
+                        <div class="box">
+                            <form action="search" method="GET" class="search-form">
+                                <input name="txtSearchValue" value="${param.txtSearchValue}" type="text" id="search-input" class="search-input"
+                                       required="">
+                                <label class="search-label" for="search-input">Search</label>
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
 
-        <!-- Swiper -->
-        <div class="card-slider">
-            <div class="swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a class="category-card" href="">
-                            <img src="UI/Icon/selfmademan.jpg" alt="">
-                            <p>Category name</p>
-                        </a>
+                    <!-- Swiper -->
+                    <div class="card-slider">
+                        <div class="swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/selfmademan.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/FPTCampus.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/hallwayfpt.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/FPTCampus.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/selfmademan.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="category-card" href="">
+                                        <img src="UI/Icon/selfmademan.jpg" alt="">
+                                        <p>Category name</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                        </div>
                     </div>
-                    <div class="swiper-slide">
-                        <a class="category-card" href="">
-                            <img src="UI/Icon/FPTCampus.jpg" alt="">
-                            <p>Category name</p>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a class="category-card" href="">
-                            <img src="UI/Icon/hallwayfpt.jpg" alt="">
-                            <p>Category name</p>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a class="category-card" href="">
-                            <img src="UI/Icon/FPTCampus.jpg" alt="">
-                            <p>Category name</p>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a class="category-card" href="">
-                            <img src="UI/Icon/selfmademan.jpg" alt="">
-                            <p>Category name</p>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a class="category-card" href="">
-                            <img src="UI/Icon/selfmademan.jpg" alt="">
-                            <p>Category name</p>
-                        </a>
-                    </div>
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
 
-        <div id="search-result-container" class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="post-box">
-                        <div class="author-inform">
-                            <ul>
-                                <li><a href="">Author name</a></li>
-                                <li>11/10/2001</li>
-                                <li>comment(10)</li>
-                            </ul>
-                        </div>
-                        <h1 class="blog-title"><a href="">Blog title</a></h1>
-                        <div class="img-link">
-                            <a href=""><img src="UI/Icon/selfmademan.jpg" alt=""></a>
-                        </div>
-                        <p>According to the caption on the bronze marker placed by the Multnomah Chapter of the
-                            Daughters of the American Revolution on May 12, 1939, “College Hall (is) the oldest
-                            building
-                            in continuous use for Educational purposes west of the Rocky Mountains. Here were
-                            educated
-                            men and women who have won recognition throughout the world in all the learned
-                            professions.”
-                        </p>
-                        <div class="blog-detail">
-                            <a href="">link to blog detail</a>
-                        </div>
-                    </div>
-                    <div class="post-box">
-                        <div class="author-inform">
-                            <ul>
-                                <li><a href="">Author name</a></li>
-                                <li>11/10/2001</li>
-                                <li>comment(10)</li>
-                            </ul>
-                        </div>
-                        <h1 class="blog-title"><a href="">Blog title</a></h1>
-                        <div class="img-link">
-                            <a href=""><img src="UI/Icon/selfmademan.jpg" alt=""></a>
-                        </div>
-                        <p>According to the caption on the bronze marker placed by the Multnomah Chapter of the
-                            Daughters of the American Revolution on May 12, 1939, “College Hall (is) the oldest
-                            building
-                            in continuous use for Educational purposes west of the Rocky Mountains. Here were
-                            educated
-                            men and women who have won recognition throughout the world in all the learned
-                            professions.”
-                        </p>
-                        <div class="blog-detail">
-                            <a href="">link to blog detail</a>
+                    <div id="search-result-container" class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <c:set var="blogs" value="${requestScope.BLOG_LIST}"/>
+                                <c:forEach var="dto" items="${blogs}">
+                                    <div class="post-box">
+                                        <div class="author-inform">
+                                            <ul>
+                                                <li><a href="">Author name</a></li>
+                                                <li>11/10/2001</li>
+                                                <li>comment(10)</li>
+                                            </ul>
+                                        </div>
+                                        <h1 class="blog-title"><a href="">${dto.title}</a></h1>
+                                        <div class="img-link">
+                                            <a href=""><img src="UI/Icon/selfmademan.jpg" alt=""></a>
+                                        </div>
+                                        <p>${dto.content}
+                                        </p>
+                                        <div class="blog-detail">
+                                            <a href="">link to blog detail</a>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
-                    <div class="post-box">
-                        <div class="author-inform">
-                            <ul>
-                                <li><a href="">Author name</a></li>
-                                <li>11/10/2001</li>
-                                <li>comment(10)</li>
-                            </ul>
-                        </div>
-                        <h1 class="blog-title"><a href="">Blog title</a></h1>
-                        <div class="img-link">
-                            <a href=""><img src="UI/Icon/selfmademan.jpg" alt=""></a>
-                        </div>
-                        <p>According to the caption on the bronze marker placed by the Multnomah Chapter of the
-                            Daughters of the American Revolution on May 12, 1939, “College Hall (is) the oldest
-                            building
-                            in continuous use for Educational purposes west of the Rocky Mountains. Here were
-                            educated
-                            men and women who have won recognition throughout the world in all the learned
-                            professions.”
-                        </p>
-                        <div class="blog-detail">
-                            <a href="">link to blog detail</a>
-                        </div>
+
+                    <nav id="pagination-box" aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <!-- previous button -->
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <!-- end previousr button -->
+
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+                            <!-- next button -->
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <!-- end next button -->
+                        </ul>
+                    </nav>
+
+                    <!-- FOOTER -->
+                    <div class="web-footer">
+                        <p>2021 Henry. FE by Henry</p>
+                        <button onclick="goTop()">Back to top</button>
                     </div>
-                    <div class="post-box">
-                        <div class="author-inform">
-                            <ul>
-                                <li><a href="">Author name</a></li>
-                                <li>11/10/2001</li>
-                                <li>comment(10)</li>
-                            </ul>
-                        </div>
-                        <h1 class="blog-title"><a href="">Blog title</a></h1>
-                        <div class="img-link">
-                            <a href=""><img src="UI/Icon/selfmademan.jpg" alt=""></a>
-                        </div>
-                        <p>According to the caption on the bronze marker placed by the Multnomah Chapter of the
-                            Daughters of the American Revolution on May 12, 1939, “College Hall (is) the oldest
-                            building
-                            in continuous use for Educational purposes west of the Rocky Mountains. Here were
-                            educated
-                            men and women who have won recognition throughout the world in all the learned
-                            professions.”
-                        </p>
-                        <div class="blog-detail">
-                            <a href="">link to blog detail</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <nav id="pagination-box" aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <!-- previous button -->
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <!-- end previousr button -->
-
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-                <!-- next button -->
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <!-- end next button -->
-            </ul>
-        </nav>
-
-        <!-- FOOTER -->
-        <div class="web-footer">
-            <p>2021 Henry. FE by Henry</p>
-            <button onclick="goTop()">Back to top</button>
-        </div>
-
-        <!-- this is js for swiper -->
-        <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-        <script type="module">
-            var swiper = new Swiper('.swiper', {
-            slidesPerView: 1,
-            spaceBetween: 10,
-            // init: false,
-            pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            },
-            breakpoints: {
-            640: {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            },
-            768: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-            },
-            968: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-            },
-            1024: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-            },
-            }
-            });
-        </script>
-    </body>
-</html>
+                    <!-- this is js for swiper -->
+                    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+                    <script type="module">
+                        var swiper = new Swiper('.swiper', {
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                        // init: false,
+                        pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                        },
+                        breakpoints: {
+                        640: {
+                        slidesPerView: 1,
+                        spaceBetween: 30,
+                        },
+                        768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                        },
+                        968: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                        },
+                        1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                        },
+                        }
+                        });
+                    </script>
+                    </body>
+                    </html>

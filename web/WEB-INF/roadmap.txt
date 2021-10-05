@@ -26,30 +26,30 @@ commentPage=commentPage.jsp
 edit=BlogEditServlet
 editPage=edit.jsp
 
-### STUDENT
-
-student/dashboard=StudentDashboardServlet
-student/dashboardPage=student.jsp
-
 notification=NotificationServlet
 notificationPage=notification.jsp
 
+### STUDENT
+
+student=StudentServlet
+studentPage=student.jsp
+
 ### MENTOR
 
-mentor/dashboard=MentorDashboardServlet
-mentor/dashboardPage=mentor.jsp
+mentor=MentorServlet
+mentorPage=mentor.jsp
 
-mentor/blogPendingList=MentorBlogPendingListServlet
-mentor/blogPendingListPage=mentorBlogPendingList.jsp
+blogPendingList=MentorBlogPendingListServlet
+blogPendingListPage=mentorBlogPendingList.jsp
 
-mentor/blogPendingDetail=MentorBlogPendingDetailServlet
-mentor/blogPendingDetailPage=mentorBlogPendingDetail.jsp
+blogPendingDetail=MentorBlogPendingDetailServlet
+blogPendingDetailPage=mentorBlogPendingDetail.jsp
 
-mentor/awardList=MentorAwardListServlet
-mentor/awardListPage=mentorAwardList.jsp
+awardList=MentorAwardListServlet
+awardListPage=mentorAwardList.jsp
 
-mentor/awardDetail=MentorAwardDetailServlet
-mentor/awardDetailPage=mentorAwardDetail.jsp
+awardDetail=MentorAwardDetailServlet
+awardDetailPage=mentorAwardDetail.jsp
 
 ### ADMIN
 

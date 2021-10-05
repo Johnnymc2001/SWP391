@@ -78,35 +78,7 @@ public class HomePageServlet extends HttpServlet {
             request.setAttribute("MOST_AWARD", sc);
             request.setAttribute("MOST_RATE", sc);
             request.setAttribute("MOST_COMMENT", sc);
-            request.setAttribute("MOST_RECENT", sc);
-            
-
-//            CategoryDAO catDao = new CategoryDAO();
-//            ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-
-//            HashMap<CategoryDTO, ArrayList<BlogDTO>> catToBlogMap = new HashMap<>();
-//            HashMap<BlogDTO, String> blogToImageMap = new HashMap<>();
-
-//            AttachmentDAO attDao = new AttachmentDAO();
-//            for (CategoryDTO catDto : catList) {
-//                ArrayList<BlogDTO> tempBlogList = blogDao.getAllAvailableBlogFromCategoryID(catDto.getCategoryID());
-//                if (tempBlogList.size() > 0) {
-//                    for (BlogDTO blog : tempBlogList) {
-//                        ArrayList<String> attList = blog.getAllImage();
-//                        if (attList.size() > 0) {   
-//                            if (null != attList) {
-//                                blogToImageMap.put(blog, attList.get(0));
-//                            }
-//                        }
-//                    }
-//                    catToBlogMap.put(catDto, tempBlogList);
-//                } else {
-////                    list.put(catDto, null);
-//                }
-//            }
-
-//            request.setAttribute("CAT_TO_BLOG_MAP", catToBlogMap);
-//            request.setAttribute("BLOG_TO_IMAGE_MAP", blogToImageMap);
+            request.setAttribute("MOST_RECENT", sc);      
 
         } catch (SQLException ex) {
             ex.printStackTrace();
