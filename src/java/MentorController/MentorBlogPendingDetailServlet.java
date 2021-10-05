@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,8 +29,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "MentorBlogPendingDetailServlet", urlPatterns = {"/mentor/MentorBlogPendingDetailServlet"})
 public class MentorBlogPendingDetailServlet extends HttpServlet {
 
-    public final String EDIT = "mentor/blogPendingDetailPage";
-    public final String SUCCESS = "mentor/blogPendingList";
+    public final String PENDING_EDIT = "mentor/blogPendingDetailPage";
+    public final String PENDING_LIST = "mentor/blogPendingList";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,7 +43,7 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = EDIT;
+        String url = PENDING_EDIT;
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
@@ -51,13 +52,9 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
 //        AccountDTO account = (AccountDTO) session.getAttribute("USER");
 
         AccountDAO accDao = new AccountDAO();
-        int accountID = 5;
-        AccountDTO account = null;
+        AccountDTO account = (AccountDTO) session.getAttribute("USER");
 
-        try {
-            account = accDao.getAccountFromAcoountID(accountID);
-        } catch (SQLException ex) {
-        }
+ 
 
         BlogDAO blogDao = new BlogDAO();
         BlogDTO blog = null;
@@ -74,27 +71,90 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
             }
         }
         if (blogID != 0) {
+            System.out.println("1");
             try {
                 blog = blogDao.getBlogFromBlogID(blogID);
-                if (null != blog) {
-                    if (blog.getCategoryID().equals(account.getCategoryID())) {
-                        if (null == action) {
 
-                        } else if ("Update".equals(account)) {
+                if (null != blog) {
+                    System.out.println("2");
+                    if (blog.getCategoryID().equals(account.getCategoryID())) {
+                        boolean foundErr = false;
+
+                        if (null == action) {
+                            System.out.println("3");
+                            url = roadmap.get(PENDING_EDIT);
+                            request.setAttribute("BLOG", blog);
+                            RequestDispatcher rd = request.getRequestDispatcher(url);
+                            rd.forward(request, response);
+
+                        } else if ("Update".equals(action)) {
                             String title = null == request.getParameter("title") ? blog.getTitle() : request.getParameter("title");
-                            String content = null == request.getParameter("title") ? blog.getTitle() : request.getParameter("title");
-                            
-                            // Verify Title & Content
-                            // Update
-                            
+                            String content = null == request.getParameter("content") ? blog.getTitle() : request.getParameter("content");
+
+                            if (title.trim().length() < 6 || title.trim().length() > 60) {
+                                foundErr = true;
+                                request.setAttribute("ERROR_TITLE", "title is required from 6 to 60 characters");
+                            }
+
+                            if (content.trim().length() < 10) {
+                                foundErr = true;
+                                request.setAttribute("ERROR_CONTENT", "Content is required at least 10 characters");
+                            }
+
+                            if (foundErr) {
+                                url = roadmap.get(PENDING_EDIT);
+                                RequestDispatcher rd = request.getRequestDispatcher(url);
+                                rd.forward(request, response);
+                            } else {
+                                blog.setTitle(title);
+                                blog.setContent(content);
+                                boolean result = blogDao.updateBlog(blogID, blog);
+                                if (result) {
+                                    request.setAttribute("MESSAGE", "Blog Successfully Updated!");
+                                } else {
+                                    request.setAttribute("MESSAGE", "Something wrong, please try again!");
+                                }
+                                request.setAttribute("BLOG", blog);
+                                url = roadmap.get(PENDING_EDIT);
+                                RequestDispatcher rd = request.getRequestDispatcher(url);
+                                rd.forward(request, response);
+                            }
+
+                        } else if ("Approve".equals(action)) {
+                            request.setAttribute("MESSAGE", "Blog Approved");
+                            blogDao.approveBlog(blogID);
+                            url = roadmap.get(PENDING_LIST);
+                            RequestDispatcher rd = request.getRequestDispatcher(url);
+                            rd.forward(request, response);
+                        } else if ("Disapprove".equals(action)) {
+                            request.setAttribute("MESSAGE", "Blog Disapproved");
+                            url = roadmap.get(PENDING_LIST);
+                            blogDao.disapproveBlog(blogID);
+                            RequestDispatcher rd = request.getRequestDispatcher(url);
+                            rd.forward(request, response);
+                        } else {
+                            url = roadmap.get(PENDING_EDIT);
+                            request.setAttribute("BLOG", blog);
+                            RequestDispatcher rd = request.getRequestDispatcher(url);
+                            rd.forward(request, response);
                         }
+                    } else {
+                        url = roadmap.get(PENDING_LIST);
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                        rd.forward(request, response);
                     }
                 } else {
+                    url = roadmap.get(PENDING_LIST);
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         } else {
+            url = roadmap.get(PENDING_LIST);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
 
     }

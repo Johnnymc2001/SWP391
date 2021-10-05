@@ -58,36 +58,55 @@ public class HomePageServlet extends HttpServlet {
 //                });
 //            }
             BlogDAO blogDao = new BlogDAO();
-//            ArrayList<BlogDTO> blogList = blogDao.getAllAvailableBlog();
+            
+            // Most Award And Rate
+            ArrayList<BlogDTO> mostAwardAndRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
+            
+            // Most Award 
+            ArrayList<BlogDTO> mostAward = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
+            
+            // Most Rate
+            ArrayList<BlogDTO> mostRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
+            
+            // Most Comment
+            ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(5);
+            
+            // Recent
+            ArrayList<BlogDTO> recent = blogDao.getAllApprovedBlog();
+            
+            request.setAttribute("MOST_AWARD_AND_RATE", mostAwardAndRate);
+            request.setAttribute("MOST_AWARD", sc);
+            request.setAttribute("MOST_RATE", sc);
+            request.setAttribute("MOST_COMMENT", sc);
+            request.setAttribute("MOST_RECENT", sc);
+            
 
-            CategoryDAO catDao = new CategoryDAO();
-            ArrayList<CategoryDTO> catList = catDao.getAllCategory();
+//            CategoryDAO catDao = new CategoryDAO();
+//            ArrayList<CategoryDTO> catList = catDao.getAllCategory();
 
-            HashMap<CategoryDTO, ArrayList<BlogDTO>> catToBlogMap = new HashMap<>();
-            HashMap<BlogDTO, String> blogToImageMap = new HashMap<>();
+//            HashMap<CategoryDTO, ArrayList<BlogDTO>> catToBlogMap = new HashMap<>();
+//            HashMap<BlogDTO, String> blogToImageMap = new HashMap<>();
 
-            AttachmentDAO attDao = new AttachmentDAO();
-            for (CategoryDTO catDto : catList) {
-                ArrayList<BlogDTO> tempBlogList = blogDao.getAllAvailableBlogFromCategoryID(catDto.getCategoryID());
-                if (tempBlogList.size() > 0) {
-                    for (BlogDTO blog : tempBlogList) {
-                        ArrayList<String> attList = blog.getAllImage();
-                        if (attList.size() > 0) {   
-                            if (null != attList) {
-                                blogToImageMap.put(blog, attList.get(0));
-                            }
-                        }
-                    }
-                    catToBlogMap.put(catDto, tempBlogList);
-                } else {
-//                    list.put(catDto, null);
-                }
-            }
+//            AttachmentDAO attDao = new AttachmentDAO();
+//            for (CategoryDTO catDto : catList) {
+//                ArrayList<BlogDTO> tempBlogList = blogDao.getAllAvailableBlogFromCategoryID(catDto.getCategoryID());
+//                if (tempBlogList.size() > 0) {
+//                    for (BlogDTO blog : tempBlogList) {
+//                        ArrayList<String> attList = blog.getAllImage();
+//                        if (attList.size() > 0) {   
+//                            if (null != attList) {
+//                                blogToImageMap.put(blog, attList.get(0));
+//                            }
+//                        }
+//                    }
+//                    catToBlogMap.put(catDto, tempBlogList);
+//                } else {
+////                    list.put(catDto, null);
+//                }
+//            }
 
-//            request.setAttribute("CATEGORY_LIST", catList);
-//            request.setAttribute("BLOG_LIST", blogList);
-            request.setAttribute("CAT_TO_BLOG_MAP", catToBlogMap);
-            request.setAttribute("BLOG_TO_IMAGE_MAP", blogToImageMap);
+//            request.setAttribute("CAT_TO_BLOG_MAP", catToBlogMap);
+//            request.setAttribute("BLOG_TO_IMAGE_MAP", blogToImageMap);
 
         } catch (SQLException ex) {
             ex.printStackTrace();

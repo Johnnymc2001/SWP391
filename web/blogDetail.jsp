@@ -64,7 +64,7 @@
     <div class="container-fluid">
         <c:set var="dtoBD" value="${requestScope.BLOG_DETAIL}" />
         <h1>${dtoBD.title}</h1>
-      
+
         <h4>by ${dtoBD.studentID}</h4>
         <h5>${dtoBD.approvedDate}</h5>
         <div>
@@ -76,11 +76,27 @@
                 <img src="data:image/png;base64, ${Image}" alt="Blog thumbnail"/>
             </c:if>
         </div>
+            
+            
+        <c:if test="${ empty USER}">
+            <font color="red">
+            Please login to edit this blog !!
+            </font><br/>
+        </c:if>
 
-        <form action="edit" method="POST"> 
-              <input type="hidden" name ="txtBlogID" value="${dtoBD.blogID}">
-            <input type="submit" value="Edit" name="btAction"/>
-        </form>        
+        <c:if test="${not empty USER}">
+            <form action="edit" method="POST"> 
+                <input type="hidden" name ="txtBlogID" value="${dtoBD.blogID}">
+                <input type="submit" value="Edit" name="btAction"/>
+                <c:if test="${ empty USER}">
+                    <font color="red">
+                    Please login to edit this blog !!
+                    </font><br/>
+                </c:if>
+            </form>     
+        </c:if>
+
+
 
 
 
