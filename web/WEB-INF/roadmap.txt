@@ -13,6 +13,7 @@ searchPage=search.jsp
 
 login=LoginServlet
 loginPage=login.jsp
+newloginPage=NewloginPage.jsp
 
 register=CreateAccountServlet
 registerPage=register.jsp
