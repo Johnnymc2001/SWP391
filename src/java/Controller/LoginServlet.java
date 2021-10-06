@@ -30,8 +30,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-    private static final String HOME_PAGE ="";
-  
+    private static final String HOME_PAGE = "";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,14 +49,15 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String url = "login.jsp";
+        String url = "loginPage";
         System.out.println(username);
         System.out.println(password);
-        LoginErrorDTO error = new LoginErrorDTO();
+     
         boolean foundError = false;
         try {
             if (username == null || password == null) {
-                error.setUsernameNullError("User Name or Password Is Invalid");
+                
+                request.setAttribute("LOGIN_NULL", "User Name or Password Is Invalid");
                 foundError = true;
             } else {
 
@@ -66,42 +66,46 @@ public class LoginServlet extends HttpServlet {
                 curUser = dao.checkLogin(username, password);
                 System.out.println();
 
-                if (curUser == null ) {
+                if (curUser == null) {
                     foundError = true;
-                    error.setUsernameNotExist("User Name or Password is Invalid ");
-                       request.setAttribute("LOGIN_ERROR", error);
-                      
+                   
+                    request.setAttribute("LOGIN_ERROR", "Account not exist");
+
+                    
+                } else {
+                    if (curUser.getStatus().equals("UNAVAILABLE")) {
+                        foundError = true;
+                        request.setAttribute("LOGIN_FAIL", "Your Account is not AVAILABLE anymore ");
+                        System.out.println("Your Account is not AVAILABLE anymore");
                         System.out.println(curUser.getStatus());
-                     
+
+                    }
+
                 }
-                
-                else if (curUser.getStatus().equals("UNAVAILABLE")){
-                    foundError = true;
-                      request.setAttribute("LOGIN_FAIL", "Your Account is not AVAILABLE anymore " );
-                         System.out.println("Your Account is not AVAILABLE anymore");
-                }else {
+                if (foundError) {
+                    url = roadmap.get(url);
+                    request.getRequestDispatcher(url).forward(request, response);
+                } else {
                     Cookie cookie = new Cookie(username, password);
-                cookie.setMaxAge(60 * 5);
-                response.addCookie(cookie);
+                    cookie.setMaxAge(60 * 5);
+                    response.addCookie(cookie);
                     url = roadmap.get("home");
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER", curUser);
-                }
-                
-              
+                    response.sendRedirect(url);
 
+                }
 
 //                if (curUser!=null ) {
 //                    url = roadmap.get("homePage");
 //                      HttpSession session = request.getSession(true);
 //                        session.setAttribute("USER", curUser);
 //                }
-
-                System.out.println("curUser: " + curUser.getUsername()+ "-"+curUser.getPassword());
+                
                 System.out.println(url);
             }
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+
 //           response.sendRedirect(url);
         }
     }
