@@ -13,16 +13,23 @@
         <title>Comment Section</title>
     </head>
     <body>
+
+
+        <c:if test="${not empty sessionScope.USER}">
+            <c:if test="${sessionScope.USER.role != 'Mentor' || sessionScope.USER.role != 'Student'}">
+                <form action="comment" method="POST">
+                    <div>
+                        <textarea name="content" required="">${param.content}</textarea>
+                        <font color="red">
+                        ${requestScope.ERROR_COMMENT}
+                        </font><br/>
+                        <input type="submit" value="comment">
+                    </div>
+                </form>
+            </c:if>
+        </c:if>
         <section>
-            <form action="comment" method="POST">
-                <div>
-                    <textarea name="content">Comment</textarea>
-                    <font color="red">
-                    ${requestScope.ERROR_COMMENT}
-                    </font><br/>
-                    <input type="submit" value="comment">
-                </div>
-            </form>
+
             <div>
                 <c:set var="dtoCmMAP" value="${requestScope.COMMENT_MAP}"/>
                 <c:forEach var="dtoCm" items="${dtoCmMAP}">

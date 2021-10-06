@@ -55,9 +55,17 @@ public class BlogCommentServlet extends HttpServlet {
         String url = null;
 
         String content = request.getParameter("content");
-//          int blogID = Integer.parseInt(request.getParameter("txtBlogID"));
+        String blogIdString = request.getParameter("txtBlogID");
+        int blogID = 0;
+        if (blogIdString != null) {
+            try {
+                blogID = Integer.parseInt(blogIdString);
+            } catch (NumberFormatException ex) {
+                blogID = 0;
+            }
+        }
 
-        int blogID = 21;
+//        int blogID = 21;
         int ownerID;
         AccountDTO curUser = (AccountDTO) request.getSession().getAttribute("USER");
 
@@ -68,42 +76,46 @@ public class BlogCommentServlet extends HttpServlet {
         }
 
         BlogCommentDAO dao = new BlogCommentDAO();
+        if (blogID == 0) {
+            response.sendRedirect(sc.getContextPath());
+        } else {
 
-        try {
-            if (null != content) {
-                if (content.trim().length() < 4) {
-                    request.setAttribute("ERROR_COMMENT", "Your comment need at least 4 character");
-                } else {
-                    Date commentDate = new Date(Calendar.getInstance().getTime().getTime());
-                    BlogCommentDTO dto = new BlogCommentDTO(blogID, commentDate, content, ownerID);
-                    dao.createBlogComment(dto);
+            try {
+                if (null != content) {
+                    if (content.trim().length() < 4) {
+                        request.setAttribute("ERROR_COMMENT", "Your comment need at least 4 character");
+                    } else {
+                        Date commentDate = new Date(Calendar.getInstance().getTime().getTime());
+                        BlogCommentDTO dto = new BlogCommentDTO(blogID, commentDate, content, ownerID);
+                        dao.createBlogComment(dto);
+                    }
                 }
-            }
-            BlogCommentDAO commentDao = new BlogCommentDAO();
-            ArrayList<BlogCommentDTO> commentList = commentDao.getAllBlogComment();
-            System.out.println(" COMMMEEENNTTTTTT!!!!!!!!!" + commentList.toString());
-            AccountDAO accountDao = new AccountDAO();
-            
-            HashMap<BlogCommentDTO,AccountDTO> CommentToAccountMap = new HashMap<>(); 
-            for(BlogCommentDTO comment:commentList){
-                CommentToAccountMap.put(comment, accountDao.getAccountFromAcoountID(comment.getOwnerID()));
-            }
-            
-            if (null == commentList) {
-                url = roadmap.get(HOME_PAGE);
-                response.sendRedirect(url);
-            } else {
-                request.setAttribute("COMMENT_MAP", CommentToAccountMap);
-                url = roadmap.get(COMMENT_PAGE);
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-            }
+                BlogCommentDAO commentDao = new BlogCommentDAO();
+                ArrayList<BlogCommentDTO> commentList = commentDao.getAllBlogCommentFromBlogID(blogID);
+//                System.out.println(" COMMMEEENNTTTTTT!!!!!!!!!" + commentList.toString());
+                AccountDAO accountDao = new AccountDAO();
 
-        } catch (SQLException ex) {
-            String msg = ex.getMessage();
-            log("CreateBlogServlet _ SQL " + msg);
-        } finally {
+                HashMap<BlogCommentDTO, AccountDTO> CommentToAccountMap = new HashMap<>();
+                for (BlogCommentDTO comment : commentList) {
+                    CommentToAccountMap.put(comment, accountDao.getAccountFromAcoountID(comment.getOwnerID()));
+                }
 
+                if (null == commentList) {
+                    url = roadmap.get(HOME_PAGE);
+                    response.sendRedirect(url);
+                } else {
+                    request.setAttribute("COMMENT_MAP", CommentToAccountMap);
+                    url = roadmap.get(COMMENT_PAGE);
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                }
+
+            } catch (SQLException ex) {
+                String msg = ex.getMessage();
+                log("CreateBlogServlet _ SQL " + msg);
+            } finally {
+
+            }
         }
     }
 

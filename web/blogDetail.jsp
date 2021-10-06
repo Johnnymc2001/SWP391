@@ -57,6 +57,7 @@
             </form>     
         </c:if>
 
+        <iframe src="comment?txtBlogID=${dtoBD.blogID}"/>
 
 
 
