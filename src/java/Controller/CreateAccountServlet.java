@@ -59,7 +59,7 @@ public class CreateAccountServlet extends HttpServlet {
         String birthdate = request.getParameter("birthdate");
         boolean foundError = false;
         AccountError error = new AccountError();
-        String url = "register.jsp";
+        String url = "login.jsp";
         System.out.println("birthdate: " + birthdate);
           AccountDAO dao = new AccountDAO();
           
@@ -96,8 +96,8 @@ public class CreateAccountServlet extends HttpServlet {
                 }
 
                 if (foundError) {
-
                     request.setAttribute("ERROR", error);
+                    request.setAttribute("PAGE", "REGISTER");
                 } else {
 
 //                   Date  date =new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);  
@@ -115,7 +115,7 @@ public class CreateAccountServlet extends HttpServlet {
                   
                     dao.createAccount(dto);
 
-                    url = "login.html";
+                    url = "login.jsp";
                 }
 
             System.out.println("username duplicate : " +error.getUserNameExisted());

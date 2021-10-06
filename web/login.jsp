@@ -22,7 +22,7 @@
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <!-- this is external JS -->
-        <script src="UI/script/loginPage.js"></script>
+
     </head>
     <body>
 
@@ -32,7 +32,13 @@
                 <div class="col-lg-6 d-none d-lg-block">
                     <img class="phone-pic" src="UI/Icon/phone-pic.png" alt="">
                 </div>
-                <div id="login-table" class="login-table activated col-lg-6">
+                <div id="login-table" class="login-table                     
+                     <c:if test="${empty requestScope.PAGE || requestScope.PAGE == 'LOGIN'}">
+                         activated 
+                     </c:if>
+                     <c:if test="${not empty requestScope.PAGE && requestScope.PAGE == 'REGISTER'}">
+                         deactivated 
+                     </c:if> col-lg-6">
                     <img class="avatar" src="UI/Icon/avatar-login.png" alt="">
                     <h1>Login</h1>
                     <form class="login-form" action="login" method="POST">
@@ -80,7 +86,14 @@
                     </form>
                     <button class="goto-register" onclick="goToRegister()">Don't have an account ?</button>
                 </div>
-                <div id="register-table" class="register-table deactivated col-lg-6">
+                <div id="register-table" class="register-table
+                     <c:if test="${empty requestScope.PAGE || requestScope.PAGE == 'LOGIN'}">
+                         deactivated 
+                     </c:if>
+                     <c:if test="${not empty requestScope.PAGE && requestScope.PAGE == 'REGISTER'}">
+                         activated 
+                     </c:if>
+                     col-lg-6">
                     <img class="avatar" src="UI/Icon/avatar-login.png" alt="">
                     <h1>register</h1>
                     <form class="register-form" action="register" method="POST">
@@ -136,5 +149,6 @@
                 </div>
             </div>
         </div>
+        <script src="UI/script/loginPage.js"></script>
     </body>
 </html>

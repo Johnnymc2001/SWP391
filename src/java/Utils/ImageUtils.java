@@ -79,6 +79,21 @@ public class ImageUtils {
     }
 
     // Single Image Upload
+//    public static boolean changeImage(String base64, int blogId) {
+//                try {
+//            Map result = ImageUtils.uploadImage(base64);
+//            String url = (String) result.get("secure_url");
+//
+//            AttachmentDAO attDao = new AttachmentDAO();
+//            AttachmentDTO dto = new AttachmentDTO(blogId, "IMAGE/URL", url, null);
+//            attDao.createAttachment(dto);
+//            return true;
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//        return false;
+//    }
+    
     public static boolean uploadImage(String base64, int blogId) {
         try {
             Map result = ImageUtils.uploadImage(base64);

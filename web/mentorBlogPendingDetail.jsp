@@ -48,7 +48,7 @@
                 $('#summernote').summernote({
                     placeholder: "",
                     tabsize: 2,
-                    height: 100
+                    height: 400
                 });
                 $('#summernote').summernote('code', `${blog.content}`);
             </script>

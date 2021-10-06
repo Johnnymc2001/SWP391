@@ -14,7 +14,6 @@ searchPage=search.jsp
 login=LoginServlet
 loginPage=login.jsp
 
-
 register=CreateAccountServlet
 registerPage=register.jsp
 
