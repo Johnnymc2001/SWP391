@@ -288,7 +288,7 @@ a:hover {
 }
 
 .content-left .content-img img {
-    max-width: 100%;
+    width: 100%;
     transition: all 0.2s;
 }
 
