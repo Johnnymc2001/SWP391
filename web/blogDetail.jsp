@@ -23,42 +23,6 @@
 <c:set var="user" value="${sessionScope.USER}"/>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="home">
-            <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo">
-            FPT Academy
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-                <form action="search" class="form-inline" method="POST">
-                    <div class="search-navbar">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" value="">
-                        <button class="btn btn-outline-success" type="submit" value="">Search</button>
-                    </div>
-                </form>
-                <a class="nav-item nav-link" href="aboutUs.html">About us</a>
-                <c:if test="${empty user}">
-                    <a class="nav-item nav-link" href="loginPage">Login</a>
-                </c:if>
-                <c:if test="${not empty user}">
-
-                </c:if>
-            </div>
-        </div>
-    </nav>
-
-    <div>
-        <div class="xavalo">
-            <img src="UI/Icon/FPTCampus.jpg" alt="FPTCampus">
-            <h1>Blog</h1>
-            <h2>Academic Blog for FPT</h2>
-        </div>
-    </div>
-
     <div class="header-bar"></div>
 
     <div class="container-fluid">
@@ -73,16 +37,8 @@
         <h4>by ${dtoBD.studentID}</h4>
         <h5>${dtoBD.approvedDate}</h5>
         <div>
-            <c:set var="Image" value="${requestScope.IMAGE}"/>
-            <c:if test="${empty Image}">
-                <img src="UI/Icon/selfmademan.jpg" alt="blog-pic">
-            </c:if>
-            <c:if test="${not empty Image}">
-                <img src="data:image/png;base64, ${Image}" alt="Blog thumbnail"/>
-            </c:if>
+            <img src="${dtoBD.getFirstImage()}" alt="blog-pic">
         </div>
-            
-            
         <c:if test="${ empty USER}">
             <font color="red">
             Please login to edit this blog !!

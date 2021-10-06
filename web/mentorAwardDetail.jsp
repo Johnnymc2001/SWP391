@@ -62,14 +62,16 @@
     <div class="header-bar"></div>
 
     <div class="container-fluid">
-        <c:set var="dtoList" value="${requestScope.ALL_AWARD}" />  
-        <c:forEach var="dto" items="${dtoList}" varStatus="counter">
-            <p>${dto.awardID}</p>
-            <input type="checkbox"  name="awardCbox" value="${dto.awardID}">${dto.awardName}</input>
-        </c:forEach>
 
-        <input type="submit" value="Award"/>
-    </div>
+        <select name="awardBox">
+            <c:set var="dtoList" value="${requestScope.ALL_AWARD}" />  
+            <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                <option value="${dto.awardID}">${dto.awardName}</option>
+            </c:forEach>
+        </select>
+
+    <input type="submit" value="Award"/>
+</div>
 </div>
 
 

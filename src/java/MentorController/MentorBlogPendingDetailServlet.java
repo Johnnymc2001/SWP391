@@ -29,8 +29,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "MentorBlogPendingDetailServlet", urlPatterns = {"/MentorBlogPendingDetailServlet"})
 public class MentorBlogPendingDetailServlet extends HttpServlet {
 
-    public final String PENDING_EDIT = "mentorBlogPendingDetailPage";
-    public final String PENDING_LIST = "mentorBlogPendingList";
+    public final String PENDING_EDIT = "blogPendingDetailPage";
+    public final String PENDING_LIST = "blogPendingList";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,17 +72,14 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
             }
         }
         if (blogID != 0) {
-            System.out.println("1");
             try {
                 blog = blogDao.getBlogFromBlogID(blogID);
 
                 if (null != blog) {
-                    System.out.println("2");
                     if (blog.getCategoryID().equals(account.getCategoryID())) {
                         boolean foundErr = false;
 
                         if (null == action) {
-                            System.out.println("3");
                             url = roadmap.get(PENDING_EDIT);
                             request.setAttribute("BLOG", blog);
                             RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -109,14 +106,20 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                             } else {
                                 blog.setTitle(title);
                                 blog.setContent(content);
+                                System.out.println(content);
+                                
                                 boolean result = blogDao.updateBlog(blogID, blog);
+                                
                                 if (result) {
                                     request.setAttribute("MESSAGE", "Blog Successfully Updated!");
                                 } else {
                                     request.setAttribute("MESSAGE", "Something wrong, please try again!");
                                 }
+                                
                                 request.setAttribute("BLOG", blog);
+                                
                                 url = roadmap.get(PENDING_EDIT);
+                                
                                 RequestDispatcher rd = request.getRequestDispatcher(url);
                                 rd.forward(request, response);
                             }

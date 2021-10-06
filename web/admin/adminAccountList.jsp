@@ -31,10 +31,6 @@
                 <div class="col-sm-12">
                 <c:set var="list" value="${requestScope.LIST}"/>
 
-                <c:if test="${not empty param.page}">
-                    <c:set var="param.page" value="${1}"/>
-                </c:if>
-
                 <c:if test="${not empty list}">
 
                     <table>
