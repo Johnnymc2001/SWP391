@@ -48,7 +48,7 @@
             <div class="header-right">
                 <div class="search-btn">
                     <form action="search" method="POST">
-                        <input type="hidden" name="txtSearchValue" value="all">
+                        <input type="hidden" name="txtSearchValue">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
@@ -142,7 +142,7 @@
                                             <c:forEach var="blog" items="${requestScope.MOST_AWARD_AND_RATE}">
                                                 <div class="box-content">
                                                     <div class="content-img">
-                                                        <a href=""><img src="${blog.getFirstImage()}" alt=""></a>
+                                                        <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
                                                     </div>
                                                     <div class="content-text">
                                                         <h6><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></h6>
@@ -156,7 +156,7 @@
                                             <c:forEach var="blog" items="${requestScope.MOST_RECENT}">
                                                 <div class="box-content">
                                                     <div class="content-img">
-                                                        <a href=""><img src="${blog.getFirstImage()}" alt=""></a>
+                                                        <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
                                                     </div>
                                                     <div class="content-text">
                                                         <h6><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></h6>
@@ -179,7 +179,7 @@
 
                                     <div class="content-left">
                                         <div class="content-img">
-                                            <a href=""><img src="${blogMR_FIRST.getFirstImage()}" alt=""></a>
+                                            <a href="blog?txtBlogID=${blogMR_FIRST.blogID}"><img src="${blogMR_FIRST.getFirstImage()}" alt=""></a>
                                         </div>
                                         <div class="content-text">
                                             <p>
@@ -187,10 +187,10 @@
                                                 <span>${blogMR_FIRST.postDate}</span>
                                             </p>
                                             <h5>
-                                                <a href="">${blogMR_FIRST.title}</a>
+                                                <a href="blog?txtBlogID=${blogMR_FIRST.blogID}">${blogMR_FIRST.title}</a>
                                             </h5>
                                             <h7>
-                                                ${blogMR_FIRST.content}
+                                                ${blogMR_FIRST.getContentShort()}
                                             </h7>
                                         </div>
                                     </div>
@@ -200,7 +200,7 @@
                                         <c:forEach var="blog" items="${requestScope.MOST_AWARD_AND_RATE}">
                                             <div class="box-content">
                                                 <div class="content-img">
-                                                    <a href=""><img src="${blog.getFirstImage()}" alt=""></a>
+                                                    <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
                                                 </div>
                                                 <div class="content-text">
                                                     <h6><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></h6>
@@ -247,7 +247,7 @@
                                             <c:set var="blogMC_FIRST" value="${requestScope.MOST_COMMENT_FIRST}"/>
                                             <div class="box-content col-md-6">
                                                 <div class="content-img">
-                                                    <a href=""><img src="${blogMC_FIRST.getFirstImage()}" alt=""></a>
+                                                    <a href="blog?txtBlogID=${blogMC_FIRST.blogID}"><img src="${blogMC_FIRST.getFirstImage()}" alt=""></a>
                                                 </div>
                                                 <div class="content-text">
                                                     <p>
@@ -255,10 +255,10 @@
                                                         <span>${blogMC_FIRST.postDate}</span>
                                                     </p>
                                                     <h5>
-                                                        <a href="">${blogMC_FIRST.title}l</a>
+                                                        <a href="blog?txtBlogID=${blogMC_FIRST.blogID}">${blogMC_FIRST.title}</a>
                                                     </h5>
                                                     <h7>
-                                                        ${blogMC_FIRST.content}
+                                                        ${blogMC_FIRST.getContentShort()}
                                                     </h7>
                                                 </div>
                                             </div>
@@ -266,7 +266,7 @@
 
                                             <div class="box-content col-md-6">
                                                 <div class="content-img">
-                                                    <a href=""><img src="${blogMC_SECOND.getFirstImage()}" alt=""></a>
+                                                    <a href="blog?txtBlogID=${blogMC_SECOND.blogID}"><img src="${blogMC_SECOND.getFirstImage()}" alt=""></a>
                                                 </div>
                                                 <div class="content-text">
                                                     <p>
@@ -274,10 +274,10 @@
                                                         <span>${blogMC_SECOND.postDate}</span>
                                                     </p>
                                                     <h5>
-                                                        <a href="">${blogMC_SECOND.title}l</a>
+                                                        <a href="blog?txtBlogID=${blogMC_SECOND.blogID}">${blogMC_SECOND.title}</a>
                                                     </h5>
                                                     <h7>
-                                                        ${blogMC_SECOND.content}
+                                                        ${blogMC_SECOND.getContentShort()}
                                                     </h7>
                                                 </div>
                                             </div>
@@ -285,44 +285,30 @@
                                     </div>
                                     <div class="lower-content">
                                         <div class="row">
-                                            <div class="box-content col-lg-6">
-                                                <div class="content-img">
-                                                    <a href=""><img src="UI/Icon/hallwayfpt.jpg" alt=""></a>
+                                            <c:forEach var="blog" items="${requestScope.MOST_COMMENT_ROW_1}">
+                                                <div class="box-content col-lg-6">
+                                                    <div class="content-img">
+                                                        <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
+                                                    </div>
+                                                    <div class="content-text">
+                                                        <h6><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></h6>
+                                                        <p>${blog.postDate}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="content-text">
-                                                    <h6><a href="">This is a very, very, very long blog's title</a></h6>
-                                                    <p>11/10/2001</p>
-                                                </div>
-                                            </div>
-                                            <div class="box-content col-lg-6">
-                                                <div class="content-img">
-                                                    <a href=""><img src="UI/Icon/hallwayfpt.jpg" alt=""></a>
-                                                </div>
-                                                <div class="content-text">
-                                                    <h6><a href="">This is a very, very, very long blog's title</a></h6>
-                                                    <p>11/10/2001</p>
-                                                </div>
-                                            </div>
+                                            </c:forEach>
                                         </div>
                                         <div class="row">
-                                            <div class="box-content col-lg-6">
-                                                <div class="content-img">
-                                                    <a href=""><img src="UI/Icon/hallwayfpt.jpg" alt=""></a>
+                                            <c:forEach var="blog" items="${requestScope.MOST_COMMENT_ROW_2}">
+                                                <div class="box-content col-lg-6">
+                                                    <div class="content-img">
+                                                        <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
+                                                    </div>
+                                                    <div class="content-text">
+                                                        <h6><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></h6>
+                                                        <p>${blog.postDate}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="content-text">
-                                                    <h6><a href="">This is a very, very, very long blog's title</a></h6>
-                                                    <p>11/10/2001</p>
-                                                </div>
-                                            </div>
-                                            <div class="box-content col-lg-6">
-                                                <div class="content-img">
-                                                    <a href=""><img src="UI/Icon/hallwayfpt.jpg" alt=""></a>
-                                                </div>
-                                                <div class="content-text">
-                                                    <h6><a href="">This is a very, very, very long blog's title</a></h6>
-                                                    <p>11/10/2001</p>
-                                                </div>
-                                            </div>
+                                            </c:forEach>
                                         </div>
                                     </div>
                                 </div>
@@ -372,39 +358,19 @@
                                     <div class="content-wrap">
                                         <div class="swiper swiper-list">
                                             <div class="swiper-wrapper">
-                                                <div class="swiper-slide">
-                                                    <div class="box-content">
-                                                        <div class="content-img">
-                                                            <a href=""><img src="UI/Icon/selfmademan.jpg" alt=""></a>
-                                                        </div>
-                                                        <div class="content-text">
-                                                            <h3><a href="">This is a very, very, very long blog's title</a></h3>
-                                                            <p>11/10/2001</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="box-content">
-                                                        <div class="content-img">
-                                                            <a href=""><img src="UI/Icon/FPTCampus.jpg#" alt=""></a>
-                                                        </div>
-                                                        <div class="content-text">
-                                                            <h3><a href="">This is a very, very, very long blog's title</a></h3>
-                                                            <p>11/10/2001</p>
+                                                <c:forEach var="blog" items="${requestScope.MOST_COMMENT}">
+                                                    <div class="swiper-slide">
+                                                        <div class="box-content">
+                                                            <div class="content-img">
+                                                                <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
+                                                            </div>
+                                                            <div class="content-text">
+                                                                <h3><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></h3>
+                                                                <p>${blog.postDate}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="box-content">
-                                                        <div class="content-img">
-                                                            <a href=""><img src="UI/Icon/hallwayfpt.jpg" alt=""></a>
-                                                        </div>
-                                                        <div class="content-text">
-                                                            <h3><a href="">This is a very, very, very long blog's title</a></h3>
-                                                            <p>11/10/2001</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </c:forEach>                         
                                             </div>
                                             <!-- Add Pagination -->
                                             <div class="swiper-pagination"></div>

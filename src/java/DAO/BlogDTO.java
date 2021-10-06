@@ -155,6 +155,23 @@ public class BlogDTO implements Serializable {
         this.studentID = studentID;
     }
 
+    public ArrayList<BlogCommentDTO> getAllComments() {
+        BlogCommentDAO blogDao = new BlogCommentDAO();
+        try {
+            return blogDao.getAllBlogCommentFromBlogID(this.blogID);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<BlogCommentDTO>();
+    }
+    
+    public String getContentShort() {
+        if (content.length() > 40) {
+            return content.substring(0, 40) + "...";
+        }
+        return content;
+    }
+
     public AccountDTO getAccount() {
         AccountDAO accDao = new AccountDAO();
         try {
@@ -164,7 +181,7 @@ public class BlogDTO implements Serializable {
         }
         return null;
     }
-    
+
     public String getFirstImage() throws SQLException {
         AttachmentDAO attDao = new AttachmentDAO();
         ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(this.getBlogID());
@@ -177,7 +194,7 @@ public class BlogDTO implements Serializable {
         } else {
             image = "UI/Icon/selfmademan.jpg";
         }
-        
+
         return image;
     }
 

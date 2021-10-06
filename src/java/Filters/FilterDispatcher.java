@@ -135,6 +135,8 @@ public class FilterDispatcher implements Filter {
             }
             
             System.out.println(url);
+            
+            System.out.println(url);
             RequestDispatcher rd = req.getRequestDispatcher(url);
             rd.forward(request, response);
 

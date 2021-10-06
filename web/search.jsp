@@ -57,8 +57,8 @@
                                         </div>
                                         <!-- personal menu -->
                                         <div class="personal-menu">
-                                            <a href="student/dashboard"><li>Profile</li></a>
-                                            <a href="createPage"><li>Create Blog</li></a>
+                                            <a href="studentDashboard"><li>Profile</li></a>
+                                            <a href="create"><li>Create Blog</li></a>
                                             <a href="logout"><li>Log out</li></a>
                                         </div>
                                     </c:if>
@@ -72,8 +72,8 @@
                                                 </div>
                                                 <!-- personal menu -->
                                                 <div class="personal-menu">
-                                                    <a href="mentor/dashboard"><li>Profile</li></a>
-                                                    <a href="mentor/blogPendingList"><li>Pending Blog</li></a>
+                                                    <a href="mentorDashboard"><li>Profile</li></a>
+                                                    <a href="blogPendingList"><li>Pending Blog</li></a>
                                                     <a href="logout"><li>Log out</li></a>
                                                 </div>
                                             </c:if>
@@ -114,7 +114,7 @@
                         <div class="box">
                             <form action="search" method="GET" class="search-form">
                                 <input name="txtSearchValue" value="${param.txtSearchValue}" type="text" id="search-input" class="search-input"
-                                       required="">
+                                       >
                                 <label class="search-label" for="search-input">Search</label>
                                 <button type="submit"><i class="fas fa-search"></i></button>
                             </form>
@@ -170,24 +170,24 @@
                     <div id="search-result-container" class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
-                                <c:set var="blogs" value="${requestScope.BLOG_LIST}"/>
-                                <c:forEach var="dto" items="${blogs}">
+                                <c:set var="blogList" value="${requestScope.BLOG_LIST}"/>
+                                <c:forEach var="blog" items="${blogList}">
                                     <div class="post-box">
                                         <div class="author-inform">
                                             <ul>
-                                                <li><a href="">Author name</a></li>
-                                                <li>11/10/2001</li>
-                                                <li>comment(10)</li>
+                                                <li><a href="">${blog.getAccount().getFullname()}</a></li>
+                                                <li>${blog.postDate}</li>
+                                                <li>Comments (${blog.getAllComments().size()})</li>
                                             </ul>
                                         </div>
                                         <h1 class="blog-title"><a href="">${dto.title}</a></h1>
                                         <div class="img-link">
-                                            <a href=""><img src="UI/Icon/selfmademan.jpg" alt=""></a>
+                                            <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
                                         </div>
-                                        <p>${dto.content}
+                                        <p>${blog.getContentShort()}
                                         </p>
                                         <div class="blog-detail">
-                                            <a href="">link to blog detail</a>
+                                            <a href="blog?txtBlogID=${blog.blogID}">Go to Post</a>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -197,25 +197,23 @@
 
                     <nav id="pagination-box" aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
-                            <!-- previous button -->
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <!-- end previousr button -->
+                            <c:forEach var="i" begin="1" end="${requestScope.PAGE_COUNT}">
+                                <c:if test="${i == param.page || ( empty param.page && i == 1)}">
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#" onclick="changePage(${i})">
+                                            ${i}
+                                        </a>
+                                    </li>
+                                </c:if>
 
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-                            <!-- next button -->
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                            <!-- end next button -->
+                                <c:if test="${i != param.page && (not empty param.page || i != 1)}">
+                                    <li class="page-item">
+                                        <a class="page-link"href="#" onclick="changePage(${i})">
+                                            ${i}
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
                         </ul>
                     </nav>
 

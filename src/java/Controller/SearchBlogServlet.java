@@ -58,13 +58,8 @@ public class SearchBlogServlet extends HttpServlet {
         CategoryDAO catDao = new CategoryDAO();
 
         try {
-            ArrayList<CategoryDTO> catList = catDao.getAllCategory();
             if (null != searchValue && searchValue != "") {
-                if (null == searchCategory || searchCategory.equals("")) {
-                    blogList = dao.getAllBlogLikeTitle(searchValue);
-                } else {
-                    blogList = dao.getAllBlogLikeTitleAndFromCategoryID(searchValue, searchCategory);
-                }
+                blogList = dao.getAllApprovedBlogLikeTitle(searchValue);
             }
 
             int maxPageItem = 5;
@@ -85,8 +80,9 @@ public class SearchBlogServlet extends HttpServlet {
                 returnList.add(blogList.get(i));
             }
 
-            request.setAttribute("CAT_LIST", catList);
-            request.setAttribute("BLOG_LIST", blogList);
+            request.setAttribute("BLOG_LIST", returnList);
+            request.setAttribute("PAGE_COUNT", (int) Math.ceil((double) blogList.size() / (double) maxPageItem));
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
