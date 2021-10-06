@@ -96,11 +96,7 @@ public class LoginServlet extends HttpServlet {
 
                 }
 
-//                if (curUser!=null ) {
-//                    url = roadmap.get("homePage");
-//                      HttpSession session = request.getSession(true);
-//                        session.setAttribute("USER", curUser);
-//                }
+
                 
                 System.out.println(url);
             }
