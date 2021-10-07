@@ -100,7 +100,7 @@ public class AccountError {
     }
 
     public boolean checkValidPhoneNumber(String phone) {
-        String regex = "[\\d]{8,10}";
+        String regex = "([0-9]){8,12}";
         Pattern pat = Pattern.compile(regex);
         return pat.matcher(phone).matches();
     }
