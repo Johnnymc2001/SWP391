@@ -86,6 +86,7 @@
                     </form>
                     <button class="goto-register" onclick="goToRegister()">Don't have an account ?</button>
                 </div>
+                <c:set var="error" value="${requestScope.ERROR}"/>
                 <div id="register-table" class="register-table
                      <c:if test="${empty requestScope.PAGE || requestScope.PAGE == 'LOGIN'}">
                          deactivated 
@@ -101,11 +102,29 @@
                             <div class="enter-field col-md-6">
                                 <input name="username" id="username-register" type="text" required>
                                 <label class="username-label" for="username"><i class="fas fa-user"></i> Username</label>
+                                <c:if test="${not empty error.userNameLengthError}">
+                                    <br/>
+                                    <font color="red">
+                                    ${error.userNameLengthError}<br/>
+                                    </font>
+                                </c:if>
+                                <c:if test="${not empty error.userNameExisted}">
+                                    <br/>
+                                    <font color="red">
+                                    ${error.userNameExisted}<br/>
+                                    </font>
+                                </c:if>
                             </div>
                             <div class="enter-field col-md-6">
                                 <input name="fullname" id="fullname" type="text" required>
                                 <label class="fullname-label" for="fullname"><i class="fas fa-file-signature"></i>
                                     Fullname</label>
+                                    <c:if test="${not empty error.fullNameLengthError}">
+                                    <br/>
+                                    <font color="red">
+                                    ${error.fullNameLengthError}<br/>
+                                    </font>
+                                </c:if>
                             </div>
                             <div class="enter-field col-md-6">
                                 <input name="address" id="address" type="text" required>
@@ -122,22 +141,46 @@
                             <div class="enter-field col-md-6">
                                 <input name="email" id="email" type="text" required>
                                 <label class="email-label" for="email"><i class="fas fa-envelope"></i> Email</label>
+                                <c:if test="${not empty error.emailErrorFormat}">
+                                    <br/>
+                                    <font color="red">
+                                    ${error.emailErrorFormat}<br/>
+                                    </font>
+                                </c:if>
                             </div>
                             <div class="enter-field col-md-6">
                                 <input name="phone" id="phone" type="text" required>
                                 <label class="phone-label" for="phone"><i class="fas fa-phone-alt"></i> Phone</label>
+                                <c:if test="${not empty error.phoneErrorFormat}">
+                                    <br/>
+                                    <font color="red">
+                                    ${error.phoneErrorFormat}<br/>
+                                    </font>
+                                </c:if>
                             </div>
+
                             <div class="enter-field col-md-6">
                                 <input name="password" id="password-register" type="password" required>
                                 <label class="password-label" for="password"><i class="fas fa-lock"></i> Password</label>
+                                <c:if test="${not empty error.passwordLengthError}">
+                                    <br/>
+                                    <font color="red">
+                                    ${error.passwordLengthError}<br/>
+                                    </font>
+                                </c:if>
                                 <i id="reclose-eye" class="close-eye d-block fas fa-eye-slash"
                                    onclick="showrePassword()"></i>
                                 <i id="reopen-eye" class="open-eye d-none fas fa-eye" onclick="hiderePassword()"></i>
                             </div>
                             <div class="enter-field col-md-6">
                                 <input name="confirm-password" id="confirm-password" type="confirm-password" required>
-                                <label class="confirm-password-label" for="confirm-password"><i class="fas fa-lock"></i>
-                                    Confirm Password</label>
+                                <label class="confirm-password-label" for="confirm-password"><i class="fas fa-lock"></i>Confirm Password</label>
+                                <c:if test="${not empty error.confirmNotMatched}">
+                                    <br/>
+                                    <font color="red">
+                                    ${error.confirmNotMatched}<br/>
+                                    </font>
+                                </c:if>
                                 <i id="coclose-eye" class="close-eye d-block fas fa-eye-slash"
                                    onclick="showcoPassword()"></i>
                                 <i id="coopen-eye" class="open-eye d-none fas fa-eye" onclick="hidecoPassword()"></i>

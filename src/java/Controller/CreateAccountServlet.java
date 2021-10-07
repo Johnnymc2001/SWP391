@@ -46,7 +46,6 @@ public class CreateAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String username = request.getParameter("username");
@@ -59,7 +58,7 @@ public class CreateAccountServlet extends HttpServlet {
         String birthdate = request.getParameter("birthdate");
         boolean foundError = false;
         AccountError error = new AccountError();
-        String url = "login.jsp";
+        String url = "loginPage";
         System.out.println("birthdate: " + birthdate);
           AccountDAO dao = new AccountDAO();
           
@@ -115,12 +114,13 @@ public class CreateAccountServlet extends HttpServlet {
                   
                     dao.createAccount(dto);
 
-                    url = "login.jsp";
+                    url = "home";
                 }
 
             System.out.println("username duplicate : " +error.getUserNameExisted());
 
         } finally {
+            url=roadmap.get(url);
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
