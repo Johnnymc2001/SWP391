@@ -83,7 +83,6 @@ public class AdminAccountDetailServlet extends HttpServlet {
             if (null != action) {
                 switch (action) {
                     case "Update":
-                        System.out.println("GO HERE");
                         String username = null == request.getParameter("username") ? oldAcc.getUsername() : request.getParameter("username");
                         String password = null == request.getParameter("password") ? oldAcc.getPassword() : request.getParameter("password");
                         String fullname = null == request.getParameter("fullname") ? oldAcc.getFullname() : request.getParameter("fullname");

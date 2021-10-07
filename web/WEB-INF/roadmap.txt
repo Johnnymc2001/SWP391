@@ -64,7 +64,8 @@ admin/redirect=HomePageServlet
 ### admin/commentDetail=AdminCommentDetailServlet
 ### admin/commentDetailPage=adminCommentDetail.jsp
 
-admin/adminAction=AdminActionServlet
+admin/accountCreate=AdminAccountCreateServlet
+admin/accountCreatePage=adminAccountCreate.jsp
 
 admin/accountList=AdminAccountListServlet
 admin/accountListPage=adminAccountList.jsp

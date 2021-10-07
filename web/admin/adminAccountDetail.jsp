@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     AccountID : ${account.accountID}
-                                    <input type="hidden" name="accountid" value="${account.accountID}"></input>
+                                    <input type="hidden" name="accountid" value="${account.accountID}"/>
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="submit" name="submitAction" value="Update"></button>
