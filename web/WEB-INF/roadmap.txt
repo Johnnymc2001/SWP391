@@ -15,7 +15,7 @@ login=LoginServlet
 loginPage=login.jsp
 
 register=CreateAccountServlet
-registerPage=register.jsp
+registerPage=login.jsp
 
 create=CreateBlogServlet
 createPage=createBlog.jsp
