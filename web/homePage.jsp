@@ -40,9 +40,9 @@
                 <!-- navigate options -->
                 <div class="collapse navbar-collapse options-btn">
                     <a href="home"><button class="active-btn">Home</button></a>
-                    <a href="home"><button class="">Popular</button></a>
-                    <a href="home"><button class="">Recent</button></a>
-                    <a href="home"><button class="">About</button></a>
+                    <a href="search?txtSearchType=popular"><button class="">Popular</button></a>
+                    <a href="search?txtSearchType=recent"><button class="">Recent</button></a>
+                    <a href="aboutUs.html"><button class="">About</button></a>
                 </div>
             </div>
             <div class="header-right">

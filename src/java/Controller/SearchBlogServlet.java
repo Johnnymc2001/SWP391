@@ -47,19 +47,27 @@ public class SearchBlogServlet extends HttpServlet {
 //        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 //        String url = roadmap.get(SEARCH_PAGE);
         String searchValue = request.getParameter("txtSearchValue");
-        String searchCategory = request.getParameter("txtSearchCategory");
+        String searchType = request.getParameter("txtSearchType");
         String pageString = request.getParameter("page");
         ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
         ArrayList<BlogDTO> returnList = new ArrayList<BlogDTO>();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
         String url = roadmap.get(SEARCH_PAGE);
-        BlogDAO dao = new BlogDAO();
+        BlogDAO blogDao = new BlogDAO();
         CategoryDAO catDao = new CategoryDAO();
 
         try {
-            if (null != searchValue && searchValue != "") {
-                blogList = dao.getAllApprovedBlogLikeTitle(searchValue);
+            if (null != searchType && !"".equals(searchType)) {
+                if ("popular".equals(searchType)) {
+                    blogList = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(10);
+                } else if ("recent".equals(searchType)) {
+                    blogList = blogDao.getAllApprovedBlog(10);
+                }
+            } else {
+                if (null != searchValue && !"".equals(searchValue)) {
+                    blogList = blogDao.getAllApprovedBlogLikeTitle(searchValue);
+                }
             }
 
             int maxPageItem = 5;

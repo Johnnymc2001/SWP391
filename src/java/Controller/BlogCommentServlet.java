@@ -100,15 +100,16 @@ public class BlogCommentServlet extends HttpServlet {
                     CommentToAccountMap.put(comment, accountDao.getAccountFromAcoountID(comment.getOwnerID()));
                 }
 
-                if (null == commentList) {
-                    url = roadmap.get(HOME_PAGE);
-                    response.sendRedirect(url);
-                } else {
-                    request.setAttribute("COMMENT_MAP", CommentToAccountMap);
-                    url = roadmap.get(COMMENT_PAGE);
-                    RequestDispatcher rd = request.getRequestDispatcher(url);
-                    rd.forward(request, response);
-                }
+//                if (null == commentList) {
+//                    url = roadmap.get(HOME_PAGE);
+//                    response.sendRedirect(url);
+//                } else {
+//
+//                }
+                request.setAttribute("COMMENT_MAP", CommentToAccountMap);
+                url = roadmap.get(COMMENT_PAGE);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
 
             } catch (SQLException ex) {
                 String msg = ex.getMessage();
