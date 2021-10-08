@@ -62,7 +62,7 @@ public class MentorBlogPendingListServlet extends HttpServlet {
                 return;
             }
 
-            ArrayList<BlogDTO> blogList = blogDao.getAllPendingBlogFromCategoryID(account.getCategoryID());
+            ArrayList<BlogDTO> blogList = blogDao.getAllBlogWithStatusFromCategoryId("PENDING", account.getCategoryID());
             ArrayList<BlogDTO> returnList = new ArrayList<>();
 
             int maxPageItem = 5;

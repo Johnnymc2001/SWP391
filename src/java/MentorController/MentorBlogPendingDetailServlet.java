@@ -76,7 +76,7 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                 blog = blogDao.getBlogFromBlogID(blogID);
 
                 if (null != blog) {
-                    if (blog.getCategoryID().equals(account.getCategoryID())) {
+                    if (blog.getCategoryID().equals(account.getCategoryID()) || blog.getStatus().equals("PENDING")) {
                         boolean foundErr = false;
 
                         if (null == action) {

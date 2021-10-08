@@ -62,7 +62,7 @@ public class SearchBlogServlet extends HttpServlet {
                 if ("popular".equals(searchType)) {
                     blogList = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(10);
                 } else if ("recent".equals(searchType)) {
-                    blogList = blogDao.getAllApprovedBlog(10);
+                    blogList = blogDao.getAllBlogWithStatus("APPROVED" ,10);
                 }
             } else {
                 if (null != searchValue && !"".equals(searchValue)) {
