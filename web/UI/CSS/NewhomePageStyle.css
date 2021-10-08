@@ -5,7 +5,6 @@
     margin: 0;
     padding: 0;
     font-family: 'Ubuntu', sans-serif;
-    color: rgb(87, 82, 82);
 }
 
 body {
@@ -30,16 +29,10 @@ h1 {
     box-shadow: 0px 4px 7px -1px rgba(0, 0, 0, 0.1);
 }
 
-@media only screen and (max-width: 480px) {
-    #header-default {
-        padding: 0.5rem 1rem;
-    }
-}
-
 a:visited,
 a:link {
     text-decoration: none;
-    color: rgb(87, 82, 82);
+    color: black;
 }
 
 a:hover {
@@ -96,7 +89,7 @@ a:hover {
     padding: 0.4rem 0.7rem;
     border-radius: 50%;
     background: orange;
-    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.35);
 }
 
 .header-right .search-btn .search-button:active {
@@ -144,6 +137,103 @@ a:hover {
 
 .header-right .dropdown-menu .personal-menu {
     border-bottom: 0.2px rgb(219, 219, 219) solid;
+}
+
+.header-right .notify .dropdown-menu li:hover {
+    background-color: orange;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    font-size: medium;
+}
+
+.header-right .notify {
+    margin: 0 0 0 1rem;
+}
+
+.header-right .notify .notify-button {
+    border: none;
+    background: orange;
+    padding: 0.4rem 0.7rem;
+    border-radius: 50%;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.header-right .notify .num {
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: red;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    color: white;
+}
+
+.notify-box {
+    min-width: 30vw;
+}
+
+.notify-box a {
+    display: flex;
+    align-items: center;
+}
+
+.notify-box .notify-icon{
+    width: 10%;
+}
+
+.notify-box .new{
+    border-bottom: 0.2px rgb(219, 219, 219) solid;
+}
+
+.notify-box .notify-content {
+    width: 80%;
+}
+
+.notify-box .notify-content .title {
+    font-size: large;
+}
+
+.notify-box li:hover .notify-content .date {
+    font-size: small;
+    color: rgb(0, 0, 0);
+}
+
+.notify-box li:hover .notify-status{
+    color: red;
+}
+
+.notify-box .notify-content .date {
+    font-size: small;
+    color: rgb(255, 145, 0);
+}
+
+.notify-status {
+    color: orange;
+    text-align: right;
+    width: 10%;
+}
+
+@media only screen and (max-width: 480px) {
+    #header-default {
+        padding: 0.5rem 0;
+    }
+
+    .header-right .notify {
+        margin: 0 0 0 0.5rem;
+    }
+
+    .notify-box {
+        min-width: 100vw;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+    .notify-box {
+        min-width: 50vw;
+    }
 }
 
 /* CONTAINER 1 */

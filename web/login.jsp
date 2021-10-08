@@ -52,25 +52,15 @@
                             <i id="close-eye" class="close-eye d-block fas fa-eye-slash" onclick="showPassword()"></i>
                             <i id="open-eye" class="open-eye d-none fas fa-eye" onclick="hidePassword()"></i>
                         </div>
-
-                        <br/>
                         <font color="red">
                         ${LOGIN_NULL}<br/>
                         </font>
-
-
-                        <br/>
                         <font color="red">
                         ${LOGIN_ERROR}<br/>
                         </font>
-
-
-
-                        <br/>
                         <font color="red">
                         ${LOGIN_FAIL}<br/>
                         </font>
-
                         <div class="footer-link">
                             <div class="row">
                                 <div class="remember-me col-12 col-sm-6">
