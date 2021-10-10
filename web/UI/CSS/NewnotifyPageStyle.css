@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+li:hover {
+    background-color: orange;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    font-size: medium;
+}
+
+.notify {
+    margin: 0 0 0 1rem;
+}
+
+a {
+    display: flex;
+    align-items: center;
+}
+
+.notify-icon {
+    width: 10%;
+}
+
+.new {
+    border-bottom: 0.2px rgb(219, 219, 219) solid;
+}
+
+.notify-content {
+    width: 80%;
+}
+
+.notify-content .title {
+    font-size: large;
+}
+
+li {
+    list-style: none;
+    padding: 0.5rem;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.notify-status {
+    color: orange;
+}
+
+.date {
+    color: rgb(255, 136, 0);
+}
+
+li:hover .notify-content .date {
+    font-size: small;
+    color: rgb(0, 0, 0);
+}
+
+.notify-content .date {
+    font-size: small;
+}
+
+li:hover .notify-status {
+    color: red;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

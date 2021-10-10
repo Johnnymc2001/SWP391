@@ -235,6 +235,11 @@ a:hover {
     }
 }
 
+.notify-window {
+    width: 100%;
+    height: 50vh;
+}
+
 .search-bar {
     padding: 1rem 0;
     width: 100%;

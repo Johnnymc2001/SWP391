@@ -116,60 +116,7 @@
                                     <span class="num">1</span>
                                 </button>
                                 <ul class="notify-box dropdown-menu dropdown-menu-end">
-                                    <div class="new">
-                                        <h4>Recent</h4>
-                                        <li>
-                                            <a href="">
-                                                <i class="notify-icon fas fa-star fa-lg"></i>
-                                                <div class="notify-content">
-                                                    <span class="title">Awarded Blog Title</span><br>
-                                                    <span class="date">11/10/2001</span>
-                                                </div>
-                                                <div class="notify-status">
-                                                    <i class="fas fa-circle fa-xs"></i>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </div>
-                                    <div class="old">
-                                        <h4>Before</h4>
-                                        <li>
-                                            <a href="">
-                                                <i class="notify-icon fas fa-comments fa-lg"></i>
-                                                <div class="notify-content">
-                                                    <span class="title">Blog Title get commented</span><br>
-                                                    <span class="date">11/10/2001</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <i class="notify-icon fas fa-edit fa-lg"></i>
-                                                <div class="notify-content">
-                                                    <span class="title">Blog Title get edited</span><br>
-                                                    <span class="date">11/10/2001</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <i class="notify-icon fas fa-thumbs-up fa-lg"></i>
-                                                <div class="notify-content">
-                                                    <span class="title">Approved Blog Title</span><br>
-                                                    <span class="date">11/10/2001</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <i class="notify-icon fas fa-thumbs-down fa-lg"></i>
-                                                <div class="notify-content">
-                                                    <span class="title">Disapproved Blog Title</span><br>
-                                                    <span class="date">11/10/2001</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </div>
+                                    <iframe class="notify-window" src="notification" frameborder="0"></iframe>
                                 </ul>
                             </div>
                         </c:if>

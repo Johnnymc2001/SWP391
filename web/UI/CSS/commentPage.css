@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+    height: min-content;
+}
+
+.comment-post {
+    margin-top: 4rem;
+    margin-left: 2vw;
+}
+
+.comment-post .header-comment {
+    margin-top: 40px;
+}
+
+.comment-post .header-comment {
+    display: flex;
+    align-items: center;
+}
+
+.comment-post .header-comment .avatar {
+    box-sizing: unset;
+    padding: 0 1vw;
+}
+
+.comment-post .header-comment img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.comment-post .comment-field {
+    background: rgb(231, 231, 231);
+    padding: 0 0.5rem;
+    border-radius: 20px;
+}
+
+.comment-input {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    background: white;
+}
+
+.comment-input .avatar {
+    box-sizing: unset;
+    padding: 0 1vw;
+}
+
+.comment-input img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.comment-input .enter-field {
+    width: 100%;
+}
+
+.comment-input .enter-field .user-comment {
+    width: 100%;
+    padding: 0.8rem 0.5rem;
+    border-radius: 20px 0 0 20px;
+    border-right: none;
+    border: orange 1px solid;
+    position: relative;
+}
+
+.comment-input .enter-field .user-comment:focus {
+    outline: none;
+}
+
+.comment-input .send-btn {
+    padding: 0.8rem 0.8rem;
+    border-radius: 0 40px 40px 0;
+    background: orange;
+    border-left: none;
+    border: orange 1px solid;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
