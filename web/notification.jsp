@@ -17,39 +17,31 @@ Sammy Guergachi
                     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
             </script>
             <!-- this is external css -->
-            <link rel="stylesheet" href="UI/CSS/NewnotifyPage.css">
+            <link rel="stylesheet" href="UI/CSS/NewnotifyPageStyle.css">
             <!-- this is fontawsome -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <body>
-            <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo" class="Ficon" />
 
             <c:set var="notificationList" value="${requestScope.LIST_NOTIFICATION}" />
             <c:if test="${not empty notificationList}">
-                <div class="new">
-                    <h4>Recent</h4>
-                    <c:forEach var="dto" items="${notificationList}">
-                        <li>
-                            <a href="">
-                                <i class="notify-icon fas fa-star fa-lg"></i>
-                                <div class="notify-content">
-                                    <span class="title">${dto.content}</span><br>
-                                    <span class="date">${dto.date}}</span>
-                                </div>
-                                <div class="notify-status">
-                                    <i class="fas fa-circle fa-xs"></i>
-                                </div>
-                            </a>
-                        </li>
-                    </c:forEach>
-
-                </div>
-                <div class="old">
-                    <h4>Before</h4>
-                </div>
-            </c:if>
-            <c:if test="${empty notificationList}">
-                <h2>There is no Notification</h2>
-            </c:if>
-        </body>
-    </html>
+                <c:forEach var="dto" items="${notificationList}">
+                <li>
+                    <a href="">
+                        <i class="notify-icon fas fa-star fa-lg"></i>
+                        <div class="notify-content">
+                            <span class="title">${dto.content}</span><br>
+                            <span class="date">${dto.date}</span>
+                        </div>
+                        <div class="notify-status">
+                            <i class="fas fa-circle fa-xs"></i>
+                        </div>
+                    </a>
+                </li>
+            </c:forEach>
+        </c:if>
+        <c:if test="${empty notificationList}">
+            <h2>There is no Notification</h2>
+        </c:if>
+    </body>
+</html>
 </sguergachi>
