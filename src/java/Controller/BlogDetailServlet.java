@@ -61,7 +61,9 @@ public class BlogDetailServlet extends HttpServlet {
             BlogDAO blogDao = new BlogDAO();
             BlogDTO blog = blogDao.getBlogFromBlogID(blogID);
             request.setAttribute("BLOG", blog);
-            if (null == blog) {
+            request.setAttribute("AUTHOR", blog.getAccount());
+            
+            if (blog == null) {
                 url = roadmap.get(HOME_PAGE);
                 response.sendRedirect(url);
             } else {
