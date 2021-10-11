@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class NotificationDAO implements Serializable {
 
-    public  boolean createNotification(NotificationDTO dto) throws SQLException {
+    public boolean createNotification(NotificationDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -29,7 +29,7 @@ public class NotificationDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "INSERT INTO Notification (ownerID, isRead, type, content, date) "
+                String sql = "INSERT INTO Notification (ownerID, isRead, type, content, date, redirectUrl) "
                         + "VALUES (?, ? ,?, ?, ?)";
 
                 stm = con.prepareStatement(sql);
@@ -38,6 +38,7 @@ public class NotificationDAO implements Serializable {
                 stm.setString(3, dto.getType());
                 stm.setString(4, dto.getContent());
                 stm.setDate(5, dto.getDate());
+                stm.setString(6, dto.getRedirectUrl());
 
                 int line = stm.executeUpdate();
 
@@ -56,7 +57,7 @@ public class NotificationDAO implements Serializable {
         return false;
     }
 
-    public  ArrayList<NotificationDTO> getAllNotification() throws SQLException {
+    public ArrayList<NotificationDTO> getAllNotification() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -68,7 +69,7 @@ public class NotificationDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT notificationID, ownerID, isRead, type, content, date "
+                String sql = "SELECT notificationID, ownerID, isRead, type, content, date, redirectUrl "
                         + "FROM Notification "
                         + "ORDER BY date DESC";
 
@@ -83,8 +84,9 @@ public class NotificationDAO implements Serializable {
                     String type = rs.getString("type");
                     String content = rs.getString("content");
                     Date date = rs.getDate("date");
+                    String redirectUrl = rs.getString("redirectUrl");
 
-                    dto = new NotificationDTO(notificationID, ownerID, isRead, type, content, date);
+                    dto = new NotificationDTO(notificationID, ownerID, isRead, type, content, date, redirectUrl);
                     notificationList.add(dto);
                 }
 
@@ -104,7 +106,7 @@ public class NotificationDAO implements Serializable {
         return null;
     }
 
-    public  ArrayList<NotificationDTO> getAllNotificationFromAccountID(int accountId) throws SQLException {
+    public ArrayList<NotificationDTO> getAllNotificationFromAccountID(int accountId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -116,7 +118,7 @@ public class NotificationDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT notificationID, ownerID, isRead, type, content, date "
+                String sql = "SELECT notificationID, ownerID, isRead, type, content, date, redirectUrl "
                         + "FROM Notification "
                         + "WHERE ownerID = ?";
 
@@ -132,8 +134,9 @@ public class NotificationDAO implements Serializable {
                     String type = rs.getString("type");
                     String content = rs.getString("content");
                     Date date = rs.getDate("date");
+                    String redirectUrl = rs.getString("redirectUrl");
 
-                    dto = new NotificationDTO(notificationID, ownerID, isRead, type, content, date);
+                    dto = new NotificationDTO(notificationID, ownerID, isRead, type, content, date, redirectUrl);
                     notificationList.add(dto);
                 }
 
@@ -153,7 +156,7 @@ public class NotificationDAO implements Serializable {
         return null;
     }
 
-    public  NotificationDTO getNotificationFromNotificationID(int notificationId) throws SQLException {
+    public NotificationDTO getNotificationFromNotificationID(int notificationId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -164,7 +167,7 @@ public class NotificationDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT notificationID, ownerID, isRead, type, content, date "
+                String sql = "SELECT notificationID, ownerID, isRead, type, content, date, redirectUrl "
                         + "FROM Notification "
                         + "WHERE notificationID = ? "
                         + "ORDER BY date DESC";
@@ -181,8 +184,9 @@ public class NotificationDAO implements Serializable {
                     String type = rs.getString("type");
                     String content = rs.getString("content");
                     Date date = rs.getDate("date");
+                    String redirectUrl = rs.getString("redirectUrl");
 
-                    dto = new NotificationDTO(notificationID, ownerID, isRead, type, content, date);
+                    dto = new NotificationDTO(notificationID, ownerID, isRead, type, content, date, redirectUrl);
                 }
 
                 return dto;
@@ -201,7 +205,7 @@ public class NotificationDAO implements Serializable {
         return null;
     }
 
-    public  boolean updateNotification(int notificationId, NotificationDTO dto) throws SQLException {
+    public boolean updateNotification(int notificationId, NotificationDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -211,7 +215,7 @@ public class NotificationDAO implements Serializable {
 
             if (con != null) {
                 String sql = "UPDATE Notification "
-                        + "SET ownerID = ?, isRead = ?, type = ?, content = ?, date = ? "
+                        + "SET ownerID = ?, isRead = ?, type = ?, content = ?, date = ?, redirectUrl = ? "
                         + "WHERE notificationID = ?";
 
                 stm = con.prepareStatement(sql);
@@ -221,8 +225,9 @@ public class NotificationDAO implements Serializable {
                 stm.setString(3, dto.getType());
                 stm.setString(4, dto.getContent());
                 stm.setDate(5, dto.getDate());
+                stm.setString(6, dto.getRedirectUrl());
 
-                stm.setInt(6, notificationId);
+                stm.setInt(7, notificationId);
 
                 int line = stm.executeUpdate();
 
@@ -234,7 +239,7 @@ public class NotificationDAO implements Serializable {
         return false;
     }
 
-    public  boolean deleteNotification(int notificationId) throws SQLException {
+    public boolean deleteNotification(int notificationId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 

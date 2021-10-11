@@ -23,91 +23,31 @@ Sammy Guergachi
         <body>
             <img src="UI/Icon/FPTLogo.jpg" alt="FPTLogo" class="Ficon" />
 
-            <c:set var="noti" value="${requestScope.LIST_NOTIFICATION}" />
-            <c:if test="${not empty noti}">
+            <c:set var="notificationList" value="${requestScope.LIST_NOTIFICATION}" />
+            <c:if test="${not empty notificationList}">
                 <div class="new">
                     <h4>Recent</h4>
-                    <li>
-                        <a href="">
-                            <i class="notify-icon fas fa-star fa-lg"></i>
-                            <div class="notify-content">
-                                <span class="title">Awarded Blog Title</span><br>
-                                <span class="date">11/10/2001</span>
-                            </div>
-                            <div class="notify-status">
-                                <i class="fas fa-circle fa-xs"></i>
-                            </div>
-                        </a>
-                    </li>
+                    <c:forEach var="dto" items="${notificationList}">
+                        <li>
+                            <a href="">
+                                <i class="notify-icon fas fa-star fa-lg"></i>
+                                <div class="notify-content">
+                                    <span class="title">${dto.content}</span><br>
+                                    <span class="date">${dto.date}}</span>
+                                </div>
+                                <div class="notify-status">
+                                    <i class="fas fa-circle fa-xs"></i>
+                                </div>
+                            </a>
+                        </li>
+                    </c:forEach>
+
                 </div>
                 <div class="old">
                     <h4>Before</h4>
-                    <li>
-                        <a href="">
-                            <i class="notify-icon fas fa-comments fa-lg"></i>
-                            <div class="notify-content">
-                                <span class="title">Blog Title get commented</span><br>
-                                <span class="date">11/10/2001</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="notify-icon fas fa-edit fa-lg"></i>
-                            <div class="notify-content">
-                                <span class="title">Blog Title get edited</span><br>
-                                <span class="date">11/10/2001</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="notify-icon fas fa-thumbs-up fa-lg"></i>
-                            <div class="notify-content">
-                                <span class="title">Approved Blog Title</span><br>
-                                <span class="date">11/10/2001</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="notify-icon fas fa-thumbs-down fa-lg"></i>
-                            <div class="notify-content">
-                                <span class="title">Disapproved Blog Title</span><br>
-                                <span class="date">11/10/2001</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="notify-icon fas fa-thumbs-down fa-lg"></i>
-                            <div class="notify-content">
-                                <span class="title">Disapproved Blog Title</span><br>
-                                <span class="date">11/10/2001</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="notify-icon fas fa-thumbs-down fa-lg"></i>
-                            <div class="notify-content">
-                                <span class="title">Disapproved Blog Title</span><br>
-                                <span class="date">11/10/2001</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="notify-icon fas fa-thumbs-down fa-lg"></i>
-                            <div class="notify-content">
-                                <span class="title">Disapproved Blog Title</span><br>
-                                <span class="date">11/10/2001</span>
-                            </div>
-                        </a>
-                    </li>
                 </div>
             </c:if>
-            <c:if test="${ empty noti}">
+            <c:if test="${empty notificationList}">
                 <h2>There is no Notification</h2>
             </c:if>
         </body>

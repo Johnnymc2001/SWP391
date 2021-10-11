@@ -60,31 +60,11 @@ public class BlogDetailServlet extends HttpServlet {
         try {
             BlogDAO blogDao = new BlogDAO();
             BlogDTO blog = blogDao.getBlogFromBlogID(blogID);
-            request.setAttribute("BLOG_DETAIL", blog);
+            request.setAttribute("BLOG", blog);
             if (null == blog) {
                 url = roadmap.get(HOME_PAGE);
                 response.sendRedirect(url);
             } else {
-                AttachmentDAO attDao = new AttachmentDAO();
-                ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(blog.getBlogID());
-                if (attList.size() > 0) {
-                    AttachmentDTO attachment = attList.get(0);
-                    String base64Image = "";
-                    System.out.println(attachment.toString());
-                    if ("IMAGE/BINARY".equals(attachment.getType())) {
-                        base64Image = ImageUtils.BytesToBase64(attachment.getDataBinary());
-                    }
-
-                    if ("IMAGE/BASE64".equals(attachment.getType())) {
-                        base64Image = attachment.getDataText();
-                    }
-
-                    System.out.println(base64Image);
-
-                    if (null != base64Image) {
-                        request.setAttribute("IMAGE", base64Image);
-                    }
-                }
                 url = roadmap.get(BLOGDETAIL_PAGE);
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);

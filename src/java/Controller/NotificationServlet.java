@@ -42,34 +42,31 @@ public class NotificationServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-    
+
 //        String content = request.getParameter("content");
 //        String isRead = request.getParameter("");
-          AccountDTO curUser= (AccountDTO) request.getSession().getAttribute("USER");
-       ServletContext sc = request.getServletContext();
-            HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-          String url = "notificationPage";
+        AccountDTO curUser = (AccountDTO) request.getSession().getAttribute("USER");
+        ServletContext sc = request.getServletContext();
+        HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+        String url = "notificationPage";
         try {
-            
-            if (curUser==null){
-               url="home";
+
+            if (null == curUser) {
+                url = "home";
             }
-            
+
             NotificationDAO dao = new NotificationDAO();
-            ArrayList<NotificationDTO> listNotification= dao.getAllNotificationFromAccountID(curUser.getAccountID());
-            if (listNotification!=null){
+            ArrayList<NotificationDTO> listNotification = dao.getAllNotificationFromAccountID(curUser.getAccountID());
+            if (listNotification != null) {
                 request.setAttribute("LIST_NOTIFICATION", listNotification);
-              for (NotificationDTO dto : listNotification) {
-                  System.out.println(dto);
-              }
             }
-     
-        }finally {
-            url=roadmap.get(url);
-                  RequestDispatcher rd = request.getRequestDispatcher(url);
-                 rd.forward(request, response);
-          
-            }
+
+        } finally {
+            url = roadmap.get(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

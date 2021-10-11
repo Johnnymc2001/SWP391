@@ -13,12 +13,24 @@ import java.sql.Date;
  * @author JohnnyMC
  */
 public class NotificationDTO implements Serializable {
+
     private int notificationID;
     private int ownerID;
     private boolean isRead;
     private String type;
     private String content;
     private Date date;
+    private String redirectUrl;
+
+    public NotificationDTO(int notificationID, int ownerID, boolean isRead, String type, String content, Date date, String redirectUrl) {
+        this.notificationID = notificationID;
+        this.ownerID = ownerID;
+        this.isRead = isRead;
+        this.type = type;
+        this.content = content;
+        this.date = date;
+        this.redirectUrl = redirectUrl;
+    }
 
     public NotificationDTO(int notificationID, int ownerID, boolean isRead, String type, String content, Date date) {
         this.notificationID = notificationID;
@@ -27,6 +39,7 @@ public class NotificationDTO implements Serializable {
         this.type = type;
         this.content = content;
         this.date = date;
+        this.redirectUrl = "";
     }
 
     public NotificationDTO(int ownerID, boolean isRead, String type, String content, Date date) {
@@ -35,6 +48,7 @@ public class NotificationDTO implements Serializable {
         this.type = type;
         this.content = content;
         this.date = date;
+        this.redirectUrl = "";
     }
 
     public NotificationDTO() {
@@ -88,10 +102,17 @@ public class NotificationDTO implements Serializable {
         this.date = date;
     }
 
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+    }
+
     @Override
     public String toString() {
-        return "NotificationDTO{" + "notificationID=" + notificationID + ", ownerID=" + ownerID + ", isRead=" + isRead + ", type=" + type + ", content=" + content + ", date=" + date + '}';
+        return "NotificationDTO{" + "notificationID=" + notificationID + ", ownerID=" + ownerID + ", isRead=" + isRead + ", type=" + type + ", content=" + content + ", date=" + date + ", redirectUrl=" + redirectUrl + '}';
     }
-    
-    
+
 }
