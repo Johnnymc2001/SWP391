@@ -28,6 +28,7 @@
         <c:if test="${not empty user}">
             <c:if test="${user.role == 'Mentor' || user.role == 'Student'}">
                 <form class="comment-input" action="comment" method="post">
+                    <input type="hidden" name="txtBlogID" value="${param.txtBlogID}"
                     <div class="avatar">
                         <img src="UI/Icon/Haotn.jpg" alt="">
                     </div>
