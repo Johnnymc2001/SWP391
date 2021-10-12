@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AccountDTO;
 import DAO.AttachmentDAO;
 import DAO.AttachmentDTO;
 import DAO.BlogDAO;
@@ -60,8 +61,10 @@ public class BlogDetailServlet extends HttpServlet {
         try {
             BlogDAO blogDao = new BlogDAO();
             BlogDTO blog = blogDao.getBlogFromBlogID(blogID);
+            AccountDTO author = blog.getAccount();
+            
             request.setAttribute("BLOG", blog);
-            request.setAttribute("AUTHOR", blog.getAccount());
+            request.setAttribute("AUTHOR", author);
             
             if (blog == null) {
                 url = roadmap.get(HOME_PAGE);

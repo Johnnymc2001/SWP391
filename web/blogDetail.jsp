@@ -32,7 +32,7 @@
 
 <body>
 
-    <c:set var="author" value="${sessionScope.AUTHOR}"/>
+    <c:set var="author" value="${requestScope.AUTHOR}"/>
     <c:set var="blog" value="${requestScope.BLOG}"/>
     <!-- THIS IS NAVBAR -->
     <header class="navbar navbar-expand-lg" id="header-default">
@@ -133,7 +133,7 @@
                             <div class="author-mobile d-flex col-md-12 col-lg-7">
                                 <div class="text-introduce" data-tilt>
                                     <h4>Welcome</h4>
-                                    <h1>${author.getFullname()}</h1>
+                                    <h1>${author.fullname}</h1>
                                     <div class="reward">
                                         <i class="fas fa-trophy fa-lg">
                                             <p>3</p>
