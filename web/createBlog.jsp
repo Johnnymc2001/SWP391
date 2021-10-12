@@ -38,14 +38,14 @@
                 ${requestScope.ERROR_TITLE}
                 </font><br/>
 
-                <select name="categoryBox">
+                </br>Category <select name="categoryBox">
                     <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
                     <c:forEach var="dto" items="${dtoList}" varStatus="counter">
                         <option value="${dto.categoryID}">${dto.categoryName}</option>
                     </c:forEach>
                 </select>
                 
-                Thumbnail: <br/><input type="file" id="attachment" name="fileAttachment">
+                </br>Thumbnail <br/><input type="file" id="attachment" name="fileAttachment">
                 <font color="red">
                 ${requestScope.ERROR_UPLOAD}
                 </font><br/>
