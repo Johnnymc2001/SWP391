@@ -200,6 +200,12 @@
                             </div>
                         </div>
                     </div>
+                                    
+                                    <form action="edit" method="POST" >
+                                        <input type="hidden" name="txtBlogID" value="${blog.blogID}">
+                                        <input type="submit" name="btAction"   value="Edit">
+                                    </form>
+                                    
 
                     <!-- THIS IS COMMENT SECTION -->
                     <div id="comment-section" class="comment-section container">
