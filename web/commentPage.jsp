@@ -24,10 +24,9 @@
     </head>
     <body>
 
-
-        <c:if test="${not empty sessionScope.USER}">
-
-            <c:if test="${sessionScope.USER.role == 'Mentor' || sessionScope.USER.role == 'Student'}">
+        <c:set var="user" value="sessionScope.USER"/>
+        <c:if test="${not empty user}">
+            <c:if test="${user.role == 'Mentor' || user.role == 'Student'}">
                 <form class="comment-input" action="comment" method="post">
                     <div class="avatar">
                         <img src="UI/Icon/Haotn.jpg" alt="">
