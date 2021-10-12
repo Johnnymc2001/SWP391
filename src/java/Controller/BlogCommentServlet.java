@@ -72,7 +72,7 @@ public class BlogCommentServlet extends HttpServlet {
         if (null != curUser) {
             ownerID = curUser.getAccountID();
         } else {
-            ownerID = 2;
+            ownerID = 0;
         }
 
         BlogCommentDAO dao = new BlogCommentDAO();
