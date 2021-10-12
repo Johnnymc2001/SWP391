@@ -24,7 +24,7 @@
     </head>
     <body>
 
-        <c:set var="user" value="sessionScope.USER"/>
+        <c:set var="user" value="${sessionScope.USER}"/>
         <c:if test="${not empty user}">
             <c:if test="${user.role == 'Mentor' || user.role == 'Student'}">
                 <form class="comment-input" action="comment" method="post">
