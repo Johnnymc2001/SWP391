@@ -26,31 +26,32 @@
 
 
         <c:if test="${not empty sessionScope.USER}">
-            <form class="comment-input" action="comment" method="post">
-                <div class="avatar">
-                    <img src="UI/Icon/Haotn.jpg" alt="">
-                </div>
-                <div class="enter-field">
-                    <input class="user-comment" type="text" name="content" id="txtComment">
-                </div>
-                <button class="send-btn" type="submit"><i class="fas fa-paper-plane fa-lg"></i></button>
-            </form>
-            <c:if test="${sessionScope.USER.role != 'Mentor' || sessionScope.USER.role != 'Student'}">
-                <c:set var="dtoCmMAP" value="${requestScope.COMMENT_MAP}"/>
-                <div class="comment-post">
-                    <c:forEach var="dtoCm" items="${dtoCmMAP}">
-                        <div class="header-comment">
-                            <div class="avatar">
-                                <img src="UI/Icon/tamt.jpg" alt="">
-                            </div>
-                            <div class="comment-field">
-                                <h5>${dtoCm.value.fullname}</h5>
-                                <p>${dtoCm.key.content}</p>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
+
+            <c:if test="${sessionScope.USER.role == 'Mentor' || sessionScope.USER.role == 'Student'}">
+                <form class="comment-input" action="comment" method="post">
+                    <div class="avatar">
+                        <img src="UI/Icon/Haotn.jpg" alt="">
+                    </div>
+                    <div class="enter-field">
+                        <input class="user-comment" type="text" name="content" id="txtComment">
+                    </div>
+                    <button class="send-btn" type="submit"><i class="fas fa-paper-plane fa-lg"></i></button>
+                </form>
             </c:if>
         </c:if>
+        <c:set var="dtoCmMAP" value="${requestScope.COMMENT_MAP}"/>
+        <div class="comment-post">
+            <c:forEach var="dtoCm" items="${dtoCmMAP}">
+                <div class="header-comment">
+                    <div class="avatar">
+                        <img src="UI/Icon/tamt.jpg" alt="">
+                    </div>
+                    <div class="comment-field">
+                        <h5>${dtoCm.value.fullname}</h5>
+                        <p>${dtoCm.key.content}</p>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </body>
 </html>
