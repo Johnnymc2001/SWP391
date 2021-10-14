@@ -107,13 +107,8 @@ public class CreateAccountServlet extends HttpServlet {
 //                   Date  date =new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);  
                     java.sql.Date sqlDate;
                     sqlDate = java.sql.Date.valueOf(birthdate);
-                    AccountDTO dto = new AccountDTO();
-                    dto.setAddress(address);
-                    dto.setUsername(username);
-                    dto.setPassword(password);
-                    dto.setFullname(fullname);
-                    dto.setPhone(phone);
-                    dto.setBirthday(sqlDate);
+                    AccountDTO dto = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
+                 
 
 //               AccountDAO.createAccount(dto);
                   
