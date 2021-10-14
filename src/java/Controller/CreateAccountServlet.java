@@ -52,8 +52,8 @@ public class CreateAccountServlet extends HttpServlet {
         String fullname = request.getParameter("fullname");
         String address = request.getParameter("address");
         String password = request.getParameter("password");
-        String confirm_password = request.getParameter("confirm_password");
-        String email = request.getParameter("emai");
+        String confirm_password = request.getParameter("confirm-password");
+        String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
         boolean foundError = false;
