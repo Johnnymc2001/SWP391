@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String Remember = request.getParameter("chkRemember");
         String url = "loginPage";
         System.out.println(username);
         System.out.println(password);
@@ -87,13 +88,18 @@ public class LoginServlet extends HttpServlet {
                     request.getRequestDispatcher(url).forward(request, response);
                 } else {
                     Cookie cookie = new Cookie(username, password);
-                    cookie.setMaxAge(60 * 5);
+                    if(Remember.equals("true")){
+                        cookie.setMaxAge(60 * 24 * 7);
+                        
+                    }
+                    else{
+                         cookie.setMaxAge(60 * 5);
+                    }
                     response.addCookie(cookie);
                     url = roadmap.get("home");
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER", curUser);
                     response.sendRedirect(url);
-
                 }
 
 

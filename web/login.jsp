@@ -64,7 +64,7 @@
                         <div class="footer-link">
                             <div class="row">
                                 <div class="remember-me col-12 col-sm-6">
-                                    <input id="checkbox" type="checkbox">
+                                    <input id="checkbox" type="checkbox" name="chkRemember" value="true">
                                     <label for="checkbox">Remember me</label>
                                 </div>
                                 <div class="forgot-link col-12 col-sm-6">
