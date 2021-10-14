@@ -98,7 +98,7 @@ public class HomePageServlet extends HttpServlet {
             request.setAttribute("MOST_COMMENT_ROW_2", mostCommentRow2);
 
             // Recent [Recent]
-            ArrayList<BlogDTO> recent = blogDao.getAllBlogWithStatus("APPROVED" ,10);
+            ArrayList<BlogDTO> recent = blogDao.getAllBlogWithStatus("APPROVED" , 5);
             request.setAttribute("MOST_RECENT", recent);
 
             // Landing Post [Epic]

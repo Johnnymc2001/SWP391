@@ -48,6 +48,7 @@ public class SearchBlogServlet extends HttpServlet {
 //        String url = roadmap.get(SEARCH_PAGE);
         String searchValue = request.getParameter("txtSearchValue");
         String searchType = request.getParameter("txtSearchType");
+        String searchCategory = request.getParameter("txtSearchCategory");
         String pageString = request.getParameter("page");
         ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
         ArrayList<BlogDTO> returnList = new ArrayList<BlogDTO>();
@@ -62,8 +63,10 @@ public class SearchBlogServlet extends HttpServlet {
                 if ("popular".equals(searchType)) {
                     blogList = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(10);
                 } else if ("recent".equals(searchType)) {
-                    blogList = blogDao.getAllBlogWithStatus("APPROVED" ,10);
+                    blogList = blogDao.getAllBlogWithStatus("APPROVED", 10);
                 }
+            } else if (null != searchCategory) {
+                blogList = blogDao.getAllBlogFromCategoryId(searchCategory);
             } else {
                 if (null != searchValue && !"".equals(searchValue)) {
                     blogList = blogDao.getAllApprovedBlogLikeTitle(searchValue);
@@ -88,6 +91,7 @@ public class SearchBlogServlet extends HttpServlet {
                 returnList.add(blogList.get(i));
             }
 
+            request.setAttribute("CAT_LIST", catDao.getAllCategory());
             request.setAttribute("BLOG_LIST", returnList);
             request.setAttribute("PAGE_COUNT", (int) Math.ceil((double) blogList.size() / (double) maxPageItem));
 

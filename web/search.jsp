@@ -142,42 +142,14 @@
                         <div class="card-slider">
                             <div class="swiper">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a class="category-card" href="">
-                                            <img src="UI/Icon/selfmademan.jpg" alt="">
-                                            <p>Category name</p>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a class="category-card" href="">
-                                            <img src="UI/Icon/FPTCampus.jpg" alt="">
-                                            <p>Category name</p>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a class="category-card" href="">
-                                            <img src="UI/Icon/hallwayfpt.jpg" alt="">
-                                            <p>Category name</p>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a class="category-card" href="">
-                                            <img src="UI/Icon/FPTCampus.jpg" alt="">
-                                            <p>Category name</p>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a class="category-card" href="">
-                                            <img src="UI/Icon/selfmademan.jpg" alt="">
-                                            <p>Category name</p>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a class="category-card" href="">
-                                            <img src="UI/Icon/selfmademan.jpg" alt="">
-                                            <p>Category name</p>
-                                        </a>
-                                    </div>
+                                    <c:forEach var="dto" items="${requestScope.CAT_LIST}">
+                                        <div class="swiper-slide">
+                                            <a class="category-card" href="search?txtSearchCategory=${dto.categoryID}">
+                                                <img src="UI/Icon/selfmademan.jpg" alt="">
+                                                <p>${dto.categoryName}</p>
+                                            </a>
+                                        </div>   
+                                    </c:forEach>
                                 </div>
                                 <!-- Add Pagination -->
                                 <div class="swiper-pagination"></div>
