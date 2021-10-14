@@ -163,7 +163,7 @@
                                 <i id="reopen-eye" class="open-eye d-none fas fa-eye" onclick="hiderePassword()"></i>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="confirm-password" id="confirm-password" type="confirm-password" required>
+                                <input name="confirm-password" id="confirm-password" type="password" required>
                                 <label class="confirm-password-label" for="confirm-password"><i class="fas fa-lock"></i>Confirm Password</label>
                                 <c:if test="${not empty error.confirmNotMatched}">
                                     <br/>
