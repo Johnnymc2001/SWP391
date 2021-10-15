@@ -9,6 +9,7 @@ import DAO.AwardDAO;
 import DAO.AwardDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -52,7 +53,7 @@ public class MentorCreateAwardServlet extends HttpServlet {
             if (dao.createAward(dto)) {
                 url = roadmap.get(HOME_PAGE);
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("CreateAwardServlet _ SQL " + msg);
         } finally {
