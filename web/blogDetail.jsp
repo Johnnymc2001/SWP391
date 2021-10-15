@@ -127,85 +127,124 @@
                     </div>
                     </header>
                     <!-- END OF NAVBAR -->
-                    <!-- THIS IS AUTHOR AREA -->
-                    <div class="container-fluid" data-parallax="scroll" data-image-src="UI/Icon/FPTCampus_2.jpg">
-                        <div class="author-info-div row">
-                            <div class="author-mobile d-flex col-md-12 col-lg-7">
-                                <div class="text-introduce" data-tilt>
-                                    <h4>Welcome</h4>
-                                    <h1>${author.fullname}</h1>
-                                    <div class="reward">
-                                        <i class="fas fa-trophy fa-lg">
-                                            <p>3</p>
-                                        </i>
-                                        <i class="middle-icon fas fa-pen fa-lg">
-                                            <p>5</p>
-                                        </i>
-                                        <i class="fas fa-thumbs-up fa-lg">
-                                            <p>7</p>
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="author-img-div d-none d-lg-flex col-md-5">
-                                <div class="tilt-element" data-tilt data-tilt-glare data-tilt-max-glare="0.8">
-                                    <img src="UI/Icon/Khoatd.png" alt="">
-                                    <div class="tilt-text">
-                                        <h3>${author.getFullname()}</h3>
-                                        <i class="fas fa-trophy">
-                                            <p>3</p>
-                                        </i>
-                                        <i class="middle-icon fas fa-pen">
-                                            <p>5</p>
-                                        </i>
-                                        <i class="fas fa-thumbs-up">
-                                            <p>7</p>
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="blog-detail container-fluid">
-                        <div class="row justify-content-center">
-                            <div class="col-sm-8">
+                    <div class="parallax-window" data-parallax="scroll" data-image-src="UI/Icon/FPTCampus_2.jpg">
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-8">
                                 <div class="blog-title">
                                     <h1>${blog.title}</h1>
                                     <div class="blog-note">
                                         <ul>
                                             <li><a href="">${author.getFullname()}</a></li>
-                                            <li>${blog.title}</li>
-                                            <li>Comments (${blog.getAllComments().size()})</li>
+                                            <li>11/10/2001</li>
+                                            <li>comment(${blog.getAllComments().size()})</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="blog-content">
                                     <img class="blog-img" src="UI/Icon/selfmademan.jpg" alt="">
-                                    <p class="content-text">
-                                      ${blog.content}
+                                    <p class="blog-text">
+                                        ${blog.content}
                                     </p>
-                                    <div class="vote">
-                                        <button class="vote-btn"><i class="fas fa-star"> 123</i></button>
-                                        <button class="vote-btn"><i class="fas fa-trophy"> 3</i></button>
+                                    <div class="blog-vote">
+                                        <div>
+                                            <i class="fas fa-star fa-lg"></i>
+                                            <span>13</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-trophy fa-lg"></i>
+                                            <span>5</span>
+                                        </div>
+                                    </div>
+                                    <div class="user-vote">
+                                        <div class="btn-group dropend">
+                                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                Vote
+                                            </button>
+                                            <ul class="vote-menu dropdown-menu">
+                                                <li>
+                                                    <i class="fas fa-star fa-lg"></i>
+                                                    <span>5</span>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-star fa-lg"></i>
+                                                    <span>4</span>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-star fa-lg"></i>
+                                                    <span>3</span>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-star fa-lg"></i>
+                                                    <span>2</span>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-star fa-lg"></i>
+                                                    <span>1</span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="vote-option">
-                                    <button class="option-btn"><i class="fas fa-star">5</i></button>
-                                    <button class="option-btn"><i class="fas fa-star">4</i></button>
-                                    <button class="option-btn"><i class="fas fa-star">3</i></button>
-                                    <button class="option-btn"><i class="fas fa-star">2</i></button>
-                                    <button class="option-btn"><i class="fas fa-star">1</i></button>
+                            </div>
+                            <div class="right-colum col-lg-4">
+                                <div class="row justify-content-center">
+                                    <div class="author-introduce col-md-6 col-lg-11">
+                                        <h4>Author of this article</h4>
+                                        <h2>${author.getFullname()}</h2>
+                                        <div class="reward">
+                                            <i class="fas fa-trophy fa-lg">
+                                                <p>3</p>
+                                            </i>
+                                            <i class="fas fa-pen fa-lg">
+                                                <p>5</p>
+                                            </i>
+                                            <i class="fas fa-star fa-lg">
+                                                <p>7</p>
+                                            </i>
+                                        </div>
+                                    </div>
+                                    <div class="web-introduce col-md-6 col-lg-11">
+                                        <div class="logo-title">
+                                            <img src="UI/Icon/FPTLogo.jpg" alt="">
+                                            <h3>FPT Academy</h3>
+                                        </div>
+                                        <p>Hello, We’re content writer who is fascinated by content academy. We help students access the
+                                            articles with a wide range of knowledge.</p>
+                                    </div>
+                                </div>
+                                <div class="explore-topics">
+                                    <h3>Explore Topic</h3>
+                                    <div class="topic-list">
+                                        <ul>
+                                            <c:forEach var="dto" items="${requestScope.CAT_LIST}">
+                                                <li>
+                                                    <a href="">${dto.categoryName}</a>
+                                                    <a href="">(10)</a>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="register-invitation">
+                                    <h3>Join us now</h3>
+                                    <h6>Be one of us to reaches the world's knowledge</h6>
+                                    <a href="registerPage"><button>Register to join</button></a>
+                                    <p><a href="loginPage">Already have an account ?</a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                                    
-                                    <form action="edit" method="POST" >
-                                        <input type="hidden" name="txtBlogID" value="${blog.blogID}">
-                                        <input type="submit" name="btAction"   value="Edit">
-                                    </form>
-                                    
+                    <!-- END OF BLOG CONTENT -->
+
+                    <form action="edit" method="POST" >
+                        <input type="hidden" name="txtBlogID" value="${blog.blogID}">
+                        <input type="submit" name="btAction"   value="Edit">
+                    </form>
+
 
                     <!-- THIS IS COMMENT SECTION -->
                     <div id="comment-section" class="comment-section container">
@@ -224,8 +263,8 @@
                     <!-- This is JS -->
                     <script type="text/javascript" src="UI/script/vanilla-tilt.js"></script>
 
-                    
-                   
-    </body>
 
-</html>
+
+                    </body>
+
+                    </html>

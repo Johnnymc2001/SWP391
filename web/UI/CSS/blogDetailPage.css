@@ -16,6 +16,10 @@ body {
     margin: 0;
 }
 
+.container{
+    min-height: max-content;
+}
+
 /* NAVBAR */
 
 #header-default {
@@ -192,175 +196,197 @@ a:hover {
     }
 }
 
-/* Author div */
-
-.author-info-div {
-    height: 650px;
-}
-
-.author-img-div {
-    display: flex;
-    align-items: center;
-}
-
-.author-img-div .tilt-element {
-    width: 350px;
-    height: 350px;
-    transform-style: preserve-3d;
-    transform: perspective(1000px);
-}
-
-.author-img-div img {
-    width: 100%;
-    height: 100%;
-    border-radius: 40px;
-}
-
-.author-img-div .tilt-text {
-    position: absolute;
-    top: 300px;
-    left: 25px;
-    text-align: center;
-    width: 300px;
-    background-color: white;
-    transform: translateZ(20px) scaleY(0);
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
-    transition: all 0.3s;
-}
-
-.author-img-div .tilt-element:hover .tilt-text {
-    transform: translateZ(20px) scaleY(1);
-}
-
-.fas .js-tilt-glare {
-    border-radius: 20px;
-}
-
-.author-img-div .js-tilt-glare {
-    border-radius: 40px;
-}
-
-.author-img-div .tilt-text .middle-icon {
-    margin: 0 3rem;
-}
-
-.notify-window {
-    width: 100%;
+/* BLOG_CONTAINER */
+.parallax-window {
     height: 50vh;
+    margin-bottom: 5vh;
 }
 
-.text-introduce .middle-icon {
-    margin: 0 3rem;
+.parallax-window img {
+    width: 100%;
 }
 
-.text-introduce {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    padding: 1rem;
-}
-
-.text-introduce .fas {
-    padding: 1rem 1.5rem 0 1.5rem;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.35);
-    border-radius: 20px;
-    color: orange;
-}
-
-.text-introduce h4 {
-    color: orange;
-}
-
-.text-introduce h1 {
-    color: #203656;
-}
-
-.text-introduce .reward p {
-    padding: 0.5rem 0;
-}
-
-.author-mobile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.blog-detail {
-    margin-top: 10vh;
-}
-
-.blog-detail .blog-note {
-    font-size: 14px;
-    color: #8F9BAD;
-}
-
-.blog-detail h1 {
+.blog-title h1 {
     color: #203656;
     font-size: calc(30px + 18 * ((100vw - 430px) / 770));
     font-weight: 600;
 }
 
-.blog-detail ul {
+.blog-note ul {
     display: flex;
-}
-
-.blog-detail ul li {
-    padding: 0 1rem;
     list-style: none;
+    justify-content: right;
 }
 
-.blog-detail .blog-title {
-    border-bottom: 0.2px rgb(219, 219, 219) solid;
+.blog-note ul li {
+    margin: 0 1rem;
 }
 
-.blog-detail .blog-content {
-    margin-top: 1rem;
-    padding: 0 0 1rem 0.5rem;
-    border-bottom: 0.2px rgb(219, 219, 219) solid;
+.blog-content .blog-img {
+    width: 100%;
+    border-radius: 20px;
+    margin: 1rem 0;
+
 }
 
-.blog-content .vote {
-    margin-top: 1rem;
+.blog-content .blog-text {
+    font-size: calc(16px + 2 * ((100vw - 430px) / 770));
+}
+
+.blog-vote{
+    width: 100%;
+    padding: 0.5rem 0;
+    border: 0.2px rgb(219, 219, 219) solid;
+    border-left: none;
+    border-right: none;
     display: flex;
     justify-content: space-between;
 }
 
-.blog-content .vote .vote-btn{
-    padding: 0.5rem 1rem;
+.blog-vote .fas{
     color: orange;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.35);
-    border-radius: 10px;
-    background-color: white;
-    border: none;
 }
 
-.option-btn{
-    padding: 0.5rem 1rem;
-    color: orange;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.35);
-    border-radius: 10px;
-    background-color: white;
-    border: none;
+.blog-vote span{
+    color: #203656;
+    font-size: 18px;
 }
 
-.blog-detail .blog-content .blog-img {
-    width: 100%;
+.web-introduce {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    padding: 2rem 1rem;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 5vh;
+}
+
+.web-introduce .logo-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #203656;
+}
+
+.web-introduce .logo-title img {
+    width: 4rem;
+}
+
+.author-introduce {
+    color: #203656;
+    text-align: center;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 1rem;
+    height: max-content;
+    margin-top: 5vh;
+}
+
+.author-introduce .reward {
+    margin-top: 2rem;
+}
+
+.author-introduce .reward .fas {
+    padding: 0 10%;
+    color: orange;
+    line-height: 1.7;
+}
+
+.explore-topics {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 5vh;
+}
+
+.topic-list ul {
+    padding: 0;
+}
+
+.topic-list li {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    border-bottom: 0.2px rgb(219, 219, 219) solid;
+    padding: 0.5rem 0;
+}
+
+.register-invitation {
+    text-align: center;
+    color: #203656;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    padding: 1rem 0.5rem;
+    margin-top: 5vh;
+    line-height: 1.6;
+}
+
+.register-invitation button {
+    padding: 0.5rem;
     border-radius: 20px;
+    border: none;
+    background: orange;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    margin-top: 7rem;
 }
 
-.blog-detail .blog-content .content-text {
-    font-size: calc(16px + 2 * ((100vw - 430px) / 770));
-    margin: 1rem 0 0 0;
+.user-vote{
+    margin: 0.5rem 0;
+}
+
+.user-vote button{
+    background: orange;
+}
+
+.user-vote .vote-menu{
+    min-width: 5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.vote-menu li{
+    text-align: center;
+    border: 0.2px rgb(219, 219, 219) solid;
+    border-left: none;
+    border-right: none;
+    padding: 0.3rem 0;
+}
+
+.vote-menu li:hover{
+    background: orange;
+    cursor: pointer;
+}
+
+.vote-menu li:nth-child(1){
+    color: red;
+}
+
+.vote-menu li:nth-child(2){
+    color: purple;
+}
+
+.vote-menu li:nth-child(3){
+    color: blue;
+}
+
+.vote-menu li:nth-child(4){
+    color: green;
+}
+
+.vote-menu li:nth-child(5){
+    color: gray;
+}
+
+@media only screen and (min-width: 992px) {
+    .right-colum {
+        margin-top: 200px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
-    .author-info-div {
-        height: max-content;
-    }
-
-    .blog-detail {
-        margin-top: 5vh;
+    .parallax-window {
+        height: 20vh;
+        margin-bottom: 5vh;
     }
 }
 
