@@ -31,6 +31,9 @@ editPage=edit.jsp
 notification=NotificationServlet
 notificationPage=notification.jsp
 
+rate=BlogRatingServlet
+
+
 ### STUDENT
 
 student=StudentServlet
@@ -55,6 +58,9 @@ awardListPage=mentorAwardList.jsp
 
 award=MentorAwardServlet
 awardPage=mentorAwardDetail.jsp
+
+rate=RateServlet
+
 
 ### ADMIN
 

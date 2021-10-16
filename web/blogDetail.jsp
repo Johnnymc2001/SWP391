@@ -158,36 +158,41 @@
                                             <span>5</span>
                                         </div>
                                     </div>
-                                    <div class="user-vote">
-                                        <div class="btn-group dropend">
-                                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                Vote
-                                            </button>
-                                            <ul class="vote-menu dropdown-menu">
-                                                <li>
-                                                    <i class="fas fa-star fa-lg"></i>
-                                                    <span>5</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star fa-lg"></i>
-                                                    <span>4</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star fa-lg"></i>
-                                                    <span>3</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star fa-lg"></i>
-                                                    <span>2</span>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star fa-lg"></i>
-                                                    <span>1</span>
-                                                </li>
-                                            </ul>
+                                    
+                                    <%-- ----------- HENRY SEND name="txtRate" value="Số sao được chọn hoặc null" ---------------------------   --%>
+                                    <form action="rate" method="POST">
+                                        <div class="user-vote">
+                                            <div class="btn-group dropend">
+                                                <button type="submit" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
+                                                    Vote
+                                                </button>
+                                                <ul class="vote-menu dropdown-menu">
+                                                    <li>
+                                                        <i class="fas fa-star fa-lg"></i>
+                                                        <span>5</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fas fa-star fa-lg"></i>
+                                                        <span>4</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fas fa-star fa-lg"></i>
+                                                        <span>3</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fas fa-star fa-lg"></i>
+                                                        <span>2</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fas fa-star fa-lg"></i>
+                                                        <span>1</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
+
                                 </div>
                             </div>
                             <div class="right-colum col-lg-4">

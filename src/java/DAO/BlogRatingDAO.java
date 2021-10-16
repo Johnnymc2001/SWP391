@@ -198,6 +198,54 @@ public class BlogRatingDAO implements Serializable {
         }
         return null;
     }
+    
+    public BlogRatingDTO getBlogRatingFromBlogIDAndOwnerID(int blogId, int ownerId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            BlogRatingDTO dto = null;
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT ratingID, blogID, date, rate, ownerID "
+                        + "FROM BlogRating "
+                        + "WHERE blogID = ? and ownerID = ?"
+                        + "ORDER BY date DESC";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, blogId);
+                stm.setInt(2, ownerId);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int ratingID = rs.getInt("ratingId");
+                    int blogID = rs.getInt("blogID");
+                    Date date = rs.getDate("date");
+                    double rate = rs.getDouble("rate");
+                    int ownerID = rs.getInt("ownerID");
+
+                    dto = new BlogRatingDTO(ratingID, blogID, date, rate, ownerID);
+                }
+
+                return dto;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 
     public boolean updateBlogRating(int ratingId, BlogRatingDTO dto) throws SQLException {
         Connection con = null;
