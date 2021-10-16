@@ -14,11 +14,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Create Blog</title>
         <!-- this is external css -->
-        <link rel="stylesheet" href="UI/CSS/createBlog.css">
+        <link rel="stylesheet" href="UI/CSS/createBlogPageStyle.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <!-- this is external JS -->
-        <script src="UI/script//blogDetail.js"></script>
+        <script src="UI/script/blogDetail.js"></script>
         <!-- this is bootstrap 5 -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -42,85 +42,179 @@
     </head>
     <body>
 
-        <div class="create-blog-container container-fluid">
-            <form action="create" method="POST" enctype='multipart/form-data'>
-                <div class="user-pick">
-                    <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
-
-                    <div class="title-area">
-                        <span>Title: </span>
-                        <br>
-                        <input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="60" size="62" required/>
-                    </div> 
-                    <br>
-                    <font color="red">
-                    ${requestScope.ERROR_TITLE}
-                    </font>
-
-                    <div class="category-area">
-                        <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
-                        <span>Category: </span>
-                        <select name="categoryBox">
-                            <c:forEach var="dto" items="${dtoList}" varStatus="counter">
-                                <option value="${dto.categoryID}">${dto.categoryName}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-
-                    <div class="thumbnail-area">
-                        <span>Thumbnail: </span>
-                        <br>
-                        <label for="attachment">Choose file</label>
-                        <input type="file" id="attachment" name="fileAttachment">
-                        <span>Chosen file: </span>
-                        <span id="file-name">None</span>
-                    </div>
-                    <br>
-                    <font color="red">
-                    ${requestScope.ERROR_UPLOAD}
-                    </font><br/>
+        <c:set var="user" value="${sessionScope.USER}"/>
+        <!-- THIS IS NAVBAR -->
+        <header class="navbar navbar-expand-lg" id="header-default">
+            <div class="header-left">
+                <!-- site logo -->
+                <div class="site-logo">
+                    <a href="home"><img src="UI/Icon/FPTLogo.jpg" alt="logo"></a>
+                    <a href="home">FPT Academy</a>
                 </div>
-
-                <div class="user-write">
-                    <textarea id="summernote" name="txtContent">${param.txtContent}</textarea>
+                <!-- navigate options -->
+                <div class="collapse navbar-collapse options-btn">
+                    <a href="home"><button class="active-btn">Home</button></a>
+                    <a href="search?txtSearchType=popular"><button class="">Popular</button></a>
+                    <a href="search?txtSearchType=recent"><button class="">Recent</button></a>
+                    <a href="aboutUs.html"><button class="">About</button></a>
                 </div>
-                <br/>
-                <font color="red">
-                ${requestScope.ERROR_CONTENT}
-                </font>
-                <br/>
-
-                <div class="user-footer">
-                    <button class="post" type="submit">Post</button>
-                    <button class="reset" type="reset">Reset</button>
-                    <!-- <input class="post" type="submit" value="Post" />
-                    <input class="reset" type="reset" value="Reset" /> -->
+            </div>
+            <div class="header-right">
+                <div class="search-btn">
+                    <form action="search" method="POST">
+                        <input type="hidden" name="txtSearchValue">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
-                <a href="home">Return to Home</a>
-            </form>
-        </div>
+                <c:if test="${not empty user}">
+                    <button type="button" class="menu-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        ${user.fullname}
+                    </button>
+                    <c:if test="${user.role == 'Student'}">
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <!-- this is user img -->
+                            <div class="avatar">
+                                <img src="UI/Icon/profile-icon.png" alt="avatar">
+                                <p>${user.fullname}</p>
+                            </div>
+                            <!-- personal menu -->
+                            <div class="personal-menu">
+                                <a href="studentDashboard"><li>Profile</li></a>
+                                <a href="create"><li>Create Blog</li></a>
+                                <a href="logout"><li>Log out</li></a>
+                            </div>
+                        </c:if>
+                        <c:if test="${user.role == 'Mentor'}">
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <!-- this is user img -->
+                                <div class="avatar">
+                                    <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
+                                    <p>${user.fullname}</p>
+                                </div>
+                                <!-- personal menu -->
+                                <div class="personal-menu">
+                                    <a href="mentorDashboard"><li>Profile</li></a>
+                                    <a href="blogPendingList"><li>Pending Blog</li></a>
+                                    <a href="logout"><li>Log out</li></a>
+                                </div>
+                            </c:if>
+                            <c:if test="${user.role == 'Admin'}">
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <!-- this is user img -->
+                                    <div class="avatar">
+                                        <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
+                                        <p>${user.fullname}</p>
+                                    </div>
+                                    <!-- personal menu -->
+                                    <div class="personal-menu">
+                                        <a href="admin/dashboard"><li>Dashboard</li></a>
+                                        <a href="admin/accountList"><li>Manage Accounts</li></a>
+                                        <a href="logout"><li>Log out</li></a>
+                                    </div>
+                                </c:if>
+                                <!-- public menu -->
+                                <div class="public-menu">
+                                    <a href="home"><li>Home</li></a>
+                                    <a href="search"><li>Search</li></a>
+                                    <a href="about"><li>About</li></a>
+                                    <a href="contact"><li>Contact</li></a>
+                                </div>
+                            </ul>
+                            <div class="notify">
+                                <button type="button" class="notify-button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="num">1</span>
+                                </button>
+                                <ul class="notify-box dropdown-menu dropdown-menu-end">
+                                    <iframe class="notify-window" src="notification" frameborder="0"></iframe>
+                                </ul>
+                            </div>
+                        </c:if>
+                        <c:if test="${empty user}">
+                            <a href="loginPage">Login</a>
+                        </c:if>
+                        </div>
+                        </header>
+                        <!-- END OF NAVBAR -->
 
-        <!-- FOOTER -->
-        <div class="web-footer">
-            <p>2021 Henry. FE by Henry</p>
-            <button onclick="goTop()">Back to top</button>
-        </div>
+                        <div class="create-blog-container container">
+                            <form action="create" method="POST" enctype='multipart/form-data'>
+                                <div class="user-pick">
+                                    <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
 
-        <!-- this is JS for summernote -->
-        <script>
-            $('#summernote').summernote({
-                placeholder: 'Ready to share .... ',
-                tabsize: 2,
-                height: 300
-            });
-        </script>
-        <script>
-            let inputFile = document.getElementById('attachment');
-            let fileName = document.getElementById('file-name');
-            inputFile.addEventListener('change', function (event) {
-                let uploadedFileName = event.target.files[0].name;
-                fileName.textContent = uploadedFileName;
-            })
-        </script>
-    </body>
-</html>
+                                    <div class="title-area">
+                                        <span>Title: </span>
+                                        <br>
+                                        <input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="60" size="62" required/>
+                                    </div> 
+                                    <br>
+                                    <font color="red">
+                                    ${requestScope.ERROR_TITLE}
+                                    </font>
+
+                                    <div class="category-area">
+                                        <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
+                                        <span>Category: </span>
+                                        <select name="categoryBox">
+                                            <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                                                <option value="${dto.categoryID}">${dto.categoryName}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+
+                                    <div class="thumbnail-area">
+                                        <span>Thumbnail: </span>
+                                        <br>
+                                        <label for="attachment">Choose file</label>
+                                        <input type="file" id="attachment" name="fileAttachment">
+                                        <span>Chosen file: </span>
+                                        <span id="file-name">None</span>
+                                    </div>
+                                    <br>
+                                    <font color="red">
+                                    ${requestScope.ERROR_UPLOAD}
+                                    </font><br/>
+                                </div>
+
+                                <div class="user-write">
+                                    <textarea id="summernote" name="txtContent">${param.txtContent}</textarea>
+                                </div>
+                                <br/>
+                                <font color="red">
+                                ${requestScope.ERROR_CONTENT}
+                                </font>
+                                <br/>
+                                <div class="user-footer">
+                                    <button class="post" type="submit">Post</button>
+                                    <button class="reset" type="reset">Reset</button>
+                                    <!-- <input class="post" type="submit" value="Post" />
+                                    <input class="reset" type="reset" value="Reset" /> -->
+                                </div>
+                                <a href="home">Return to Home</a>
+                            </form>
+                        </div>
+
+                        <!-- FOOTER -->
+                        <div class="web-footer">
+                            <p>2021 Henry. FE by Henry</p>
+                            <button onclick="goTop()">Back to top</button>
+                        </div>
+
+                        <!-- this is JS for summernote -->
+                        <script>
+                            $('#summernote').summernote({
+                                placeholder: 'Ready to share .... ',
+                                tabsize: 2,
+                                height: 300
+                            });
+                        </script>
+                        <script>
+                            let inputFile = document.getElementById('attachment');
+                            let fileName = document.getElementById('file-name');
+                            inputFile.addEventListener('change', function (event) {
+                                let uploadedFileName = event.target.files[0].name;
+                                fileName.textContent = uploadedFileName;
+                            })
+                        </script>
+                        </body>
+                        </html>
