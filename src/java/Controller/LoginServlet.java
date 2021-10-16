@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
                     request.getRequestDispatcher(url).forward(request, response);
                 } else {
                     Cookie cookie = new Cookie(username, password);
-                    if(Remember.equals("true")){
+                    if(null != Remember && Remember.equals("true")){
                         cookie.setMaxAge(60 * 24 * 7);
                         
                     }
@@ -107,8 +107,7 @@ public class LoginServlet extends HttpServlet {
                 System.out.println(url);
             }
         } finally {
-
-//           response.sendRedirect(url);
+           response.sendRedirect(url);
         }
     }
 

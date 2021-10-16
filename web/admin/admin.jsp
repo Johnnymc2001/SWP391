@@ -25,6 +25,11 @@
                 <a href="categoryManage">Manage Categories</a>
                 <iframe src="categoryManage" width="100%" height="400px" style="border:none;"></iframe>
             </div>
+            
+            <div class="col-sm-12">
+                <a href="accountCreate">Create New Acccount</a>
+                <iframe src="accountCreate" width="100%" height="400px" style="border:none;"></iframe>
+            </div>
         </div>
 
     </body>
