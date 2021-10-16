@@ -197,5 +197,6 @@ h1 {
 .close-eye{
     position: absolute;
     right: 0;
-    bottom: 25%;
+    top: 50%;
+    transform: translateY(-50%);
 }

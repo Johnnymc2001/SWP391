@@ -80,25 +80,21 @@ and open the template in the editor.
                 </div>
                 <div class="enter-field">
                     <input type="password" id="password" placeholder="Password" name ="password">
-
                     <c:if test="${not empty error.passwordLengthError}">
                         <br/>
                         <font color="red">
                         ${error.passwordLengthError}<br/>
                         </font>
                     </c:if>
-
                 </div>
                 <div class="enter-field">
                     <input type="password" id="confirm_password" placeholder="Confirm password" name="confirm_password">
-
                     <c:if test="${not empty error.confirmNotMatched}">
                         <br/>
                         <font color="red">
                         ${error.confirmNotMatched}<br/>
                         </font>
                     </c:if>
-
                 </div>
                 <div class="button">
                     <button type="submit" class="btn btn-outline-info">Register</button>
