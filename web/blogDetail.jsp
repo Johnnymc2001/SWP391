@@ -128,7 +128,7 @@
                     </header>
                     <!-- END OF NAVBAR -->
 
-                    <div class="parallax-window" data-parallax="scroll" data-image-src="UI/Icon/FPTCampus_2.jpg">
+                    <div class="parallax-window" data-parallax="scroll" data-image-src="${blog.getFirstImage()}">
                     </div>
                     <div class="container">
                         <div class="row">
@@ -144,7 +144,6 @@
                                     </div>
                                 </div>
                                 <div class="blog-content">
-                                    <img class="blog-img" src="UI/Icon/selfmademan.jpg" alt="">
                                     <p class="blog-text">
                                         ${blog.content}
                                     </p>

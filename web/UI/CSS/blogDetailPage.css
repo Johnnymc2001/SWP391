@@ -221,13 +221,7 @@ a:hover {
 .blog-note ul li {
     margin: 0 1rem;
 }
-
-.blog-content .blog-img {
-    width: 100%;
-    border-radius: 20px;
-    margin: 1rem 0;
-
-}
+s
 
 .blog-content .blog-text {
     font-size: calc(16px + 2 * ((100vw - 430px) / 770));

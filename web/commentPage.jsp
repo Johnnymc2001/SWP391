@@ -26,7 +26,7 @@
 
         <c:set var="user" value="${sessionScope.USER}"/>
         <c:if test="${not empty user}">
-            <c:if test="${user.role == 'Mentor' || user.role == 'Student'}">
+            <c:if test="${user.role == 'Mentor' || user.role == 'Student' || user.role == 'Admin'}">
                 <form class="comment-input" action="comment" method="post">
                     <input type="hidden" name="txtBlogID" value="${param.txtBlogID}"
                     <div class="avatar">
