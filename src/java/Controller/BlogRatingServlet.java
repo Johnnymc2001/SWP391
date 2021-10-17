@@ -8,14 +8,12 @@ package Controller;
 import DAO.AccountDTO;
 import DAO.BlogRatingDAO;
 import DAO.BlogRatingDTO;
-import MentorController.MentorAwardServlet;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -26,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Admin
+ * @author JohnnyMC
  */
 @WebServlet(name = "BlogRatingServlet", urlPatterns = {"/BlogRatingServlet"})
 public class BlogRatingServlet extends HttpServlet {
@@ -34,6 +32,7 @@ public class BlogRatingServlet extends HttpServlet {
     private final String BLOG_DETAIL = "blog";
 
     /**
+     *
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -41,12 +40,10 @@ public class BlogRatingServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         try {
 
             ServletContext sc = request.getServletContext();
@@ -55,34 +52,37 @@ public class BlogRatingServlet extends HttpServlet {
             String txtBlogID = request.getParameter("txtBlogID");
             String txtRate = request.getParameter("txtRate");
             int blogID = Integer.parseInt(txtBlogID);
-            
-            AccountDTO account = (AccountDTO) request.getSession().getAttribute("User");
-                
+
+            AccountDTO account = (AccountDTO) request.getSession().getAttribute("USER");
+
             BlogRatingDAO dao = new BlogRatingDAO();
-                BlogRatingDTO dto = dao.getBlogRatingFromBlogIDAndOwnerID(blogID, account.getAccountID());
+            BlogRatingDTO dto = dao.getBlogRatingFromBlogIDAndOwnerID(blogID, account.getAccountID());
+
             if (null != txtRate) {
-                
                 double rate = Integer.parseInt(txtRate);
 
-                Date date = new Date(Calendar.getInstance().getTime().getTime());
+                if (rate >= 1 && rate <= 5) {
+                    Date date = new Date(Calendar.getInstance().getTime().getTime());
 
-                
-                BlogRatingDTO newDto = new BlogRatingDTO(blogID, date, rate, account.getAccountID());
-                if (null == dto) {
-                    if (dao.createBlogRating(newDto)) {
+                    BlogRatingDTO newDto = new BlogRatingDTO(blogID, date, rate, account.getAccountID());
+
+                    if (null == dto) {
+                        if (dao.createBlogRating(newDto)) {
+                        }
+                    } else {
+                        dao.updateBlogRating(dto.getRatingID(), newDto);
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                        rd.forward(request, response);
                     }
-                } else {
-                    dao.updateBlogRating(dto.getRatingID(), newDto);
+                    request.setAttribute("RATING", rate);
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
+                    return;
                 }
-                request.setAttribute("RATING", rate);
+
+            } else if (null != dto) {
+                request.setAttribute("RATING", dto.getRate());
                 RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-                return;
-            }else if(null != dto){
-                 request.setAttribute("RATING", dto.getRate());
-                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
                 return;
             }
@@ -94,8 +94,7 @@ public class BlogRatingServlet extends HttpServlet {
         }
     }
 
-
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -107,11 +106,7 @@ public class BlogRatingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MentorAwardServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -125,11 +120,7 @@ public class BlogRatingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MentorAwardServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -141,4 +132,5 @@ public class BlogRatingServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }
