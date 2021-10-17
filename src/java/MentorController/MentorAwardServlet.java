@@ -75,7 +75,7 @@ public class MentorAwardServlet extends HttpServlet {
 //            }
         }
         try {
-            AccountDTO account = (AccountDTO) request.getSession().getAttribute("User");
+            AccountDTO account = (AccountDTO) request.getSession().getAttribute("USER");
             AwardListDAO ALdao = new AwardListDAO();
             Date date = new Date(Calendar.getInstance().getTime().getTime());
             ALdao.createAwardList(new AwardListDTO(blogID, awardID, date, account.getAccountID()));

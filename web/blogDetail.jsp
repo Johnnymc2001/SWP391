@@ -149,50 +149,52 @@
                                         ${blog.content}
                                     </p>
                                     <div class="blog-vote">
-                                        <div>
-                                            <i class="fas fa-star fa-lg"></i>
-                                            <span>13</span>
-                                        </div>
-                                        <div>
-                                            <i class="fas fa-trophy fa-lg"></i>
-                                            <span>5</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <%-- ----------- HENRY SEND name="txtRate" value="Số sao được chọn hoặc null" ---------------------------   --%>
-                                    <form action="rate" method="POST">
+                                        <%-- ----------- Khu Vuc Rating 52 ---------------------------   --%>
                                         <div class="user-vote">
                                             <div class="btn-group dropend">
                                                 <button type="submit" class="btn dropdown-toggle" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
-                                                    Vote
+                                                    <i class="fas fa-star fa-lg">13</i> 
                                                 </button>
                                                 <ul class="vote-menu dropdown-menu">
-                                                    <li>
+                                                    <li onclick="rate(${blog.blogID}, 5)">
                                                         <i class="fas fa-star fa-lg"></i>
                                                         <span>5</span>
                                                     </li>
-                                                    <li>
+                                                    <li onclick="rate(${blog.blogID}, 4)">
                                                         <i class="fas fa-star fa-lg"></i>
                                                         <span>4</span>
                                                     </li>
-                                                    <li>
+                                                    <li onclick="rate(${blog.blogID}, 3)">
                                                         <i class="fas fa-star fa-lg"></i>
                                                         <span>3</span>
                                                     </li>
-                                                    <li>
+                                                    <li onclick="rate(${blog.blogID}, 2)">
                                                         <i class="fas fa-star fa-lg"></i>
                                                         <span>2</span>
                                                     </li>
-                                                    <li>
+                                                    <li onclick="rate(${blog.blogID}, 1)">
                                                         <i class="fas fa-star fa-lg"></i>
                                                         <span>1</span>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                    </form>
+                                        <%-- ----------- Rating 63 ---------------------------   --%>   
+                                        <div>
+                                            <i class="fas fa-trophy fa-lg"></i>
+                                            <span>5</span>
+                                        </div>
+                                    </div>
 
+
+                                    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                Your vote has been sent
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="right-colum col-lg-4">

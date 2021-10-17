@@ -11,6 +11,7 @@ const iframe = document.querySelector("iframe");
 //function modifyAccount(id) {
 //    window.location.href = "accountDetail?accountid=" + id;
 //}
+
 async function deactivateAccount(id) {
     await fetch("accountDetail?accountid=" + id + "&submitAction=Disable");
     window.location.href = "accountList";

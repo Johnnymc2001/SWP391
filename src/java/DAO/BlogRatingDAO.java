@@ -212,7 +212,7 @@ public class BlogRatingDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT ratingID, blogID, date, rate, ownerID "
                         + "FROM BlogRating "
-                        + "WHERE blogID = ? and ownerID = ?"
+                        + "WHERE blogID = ? and ownerID = ? "
                         + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);

@@ -59,9 +59,6 @@ awardListPage=mentorAwardList.jsp
 award=MentorAwardServlet
 awardPage=mentorAwardDetail.jsp
 
-rate=RateServlet
-
-
 ### ADMIN
 
 admin/dashboard=AdminDashboardServlet
