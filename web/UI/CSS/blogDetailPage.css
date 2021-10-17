@@ -206,6 +206,10 @@ a:hover {
     width: 100%;
 }
 
+.blog-title{
+    border-bottom: 0.2px rgb(219, 219, 219) solid;
+}
+
 .blog-title h1 {
     color: #203656;
     font-size: calc(30px + 18 * ((100vw - 430px) / 770));
@@ -238,7 +242,7 @@ s
 }
 
 .blog-vote .fas{
-    color: orange;
+    color: #203656;
 }
 
 .blog-vote span{

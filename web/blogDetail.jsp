@@ -151,7 +151,7 @@
                                         <%-- ----------- Khu Vuc Rating 52 ---------------------------   --%>
                                         <div class="user-vote">
                                             <div class="btn-group dropend">
-                                                <button type="submit" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                                <button type="submit" class="btn" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
                                                     <i class="fas fa-star fa-lg">13</i> 
                                                 </button>
