@@ -11,6 +11,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <!-- this is for summer note -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     </head>
     <body>
 
@@ -27,12 +41,11 @@
                 </font><br/>
             </c:if>
 
-            Content <br/><input type="text" value="${editBlog.content}" name="txtContent" maxlength="60" size="62"/> <br/>
-            <c:if test="${not empty ERROR_CONTENT}" >
-                <font color="red">
-                ${requestScope.ERROR_CONTENT}
-                </font><br/>
-            </c:if>
+
+            <div class="user-write">
+                <textarea id="summernote" name="txtContent">${editBlog.content}</textarea>
+            </div>F
+
 
             <select name="categoryBox">
                 <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
@@ -49,6 +62,15 @@
                 <input type="submit" value="Update" name="btAction"/>
                 <input type="reset" value="Reset" /><br/>
                 <a href="home">Return to Home</a>
+
+                <script>
+                    $('#summernote').summernote({
+                        placeholder: 'Ready to share .... ',
+                        tabsize: 2,
+                        height: 300
+                    });
+                </script>
+
         </form> 
     </body>
 </html>

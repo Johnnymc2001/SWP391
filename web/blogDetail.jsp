@@ -246,10 +246,12 @@
                     </div>
                     <!-- END OF BLOG CONTENT -->
 
-                    <form action="edit" method="POST" >
-                        <input type="hidden" name="txtBlogID" value="${blog.blogID}">
-                        <input type="submit" name="btAction"   value="Edit">
-                    </form>
+                   <c:if test="${blog.studentID==user.accountID}">
+                        <form action="edit" method="POST" >
+                            <input type="hidden" name="txtBlogID" value="${blog.blogID}">
+                            <input type="submit" name="btAction"   value="Edit">
+                        </form>
+                    </c:if>
 
 
                     <!-- THIS IS COMMENT SECTION -->

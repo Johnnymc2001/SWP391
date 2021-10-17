@@ -129,9 +129,8 @@ public class BlogEditServlet extends HttpServlet {
 
                         boolean flag = blogDao.updateBlog(blogID, blogEdit);
                         System.out.println(flag);
-                        url = roadmap.get("blogPage");
-                        RequestDispatcher rd = request.getRequestDispatcher(url);
-                        rd.forward(request, response);
+                        url = "blog?txtBlogID=" +blogID;
+                      response.sendRedirect(url);
                         System.out.println("url tai blog edit servlet: " + url);
                     }
                     //ktrta rang buoc : id ton tai , title ,...  
