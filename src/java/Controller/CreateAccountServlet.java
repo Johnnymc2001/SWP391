@@ -56,27 +56,34 @@ public class CreateAccountServlet extends HttpServlet {
 
         String confirm_password = request.getParameter("confirm-password");
 
-    
-
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
         boolean foundError = false;
         AccountError error = new AccountError();
-        String url = "loginPage";
+        String url = "";
         System.out.println("birthdate: " + birthdate);
-          AccountDAO dao = new AccountDAO();
-          
+        AccountDAO dao = new AccountDAO();
+
         try {
-            AccountDTO user = dao.getAccountFromUsername("username");
+            AccountDTO user = dao.getAccountFromUsername(username);
             // KIEM TRA CAC LOI KHI TAO TAI KHOAN MOI
 //             int i = dao.getAccountIDByUsername(username);
-             System.out.println("AccountID: "+user);
-            
-            if (user!=null) {
-                 foundError = true;
-                 error.setUserNameExisted("Account Existed");
-            }
+            System.out.println("Account: " + user);
+
+            if (user != null) {
+                foundError = true;
+                request.setAttribute("PAGE", "REGISTER");
+                   request.setAttribute("ERROR", error);
+                error.setUserNameExisted("Account Existed");
+                System.out.println("username duplicate : " + user.getUsername());
+                url = "registerPage";
+                url = roadmap.get(url);
+                request.getRequestDispatcher(url).forward(request, response);
+                
+
+            } else {
+
                 if (username == null || username.trim().length() < 6 || username.trim().length() > 20) {
                     foundError = true;
                     error.setUserNameLengthError("User name must be from 6-20 character");
@@ -101,27 +108,29 @@ public class CreateAccountServlet extends HttpServlet {
 
                 if (foundError) {
                     request.setAttribute("ERROR", error);
+                    url = "registerPage";
+                    url = roadmap.get(url);
+                    request.getRequestDispatcher(url).forward(request, response);
                     request.setAttribute("PAGE", "REGISTER");
+
                 } else {
 
 //                   Date  date =new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);  
                     java.sql.Date sqlDate;
                     sqlDate = java.sql.Date.valueOf(birthdate);
                     AccountDTO dto = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
-                 
 
 //               AccountDAO.createAccount(dto);
-                  
                     dao.createAccount(dto);
 
                     url = "home";
+                    url = roadmap.get(url);
+                    request.getRequestDispatcher(url).forward(request, response);
                 }
-
-            System.out.println("username duplicate : " +error.getUserNameExisted());
+            }
 
         } finally {
-            url=roadmap.get(url);
-            request.getRequestDispatcher(url).forward(request, response);
+
         }
     }
 
