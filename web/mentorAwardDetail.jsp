@@ -63,15 +63,24 @@
 
     <div class="container-fluid">
 
+        <div class="title-area">
+            <input type="submit" value="Create an Award" id="ShowtextAward" />
+            <span>Award Name: </span>
+            <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
+            <span>Effective Days: </span>
+            <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
+        </div> 
+
         <select name="awardBox">
-            <c:set var="dtoList" value="${requestScope.ALL_AWARD}" />  
-            <c:forEach var="dto" items="${dtoList}" varStatus="counter">
-                <option value="${dto.awardID}">${dto.awardName}</option>
+            <input 
+                <c:set var="dtoList" value="${requestScope.ALL_AWARD}" />  
+                <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                    <option value="${dto.awardID}">${dto.awardName}</option>
             </c:forEach>
         </select>
 
-    <input type="submit" value="Award"/>
-</div>
+        <input type="submit" value="Award"/>
+    </div>
 </div>
 
 
