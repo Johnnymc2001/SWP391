@@ -18,7 +18,6 @@
     </c:if>
     <c:set var="user" value="${sessionScope.USER}"/>
     <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mentor BlogPendingList</title>
         <!-- this is bootstrap 5-->
@@ -96,37 +95,28 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="d-md-none d-lg-none d-sm-block">
-                        <div class="mobile-user-choice row">
-                            <a class="col" href="">Pending Blogs</a>
-                            <a class="col" href="">Edit Blogs</a>
-                        </div>
-                    </div>
-                    <div class="d-none d-md-block d-lg-block col-md-3">
+                    <div class="d-none d-md-block col-md-3">
                         <ul class="option-table list-group">
                             <div class="user-avatar">
                                 <h2>Mentor</h2>
                             </div>
                             <div class="user-option">
-                                <a href="">
+                                <a href="blogPendingList">
                                     <li class="list-group-item active">Pending Blogs</li>
-                                </a>
-                                <a href="">
-                                    <li class="list-group-item">Edit Blogs</li>
                                 </a>
                             </div>
                             <div class="public-option">
-                                <a href="">
+                                <a href="home">
                                     <li>Home</li>
                                 </a>
-                                <a href="">
+                                <a href="search">
                                     <li>Search</li>
                                 </a>
                                 <a href="">
                                     <li>Contact</li>
                                 </a>
                             </div>
-                            <a href="">
+                            <a href="logout">
                                 <li>Log out</li>
                             </a>
                         </ul>
@@ -187,10 +177,6 @@
             <h1>There is no pending blog!</h1>
         </c:if>
         <script type="text/javascript" src="UI/script/mentorBlogPendingList.js"></script>
-
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     </body>
 </html>
