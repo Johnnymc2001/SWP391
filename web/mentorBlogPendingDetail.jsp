@@ -102,7 +102,7 @@
         </header>
         <!-- END OF NAVBAR -->
 
-        <div class="container">
+        <div class="create-blog-container container">
             <form action="blogPendingDetail" method="POST">
                 <input type="hidden" name="blogid" value="${blog.blogID}">
                 ${requestScope.ERROR_TITLE}<br/>

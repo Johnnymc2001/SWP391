@@ -135,6 +135,12 @@
                             <div class="col-md-12 col-lg-8">
                                 <div class="blog-title">
                                     <h1>${blog.title}</h1>
+                                    <c:if test="${blog.studentID==user.accountID}">
+                                        <form action="edit" method="POST" >
+                                            <input type="hidden" name="txtBlogID" value="${blog.blogID}">
+                                            <button class="edit-btn" type="submit" name="btAction" value="Edit">Edit</button>
+                                        </form>
+                                    </c:if>
                                     <div class="blog-note">
                                         <ul>
                                             <li><a href="">${author.getFullname()}</a></li>
@@ -246,12 +252,7 @@
                     </div>
                     <!-- END OF BLOG CONTENT -->
 
-                   <c:if test="${blog.studentID==user.accountID}">
-                        <form action="edit" method="POST" >
-                            <input type="hidden" name="txtBlogID" value="${blog.blogID}">
-                            <input type="submit" name="btAction"   value="Edit">
-                        </form>
-                    </c:if>
+
 
 
                     <!-- THIS IS COMMENT SECTION -->
