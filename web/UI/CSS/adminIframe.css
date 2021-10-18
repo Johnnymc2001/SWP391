@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: #203656;
+}
+
+body {
+    overflow-x: hidden;
+    position: relative;
+    text-align: center;
+}
+
+body img:hover {
+    transform: scale(1.1);
+}
+
+h1 {
+    color: #203656;
+}
+
+.btn-action.deactive {
+    background: red;
+}
+
+.btn-action.enable {
+    background: greenyellow;
+}
+
+.search-account-form {
+    margin-top: 2.5rem;
+}
+
+.search-account-textbox {
+    margin-bottom: 2rem;
+    padding: 0.3rem;
+    transition: all 0.3s;
+    border: 1px black solid;
+}
+
+.search-account-textbox:focus,
+.search-account-textbox:valid {
+    outline: none;
+    border-radius: 10px;
+    border: 1px orange solid;
+}
+
+.btn-action.submit {
+    background: orange;
+    border: none;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-action {
+    background: orange;
+    border: none;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+.role-select{
+    padding: 0.4rem;
+}
+
+.role-select:focus{
+    outline: none;
+}
+
+.page-item.active .page-link{
+    background: orange
+}
+
+.pagination{
+    width: 100%;
+    justify-content: center;
+}
+
+.category-manage,
+.add-category{
+    margin-top: 50px;
+}
+
+input{
+    padding: 0.3rem;
+}
+
+.enter-field{
+    margin-top: 1.5rem;
+}
+
+.enter-field input{
+    width: 100%;
+}
+
+.enter-field select{
+    padding: 0.6rem;
+    width: 100%;
+}
+
+.footer-create-admin{
+    width: 100%;
+    text-align: center;
+}
+
+.footer-create-admin button{
+    width: 30%;
+    padding: 0.5rem 0;
+    margin-top: 2rem;
+}
+
+#available-text{
+    color: green;
+}
+
+#unavailable-text{
+    color: red;
+}
