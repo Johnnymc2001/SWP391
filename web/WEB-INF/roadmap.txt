@@ -33,6 +33,7 @@ notificationPage=notification.jsp
 
 rate=BlogRatingServlet
 
+imageUpload=ImageUploadServlet
 
 ### STUDENT
 

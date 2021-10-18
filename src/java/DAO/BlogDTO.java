@@ -212,6 +212,11 @@ public class BlogDTO implements Serializable {
         }
         return imageUrlList;
     }
+    
+    public int getAverageRating() throws SQLException {
+        BlogDAO blogDao = new BlogDAO();
+        return blogDao.getAverageRatingFromBlogID(this.blogID);
+    }
 
     @Override
     public String toString() {

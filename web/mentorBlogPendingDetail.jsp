@@ -122,8 +122,38 @@
                     $('#summernote').summernote({
                         placeholder: "",
                         tabsize: 2,
-                        height: 400
+                        height: 400,
+                        maximumImageFileSize: 1000 * 1024, // 2mb
+                        callbacks: {
+                            onImageUpload: function (image) {
+                                uploadImage(image[0]);
+                            }
+                        }
                     });
+                    function uploadImage(image) {
+                        var data = new FormData();
+                        data.append("image", image);
+                        $.ajax({
+                            url: './imageUpload',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            type: "post",
+                            success: function (json) {
+                                if (json.status === "OK") {
+                                    var image = $('<img>').attr('src', json.imageUrl);
+                                    $('#summernote').summernote("insertNode", image[0]);
+                                } else {
+                                    console.log(json);
+                                }
+
+                            },
+                            error: function (data) {
+                                console.log(data);
+                            }
+                        });
+                    }
                     $('#summernote').summernote('code', `${blog.content}`);
                 </script>
                 <div class="user-footer">

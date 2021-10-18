@@ -327,7 +327,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    // Stored Procedure
+    // Function
     public ArrayList<BlogDTO> getAllApprovedBlogWithMostAward(int maxBlog) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -534,6 +534,44 @@ public class BlogDAO implements Serializable {
             }
         }
         return null;
+    }
+    
+    public int getAverageRatingFromBlogID(int blogID) throws SQLException {
+          Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
+
+            con = DBHelpers.makeConnection();
+            int rating = 0;
+            if (con != null) {
+                String sql = "SELECT blogID, ratingCount "
+                        + "FROM getAverageRatingFromBlogID(?)";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, blogID);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    rating = rs.getInt("ratingCount"); 
+                }
+
+                return rating;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
     }
 
     // Blog With Status

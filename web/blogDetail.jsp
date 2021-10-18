@@ -159,7 +159,7 @@
                                             <div class="btn-group dropend">
                                                 <button type="submit" class="btn" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
-                                                    <i class="fas fa-star fa-lg">13</i> 
+                                                    <i class="fas fa-star fa-lg">${blog.getAverageRating()}</i> 
                                                 </button>
                                                 <ul class="vote-menu dropdown-menu">
                                                     <li onclick="rate(${blog.blogID}, 5)">

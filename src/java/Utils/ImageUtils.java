@@ -109,6 +109,19 @@ public class ImageUtils {
         return false;
     }
 
+        public static String uploadImageAndGetUrl(InputStream is) {
+        try {
+            String base64 = BytesToBase64(InputStreamToBytes(is));
+            Map result = ImageUtils.uploadImage(base64);
+            String url = (String) result.get("secure_url");
+            return url;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return "";
+    }
+
+        
     public static boolean uploadImage(InputStream is, String blogId) {
         try {
             String base64 = BytesToBase64(InputStreamToBytes(is));
