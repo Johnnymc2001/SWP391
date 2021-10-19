@@ -19,7 +19,7 @@
                 integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
         <!-- this is external css -->
-        <link rel="stylesheet" href="../UI/CSS/adminIframe.css">
+        <link rel="stylesheet" href="./UI/CSS/adminIframe.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     </head>
@@ -98,7 +98,7 @@
                                 <option>10</option>
                             </select>-->
 </div>
-<script type="text/javascript" src="../UI/script/adminAccountList.js"></script>
+<script type="text/javascript" src="./UI/script/adminAccountList.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
 </body>

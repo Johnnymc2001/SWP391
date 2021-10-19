@@ -10,13 +10,13 @@ function activePage(name) {
         }
     }
     if (name.textContent == "Accounts List") {
-        iframe.src = "accountList";
+        iframe.src = "adminAccountList";
         console.log("Iframe src have been changed");
     } else if (name.textContent == "Manage Category") {
-        iframe.src = "categoryManage";
+        iframe.src = "adminCategoryManage";
         console.log("Iframe src have been changed");
     } else if (name.textContent == "New Account") {
-        iframe.src = "accountCreate";
+        iframe.src = "adminAccountCreate";
         console.log("Iframe src have been changed");
     }
 }

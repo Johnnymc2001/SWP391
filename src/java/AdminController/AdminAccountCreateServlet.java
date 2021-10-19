@@ -27,11 +27,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminAccountCreateServlet", urlPatterns = {"/admin/AdminAccountCreateServlet"})
+@WebServlet(name = "AdminAccountCreateServlet", urlPatterns = {"/AdminAccountCreateServlet"})
 public class AdminAccountCreateServlet extends HttpServlet {
 
-    public final String CREATE_PAGE = "admin/accountCreatePage";
-    public final String LIST_ACCOUNT = "admin/accountList";
+    public final String CREATE_PAGE = "adminAccountCreatePage";
+    public final String LIST_ACCOUNT = "adminAccountList";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -132,12 +132,12 @@ public class AdminAccountCreateServlet extends HttpServlet {
                     request.setAttribute("ERROR_ROLE", "Role not found!");
                     foundError = true;
                 }
-                if ("Mentor".equals(role)) {
-                    if (!catList.contains(categoryID) || !(null != categoryID)) {
-                        request.setAttribute("ERROR_CATEGORY", "Category not found!");
-                        foundError = true;
-                    }
-                }
+//                if ("Mentor".equals(role)) {
+//                    if (!catList.contains(categoryID) || !(null != categoryID)) {
+//                        request.setAttribute("ERROR_CATEGORY", "Category not found!");
+//                        foundError = true;
+//                    }
+//                }
                 if (!foundError) {
                     AccountDTO newDto = new AccountDTO(username, password, fullname, address, birthdate, email, phone, role, categoryID, "AVAILABLE");
                     accDao.createAccount(newDto);

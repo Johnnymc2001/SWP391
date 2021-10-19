@@ -27,10 +27,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminAccountListServlet", urlPatterns = {"/admin/AdminAccountListServlet"})
+@WebServlet(name = "AdminAccountListServlet", urlPatterns = {"/AdminAccountListServlet"})
 public class AdminAccountListServlet extends HttpServlet {
 
-    public final String SUCCESS = "admin/accountListPage";
+    public final String SUCCESS = "adminAccountListPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

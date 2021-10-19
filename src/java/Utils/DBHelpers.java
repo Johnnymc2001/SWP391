@@ -32,7 +32,7 @@ public class DBHelpers {
             ex.printStackTrace();
         }
         String connectionUrl
-                = "jdbc:sqlserver://swp391-group4.database.windows.net:1433;database=swp391_group4;user=usernameg4swp@swp391-group4;password=4!m3wp$MA835HU@6r&Fx;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+                = "jdbc:sqlserver://swp391-group4.database.windows.net:1433;database=swp391_group4;user=usernameg4swp@swp391-group4;password=4!m3wp$MA835HU@6r&Fx;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;useUnicode=true;characterEncoding=UTF-8";
         Connection connection = DriverManager.getConnection(connectionUrl);
         return connection;
 

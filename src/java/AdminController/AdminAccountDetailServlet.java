@@ -27,11 +27,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminAccountDetailServlet", urlPatterns = {"/admin/AdminAccountDetailServlet"})
+@WebServlet(name = "AdminAccountDetailServlet", urlPatterns = {"/AdminAccountDetailServlet"})
 public class AdminAccountDetailServlet extends HttpServlet {
 
-    public final String SUCCESS = "admin/accountDetailPage";
-    public final String BACK = "admin/accountListPage";
+    public final String SUCCESS = "adminAccountDetailPage";
+    public final String BACK = "adminAccountListPage";
 
     /**
      * public final String SUCCESS = "admin/accountDetailPage"; Processes

@@ -9,6 +9,7 @@ import DAO.AccountDAO;
 import DAO.AccountDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
+import DAO.NotificationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -49,6 +50,7 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
         AccountDAO accDao = new AccountDAO();
+//        request.setCharacterEncoding("UTF-8"); 
         HttpSession session = request.getSession();
         AccountDTO account = (AccountDTO) session.getAttribute("USER");
         if (null == account || !account.getRole().equals("Mentor")) {
@@ -127,6 +129,8 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                         } else if ("Approve".equals(action)) {
                             request.setAttribute("MESSAGE", "Blog Approved");
                             blogDao.approveBlog(blogID);
+                            
+                            NotificationDAO notiDao = new NotificationDAO();
                             url = roadmap.get(PENDING_LIST);
                             RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);

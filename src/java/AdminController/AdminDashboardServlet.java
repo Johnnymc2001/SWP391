@@ -20,10 +20,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminDashboardServlet", urlPatterns = {"/admin/AdminDashboardServlet"})
+@WebServlet(name = "AdminDashboardServlet", urlPatterns = {"/AdminDashboardServlet"})
 public class AdminDashboardServlet extends HttpServlet {
 
-    public final String SUCCESS = "admin/dashboardPage";
+    public final String SUCCESS = "adminPage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

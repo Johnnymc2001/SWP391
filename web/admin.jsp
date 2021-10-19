@@ -19,11 +19,11 @@
                 integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
         <!-- this is external css -->
-        <link rel="stylesheet" href="../UI/CSS/adminPage.css">
+        <link rel="stylesheet" href="./UI/CSS/adminPage.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <!-- this is script -->
-        <script src="../UI/script/admin.js"></script>
+        <script src="./UI/script/admin.js"></script>
     </head>
     <body>
     <c:set var="user" value="${sessionScope.USER}"/>
@@ -31,15 +31,15 @@
         <div class="header-left">
             <!-- site logo -->
             <div class="site-logo">
-                <a href="../home"><img src="../UI/Icon/FPTLogo.jpg" alt="logo"></a>
-                <a href="../home">FPT Academy</a>
+                <a href="/home"><img src="./UI/Icon/FPTLogo.jpg" alt="logo"></a>
+                <a href="/home">FPT Academy</a>
             </div>
             <!-- navigate options -->
             <div class="collapse navbar-collapse options-btn">
-                <a href="../home"><button class="active-btn">Home</button></a>
-                <a href="../search?txtSearchType=popular"><button class="">Popular</button></a>
-                <a href="../search?txtSearchType=recent"><button class="">Recent</button></a>
-                <a href="../aboutUs.html"><button class="">About</button></a>
+                <a href="/home"><button class="active-btn">Home</button></a>
+                <a href="/search?txtSearchType=popular"><button class="">Popular</button></a>
+                <a href="/search?txtSearchType=recent"><button class="">Recent</button></a>
+                <a href="/aboutUs.html"><button class="">About</button></a>
             </div>
         </div>
         <div class="header-right">
@@ -55,7 +55,7 @@
             <ul class="dropdown-menu dropdown-menu-end">
                 <!-- this is user img -->
                 <div class="avatar">
-                    <img src="../UI/Icon/maleteacher-icon.png" alt="avatar">
+                    <img src="/UI/Icon/maleteacher-icon.png" alt="avatar">
                     <p>${user.fullname}</p>
                 </div>
                 <!-- personal menu -->

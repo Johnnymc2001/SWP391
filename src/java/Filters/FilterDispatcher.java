@@ -107,7 +107,7 @@ public class FilterDispatcher implements Filter {
         String uri = req.getRequestURI();
         String url = roadmap.get("default");
 
-        log(uri);
+        request.setCharacterEncoding("UTF-8"); 
 
         try {
             int lastIndex = uri.lastIndexOf("/");

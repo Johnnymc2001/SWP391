@@ -24,10 +24,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminCategoryManageServlet", urlPatterns = {"/admin/AdminCategoryManageServlet"})
+@WebServlet(name = "AdminCategoryManageServlet", urlPatterns = {"/AdminCategoryManageServlet"})
 public class AdminCategoryManageServlet extends HttpServlet {
 
-    private final String SUCCESS = "admin/categoryManagePage";
+    private final String SUCCESS = "adminCategoryManagePage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

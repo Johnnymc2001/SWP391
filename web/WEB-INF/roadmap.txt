@@ -62,22 +62,20 @@ awardPage=mentorAwardDetail.jsp
 
 ### ADMIN
 
-admin/dashboard=AdminDashboardServlet
-admin/dashboardPage=admin.jsp
-
-admin/redirect=HomePageServlet
+admin=AdminDashboardServlet
+adminPage=admin.jsp
 
 ### admin/commentDetail=AdminCommentDetailServlet
 ### admin/commentDetailPage=adminCommentDetail.jsp
 
-admin/accountCreate=AdminAccountCreateServlet
-admin/accountCreatePage=adminAccountCreate.jsp
+adminAccountCreate=AdminAccountCreateServlet
+adminAccountCreatePage=adminAccountCreate.jsp
 
-admin/accountList=AdminAccountListServlet
-admin/accountListPage=adminAccountList.jsp
+adminAccountList=AdminAccountListServlet
+adminAccountListPage=adminAccountList.jsp
 
-admin/accountDetail=AdminAccountDetailServlet
-admin/accountDetailPage=adminAccountDetail.jsp
+adminAccountDetail=AdminAccountDetailServlet
+adminAccountDetailPage=adminAccountDetail.jsp
 
-admin/categoryManage=AdminCategoryManageServlet
-admin/categoryManagePage=adminCategoryManage.jsp
+adminCategoryManage=AdminCategoryManageServlet
+adminCategoryManagePage=adminCategoryManage.jsp

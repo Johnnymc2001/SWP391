@@ -39,7 +39,7 @@
         <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
         <script type="text/javascript" src="../UI/script/mentorBlogPendingDetail.js"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>Edit Page</title>
     </head>
     <body>
@@ -103,7 +103,7 @@
         <!-- END OF NAVBAR -->
 
         <div class="create-blog-container container">
-            <form action="blogPendingDetail" method="POST">
+            <form action="blogPendingDetail" method="POST" accept-charset="utf-8">
                 <input type="hidden" name="blogid" value="${blog.blogID}">
                 ${requestScope.ERROR_TITLE}<br/>
                 <div class="title-area">

@@ -169,7 +169,7 @@
                                                     <li>Comments (${blog.getAllComments().size()})</li>
                                                 </ul>
                                             </div>
-                                            <h1 class="blog-title"><a href="">${dto.title}</a></h1>
+                                            <h1 class="blog-title"><a href="">${blog.title}</a></h1>
                                             <div class="img-link">
                                                 <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
                                             </div>

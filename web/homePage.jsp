@@ -198,9 +198,9 @@
                                             <h5>
                                                 <a href="blog?txtBlogID=${blogMR_FIRST.blogID}">${blogMR_FIRST.title}</a>
                                             </h5>
-                                            <h7>
+<!--                                            <h7>
                                                 ${blogMR_FIRST.getContentShort()}
-                                            </h7>
+                                            </h7>-->
                                         </div>
                                     </div>
                                 </div>
@@ -266,9 +266,9 @@
                                                     <h5>
                                                         <a href="blog?txtBlogID=${blogMC_FIRST.blogID}">${blogMC_FIRST.title}</a>
                                                     </h5>
-                                                    <h7>
+<!--                                                    <h7>
                                                         ${blogMC_FIRST.getContentShort()}
-                                                    </h7>
+                                                    </h7>-->
                                                 </div>
                                             </div>
                                             <c:set var="blogMC_SECOND" value="${requestScope.MOST_COMMENT_SECOND}"/>
@@ -285,9 +285,9 @@
                                                     <h5>
                                                         <a href="blog?txtBlogID=${blogMC_SECOND.blogID}">${blogMC_SECOND.title}</a>
                                                     </h5>
-                                                    <h7>
+<!--                                                    <h7>
                                                         ${blogMC_SECOND.getContentShort()}
-                                                    </h7>
+                                                    </h7>-->
                                                 </div>
                                             </div>
                                         </div>
