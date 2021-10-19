@@ -31,15 +31,15 @@
         <div class="header-left">
             <!-- site logo -->
             <div class="site-logo">
-                <a href="home"><img src="../UI/Icon/FPTLogo.jpg" alt="logo"></a>
-                <a href="home">FPT Academy</a>
+                <a href="../home"><img src="../UI/Icon/FPTLogo.jpg" alt="logo"></a>
+                <a href="../home">FPT Academy</a>
             </div>
             <!-- navigate options -->
             <div class="collapse navbar-collapse options-btn">
-                <a href="home"><button class="active-btn">Home</button></a>
-                <a href="search?txtSearchType=popular"><button class="">Popular</button></a>
-                <a href="search?txtSearchType=recent"><button class="">Recent</button></a>
-                <a href="aboutUs.html"><button class="">About</button></a>
+                <a href="../home"><button class="active-btn">Home</button></a>
+                <a href="../search?txtSearchType=popular"><button class="">Popular</button></a>
+                <a href="../search?txtSearchType=recent"><button class="">Recent</button></a>
+                <a href="../aboutUs.html"><button class="">About</button></a>
             </div>
         </div>
         <div class="header-right">

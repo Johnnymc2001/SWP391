@@ -71,12 +71,14 @@ public class CreateBlogServlet extends HttpServlet {
 
         String tags = request.getParameter("txtTags");
 
-        int studentID = 2;
-//        if (null != student) {
-//            studentID = student.getAccountID();
-//        } else {
-//            response.sendRedirect(ERROR_PAGE);
-//        }
+        int studentID = 0;
+
+        if (null != account) {
+            studentID = account.getAccountID();
+        } else {
+            response.sendRedirect(ERROR_PAGE);
+            return;
+        }
 
         String header = request.getContentType();
         byte[] bytesImage = null;
