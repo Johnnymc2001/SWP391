@@ -121,3 +121,11 @@ input{
 #unavailable-text{
     color: red;
 }
+
+font{
+    color: red;
+}
+
+img{
+    width:100%;
+}
