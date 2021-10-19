@@ -169,11 +169,14 @@
                         </nav>
                     </div>
                 </c:if>
+                <c:if test="${empty blogList}">
+                    <div class="col-md-8">
+                        <h1>There is no pending blog!</h1>
+                    </div>
+                </c:if>
             </div>
         </div>
-        <c:if test="${empty blogList}">
-            <h1>There is no pending blog!</h1>
-        </c:if>
+
         <script type="text/javascript" src="UI/script/mentorBlogPendingList.js"></script>
 
     </body>
