@@ -33,7 +33,6 @@
     </head>
     <body>
         <c:set var="blogList" value="${requestScope.PENDING_BLOG_LIST}"/>
-        ${requestScope.MESSAGE}
         <header class="navbar navbar-expand-lg" id="header-default">
             <div class="header-left">
                 <!-- site logo -->
@@ -126,6 +125,7 @@
                 <c:if test="${not empty blogList}">
                     <div class="user-area col-md-8">
                         <h1>Pending Blogs List</h1>
+                        ${requestScope.MESSAGE}
                         <table class="table table-hover">
                             <thead>
                                 <tr>

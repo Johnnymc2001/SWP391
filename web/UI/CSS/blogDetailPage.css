@@ -244,6 +244,10 @@ s
     font-size: calc(16px + 2 * ((100vw - 430px) / 770));
 }
 
+.blog-content img{
+    max-width: 100%;
+}
+
 .blog-vote{
     width: 100%;
     padding: 0.5rem 0;
