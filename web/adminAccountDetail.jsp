@@ -36,12 +36,7 @@
             </c:if>
             <c:if test="${not empty account}">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <!--<img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png"/>-->
-                        Empty Image
-                    </div>
-
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                         <!--                    <div class="row">
                                                     <div class="col-sm-6">
                                                     </div>
@@ -63,21 +58,32 @@
                                     <c:if test="${account.status == 'UNAVAILABLE'}">
                                         <button class="btn-action" type="submit" name="submitAction" value="Enable">Enable</button>
                                     </c:if>
+                                    <font color="red">
                                     ${requestScope.MESSAGE}
+                                    </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
-                                    Username<br/>${requestScope.ERROR_USERNAME}
+                                    Username<br/>
                                     <input type="text" name="username" id="username" value="${account.username}" required/>
+                                    <font color="red">
+                                    ${requestScope.ERROR_USERNAME}
+                                    </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
-                                    Password<br/>${requestScope.ERROR_PASSWORD}
+                                    Password<br/>
                                     <input type="password" name="password" id="password" value="${account.password}" required/>
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
+                                    <font color="red">
+                                    ${requestScope.ERROR_PASSWORD}
+                                    </font>
                                 </div>
 
                                 <div class="enter-field col-sm-6">
-                                    Fullname<br/>${requestScope.ERROR_FULLNAME}
+                                    Fullname<br/>
                                     <input type="text" name="fullname" id="fullname" value="${account.fullname}" required></input>
+                                    <font color="red">
+                                    ${requestScope.ERROR_FULLNAME}
+                                    </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
                                     Birthday<br/>
@@ -85,20 +91,29 @@
                                 </div>
 
                                 <div class="enter-field col-sm-12">
-                                    Address<br/>${requestScope.ERROR_ADDRESS}
+                                    Address<br/>
                                     <input type="text" name="address" id="address" value="${account.address}" required></input>
+                                    <font color="red">
+                                    ${requestScope.ERROR_ADDRESS}
+                                    </font>
                                 </div>
 
                                 <div class="enter-field col-sm-6">
-                                    Email<br/>${requestScope.ERROR_EMAIL}
+                                    Email<br/>
                                     <input type="text" name="email" id="email"value="${account.email}" required></input>
+                                    <font color="red">
+                                    ${requestScope.ERROR_EMAIL}
+                                    </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
-                                    Phone<br/>${requestScope.ERROR_PHONE}
+                                    Phone<br/>
                                     <input type="text" name="phone" id="phone" value="${account.phone}" required></input>
+                                    <font color="red">
+                                    ${requestScope.ERROR_PHONE}
+                                    </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
-                                    Role<br/>${requestScope.ERROR_ROLE}
+                                    Role<br/>
                                     <select class="form-select" name="role" id="roleSelect" onchange="changeRole(this);">
                                         <c:forEach var="item" items="${roleList}">
                                             <option value="${item}" 
@@ -109,10 +124,13 @@
                                             </option>
                                         </c:forEach>
                                     </select>
+                                    <font color="red">
+                                    ${requestScope.ERROR_ROLE}
+                                    </font>
                                 </div>
                                     <!--<input type="text" name="role" value="${account.role}"></input>-->
                                 <div class="enter-field col-sm-6">
-                                    Category<br/>${requestScope.ERROR_CATEGORY}
+                                    Category<br/>
                                     <select name="category" id="categorySelect" disabled>
                                         <c:forEach var="item" items="${catList}">
                                             <option value="${item.categoryID}"
@@ -122,6 +140,9 @@
                                                 ${item.categoryName}</option>
                                             </c:forEach>
                                     </select>
+                                    <font color="red">
+                                    ${requestScope.ERROR_CATEGORY}
+                                    </font>
                                     <!--<input type="text" name="categoryID" value="${account.categoryID}"></input>-->
                                 </div>
                             </div>
