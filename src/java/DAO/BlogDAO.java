@@ -814,8 +814,8 @@ public class BlogDAO implements Serializable {
             con = DBHelpers.makeConnection();
             // 2. Create SQL String
             if (con != null) {
-                String sql = "INSERT INTO Blog (title, content, postDate, categoryID, status, tags, ownerID) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO Blog (title, content, postDate, categoryID, status, tags, ownerID, thumbnail) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 stm.setString(1, dto.getTitle());
@@ -825,6 +825,7 @@ public class BlogDAO implements Serializable {
                 stm.setString(5, dto.getStatus());
                 stm.setString(6, dto.getTags());
                 stm.setInt(7, dto.getStudentID());
+                stm.setString(8, dto.getThumbnail());
 
                 int line = stm.executeUpdate();
 
