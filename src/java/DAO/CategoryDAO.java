@@ -60,7 +60,7 @@ public class CategoryDAO {
 
         try {
             CategoryDTO dto = null;
-            ArrayList<CategoryDTO> categoryList = new ArrayList<CategoryDTO>();
+            ArrayList<CategoryDTO> categoryList = new ArrayList<>();
 
             con = DBHelpers.makeConnection();
 

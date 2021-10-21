@@ -44,7 +44,7 @@
                                                         <button id="editButton" onclick="toggle(this)">Edit</button>
                                                     </div>
                                                 </div>-->
-                        <form action="accountDetail" method="POST">
+                        <form action="adminAccountDetail" method="POST">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <span>Account ID: ${account.accountID}</span>
@@ -64,52 +64,46 @@
                                 </div>
                                 <div class="enter-field col-sm-6">
                                     Username<br/>
-                                    <input type="text" name="username" id="username" value="${account.username}" required/>
+                                    <input type="text" name="username" id="username" value="${account.username}" disabled/>
                                     <font color="red">
-                                    ${requestScope.ERROR_USERNAME}
                                     </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
                                     Password<br/>
-                                    <input type="password" name="password" id="password" value="${account.password}" required/>
+                                    <input type="password" name="password" id="password" value="${account.password}" disabled/>
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
                                     <font color="red">
-                                    ${requestScope.ERROR_PASSWORD}
                                     </font>
                                 </div>
 
                                 <div class="enter-field col-sm-6">
                                     Fullname<br/>
-                                    <input type="text" name="fullname" id="fullname" value="${account.fullname}" required></input>
+                                    <input type="text" name="fullname" id="fullname" value="${account.fullname}" disabled></input>
                                     <font color="red">
-                                    ${requestScope.ERROR_FULLNAME}
                                     </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
                                     Birthday<br/>
-                                    <input type="date" name="birthday" id="birthday" value="${account.birthday}" required></input>
+                                    <input type="date" name="birthday" id="birthday" value="${account.birthday}" disabled></input>
                                 </div>
 
                                 <div class="enter-field col-sm-12">
                                     Address<br/>
-                                    <input type="text" name="address" id="address" value="${account.address}" required></input>
+                                    <input type="text" name="address" id="address" value="${account.address}" disabled></input>
                                     <font color="red">
-                                    ${requestScope.ERROR_ADDRESS}
                                     </font>
                                 </div>
 
                                 <div class="enter-field col-sm-6">
                                     Email<br/>
-                                    <input type="text" name="email" id="email"value="${account.email}" required></input>
+                                    <input type="text" name="email" id="email"value="${account.email}" disabled></input>
                                     <font color="red">
-                                    ${requestScope.ERROR_EMAIL}
                                     </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
                                     Phone<br/>
-                                    <input type="text" name="phone" id="phone" value="${account.phone}" required></input>
+                                    <input type="text" name="phone" id="phone" value="${account.phone}" disabled></input>
                                     <font color="red">
-                                    ${requestScope.ERROR_PHONE}
                                     </font>
                                 </div>
                                 <div class="enter-field col-sm-6">

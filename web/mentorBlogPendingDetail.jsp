@@ -38,7 +38,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-        <script type="text/javascript" src="../UI/script/mentorBlogPendingDetail.js"></script>
+        <script type="text/javascript" src="./UI/script/mentorBlogPendingDetail.js"></script>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>Edit Page</title>
     </head>
@@ -101,6 +101,15 @@
             </div>
         </header>
         <!-- END OF NAVBAR -->
+        <div class="view-blog-container">
+            <div class="blog-detail"></div>
+
+        </div>
+        <div class="edit-button">
+            <button class="btn-action" id="editBtn" onclick="EnableEditAndSave();">Edit</button>
+            <button class="btn-action" id="saveBtn" onclick="SaveEdit();" style="display: none;">Save</button>
+            <button class="btn-action" id="undoBtn" onclick="Undo();" style="display: none;">Undo</button>
+        </div>
 
         <div class="create-blog-container container">
             <form action="blogPendingDetail" method="POST" accept-charset="utf-8">
@@ -118,52 +127,20 @@
                     </font>
                     <textarea id="summernote" name="content"></textarea>
                 </div>
-                <script>
-                    $('#summernote').summernote({
-                        placeholder: "",
-                        tabsize: 2,
-                        height: 400,
-                        maximumImageFileSize: 1000 * 1024, // 2mb
-                        callbacks: {
-                            onImageUpload: function (image) {
-                                uploadImage(image[0]);
-                            }
-                        }
-                    });
-                    function uploadImage(image) {
-                        var data = new FormData();
-                        data.append("image", image);
-                        $.ajax({
-                            url: './imageUpload',
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            data: data,
-                            type: "post",
-                            success: function (json) {
-                                if (json.status === "OK") {
-                                    var image = $('<img>').attr('src', json.imageUrl);
-                                    $('#summernote').summernote("insertNode", image[0]);
-                                } else {
-                                    console.log(json);
-                                }
-
-                            },
-                            error: function (data) {
-                                console.log(data);
-                            }
-                        });
-                    }
-                    $('#summernote').summernote('code', `${blog.content}`);
-                </script>
                 <div class="user-footer">
-                    <button class="btn-action" type="submit" name="submitAction" value="Update">Update</button>
-                    <button class="btn-action" type="submit" name="submitAction" value="Approve">Approve</button>
-                    <button class="btn-action" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
+                    <button class="btn-action" id="updateBtn" type="submit" name="submitAction" value="Update" style="display: none;">Update</button>
+                    <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
+                    <button class="btn-action" id="disapproveBtn" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
                 </div>
                 <a href="blogPendingList">Return</a>
             </form>
-        </div>
 
+            <!-- We need CSS for 3 of this button. -->
+
+        </div>
+        <script>
+            const blogContent = `${blog.content}`
+        </script>
+        <script type="text/javascript" src="./UI/script/summernote.js"></script>
     </body>
 </html>
