@@ -162,7 +162,7 @@
                                             </c:forEach>
                                         </select>
                                     </div>
-<%-------------------------THUMBNAIL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  --%>
+                                    <%-------------------------THUMBNAIL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  --%>
                                     <div class="thumbnail-area">
                                         <span>Thumbnail: </span>
                                         <br>
@@ -205,27 +205,10 @@
 
                         <!-- this is JS for summernote -->
                         <script>
-                            $('#summernote').summernote({
-                                placeholder: 'Ready to share .... ',
-                                tabsize: 2,
-                                height: 300
-                            });
+                            const blogContent = `${blog.content}`;
                         </script>
-                        <script>
-                            let inputFile = document.getElementById('attachment');
-                            let fileName = document.getElementById('file-name');
-                            inputFile.addEventListener('change', function (event) {
-                                let uploadedFileName = event.target.files[0].name;
-                                fileName.textContent = uploadedFileName;
-                            });
-                        </script>
-                        <script>
-                            attachment.onchange = evt => {
-                                const [file] = attachment.files;
-                                if (file) {
-                                    imgReview.src = URL.createObjectURL(file);
-                                }
-                            };
-                        </script>
+                        <script type="text/javascript" src="./UI/script/summernote.js"></script>
+                        <script type="text/javascript" src="./UI/script/createBlog.js"></script>
+
                         </body>
                         </html>

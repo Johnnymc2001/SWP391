@@ -140,8 +140,10 @@
 
         </div>
         <script>
-            const blogContent = `${blog.content}`
+            const blogContent = `${blog.content}`;
         </script>
         <script type="text/javascript" src="./UI/script/summernote.js"></script>
+        <script type="text/javascript" src="./UI/script/mentorBlogPendingDetail.js"></script>
+
     </body>
 </html>
