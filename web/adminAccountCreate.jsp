@@ -30,7 +30,7 @@
 
         <h1>Admin CreateAccount</h1>
         <div class="container-fluid">
-            <form action="accountCreate" method="POST">
+            <form action="adminAccountCreate" method="POST">
                 <div class="row">
                     <div class="enter-field col-md-6">
                         Username${requestScope.ERROR_USERNAME}

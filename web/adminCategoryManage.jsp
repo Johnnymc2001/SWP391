@@ -41,12 +41,13 @@
                     <tbody>
                         <c:forEach var="dto" items="${list}">
                             <tr>
-                        <form action="categoryManage" method="POST">
+                        <form action="adminCategoryManage" method="POST">
                             <td><input type="text" name="categoryid" value="${dto.key.categoryID}" required/></td>
                             <td> <input type="text" name="categoryname" value="${dto.key.categoryName}" required/></td>
                             <td>${dto.value}</td>
                             <td><button class="btn-action" type="submit" name="submitAction" value="Edit">Edit</button></td>
-                            <td>  <c:if test="${dto.value eq 0}">
+                            <td>  
+                                <c:if test="${dto.value eq 0}">
                                     <button class="btn-action deactive" type="submit" name="submitAction" value="Delete">Delete</button>
                                 </c:if>
                             </td>
@@ -68,7 +69,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                    <form action="categoryManage" method="GET">
+                    <form action="adminCategoryManage" method="GET">
                         <td><input type="text" name="categoryid"/></td>
                         <td><input type="text" name="categoryname"/></td>
                         <td><button class="btn-action" type="submit" name="submitAction" value="Add">Add</button></td>

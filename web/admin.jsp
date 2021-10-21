@@ -23,7 +23,7 @@
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <!-- this is script -->
-        <script src="./UI/script/admin.js"></script>
+        <script src="UI/script/admin.js"></script>
     </head>
     <body>
     <c:set var="user" value="${sessionScope.USER}"/>
@@ -31,7 +31,7 @@
         <div class="header-left">
             <!-- site logo -->
             <div class="site-logo">
-                <a href="/home"><img src="./UI/Icon/FPTLogo.jpg" alt="logo"></a>
+                <a href="/home"><img src="UI/Icon/FPTLogo.jpg" alt="logo"></a>
                 <a href="/home">FPT Academy</a>
             </div>
             <!-- navigate options -->
@@ -124,7 +124,7 @@
 
             </div>
             <div class="col-md-8">
-                <iframe id="iframe-window" src="accountList"></iframe>
+                <iframe id="iframe-window" src="adminAccountList"></iframe>
             </div>
         </div>
     </div>

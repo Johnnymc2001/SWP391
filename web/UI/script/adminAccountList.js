@@ -13,13 +13,13 @@ const iframe = document.querySelector("iframe");
 //}
 
 async function deactivateAccount(id) {
-    await fetch("accountDetail?accountid=" + id + "&submitAction=Disable");
-    window.location.href = "accountList";
+    await fetch("adminAccountDetail?accountid=" + id + "&submitAction=Disable");
+    window.location.href = "adminAccountList";
 }
 
 async function activateAccount(id) {
-    await fetch("accountDetail?accountid=" + id + "&submitAction=Enable");
-    window.location.href = "accountList";
+    await fetch("adminAccountDetail?accountid=" + id + "&submitAction=Enable");
+    window.location.href = "adminAccountList";
 }
 
 
@@ -36,7 +36,7 @@ function findGetParameter(parameterName) {
 }
 
 function changePage(page) {
-    let url = "accountList";
+    let url = "adminAccountList";
     let searchValue = findGetParameter("txtSearchValue");
     let accountType = findGetParameter("txtAccountType");
 

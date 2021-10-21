@@ -55,7 +55,7 @@
                             <td>${dto.role}</td>
                             <td>${dto.status}</td>
                             <td>
-                                <a href="accountDetail?accountid=${dto.accountID}"><button class="btn-action">Modify</button></a>
+                                <a href="adminAccountDetail?accountid=${dto.accountID}"><button class="btn-action">Modify</button></a>
                                 <c:if test="${dto.status == 'AVAILABLE'}">
                                     <a href="#" onclick="deactivateAccount(${dto.accountID})"><button class="btn-action deactive">Deactivate</button></a>
                                 </c:if>
