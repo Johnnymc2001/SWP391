@@ -42,12 +42,13 @@ public class ImageUploadServlet extends HttpServlet {
         String fileName = part.getSubmittedFileName();
 
         InputStream data = part.getInputStream();
-        String url = ImageUtils.uploadImageAndGetUrl(data);
+//        String base64 = ImageUtils.BytesToBase64(ImageUtils.InputStreamToBytes(data));
+        String url = ImageUtils.uploadImage(data);
 
         String json = "";
 
         if (url.equals("")) {
-            json = "{\"status\": \"NOT OK\", \"imageUrl\": \"alahuakbar\"}";
+            json = "{\"status\": \"NOT OK\", \"imageUrl\": \"none\"}";
         } else {
             json = "{\"status\": \"OK\", \"imageUrl\": \"" + url + "\"}";
         }

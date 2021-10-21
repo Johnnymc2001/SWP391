@@ -129,7 +129,7 @@
                     </header>
                     <!-- END OF NAVBAR -->
 
-                    <div class="parallax-window" data-parallax="scroll" data-image-src="${blog.getFirstImage()}">
+                    <div class="parallax-window" data-parallax="scroll" data-image-src="${blog.thumbnail}">
                     </div>
                     <div class="container">
                         <div class="row">

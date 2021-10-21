@@ -172,7 +172,7 @@
                                             </div>
                                             <h1 class="blog-title"><a href="">${blog.title}</a></h1>
                                             <div class="img-link">
-                                                <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
+                                                <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a>
                                             </div>
                                             <div class="blog-detail">
                                                 <a href="blog?txtBlogID=${blog.blogID}">Go to Post</a>

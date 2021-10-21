@@ -81,7 +81,6 @@ public class CreateBlogServlet extends HttpServlet {
         }
 
         String header = request.getContentType();
-        byte[] bytesImage = null;
         String base64Image = null;
 
         boolean foundErr = false;
@@ -110,7 +109,7 @@ public class CreateBlogServlet extends HttpServlet {
                             request.setAttribute("ERROR_UPLOAD", "You can only upload .jpg, .png, .jpeg");
                         } else {
                             InputStream data = part.getInputStream();
-                            base64Image = ImageUtils.resizeImageFromInputStream(data);
+                            base64Image = ImageUtils.BytesToBase64(ImageUtils.InputStreamToBytes(data));
                         }
 //                        bytesImage = ImageUtils.InputStreamToBytes(data);
 //                        base64Image = ImageUtils.BytesToBase64(bytesImage);
@@ -137,21 +136,13 @@ public class CreateBlogServlet extends HttpServlet {
                 } else {
                     //4. Call DAO to insert to DB
                     Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-                    BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID);
+                    String imageUrl = ImageUtils.uploadImage(base64Image);
+                    BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID, imageUrl);
                     
 
                     BlogDAO dao = new BlogDAO();
                     int result = dao.createBlog(dto);
-                    if (result > 0) {
-                        if (null != base64Image) {
-                            boolean bool = ImageUtils.uploadImage(base64Image, result);
-
-//                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BASE64", base64Image , null));
-                        }
-
-//                        if (null != bytesImage) {
-//                            attDao.createAttachment(new AttachmentDTO(result, "IMAGE/BINARY", null , bytesImage));
-//                        }
+                    if (result > 0) {     
                         url = roadmap.get(HOME_PAGE);
                         response.sendRedirect(url);
                     } else {

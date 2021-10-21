@@ -5,14 +5,8 @@
  */
 package Controller;
 
-import DAO.AttachmentDAO;
-import DAO.AttachmentDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
-import DAO.CategoryDAO;
-import DAO.CategoryDTO;
-import Utils.ImageUtils;
-import static Utils.ImageUtils.BytesToBase64;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;

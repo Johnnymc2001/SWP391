@@ -1,8 +1,6 @@
 package Controller;
 
 import DAO.AccountDTO;
-import DAO.AttachmentDAO;
-import DAO.AttachmentDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
 import Utils.ImageUtils;

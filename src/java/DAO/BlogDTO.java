@@ -26,8 +26,9 @@ public class BlogDTO implements Serializable {
     private Date approvedDate;
     private String tags;
     private int studentID;
+    private String thumbnail;
 
-    public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID) {
+    public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID, String thumbnail) {
         this.blogID = blogID;
         this.title = title;
         this.content = content;
@@ -38,9 +39,10 @@ public class BlogDTO implements Serializable {
         this.approvedDate = approvedDate;
         this.tags = tags;
         this.studentID = studentID;
+        this.thumbnail = thumbnail;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID, String thumbnail) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
@@ -50,9 +52,10 @@ public class BlogDTO implements Serializable {
         this.approvedDate = approvedDate;
         this.tags = tags;
         this.studentID = studentID;
+        this.thumbnail = thumbnail;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, String tags, int studentID) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, String tags, int studentID, String thumbnail) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
@@ -60,9 +63,10 @@ public class BlogDTO implements Serializable {
         this.status = status;
         this.tags = tags;
         this.studentID = studentID;
+        this.thumbnail = thumbnail;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String tags, int studentID) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String tags, int studentID, String thumbnail) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
@@ -70,6 +74,7 @@ public class BlogDTO implements Serializable {
         status = "PENDING";
         this.tags = tags;
         this.studentID = studentID;
+        this.thumbnail = thumbnail;
     }
 
     public BlogDTO() {
@@ -155,6 +160,15 @@ public class BlogDTO implements Serializable {
         this.studentID = studentID;
     }
 
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    
     public ArrayList<BlogCommentDTO> getAllComments() {
         BlogCommentDAO blogDao = new BlogCommentDAO();
         try {
@@ -165,15 +179,6 @@ public class BlogDTO implements Serializable {
         return new ArrayList<BlogCommentDTO>();
     }
     
-//    public String getContentShort() {
-//        if (content.length() > 40) {
-//            System.out.println("BLOG DTO getContentShort: "+content.substring(0, 40) + "...");
-//            return content.substring(0, 40) + "...";
-//        }
-//        System.out.println("BLOG DTO getContentShort: "+content);
-//        return content;
-//    }
-
     public AccountDTO getAccount() {
         AccountDAO accDao = new AccountDAO();
         try {
@@ -184,36 +189,6 @@ public class BlogDTO implements Serializable {
         return null;
     }
 
-    public String getFirstImage() throws SQLException {
-        AttachmentDAO attDao = new AttachmentDAO();
-        ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(this.getBlogID());
-        String image = null;
-
-        if (attList.size() > 0) {
-            if ("IMAGE/URL".equals(attList.get(0).getType())) {
-                image = attList.get(0).getDataText();
-            }
-        } else {
-            image = "UI/Icon/selfmademan.jpg";
-        }
-
-        return image;
-    }
-
-    public ArrayList<String> getAllImage() throws SQLException {
-        AttachmentDAO attDao = new AttachmentDAO();
-        ArrayList<AttachmentDTO> attList = attDao.getAllAttachmentsFromBlogID(this.getBlogID());
-        ArrayList<String> imageUrlList = new ArrayList<>();
-
-        if (attList.size() > 0) {
-            for (AttachmentDTO dto : attList) {
-                if ("IMAGE/URL".equals(dto.getType())) {
-                    imageUrlList.add(dto.getDataText());
-                }
-            }
-        }
-        return imageUrlList;
-    }
     
     public int getAverageRating() throws SQLException {
         BlogDAO blogDao = new BlogDAO();
