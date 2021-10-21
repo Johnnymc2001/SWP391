@@ -30,7 +30,7 @@ public class NotificationDAO implements Serializable {
 
             if (con != null) {
                 String sql = "INSERT INTO Notification (ownerID, isRead, type, content, date, redirectUrl) "
-                        + "VALUES (?, ? ,?, ?, ?)";
+                        + "VALUES (?, ? ,?, ?, ?, ?)";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, dto.getOwnerID());

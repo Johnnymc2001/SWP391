@@ -10,9 +10,12 @@ import DAO.AccountDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
 import DAO.NotificationDAO;
+import DAO.NotificationDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -58,8 +61,9 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
             return;
         }
 
-
         BlogDAO blogDao = new BlogDAO();
+        NotificationDAO notiDao = new NotificationDAO();
+
         BlogDTO blog = null;
 
         String blogIDString = request.getParameter("blogid");
@@ -109,19 +113,19 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                                 blog.setTitle(title);
                                 blog.setContent(content);
                                 System.out.println(content);
-                                
+
                                 boolean result = blogDao.updateBlog(blogID, blog);
-                                
+
                                 if (result) {
                                     request.setAttribute("MESSAGE", "Blog Successfully Updated!");
                                 } else {
                                     request.setAttribute("MESSAGE", "Something wrong, please try again!");
                                 }
-                                
+
                                 request.setAttribute("BLOG", blog);
-                                
+
                                 url = roadmap.get(PENDING_EDIT);
-                                
+
                                 RequestDispatcher rd = request.getRequestDispatcher(url);
                                 rd.forward(request, response);
                             }
@@ -129,14 +133,15 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                         } else if ("Approve".equals(action)) {
                             request.setAttribute("MESSAGE", "Blog Approved");
                             blogDao.approveBlog(blogID);
-                            
-                            NotificationDAO notiDao = new NotificationDAO();
+
+                            notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_APPROVED", "Your blog is approved, congratz!", new Date(Calendar.getInstance().getTime().getTime()), "/blog?txtblogid=" + blog.getBlogID()));
                             url = roadmap.get(PENDING_LIST);
                             RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);
                         } else if ("Disapprove".equals(action)) {
                             request.setAttribute("MESSAGE", "Blog Disapproved");
                             url = roadmap.get(PENDING_LIST);
+                            notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_DISAPPROVED", "Your blog have been disapproved!", new Date(Calendar.getInstance().getTime().getTime()), ""));
                             blogDao.disapproveBlog(blogID);
                             RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);

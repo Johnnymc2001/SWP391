@@ -42,13 +42,13 @@ public class NotificationDTO implements Serializable {
         this.redirectUrl = "";
     }
 
-    public NotificationDTO(int ownerID, boolean isRead, String type, String content, Date date) {
+    public NotificationDTO(int ownerID, boolean isRead, String type, String content, Date date, String redirectUrl) {
         this.ownerID = ownerID;
         this.isRead = isRead;
         this.type = type;
         this.content = content;
         this.date = date;
-        this.redirectUrl = "";
+        this.redirectUrl = redirectUrl;
     }
 
     public NotificationDTO() {

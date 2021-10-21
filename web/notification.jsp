@@ -26,7 +26,7 @@ Sammy Guergachi
             <c:if test="${not empty notificationList}">
                 <c:forEach var="dto" items="${notificationList}">
                 <li>
-                    <a href="">
+                    <a onclick="window.parent.location.href = ${dto.redirectUrl}">
                         <i class="notify-icon fas fa-star fa-lg"></i>
                         <div class="notify-content">
                             <span class="title">${dto.content}</span><br>
@@ -43,5 +43,10 @@ Sammy Guergachi
             <h2>There is no Notification</h2>
         </c:if>
     </body>
+    
+    <script>
+        
+    </script>
+    
 </html>
 </sguergachi>
