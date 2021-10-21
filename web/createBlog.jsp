@@ -146,7 +146,7 @@
                                     <div class="title-area">
                                         <span>Title: </span>
                                         <br>
-                                        <input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="60" size="62" required/>
+                                        <input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="100" size="62" required/>
                                     </div> 
                                     <br>
                                     <font color="red">

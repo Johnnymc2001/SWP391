@@ -141,7 +141,7 @@
                                         <th>${dto.title}</th>
                                         <td>${dto.studentID}</td>
                                         <td>
-                                            <button class="btn-action"><a href="blogPendingDetail?blogid=${dto.blogID}">Modify</a></button>
+                                            <button class="btn-action"><a href="blogPendingDetail?blogid=${dto.blogID}">Review</a></button>
                                         </td>
                                     </tr>
                                 </c:forEach>

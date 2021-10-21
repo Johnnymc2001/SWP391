@@ -705,7 +705,7 @@ public class BlogDAO implements Serializable {
 
             if (con != null) {
                 String sql = "SELECT "
-                        + "blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID "
+                        + "blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, tags, ownerID, thumbnail "
                         + "FROM Blog "
                         + "WHERE status = ? AND categoryID = ? "
                         + "ORDER BY postDate DESC";
