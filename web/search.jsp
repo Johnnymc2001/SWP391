@@ -173,7 +173,6 @@
                                             <div class="img-link">
                                                 <a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.getFirstImage()}" alt=""></a>
                                             </div>
-                                            <p>${blog.getContentShort()}</p>
                                             <div class="blog-detail">
                                                 <a href="blog?txtBlogID=${blog.blogID}">Go to Post</a>
                                             </div>

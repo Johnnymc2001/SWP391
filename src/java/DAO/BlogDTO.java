@@ -165,12 +165,14 @@ public class BlogDTO implements Serializable {
         return new ArrayList<BlogCommentDTO>();
     }
     
-    public String getContentShort() {
-        if (content.length() > 40) {
-            return content.substring(0, 40) + "...";
-        }
-        return content;
-    }
+//    public String getContentShort() {
+//        if (content.length() > 40) {
+//            System.out.println("BLOG DTO getContentShort: "+content.substring(0, 40) + "...");
+//            return content.substring(0, 40) + "...";
+//        }
+//        System.out.println("BLOG DTO getContentShort: "+content);
+//        return content;
+//    }
 
     public AccountDTO getAccount() {
         AccountDAO accDao = new AccountDAO();
