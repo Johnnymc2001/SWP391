@@ -18,7 +18,8 @@
                 integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
         <!-- this is external css -->
-        <link rel="stylesheet" href="UI/CSS/NewhomePageStyle.css">
+        <link rel="stylesheet" href="UI/CSS/homePageStyle.css">
+        <link rel="stylesheet" href="UI/CSS/navbar.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <!-- this is script -->
@@ -39,16 +40,16 @@
                 </div>
                 <!-- navigate options -->
                 <div class="collapse navbar-collapse options-btn">
-                    <a href="home"><button class="active-btn">Home</button></a>
-                    <a href="search?txtSearchType=popular"><button class="">Popular</button></a>
-                    <a href="search?txtSearchType=recent"><button class="">Recent</button></a>
-                    <a href="aboutUs.html"><button class="">About</button></a>
+                    <a href="home"><button class="btn active-btn">Home</button></a>
+                    <a href="search?txtSearchType=popular"><button class="btn">Popular</button></a>
+                    <a href="search?txtSearchType=recent"><button class="btn">Recent</button></a>
+                    <a href="aboutUs.html"><button class="btn">About</button></a>
                 </div>
             </div>
             <div class="header-right">
                 <div class="search-btn">
                     <form action="search" method="POST">
-                        <input type="hidden" name="txtSearchValue">
+                        <input type="hidden" name="txtSearchType" value="recent">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
                 </div>

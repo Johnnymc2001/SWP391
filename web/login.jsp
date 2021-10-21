@@ -18,7 +18,7 @@
                 integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
         <!-- this is external css -->
-        <link rel="stylesheet" href="UI/CSS/NewloginPageStyle.css">
+        <link rel="stylesheet" href="UI/CSS/loginPageStyle.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <!-- this is external JS -->

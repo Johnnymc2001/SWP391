@@ -20,6 +20,7 @@
     </script>
     <!-- this is external css -->
     <link rel="stylesheet" href="UI/CSS/blogDetailPage.css">
+    <link rel="stylesheet" href="UI/CSS/navbar.css">
     <!-- this is fontawsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <!-- this is external JS -->
@@ -45,9 +46,9 @@
             <!-- navigate options -->
             <div class="collapse navbar-collapse options-btn">
                 <a href="home"><button class="active-btn">Home</button></a>
-                <a href="search?txtSearchType=popular"><button class="">Popular</button></a>
-                <a href="search?txtSearchType=recent"><button class="">Recent</button></a>
-                <a href="aboutUs.html"><button class="">About</button></a>
+                <a href="search?txtSearchType=popular"><button class="btn">Popular</button></a>
+                <a href="search?txtSearchType=recent"><button class="btn">Recent</button></a>
+                <a href="aboutUs.html"><button class="btn">About</button></a>
             </div>
         </div>
         <div class="header-right">

@@ -27,6 +27,7 @@
         </script>
         <!-- this is external css -->
         <link rel="stylesheet" href="UI/CSS/createBlogPageStyle.css">
+        <link rel="stylesheet" href="UI/CSS/navbar.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <!-- this is external JS -->

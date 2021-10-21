@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+    position: relative;
+}
+
+body img:hover {
+    transform: scale(1.1);
+}
+
+h1 {
+    color: #203656;
+}
+
+/* NAVBAR */
+
+#header-default {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 3rem;
+    box-shadow: 0px 4px 7px -1px rgba(0, 0, 0, 0.1);
+}
+
+a:visited,
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left .site-logo a img {
+    border-radius: 50%;
+    width: 4rem;
+}
+
+.header-left .options-btn {
+    margin-left: 5rem;
+}
+
+.header-left .options-btn button {
+    padding: 0.2rem 0.3rem;
+    border: none;
+    background: transparent;
+    position: relative;
+}
+
+.header-left .options-btn .active-btn {
+    border-bottom: orange 3px solid;
+}
+
+.header-left .options-btn a {
+    margin: 0 1rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-right a:visited,
+.header-right a:link {
+    text-decoration: none;
+    color: black;
+}
+
+.header-right .search-btn {
+    margin-right: 0.5rem;
+}
+
+.header-right .search-btn .search-button {
+    background-color: transparent;
+    border: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 50%;
+    background: orange;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.35);
+}
+
+.header-right .search-btn .search-button:active {
+    transform: translateY(-0.05rem);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.35);
+}
+
+.header-right .menu-button {
+    border: none;
+    background-color: transparent;
+}
+
+.header-right .dropdown-menu {
+    padding: 1rem;
+}
+
+.header-right .dropdown-menu li:hover {
+    font-size: large;
+}
+
+.header-right .dropdown-menu .avatar,
+.header-right .dropdown-menu .personal-menu,
+.header-right .dropdown-menu .public-menu {
+    padding: 1rem;
+    min-width: 15rem;
+}
+
+.header-right .dropdown-menu .avatar {
+    text-align: center;
+    border-bottom: 0.2px rgb(219, 219, 219) solid;
+}
+
+.header-right .dropdown-menu .avatar img {
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+.header-right .dropdown-menu li {
+    padding: 0.5rem;
+    position: relative;
+}
+
+.header-right .dropdown-menu li:after {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    right: 0;
+    top: 0;
+    transition: all 0.3s;
+    background-color: orange;
+    z-index: -1;
+}
+
+.header-right .dropdown-menu li:hover::after{
+    left: 0;
+    top: 0;
+    right: auto;
+    width: 100%;
+    height: 100%;
+}
+
+.header-right .dropdown-menu .personal-menu {
+    border-bottom: 0.2px rgb(219, 219, 219) solid;
+}
+
+.header-right .notify .dropdown-menu li:hover {
+    background-color: orange;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    font-size: medium;
+}
+
+.header-right .notify {
+    margin: 0 0 0 1rem;
+    position: relative;
+}
+
+.header-right .notify .notify-button {
+    border: none;
+    background: orange;
+    padding: 0.4rem 0.7rem;
+    border-radius: 50%;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.15);
+}
+
+.header-right .notify .num {
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: red;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    color: white;
+}
+
+.notify-box {
+    min-width: 30vw;
+}
+
+.notify-box a {
+    display: flex;
+    align-items: center;
+}
+
+.notify-box .notify-icon {
+    width: 10%;
+}
+
+.notify-box .new {
+    border-bottom: 0.2px rgb(219, 219, 219) solid;
+}
+
+.notify-box .notify-content {
+    width: 80%;
+}
+
+.notify-box .notify-content .title {
+    font-size: large;
+}
+
+.notify-box li:hover .notify-content .date {
+    font-size: small;
+    color: rgb(0, 0, 0);
+}
+
+.notify-box li:hover .notify-status {
+    color: red;
+}
+
+.notify-box .notify-content .date {
+    font-size: small;
+    color: rgb(255, 145, 0);
+}
+
+.notify-status {
+    color: orange;
+    text-align: right;
+    width: 10%;
+}
+
+.header-left .options-btn .btn {
+    position: relative;
+}
+
+.header-left .options-btn .btn:not(.active-btn):after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: orange;
+    right: 0;
+    bottom: 0;
+    transition: all 0.3s;
+}
+
+.header-left .options-btn .btn:hover:after {
+    left: 0;
+    right: auto;
+    width: 100%;
+}
+
+.notify-window {
+    width: 100%;
+    height: 50vh;
+}
+
+
+@media only screen and (min-width: 0px) and (max-width: 480px) {
+    #header-default {
+        padding: 0.5rem 0;
+    }
+
+    .header-right .notify {
+        margin: 0 0 0 0.5rem;
+    }
+
+    .notify-box {
+        min-width: 100vw;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+    .notify-box {
+        min-width: 50vw;
+    }
+}
