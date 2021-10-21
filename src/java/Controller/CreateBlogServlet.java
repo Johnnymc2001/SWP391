@@ -136,7 +136,10 @@ public class CreateBlogServlet extends HttpServlet {
                 } else {
                     //4. Call DAO to insert to DB
                     Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-                    String imageUrl = ImageUtils.uploadImage(base64Image);
+                    String imageUrl = "UI/Icon/selfmademan.jpg";
+                    if(null != base64Image){
+                         imageUrl=ImageUtils.uploadImage(base64Image);
+                    }
                     BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID, imageUrl);
                     
 
