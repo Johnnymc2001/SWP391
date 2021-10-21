@@ -162,14 +162,16 @@
                                             </c:forEach>
                                         </select>
                                     </div>
-
+<%-------------------------THUMBNAIL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  --%>
                                     <div class="thumbnail-area">
                                         <span>Thumbnail: </span>
                                         <br>
                                         <label for="attachment">Choose file</label>
-                                        <input type="file" id="attachment" name="fileAttachment">
-                                        <span>Chosen file: </span>
+                                        <!--<input type="file" id="attachment" name="fileAttachment">-->
+                                        <input accept="image/*" type='file' id="attachment" name="fileAttachment" />
                                         <span id="file-name">None</span>
+                                        <br>
+                                        <img id="imgReview" src="#" alt="Your Thumbnail" />
                                     </div>
                                     <br>
                                     <font color="red">
@@ -215,7 +217,15 @@
                             inputFile.addEventListener('change', function (event) {
                                 let uploadedFileName = event.target.files[0].name;
                                 fileName.textContent = uploadedFileName;
-                            })
+                            });
+                        </script>
+                        <script>
+                            attachment.onchange = evt => {
+                                const [file] = attachment.files;
+                                if (file) {
+                                    imgReview.src = URL.createObjectURL(file);
+                                }
+                            };
                         </script>
                         </body>
                         </html>
