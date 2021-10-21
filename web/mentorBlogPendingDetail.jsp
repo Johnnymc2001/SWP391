@@ -115,13 +115,23 @@
         <div class="create-blog-container container">
             <form action="blogPendingDetail" method="POST" accept-charset="utf-8">
                 <input type="hidden" name="blogid" value="${blog.blogID}">
-                ${requestScope.ERROR_TITLE}<br/>
+
                 <div class="title-area">
                     <span>Title: </span>
                     <br>
                     <input type="text" value="${blog.title}" name="title"/>
                 </div> 
+                <font color="orange">
                 ${requestScope.ERROR_TITLE}<br/>
+                </font>
+                <div class="thumbnail-area">
+                    <span>Thumbnail: </span>
+                    <br>
+                    <%--<input type="file" value="${blog.thumbnail}" id="attachment" name="fileAttachment"/>--%>
+                    <img id="imgReview" src="${blog.thumbnail}" alt="Student Thumbnail" />
+                    <button class="btn-action" id="deleteThumnailBtn" type="submit" name="submitAction" value="DeleteThumnail">Delete</button>
+               
+                </div>
                 <div class="user-write">
                     <font color="orange">
                     ${requestScope.MESSAGE}
