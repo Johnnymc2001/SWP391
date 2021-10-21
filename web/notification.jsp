@@ -26,7 +26,7 @@ Sammy Guergachi
             <c:if test="${not empty notificationList}">
                 <c:forEach var="dto" items="${notificationList}">
                 <li>
-                    <a onclick="window.parent.location.href = ${dto.redirectUrl}">
+                    <a onclick="redirect(`./${dto.redirectUrl})`">
                         <i class="notify-icon fas fa-star fa-lg"></i>
                         <div class="notify-content">
                             <span class="title">${dto.content}</span><br>
@@ -45,7 +45,9 @@ Sammy Guergachi
     </body>
     
     <script>
-        
+        const redirect = (url) => {
+            window.parent.location.href = url
+        }
     </script>
     
 </html>

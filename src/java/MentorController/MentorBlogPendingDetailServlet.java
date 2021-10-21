@@ -134,7 +134,7 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                             request.setAttribute("MESSAGE", "Blog Approved");
                             blogDao.approveBlog(blogID);
 
-                            notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_APPROVED", "Your blog is approved, congratz!", new Date(Calendar.getInstance().getTime().getTime()), "/blog?txtblogid=" + blog.getBlogID()));
+                            notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_APPROVED", "Your blog is approved, congratz!", new Date(Calendar.getInstance().getTime().getTime()), "blog?txtblogid=" + blog.getBlogID()));
                             url = roadmap.get(PENDING_LIST);
                             RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);
