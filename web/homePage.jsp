@@ -224,8 +224,8 @@
                                             <img src="UI/Icon/FPTLogo.jpg" alt="">
                                             <h3>FPT Academy</h3>
                                         </div>
-                                        <p>I hope you love this page because I'm so tired of designing this. Looking at a white screen
-                                            for hours is killing me</p>
+                                        <p>Hello, We’re content writer who is fascinated by content academy. We help students access the
+                                            articles with a wide range of knowledge.</p>
                                     </div>
                                     <div class="reward-blog">
                                         <h3>Top Reward</h3>
