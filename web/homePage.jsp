@@ -198,8 +198,7 @@
                                             </p>
                                             <h5>
                                                 <a href="blog?txtBlogID=${blogMR_FIRST.blogID}">${blogMR_FIRST.title}</a>
-                                            </h5
-                                            
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
