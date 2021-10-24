@@ -3,10 +3,30 @@
 $('#summernote').summernote('code', blogContent);
 //$('#summernote').hide();
 
-backup = $('#summernote').summernote('code');
-$('.note-editor').hide();
+var backupContent = $('#summernote').summernote('code');
+var backupThumbnail = $('#txtImageUrl').val();
 
-var backup;
+$('.note-editor').hide();
+$("#undoDeleteBtn").hide();
+
+function deleteThumbnail() {
+    $('#imgReview').hide();
+    $('#txtImageUrl').val("");
+
+    $("#deleteThumnailBtn").hide();
+    $('#deleteThumnailBtn').hide();
+    $("#undoDeleteBtn").show();
+
+}
+
+function undoDeleteThumbnail() {
+    $('#imgReview').show();
+    $('#txtImageUrl').val(backupThumbnail);
+
+    $('#deleteThumnailBtn').show();
+    $("#undoDeleteBtn").hide();
+}
+
 function EnableEditAndSave() {
     $('#summernote').summernote('enable');
     $("#editBtn").hide();
@@ -40,7 +60,7 @@ function SaveEdit() {
 
 function Undo() {
     if (confirm('Are you sure you want undo everything?')) {
-        $('#summernote').summernote('code', backup);
+        $('#summernote').summernote('code', backupContent);
         $("#editBtn").show();
         $("#saveBtn").hide();
         $("#undoBtn").hide();

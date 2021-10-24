@@ -126,11 +126,13 @@
                 </font>
                 <div class="thumbnail-area">
                     <span>Thumbnail: </span>
+                    <button type="button" class="btn-action" id="deleteThumnailBtn" onclick="deleteThumbnail()">Delete</button>
+                    <button type="button" class="btn-action" id="undoDeleteBtn" onclick="undoDeleteThumbnail()">Undo</button>
                     <br>
-                    <!--<input type="file" value="${blog.thumbnail}" id="attachment" name="fileAttachment"/>-->
+                    <input type="hidden" value="${blog.thumbnail}" id="txtImageUrl" name="txtImageUrl"/>
                     <img id="imgReview" src="${blog.thumbnail}" alt="Student Thumbnail" />
                     <!--<button type="submit"  name="submitAction" value="ChangeThumbnail">Change Image</button>-->
-                    <button type="button" class="btn-action" id="deleteThumnailBtn" name="submitAction" value="Delete Thumbnail">Delete</button>
+                    
                 </div>
                     
                 <div class="blog-view" id="blog-view">
@@ -146,6 +148,7 @@
                     
                 <div class="user-footer">
                     <button class="btn-action" id="updateBtn" type="submit" name="submitAction" value="Update" style="display: none;">Update</button>
+                    <textarea class="form-control" name="note" rows="7"></textarea>
                     <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
                     <button class="btn-action" id="disapproveBtn" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
                 </div>
