@@ -32,7 +32,7 @@
         <c:set var="user" value="${sessionScope.USER}"/>
         <!-- THIS IS NAVBAR -->
         <header class="navbar navbar-expand-lg" id="header-default">
-            <jsp:include page="navbar.jsp" />  
+            <jsp:directive.include file="navbar.jsp" /> 
         </header>
         <!-- END OF NAVBAR -->
 

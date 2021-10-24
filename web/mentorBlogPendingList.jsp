@@ -35,7 +35,7 @@
     <body>
         <c:set var="blogList" value="${requestScope.PENDING_BLOG_LIST}"/>
         <header class="navbar navbar-expand-lg" id="header-default">
-            <jsp:include page="navbar.jsp" />  
+           <jsp:directive.include file="navbar.jsp" /> 
         </header>
         <!-- END OF NAVBAR -->
 

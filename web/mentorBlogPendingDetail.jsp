@@ -46,7 +46,9 @@
     <body>
         <c:set var="blog" value="${requestScope.BLOG}"/>
         <header class="navbar navbar-expand-lg" id="header-default">
-            <jsp:include page="navbar.jsp" />  
+            <jsp:include page="navbar.jsp">
+                <jsp:directive.include file="navbar.jsp" /> 
+            </jsp:include>
         </header>
         <!-- END OF NAVBAR -->
         <div class="view-blog-container">

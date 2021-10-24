@@ -69,6 +69,8 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
         String blogIDString = request.getParameter("blogid");
         String action = request.getParameter("submitAction");
         String note = null != request.getParameter("note") ? request.getParameter("note") : "";
+        String image = "";
+      
         int blogID = 0;
 
         if (null != blogIDString) {
