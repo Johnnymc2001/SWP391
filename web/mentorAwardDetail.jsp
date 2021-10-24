@@ -64,11 +64,13 @@
     <div class="container-fluid">
 
         <div class="title-area">
-            <input type="submit" value="Create an Award" id="ShowtextAward" />
-            <span>Award Name: </span>
-            <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
-            <span>Effective Days: </span>
-            <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
+            <button onclick="ShowCreateAward()" >Create an Award</button>
+            <div id="CreateAward" class="d-none">
+                <span>Award Name: </span>
+                <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
+                <span>Effective Days: </span>
+                <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
+            </div>
         </div> 
 
         <select name="awardBox">
@@ -93,10 +95,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
 </script>
-<script>$("#ShowtextAward").click(function () {
-        $('#textAward').show();
-    }
-    });</script>
+
+<script type="text/javascript" src="./UI/script/mentorAwardDetail.js"></script>
+
 </body>
 
 </html>
