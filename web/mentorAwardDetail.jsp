@@ -64,23 +64,34 @@
     <div class="container-fluid">
 
         <div class="title-area">
-            <button onclick="ShowCreateAward()" >Create an Award</button>
-            <div id="CreateAward" class="d-none">
-                <span>Award Name: </span>
-                <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
-                <span>Effective Days: </span>
-                <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
-            </div>
         </div> 
 
-        <select name="awardBox">
-            <input 
-                <c:set var="dtoList" value="${requestScope.ALL_AWARD}" />  
-                <c:forEach var="dto" items="${dtoList}" varStatus="counter">
-                    <option value="${dto.awardID}">${dto.awardName}</option>
-            </c:forEach>
-        </select>
-
+        <div>
+            <button onclick="ShowCreateAward()" >Create an Award</button>
+            <div id="CreateAward" class="d-none">
+                <form action="awardCreate" method="POST">
+                    <span>Award Name: </span>
+                    <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
+                    <span>Effective Days: </span>
+                    <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
+                    <input type="submit"  value="Create Award"/>
+                </form>
+            </div>
+        </div>
+        <c:set var="blogID" value="${requestScope.BLOGID}">
+        <c:if test="${not empty blogID}">
+            <form action="award" method="POST">
+                <span>Blog: ${blogInfo.title}</span><br>
+                <input type="hidden" name="txtBlogID" value="${blogInfo.blogID}">
+                <select name="awardBox">
+                    <c:set var="dtoList" value="${requestScope.ALL_AWARD}" />  
+                    <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                        <option value="${dto.awardID}">${dto.awardName}</option>
+                    </c:forEach>
+                </select>
+                <input type="submit" name="btnAction" value="Award Post"/>
+            </form>
+        </c:if>
         <input type="submit" value="Award"/>
     </div>
 </div>
