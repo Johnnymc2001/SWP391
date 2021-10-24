@@ -8,13 +8,13 @@ var backupThumbnail = $('#txtImageUrl').val();
 
 $('.note-editor').hide();
 $("#undoDeleteBtn").hide();
+$("#deleteThumnailBtn").hide();
 
 function deleteThumbnail() {
     $('#imgReview').hide();
     $('#txtImageUrl').val("");
 
     $("#deleteThumnailBtn").hide();
-    $('#deleteThumnailBtn').hide();
     $("#undoDeleteBtn").show();
 
 }
@@ -33,6 +33,13 @@ function EnableEditAndSave() {
     $("#saveBtn").show();
     $("#undoBtn").show();
 
+    if ($('#txtImageUrl').val() == "") {
+        $("#undoDeleteBtn").show();
+    } else {
+        $("#deleteThumnailBtn").show();
+    }
+
+
     // Show View
     $('#blog-view').css("visibility", "hidden");
     // Show Edtior
@@ -46,6 +53,9 @@ function SaveEdit() {
     $("#saveBtn").hide();
     $("#undoBtn").hide();
     $("#updateBtn").show();
+
+    $("#undoDeleteBtn").hide();
+    $("#deleteThumnailBtn").hide();
 
     // Show View
     $('#blog-view').css("visibility", "visible");
@@ -61,6 +71,8 @@ function SaveEdit() {
 function Undo() {
     if (confirm('Are you sure you want undo everything?')) {
         $('#summernote').summernote('code', backupContent);
+        $('#txtImageUrl').val(backupThumbnail);
+        $('#imgReview').show();
         $("#editBtn").show();
         $("#saveBtn").hide();
         $("#undoBtn").hide();

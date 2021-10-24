@@ -46,7 +46,13 @@ public class MentorCreateAwardServlet extends HttpServlet {
         String url = null;
         String txtEffectiveDays = request.getParameter("txtEffectiveDays");
         String txtAwardName = request.getParameter("txtAwardName");
-        int EffectiveDays = Integer.parseInt(txtEffectiveDays);
+        int EffectiveDays = 0;
+        try {
+             EffectiveDays = Integer.parseInt(txtEffectiveDays);
+        } catch (Exception ex) {
+            
+        }
+       
         try {
             AwardDAO dao = new AwardDAO();
             AwardDTO dto = new AwardDTO(txtAwardName, EffectiveDays);

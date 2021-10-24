@@ -35,6 +35,8 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
 
     public final String PENDING_EDIT = "blogPendingDetailPage";
     public final String PENDING_LIST = "blogPendingList";
+    
+    public final String DEFAULT_THUMBNAIL = "UI/Icon/selfmademan.jpg";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -69,7 +71,7 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
         String blogIDString = request.getParameter("blogid");
         String action = request.getParameter("submitAction");
         String note = null != request.getParameter("note") ? request.getParameter("note") : "";
-        String image = "";
+        String image = null != request.getParameter("txtImageUrl") && !"".equals(request.getParameter("txtImageUrl").trim()) ? request.getParameter("txtImageUrl") : "";;
       
         int blogID = 0;
 
@@ -115,6 +117,9 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                             } else {
                                 blog.setTitle(title);
                                 blog.setContent(content);
+                                if ("".equals(image)) {
+                                    blog.setThumbnail(DEFAULT_THUMBNAIL);
+                                }
                                 System.out.println(content);
 
                                 boolean result = blogDao.updateBlog(blogID, blog);

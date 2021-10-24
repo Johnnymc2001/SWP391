@@ -46,14 +46,11 @@
     <body>
         <c:set var="blog" value="${requestScope.BLOG}"/>
         <header class="navbar navbar-expand-lg" id="header-default">
-            <jsp:include page="navbar.jsp">
-                <jsp:directive.include file="navbar.jsp" /> 
-            </jsp:include>
+            <jsp:directive.include file="navbar.jsp" /> 
         </header>
         <!-- END OF NAVBAR -->
         <div class="view-blog-container">
             <div class="blog-detail"></div>
-
         </div>
         <div class="edit-button">
             <button class="btn-action" id="editBtn" onclick="EnableEditAndSave();">Edit</button>
@@ -75,9 +72,9 @@
                 </font>
                 <div class="thumbnail-area">
                     <span>Thumbnail: </span>
-                    <button type="button" class="btn-action" id="deleteThumnailBtn" onclick="deleteThumbnail()">Delete</button>
+                    <button type="button" class="btn-action" id="deleteThumnailBtn" onclick="deleteThumbnail()">Default</button>
                     <button type="button" class="btn-action" id="undoDeleteBtn" onclick="undoDeleteThumbnail()">Undo</button>
-                    <br>
+                    <br/>
                     <input type="hidden" value="${blog.thumbnail}" id="txtImageUrl" name="txtImageUrl"/>
                     <img id="imgReview" src="${blog.thumbnail}" alt="Student Thumbnail" />
                     <!--<button type="submit"  name="submitAction" value="ChangeThumbnail">Change Image</button>-->
