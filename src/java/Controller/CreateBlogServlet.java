@@ -140,7 +140,7 @@ public class CreateBlogServlet extends HttpServlet {
                     if(null != base64Image){
                          imageUrl=ImageUtils.uploadImage(base64Image);
                     }
-                    BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, tags, studentID, imageUrl);
+                    BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, "", tags, studentID, imageUrl);
                     
 
                     BlogDAO dao = new BlogDAO();

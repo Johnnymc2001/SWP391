@@ -1,21 +1,41 @@
-$('#summernote').summernote('code', `${blogContent}`);
-$('#summernote').summernote('disable');
+
+// $('#summernote').summernote('disable');
+$('#summernote').summernote('code', blogContent);
+//$('#summernote').hide();
+
+backup = $('#summernote').summernote('code');
+$('.note-editor').hide();
 
 var backup;
 function EnableEditAndSave() {
-    backup = $('#summernote').summernote('code');
     $('#summernote').summernote('enable');
     $("#editBtn").hide();
     $("#saveBtn").show();
     $("#undoBtn").show();
+
+    // Show View
+    $('#blog-view').css("visibility", "hidden");
+    // Show Edtior
+    //$('#summernote').show();
+    $('.note-editor').show();
+    // $('#summernote').summernote('enable');
 }
 
 function SaveEdit() {
-    $('#summernote').summernote('disable');
     $("#editBtn").show();
     $("#saveBtn").hide();
     $("#undoBtn").hide();
     $("#updateBtn").show();
+
+    // Show View
+    $('#blog-view').css("visibility", "visible");
+    // Hide Editor
+    //$('#summernote').hide();
+    $('.note-editor').hide();
+    // $('#summernote').summernote('disable');
+
+    // Copy Editor Into View
+    $('.blog-view').html($('#summernote').summernote('code'));
 }
 
 function Undo() {
@@ -24,7 +44,8 @@ function Undo() {
         $("#editBtn").show();
         $("#saveBtn").hide();
         $("#undoBtn").hide();
-        $('#summernote').summernote('disable');
+        $("#updateBtn").hide();
+        SaveEdit();
     } else {
 
     }

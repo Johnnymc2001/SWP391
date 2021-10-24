@@ -24,11 +24,12 @@ public class BlogDTO implements Serializable {
     private String status;
     private int mentorID;
     private Date approvedDate;
+    private String note;
     private String tags;
     private int studentID;
     private String thumbnail;
 
-    public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID, String thumbnail) {
+    public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String note, String tags, int studentID, String thumbnail) {
         this.blogID = blogID;
         this.title = title;
         this.content = content;
@@ -37,12 +38,13 @@ public class BlogDTO implements Serializable {
         this.status = status;
         this.mentorID = mentorID;
         this.approvedDate = approvedDate;
+        this.note = note;
         this.tags = tags;
         this.studentID = studentID;
         this.thumbnail = thumbnail;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String tags, int studentID, String thumbnail) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String note, String tags, int studentID, String thumbnail) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
@@ -50,28 +52,31 @@ public class BlogDTO implements Serializable {
         this.status = status;
         this.mentorID = mentorID;
         this.approvedDate = approvedDate;
+        this.note = note;
         this.tags = tags;
         this.studentID = studentID;
         this.thumbnail = thumbnail;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, String tags, int studentID, String thumbnail) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String status, String note, String tags, int studentID, String thumbnail) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
         this.categoryID = categoryID;
         this.status = status;
+        this.note = note;
         this.tags = tags;
         this.studentID = studentID;
         this.thumbnail = thumbnail;
     }
 
-    public BlogDTO(String title, String content, Date postDate, String categoryID, String tags, int studentID, String thumbnail) {
+    public BlogDTO(String title, String content, Date postDate, String categoryID, String note, String tags, int studentID, String thumbnail) {
         this.title = title;
         this.content = content;
         this.postDate = postDate;
         this.categoryID = categoryID;
         status = "PENDING";
+        this.note = note;
         this.tags = tags;
         this.studentID = studentID;
         this.thumbnail = thumbnail;
@@ -168,7 +173,14 @@ public class BlogDTO implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+   
     public ArrayList<BlogCommentDTO> getAllComments() {
         BlogCommentDAO blogDao = new BlogCommentDAO();
         try {

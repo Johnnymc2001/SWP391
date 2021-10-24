@@ -127,17 +127,23 @@
                 <div class="thumbnail-area">
                     <span>Thumbnail: </span>
                     <br>
-                    <%--<input type="file" value="${blog.thumbnail}" id="attachment" name="fileAttachment"/>--%>
+                    <!--<input type="file" value="${blog.thumbnail}" id="attachment" name="fileAttachment"/>-->
                     <img id="imgReview" src="${blog.thumbnail}" alt="Student Thumbnail" />
-                    <button class="btn-action" id="deleteThumnailBtn" type="submit" name="submitAction" value="DeleteThumnail">Delete</button>
-               
+                    <!--<button type="submit"  name="submitAction" value="ChangeThumbnail">Change Image</button>-->
+                    <button type="button" class="btn-action" id="deleteThumnailBtn" name="submitAction" value="Delete Thumbnail">Delete</button>
                 </div>
+                    
+                <div class="blog-view" id="blog-view">
+                    ${blog.content}
+                </div>
+                
                 <div class="user-write">
                     <font color="orange">
                     ${requestScope.MESSAGE}
                     </font>
                     <textarea id="summernote" name="content"></textarea>
                 </div>
+                    
                 <div class="user-footer">
                     <button class="btn-action" id="updateBtn" type="submit" name="submitAction" value="Update" style="display: none;">Update</button>
                     <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
