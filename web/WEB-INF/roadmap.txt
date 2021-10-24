@@ -31,15 +31,16 @@ editPage=edit.jsp
 notification=NotificationServlet
 notificationPage=notification.jsp
 
+
+
 rate=BlogRatingServlet
 
 imageUpload=ImageUploadServlet
 
 ### STUDENT
 
-student=StudentServlet
-studentPage=student.jsp
-
+profile=StudentProfileServlet
+profilePage=studentProfile.jsp
 ### MENTOR
 
 mentor=MentorServlet

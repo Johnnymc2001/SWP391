@@ -66,7 +66,7 @@
                             </div>
                             <!-- personal menu -->
                             <div class="personal-menu">
-                                <a href="studentDashboard"><li>Profile</li></a>
+                                <a href="profile?userID=${user.accountID}"><li>Profile</li></a>
                                 <a href="create"><li>Create Blog</li></a>
                                 <a href="logout"><li>Log out</li></a>
                             </div>
@@ -91,6 +91,8 @@
                                     <div class="avatar">
                                         <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
                                         <p>${user.fullname}</p>
+                                        
+                                        
                                     </div>
                                     <!-- personal menu -->
                                     <div class="personal-menu">
