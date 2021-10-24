@@ -68,6 +68,7 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
 
         String blogIDString = request.getParameter("blogid");
         String action = request.getParameter("submitAction");
+        String note = null != request.getParameter("note") ? request.getParameter("note") : "";
         int blogID = 0;
 
         if (null != blogIDString) {
@@ -132,8 +133,7 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
 
                         } else if ("Approve".equals(action)) {
                             request.setAttribute("MESSAGE", "Blog Approved");
-                            blogDao.approveBlog(blogID);
-
+                            blogDao.approveBlog(blogID, note);
                             notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_APPROVED", "Your blog is approved, congratz!", new Date(Calendar.getInstance().getTime().getTime()), "blog?txtblogid=" + blog.getBlogID()));
                             url = roadmap.get(PENDING_LIST);
                             RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -142,7 +142,7 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                             request.setAttribute("MESSAGE", "Blog Disapproved");
                             url = roadmap.get(PENDING_LIST);
                             notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_DISAPPROVED", "Your blog have been disapproved!", new Date(Calendar.getInstance().getTime().getTime()), ""));
-                            blogDao.disapproveBlog(blogID);
+                            blogDao.disapproveBlog(blogID, note);
                             RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);
                         } else {
