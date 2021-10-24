@@ -242,12 +242,14 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="register-invitation">
-                                    <h3>Join us now</h3>
-                                    <h6>Be one of us to reaches the world's knowledge</h6>
-                                    <a href="registerPage"><button>Register to join</button></a>
-                                    <p><a href="loginPage">Already have an account ?</a></p>
-                                </div>
+                                <c:if test="${not empty user}">
+                                    <div class="register-invitation">
+                                        <h3>Join us now</h3>
+                                        <h6>Be one of us to reaches the world's knowledge</h6>
+                                        <a href="registerPage"><button>Register to join</button></a>
+                                        <p><a href="loginPage">Already have an account ?</a></p>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>

@@ -9,5 +9,6 @@ attachment.onchange = evt => {
     const [file] = attachment.files;
     if (file) {
         imgReview.src = URL.createObjectURL(file);
+        imgReview.style.height = '30vh';
     }
 };

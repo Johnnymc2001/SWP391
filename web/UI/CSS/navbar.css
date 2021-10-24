@@ -12,10 +12,6 @@ body {
     position: relative;
 }
 
-body img:hover {
-    transform: scale(1.1);
-}
-
 h1 {
     color: #203656;
 }
@@ -133,10 +129,10 @@ a:link {
 .header-right .dropdown-menu li:after {
     content: "";
     position: absolute;
-    height: 0;
+    height: 100%;
     width: 0;
     right: 0;
-    top: 0;
+    bottom: 0;
     transition: all 0.3s;
     background-color: orange;
     z-index: -1;
@@ -144,10 +140,9 @@ a:link {
 
 .header-right .dropdown-menu li:hover::after{
     left: 0;
-    top: 0;
+    bottom: 0;
     right: auto;
     width: 100%;
-    height: 100%;
 }
 
 .header-right .dropdown-menu .personal-menu {
