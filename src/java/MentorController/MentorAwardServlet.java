@@ -52,27 +52,27 @@ public class MentorAwardServlet extends HttpServlet {
         String url;
         String txtBlogID = request.getParameter("txtBlogID");
         String txtAwardID = request.getParameter("txtAwardID");
-        int blogID;
+        String Action = request.getParameter("btnAction");
+        int blogID = 0;
         if (null != txtBlogID) {
             blogID = Integer.parseInt(txtBlogID);
+            request.setAttribute("BLOGID", blogID);
         } else {
-            blogID = 2;
+            System.out.println("Blog ID NULL!");
         }
-        int awardID;
-        if (null == txtAwardID) {
-            url = roadmap.get(AWARD_PAGE);
-            AwardDAO Adao = new AwardDAO();
-            request.setAttribute("ALL_AWARD", Adao.getAllAward());
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-            return;
-        } else {
-
-//            try {
+        int awardID = 0;
+        try {
+            if (null == txtAwardID) {
+                url = roadmap.get(AWARD_PAGE);
+                AwardDAO Adao = new AwardDAO();
+                request.setAttribute("ALL_AWARD", Adao.getAllAward());
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+                return;
+            } else {
                 awardID = Integer.parseInt(txtAwardID);
-//            } catch (NumberFormatException ex) {
-//
-//            }
+            }
+        } catch (IOException | NumberFormatException | SQLException | ServletException ex) {
         }
         try {
             AccountDTO account = (AccountDTO) request.getSession().getAttribute("USER");

@@ -55,11 +55,10 @@ blogPendingDetailPage=mentorBlogPendingDetail.jsp
 mentorBlogList=MentorBlogListServlet
 mentorBlogListPage=mentorBlogList.jsp
 
-awardList=MentorAwardListServlet
-awardListPage=mentorAwardList.jsp
-
 award=MentorAwardServlet
 awardPage=mentorAwardDetail.jsp
+
+awardCreate=MentorCreateAwardServlet
 
 ### ADMIN
 
