@@ -7,8 +7,11 @@ package MentorController;
 
 import DAO.AccountDTO;
 import DAO.AwardDAO;
+import DAO.AwardDTO;
 import DAO.AwardListDAO;
 import DAO.AwardListDTO;
+import DAO.BlogDAO;
+import DAO.BlogDTO;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -33,6 +36,7 @@ public class MentorAwardServlet extends HttpServlet {
 
     private final String BLOG_DETAIL = "blog";
     private final String AWARD_PAGE = "awardPage";
+    private static final String HOME_PAGE = "homePage";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,40 +53,63 @@ public class MentorAwardServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-        String url;
+        String url = null;
         String txtBlogID = request.getParameter("txtBlogID");
         String txtAwardID = request.getParameter("txtAwardID");
         String Action = request.getParameter("btnAction");
+        String txtEffectiveDays = request.getParameter("txtEffectiveDays");
+        String txtAwardName = request.getParameter("txtAwardName");
+        int EffectiveDays = 0;
         int blogID = 0;
-        if (null != txtBlogID) {
+        int awardID = 0;
+        
+
+        try {
+            if (null != txtBlogID) {
             blogID = Integer.parseInt(txtBlogID);
-            request.setAttribute("BLOGID", blogID);
+            BlogDAO dao = new BlogDAO();
+            BlogDTO dto = dao.getBlogFromBlogID(blogID);
+            request.setAttribute("BLOG", dto);
         } else {
             System.out.println("Blog ID NULL!");
         }
-        int awardID = 0;
-        try {
-            if (null == txtAwardID) {
+        if (null != txtAwardID) {
+            awardID = Integer.parseInt(txtAwardID);
+        } else {
+            System.out.println("Award ID NULL!");
+        }
+        if (null != txtEffectiveDays) {
+            awardID = Integer.parseInt(txtEffectiveDays);
+        } else {
+            System.out.println("Award ID NULL!");
+        }
+            
+            if (null == Action) {
                 url = roadmap.get(AWARD_PAGE);
                 AwardDAO Adao = new AwardDAO();
                 request.setAttribute("ALL_AWARD", Adao.getAllAward());
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
-                return;
-            } else {
-                awardID = Integer.parseInt(txtAwardID);
-            }
-        } catch (IOException | NumberFormatException | SQLException | ServletException ex) {
-        }
-        try {
-            AccountDTO account = (AccountDTO) request.getSession().getAttribute("USER");
-            AwardListDAO ALdao = new AwardListDAO();
-            Date date = new Date(Calendar.getInstance().getTime().getTime());
-            ALdao.createAwardList(new AwardListDTO(blogID, awardID, date, account.getAccountID()));
-            url = roadmap.get(BLOG_DETAIL);
+                
+            } else if (Action.equals("Create Award")) {
+                AwardDAO dao = new AwardDAO();
+                AwardDTO dto = new AwardDTO(txtAwardName, EffectiveDays);
+                if (dao.createAward(dto)) {
+                    url = roadmap.get(HOME_PAGE);
+                }
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
 
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            } else if (Action.equals("Award Blog")) {
+                AccountDTO account = (AccountDTO) request.getSession().getAttribute("USER");
+                AwardListDAO ALdao = new AwardListDAO();
+                Date date = new Date(Calendar.getInstance().getTime().getTime());
+                ALdao.createAwardList(new AwardListDTO(blogID, awardID, date, account.getAccountID()));
+                url = roadmap.get(BLOG_DETAIL);
+
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            }
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("AwardServlet _ SQL " + msg);
