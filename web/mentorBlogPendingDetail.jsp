@@ -46,60 +46,7 @@
     <body>
         <c:set var="blog" value="${requestScope.BLOG}"/>
         <header class="navbar navbar-expand-lg" id="header-default">
-            <div class="header-left">
-                <!-- site logo -->
-                <div class="site-logo">
-                    <a href="home"><img src="UI/Icon/FPTLogo.jpg" alt="logo"></a>
-                    <a href="home">FPT Academy</a>
-                </div>
-                <!-- navigate options -->
-                <div class="collapse navbar-collapse options-btn">
-                    <a href="home"><button class="active-btn">Home</button></a>
-                    <a href="search?txtSearchType=popular"><button class="">Popular</button></a>
-                    <a href="search?txtSearchType=recent"><button class="">Recent</button></a>
-                    <a href="aboutUs.html"><button class="">About</button></a>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="search-btn">
-                    <form action="search" method="POST">
-                        <input type="hidden" name="txtSearchValue">
-                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
-                <button type="button" class="menu-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    ${user.fullname}
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <!-- this is user img -->
-                    <div class="avatar">
-                        <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
-                        <p>${user.fullname}</p>
-                    </div>
-                    <!-- personal menu -->
-                    <div class="personal-menu">
-                        <a href="mentorDashboard"><li>Profile</li></a>
-                        <a href="blogPendingList"><li>Pending Blog</li></a>
-                        <a href="logout"><li>Log out</li></a>
-                    </div>
-                    <!-- public menu -->
-                    <div class="public-menu">
-                        <a href="home"><li>Home</li></a>
-                        <a href="search"><li>Search</li></a>
-                        <a href="about"><li>About</li></a>
-                        <a href="contact"><li>Contact</li></a>
-                    </div>
-                </ul>
-                <div class="notify">
-                    <button type="button" class="notify-button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-bell"></i>
-                        <span class="num">1</span>
-                    </button>
-                    <ul class="notify-box dropdown-menu dropdown-menu-end">
-                        <iframe class="notify-window" src="notification" frameborder="0"></iframe>
-                    </ul>
-                </div>
-            </div>
+            <jsp:include page="navbar.jsp" />  
         </header>
         <!-- END OF NAVBAR -->
         <div class="view-blog-container">
@@ -132,20 +79,20 @@
                     <input type="hidden" value="${blog.thumbnail}" id="txtImageUrl" name="txtImageUrl"/>
                     <img id="imgReview" src="${blog.thumbnail}" alt="Student Thumbnail" />
                     <!--<button type="submit"  name="submitAction" value="ChangeThumbnail">Change Image</button>-->
-                    
+
                 </div>
-                    
+
                 <div class="blog-view" id="blog-view">
                     ${blog.content}
                 </div>
-                
+
                 <div class="user-write">
                     <font color="orange">
                     ${requestScope.MESSAGE}
                     </font>
                     <textarea id="summernote" name="content"></textarea>
                 </div>
-                    
+
                 <div class="user-footer">
                     <button class="btn-action" id="updateBtn" type="submit" name="submitAction" value="Update" style="display: none;">Update</button>
                     <textarea class="form-control" name="note" rows="7"></textarea>

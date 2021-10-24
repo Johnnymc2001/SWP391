@@ -44,168 +44,80 @@
         <c:set var="user" value="${sessionScope.USER}"/>
         <!-- THIS IS NAVBAR -->
         <header class="navbar navbar-expand-lg" id="header-default">
-            <div class="header-left">
-                <!-- site logo -->
-                <div class="site-logo">
-                    <a href="home"><img src="UI/Icon/FPTLogo.jpg" alt="logo"></a>
-                    <a href="home">FPT Academy</a>
+            <jsp:include page="navbar.jsp" />  
+        </header>
+        <!-- END OF NAVBAR -->
+
+        <div class="create-blog-container container">
+            <form action="create" method="POST" enctype='multipart/form-data'>
+                <div class="user-pick">
+                    <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
+                    <%-------------------------THUMBNAIL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  --%>
+                    <div class="thumbnail-area">
+                        <span>Thumbnail: </span>
+                        <br>
+                        <label for="attachment">Choose file</label>
+                        <!--<input type="file" id="attachment" name="fileAttachment">-->
+                        <input accept="image/*" type='file' id="attachment" name="fileAttachment" />
+                        <span id="file-name">None</span>
+                        <br>
+                        <img id="imgReview" src="#" alt="Your Thumbnail" />
+                    </div>
+                    <br>
+                    <font color="red">
+                    ${requestScope.ERROR_UPLOAD}
+                    </font><br/>
+                    <div class="title-area">
+                        <span>Title: </span>
+                        <br>
+                        <input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="100" size="62" required/>
+                    </div> 
+                    <br>
+                    <font color="red">
+                    ${requestScope.ERROR_TITLE}
+                    </font>
+
+                    <div class="category-area">
+                        <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
+                        <span>Category: </span>
+                        <select name="categoryBox">
+                            <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                                <option value="${dto.categoryID}">${dto.categoryName}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                 </div>
-                <!-- navigate options -->
-                <div class="collapse navbar-collapse options-btn">
-                    <a href="home"><button class="active-btn">Home</button></a>
-                    <a href="search?txtSearchType=popular"><button class="btn">Popular</button></a>
-                    <a href="search?txtSearchType=recent"><button class="btn">Recent</button></a>
-                    <a href="aboutUs.html"><button class="btn">About</button></a>
+
+                <div class="user-write">
+                    <textarea id="summernote" name="txtContent">${param.txtContent}</textarea>
                 </div>
-            </div>
-            <div class="header-right">
-                <div class="search-btn">
-                    <form action="search" method="POST">
-                        <input type="hidden" name="txtSearchValue">
-                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                    </form>
+                <br/>
+                <font color="red">
+                ${requestScope.ERROR_CONTENT}
+                </font>
+                <br/>
+                <div class="user-footer">
+                    <button class="post" type="submit">Post</button>
+                    <button class="reset" type="reset">Reset</button>
+                    <!-- <input class="post" type="submit" value="Post" />
+                    <input class="reset" type="reset" value="Reset" /> -->
                 </div>
-                <c:if test="${not empty user}">
-                    <button type="button" class="menu-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        ${user.fullname}
-                    </button>
-                    <c:if test="${user.role == 'Student'}">
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <!-- this is user img -->
-                            <div class="avatar">
-                                <img src="UI/Icon/profile-icon.png" alt="avatar">
-                                <p>${user.fullname}</p>
-                            </div>
-                            <!-- personal menu -->
-                            <div class="personal-menu">
-                                <a href="studentDashboard"><li>Profile</li></a>
-                                <a href="create"><li>Create Blog</li></a>
-                                <a href="logout"><li>Log out</li></a>
-                            </div>
-                        </c:if>
-                        <c:if test="${user.role == 'Mentor'}">
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <!-- this is user img -->
-                                <div class="avatar">
-                                    <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
-                                    <p>${user.fullname}</p>
-                                </div>
-                                <!-- personal menu -->
-                                <div class="personal-menu">
-                                    <a href="mentorDashboard"><li>Profile</li></a>
-                                    <a href="blogPendingList"><li>Pending Blog</li></a>
-                                    <a href="logout"><li>Log out</li></a>
-                                </div>
-                            </c:if>
-                            <c:if test="${user.role == 'Admin'}">
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <!-- this is user img -->
-                                    <div class="avatar">
-                                        <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
-                                        <p>${user.fullname}</p>
-                                    </div>
-                                    <!-- personal menu -->
-                                    <div class="personal-menu">
-                                        <a href="admin/dashboard"><li>Dashboard</li></a>
-                                        <a href="admin/accountList"><li>Manage Accounts</li></a>
-                                        <a href="logout"><li>Log out</li></a>
-                                    </div>
-                                </c:if>
-                                <!-- public menu -->
-                                <div class="public-menu">
-                                    <a href="home"><li>Home</li></a>
-                                    <a href="search"><li>Search</li></a>
-                                    <a href="about"><li>About</li></a>
-                                    <a href="contact"><li>Contact</li></a>
-                                </div>
-                            </ul>
-                            <div class="notify">
-                                <button type="button" class="notify-button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-bell"></i>
-                                    <span class="num">1</span>
-                                </button>
-                                <ul class="notify-box dropdown-menu dropdown-menu-end">
-                                    <iframe class="notify-window" src="notification" frameborder="0"></iframe>
-                                </ul>
-                            </div>
-                        </c:if>
-                        <c:if test="${empty user}">
-                            <a href="loginPage">Login</a>
-                        </c:if>
-                        </div>
-                        </header>
-                        <!-- END OF NAVBAR -->
+                <a href="home">Return to Home</a>
+            </form>
+        </div>
 
-                        <div class="create-blog-container container">
-                            <form action="create" method="POST" enctype='multipart/form-data'>
-                                <div class="user-pick">
-                                    <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
-                                    <%-------------------------THUMBNAIL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  --%>
-                                    <div class="thumbnail-area">
-                                        <span>Thumbnail: </span>
-                                        <br>
-                                        <label for="attachment">Choose file</label>
-                                        <!--<input type="file" id="attachment" name="fileAttachment">-->
-                                        <input accept="image/*" type='file' id="attachment" name="fileAttachment" />
-                                        <span id="file-name">None</span>
-                                        <br>
-                                        <img id="imgReview" src="#" alt="Your Thumbnail" />
-                                    </div>
-                                    <br>
-                                    <font color="red">
-                                    ${requestScope.ERROR_UPLOAD}
-                                    </font><br/>
-                                    <div class="title-area">
-                                        <span>Title: </span>
-                                        <br>
-                                        <input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="100" size="62" required/>
-                                    </div> 
-                                    <br>
-                                    <font color="red">
-                                    ${requestScope.ERROR_TITLE}
-                                    </font>
+        <!-- FOOTER -->
+        <div class="web-footer">
+            <p>&copy; 2021 Henry. FE by Henry</p>
+            <button onclick="goTop()">Back to top</button>
+        </div>
 
-                                    <div class="category-area">
-                                        <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
-                                        <span>Category: </span>
-                                        <select name="categoryBox">
-                                            <c:forEach var="dto" items="${dtoList}" varStatus="counter">
-                                                <option value="${dto.categoryID}">${dto.categoryName}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
+        <!-- this is JS for summernote -->
+        <script>
+            const blogContent = `${blog.content}`;
+        </script>
+        <script type="text/javascript" src="./UI/script/summernote.js"></script>
+        <script type="text/javascript" src="./UI/script/createBlog.js"></script>
 
-                                <div class="user-write">
-                                    <textarea id="summernote" name="txtContent">${param.txtContent}</textarea>
-                                </div>
-                                <br/>
-                                <font color="red">
-                                ${requestScope.ERROR_CONTENT}
-                                </font>
-                                <br/>
-                                <div class="user-footer">
-                                    <button class="post" type="submit">Post</button>
-                                    <button class="reset" type="reset">Reset</button>
-                                    <!-- <input class="post" type="submit" value="Post" />
-                                    <input class="reset" type="reset" value="Reset" /> -->
-                                </div>
-                                <a href="home">Return to Home</a>
-                            </form>
-                        </div>
-
-                        <!-- FOOTER -->
-                        <div class="web-footer">
-                            <p>&copy; 2021 Henry. FE by Henry</p>
-                            <button onclick="goTop()">Back to top</button>
-                        </div>
-
-                        <!-- this is JS for summernote -->
-                        <script>
-                            const blogContent = `${blog.content}`;
-                        </script>
-                        <script type="text/javascript" src="./UI/script/summernote.js"></script>
-                        <script type="text/javascript" src="./UI/script/createBlog.js"></script>
-
-                        </body>
-                        </html>
+    </body>
+</html>
