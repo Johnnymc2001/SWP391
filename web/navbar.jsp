@@ -46,7 +46,7 @@
                 </div>
                 <!-- personal menu -->
                 <div class="personal-menu">
-                    <a href="mentorDashboard"><li>Profile</li></a>
+                    <a href="profile"><li>Profile</li></a>
                     <a href="blogPendingList"><li>Pending Blog</li></a>
                     <a href="logout"><li>Log out</li></a>
                 </div>

@@ -21,6 +21,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
+
+    <!-- THIS IS NAVBAR -->
+    <header class="navbar navbar-expand-lg" id="header-default">
+        <jsp:directive.include file="navbar.jsp" /> 
+    </header>
+    <!-- END OF NAVBAR -->
+    
     <body>
         <c:set var="user" value="${sessionScope.USER}"/>
         <div>
