@@ -146,14 +146,11 @@
             <p>2021 Henry. FE by Henry</p>
             <button onclick="goTop()">Back to top</button>
         </div>
-
+        
         <script>
-            $('#summernote').summernote({
-                placeholder: 'Ready to share .... ',
-                tabsize: 2,
-                height: 300
-            });
+            const blogContent = `${blog.content}`;
         </script>
+        <script type="text/javascript" src="./UI/script/summernote.js"></script>
         <script type="text/javascript" src="./UI/script/createBlog.js"></script>
     </form> 
 </body>

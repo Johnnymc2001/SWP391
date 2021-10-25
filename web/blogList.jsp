@@ -16,8 +16,8 @@
             <c:redirect url="/"/>
         </c:if>
     </c:if> --%>
-    
-    
+
+
     <c:set var="user" value="${sessionScope.USER}"/>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,7 +37,7 @@
     <body>
         <c:set var="blogList" value="${requestScope.BLOG_LIST}"/>
         <header class="navbar navbar-expand-lg" id="header-default">
-           <jsp:directive.include file="navbar.jsp" /> 
+            <jsp:directive.include file="navbar.jsp" /> 
         </header>
         <!-- END OF NAVBAR -->
 
@@ -90,7 +90,10 @@
                                         <th>${dto.title}</th>
                                         <td>${dto.status}</td>
                                         <td>
-                                            <button class="btn-action"><a href="blog?blogid=${dto.blogID}">View</a></button>
+                                            <button class="btn-action"><a href="blog?txtBlogID=${dto.blogID}">View</a></button>
+                                            <c:if test="${dto.status} == 'APPROVED' || ${dto.status} == 'DISAPPROVED'">
+                                                <button class="btn-action"><a href="edit?txtBlogID=${dto.blogID}">Edit</a></button>
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>

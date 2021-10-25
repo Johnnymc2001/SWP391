@@ -58,7 +58,7 @@ public class BlogListServlet extends HttpServlet {
                 blogList = blogDao.getAllBlogFromAccountId(account.getAccountID());
                 ArrayList<BlogDTO> returnList = new ArrayList<>();
 
-                int maxPageItem = 5;
+                int maxPageItem = 10;
                 int page;
 
 //            if (null != maxPageItemString) {
@@ -75,7 +75,7 @@ public class BlogListServlet extends HttpServlet {
                 for (int i = (page - 1) * maxPageItem; i < blogList.size() && returnList.size() < maxPageItem; i++) {
                     returnList.add(blogList.get(i));
                 }
-                request.setAttribute("BLOG_LIST", blogList);
+                request.setAttribute("BLOG_LIST", returnList);
                 request.setAttribute("PAGE_COUNT", (int) Math.ceil((double) blogList.size() / (double) maxPageItem));
                 url = BLOG_LIST_PAGE;
             }
