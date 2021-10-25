@@ -31,12 +31,14 @@ editPage=edit.jsp
 notification=NotificationServlet
 notificationPage=notification.jsp
 
-
-
 rate=BlogRatingServlet
 
 imageUpload=ImageUploadServlet
 
+blogList=BlogListServlet
+blogListPage=blogList.jsp
+
+about=aboutUs.html
 ### STUDENT
 
 profile=StudentProfileServlet
