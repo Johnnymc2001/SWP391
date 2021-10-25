@@ -11,10 +11,7 @@ import DAO.AccountDTO;
 import DAO.AccountError;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,7 +46,7 @@ public class CreateAccountServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-        
+
         String username = request.getParameter("username");
         String fullname = request.getParameter("fullname");
         String address = request.getParameter("address");
@@ -60,77 +57,67 @@ public class CreateAccountServlet extends HttpServlet {
         String birthdate = request.getParameter("birthdate");
         boolean foundError = false;
         AccountError error = new AccountError();
-        String url = "";
-        System.out.println("birthdate: " + birthdate);
-       
+        String url;
 
         try {
-             AccountDAO dao = new AccountDAO();
+            AccountDAO dao = new AccountDAO();
             AccountDTO user = dao.getAccountFromUsername(username);
             // KIEM TRA CAC LOI KHI TAO TAI KHOAN MOI
 //             int i = dao.getAccountIDByUsername(username);
             System.out.println("Account: " + user);
-
+            request.setAttribute("PAGE", "REGISTER");
             if (user != null) {
-                foundError = true;
-                request.setAttribute("PAGE", "REGISTER");
-                   request.setAttribute("ERROR", error);
+                request.setAttribute("ERROR", error);
                 error.setUserNameExisted("Account Existed");
                 System.out.println("username duplicate : " + user.getUsername());
                 url = "registerPage";
                 url = roadmap.get(url);
                 request.getRequestDispatcher(url).forward(request, response);
-                
-
-            } else {
-
-                if (username == null || username.trim().length() < 6 || username.trim().length() > 20) {
-                    foundError = true;
-                    error.setUserNameLengthError("User name must be from 6-20 character");
-                }
-                if (password == null || password.trim().length() < 6 || password.trim().length() > 30) {
-                    foundError = true;
-                    error.setPasswordLengthError("Password must be from 6-30 character");
-                } else if (confirm_password == null || !confirm_password.trim().equals(password.trim())) {
-                    foundError = true;
-                    error.setConfirmNotMatched("Confirm Password is Not Matched");
-                }
-                if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20) {
-                    foundError = true;
-                    error.setFullNameLengthError("Full Name must be from 6-20 character");
-                }
-                if (email == null || error.checkValidEmail(email) == false) {
-                    error.setEmailErrorFormat("Email is not valid");
-                }
-                if (phone == null || error.checkValidPhoneNumber(phone) == false) {
-                    error.setPhoneErrorFormat("Phone is not valid");
-                }
-
-                if (foundError) {
-                    request.setAttribute("ERROR", error);
-                    url = "registerPage";
-                    url = roadmap.get(url);
-                    request.getRequestDispatcher(url).forward(request, response);
-                    request.setAttribute("PAGE", "REGISTER");
-
-                } else {
-
-//                   Date  date =new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);  
-                    java.sql.Date sqlDate;
-                    sqlDate = java.sql.Date.valueOf(birthdate);
-                    AccountDTO dto = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
-
-//               AccountDAO.createAccount(dto);
-                    dao.createAccount(dto);
-
-                    url = "home";
-                    url = roadmap.get(url);
-                    request.getRequestDispatcher(url).forward(request, response);
-                }
+            }
+            if (username == null || username.trim().length() < 6 || username.trim().length() > 20) {
+                foundError = true;
+                error.setUserNameLengthError("User name must be from 6-20 character");
+            }
+            if (password == null || password.trim().length() < 6 || password.trim().length() > 30) {
+                foundError = true;
+                error.setPasswordLengthError("Password must be from 6-30 character");
+            } else if (confirm_password == null || !confirm_password.trim().equals(password.trim())) {
+                foundError = true;
+                error.setConfirmNotMatched("Confirm Password is Not Matched");
+            }
+            if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20) {
+                foundError = true;
+                error.setFullNameLengthError("Full Name must be from 6-20 character");
+            }
+            if (email == null || error.checkValidEmail(email) == false) {
+                error.setEmailErrorFormat("Email is not valid");
+            }
+            if (phone == null || error.checkValidPhoneNumber(phone) == false) {
+                error.setPhoneErrorFormat("Phone is not valid");
             }
 
-        }catch(IOException | SQLException | ServletException ex){
-            
+            if (foundError) {
+                request.setAttribute("ERROR", error);
+                url = "registerPage";
+                url = roadmap.get(url);
+                request.getRequestDispatcher(url).forward(request, response);
+                request.setAttribute("PAGE", "REGISTER");
+
+            } else {
+//                   Date  date =new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);  
+                java.sql.Date sqlDate;
+                sqlDate = java.sql.Date.valueOf(birthdate);
+                AccountDTO dto = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
+
+//               AccountDAO.createAccount(dto);
+                dao.createAccount(dto);
+
+                url = "home";
+                url = roadmap.get(url);
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } catch (IOException | SQLException | ServletException ex) {
+
         }
     }
 
@@ -148,10 +135,14 @@ public class CreateAccountServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (SQLException ex) {
-            Logger.getLogger(CreateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateAccountServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (ParseException ex) {
-            Logger.getLogger(CreateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateAccountServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -168,10 +159,14 @@ public class CreateAccountServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (SQLException ex) {
-            Logger.getLogger(CreateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateAccountServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (ParseException ex) {
-            Logger.getLogger(CreateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateAccountServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 

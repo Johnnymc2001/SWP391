@@ -51,61 +51,50 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String Remember = request.getParameter("chkRemember");
         String url = "loginPage";
-        System.out.println(username);
-        System.out.println(password);
-     
+//        System.out.println(username);
+//        System.out.println(password);
+
         boolean foundError = false;
         try {
+            AccountDAO dao = new AccountDAO();
+            AccountDTO curUser = dao.checkLogin(username, password);
             if (username == null || password == null) {
-                
-                request.setAttribute("LOGIN_NULL", "User Name or Password Is Invalid");
-                foundError = true;
+                foundError=true;
+                request.setAttribute("LOGIN_NULL", "User Name or Password Is Empty!");
             } else {
-
-                AccountDAO dao = new AccountDAO();
-                AccountDTO curUser = new AccountDTO();
-                curUser = dao.checkLogin(username, password);
-                System.out.println();
 
                 if (curUser == null) {
                     foundError = true;
-                   
                     request.setAttribute("LOGIN_ERROR", "Account not exist");
-
-                    
                 } else {
                     if (curUser.getStatus().equals("UNAVAILABLE")) {
                         foundError = true;
                         request.setAttribute("LOGIN_FAIL", "Your Account is not AVAILABLE anymore ");
-                        System.out.println("Your Account is not AVAILABLE anymore");
-                        System.out.println(curUser.getStatus());
-
                     }
-
                 }
-                if (foundError) {
-                    url = roadmap.get(url);
-                    request.getRequestDispatcher(url).forward(request, response);
-                } else {
-                    Cookie cookie = new Cookie(username, password);
-                    if(null != Remember && Remember.equals("true")){
-                        cookie.setMaxAge(60 * 24 * 7);
-                        
-                    }
-                    else{
-                         cookie.setMaxAge(60 * 5);
-                    }
-                    response.addCookie(cookie);
-                    url = roadmap.get("home");
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("USER", curUser);
-                    response.sendRedirect(url);
-                }
-
-                System.out.println(url);
             }
-        } catch(IOException | SQLException | ServletException ex){
-            
+            if (foundError) {
+                url = roadmap.get(url);
+                request.getRequestDispatcher(url).forward(request, response);
+            } else {
+                Cookie cookie = new Cookie(username, password);
+                if (null != Remember && Remember.equals("true")) {
+                    cookie.setMaxAge(60 * 24 * 7);
+
+                } else {
+                    cookie.setMaxAge(60 * 5);
+                }
+                response.addCookie(cookie);
+                url = roadmap.get("home");
+                HttpSession session = request.getSession(true);
+                session.setAttribute("USER", curUser);
+                response.sendRedirect(url);
+            }
+
+            System.out.println(url);
+
+        } catch (IOException | SQLException | ServletException ex) {
+
         }
     }
 

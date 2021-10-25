@@ -39,6 +39,8 @@
                      <c:if test="${not empty requestScope.PAGE && requestScope.PAGE == 'REGISTER'}">
                          deactivated 
                      </c:if> col-lg-6">
+
+                    <%--                    LOGIN                         --%>
                     <img class="avatar" src="UI/Icon/avatar-login.png" alt="">
                     <h1>Login</h1>
                     <form class="login-form" action="login" method="POST">
@@ -76,6 +78,10 @@
                     </form>
                     <button class="goto-register" onclick="goToRegister()">Don't have an account ?</button>
                 </div>
+
+                <%--            END OF LOGIN             --%>
+
+
                 <c:set var="error" value="${requestScope.ERROR}"/>
                 <div id="register-table" class="register-table
                      <c:if test="${empty requestScope.PAGE || requestScope.PAGE == 'LOGIN'}">
@@ -90,7 +96,7 @@
                     <form class="register-form" action="register" method="POST">
                         <div class="row">
                             <div class="enter-field col-md-6">
-                                <input name="username" id="username-register" type="text" required>
+                                <input name="username" id="username-register" value="${param.username}" type="text" required>
                                 <label class="username-label" for="username"><i class="fas fa-user"></i> Username</label>
                                 <c:if test="${not empty error.userNameLengthError}">
                                     <br/>
@@ -106,7 +112,7 @@
                                 </c:if>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="fullname" id="fullname" type="text" required>
+                                <input name="fullname" id="fullname" value="${param.fullname}" type="text" required>
                                 <label class="fullname-label" for="fullname"><i class="fas fa-file-signature"></i>
                                     Fullname</label>
                                     <c:if test="${not empty error.fullNameLengthError}">
@@ -117,19 +123,19 @@
                                 </c:if>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="address" id="address" type="text" required>
+                                <input name="address" id="address" value="${param.address}" type="text" required>
                                 <label class="address-label" for="address"><i class="fas fa-map-marked-alt"></i>
                                     Address</label>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="birthdate" id="birthdate" type="text" onfocus="(this.type = 'date')"
+                                <input name="birthdate" id="birthdate" value="${param.birthdate}" type="text" onfocus="(this.type = 'date')"
                                        onblur="if (!this.value)
                                                    this.type = 'text'" required>
                                 <label class="birthdate-label" for="birthdate"><i class="fas fa-calendar-alt"></i>
                                     Birthdate</label>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="email" id="email" type="text" required>
+                                <input name="email" id="email" value="${param.email}" type="text" required>
                                 <label class="email-label" for="email"><i class="fas fa-envelope"></i> Email</label>
                                 <c:if test="${not empty error.emailErrorFormat}">
                                     <br/>
@@ -139,7 +145,7 @@
                                 </c:if>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="phone" id="phone" type="text" required>
+                                <input name="phone" id="phone" value="${param.phone}"  type="text" required>
                                 <label class="phone-label" for="phone"><i class="fas fa-phone-alt"></i> Phone</label>
                                 <c:if test="${not empty error.phoneErrorFormat}">
                                     <br/>
