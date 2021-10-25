@@ -12,7 +12,6 @@ import DAO.BlogDTO;
 import DAO.NotificationDAO;
 import DAO.NotificationDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -72,7 +71,8 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
         String action = request.getParameter("submitAction");
         String note = null != request.getParameter("note") ? request.getParameter("note") : "";
         String image = null != request.getParameter("txtImageUrl") && !"".equals(request.getParameter("txtImageUrl").trim()) ? request.getParameter("txtImageUrl") : "";;
-      
+        
+        System.out.println("Khong co ok con de"+blogIDString);
         int blogID = 0;
 
         if (null != blogIDString) {
