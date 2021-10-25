@@ -48,6 +48,11 @@
                         <div class="user-avatar">
                             <h2>Blog List</h2>
                         </div>
+                        <div class="user-option">
+                            <a href="blogList">
+                                <li class="list-group-item active">Your Blogs</li>
+                            </a>
+                        </div>
                         <div class="public-option">
                             <a href="home">
                                 <li>Home</li>

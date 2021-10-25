@@ -42,7 +42,7 @@ about=aboutUs.html
 ### STUDENT
 
 profile=StudentProfileServlet
-profilePage=studentProfile.jsp
+profilePage=profile.jsp
 ### MENTOR
 
 mentor=MentorServlet
