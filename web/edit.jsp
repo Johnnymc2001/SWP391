@@ -19,7 +19,6 @@
         </script>
         <!-- this is external css -->
         <link rel="stylesheet" href="UI/CSS/createBlogPageStyle.css">
-        <link rel="stylesheet" href="UI/CSS/blogDetailPage.css">
         <link rel="stylesheet" href="UI/CSS/navbar.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
@@ -44,101 +43,57 @@
         </header>
         <!-- END OF NAVBAR -->
 
-        <div class="create-blog-container container-fluid">
-            <div class="row">
-                <div class="col-md-12 col-lg-8">
-                    <form action="edit" method="POST" enctype='multipart/form-data'>
-                        <div class="user-pick">
-                            <c:set var="editBlog" value="${requestScope.BLOG_EDIT}"/>
-                            <div class="thumbnail-area">
-                                <span>Thumbnail: </span>
-                                <br>
-                                <label for="attachment">Choose file</label>
-                                <!--<input type="file" id="attachment" name="fileAttachment">-->
-                                <input accept="image/*" type='file' id="attachment" name="fileAttachment" />
-                                <span id="file-name">${editBlog.thumbnail.toString()}</span>
-                                <br>
-                                <img id="imgReview" src="${editBlog.thumbnail}" alt="Your Thumbnail" />
-                            </div>
-                            <font color="red">
-                            ${requestScope.ERROR_UPLOAD}
-                            </font>
-                            <input type="hidden" name ="txtBlogID" value="${editBlog.blogID}">
-                            <div class="title-area">
-                                <span>Title: </span>
-                                <br>
-                                <input type="text" value="${editBlog.title}" name="txtTitle" maxlength="60" size="62"/>
-                            </div> 
-                            <c:if test="${not empty ERROR_TITLE}" >
+        <div class="create-blog-container container">
+            <form action="edit" method="POST" enctype='multipart/form-data'>
+                <div class="user-pick">
+                    <c:set var="editBlog" value="${requestScope.BLOG_EDIT}"/>
+                    <div class="thumbnail-area">
+                        <span>Thumbnail: </span>
+                        <br>
+                        <label for="attachment">Choose file</label>
+                        <!--<input type="file" id="attachment" name="fileAttachment">-->
+                        <input accept="image/*" type='file' id="attachment" name="fileAttachment" />
+                        <span id="file-name">${editBlog.thumbnail.toString()}</span>
+                        <br>
+                        <img id="imgReview" src="${editBlog.thumbnail}" alt="Your Thumbnail" />
+                    </div>
+                    <font color="red">
+                    ${requestScope.ERROR_UPLOAD}
+                    </font>
+                    <input type="hidden" name ="txtBlogID" value="${editBlog.blogID}">
+                    <div class="title-area">
+                        <span>Title: </span>
+                        <br>
+                        <input type="text" value="${editBlog.title}" name="txtTitle" maxlength="60" size="62"/>
+                    </div> 
+                    <c:if test="${not empty ERROR_TITLE}" >
+                        <font color="red">
+                        ${requestScope.ERROR_TITLE}
+                        </font><br/>
+                    </c:if>
+                    <div class="category-area">
+                        <span>Category: </span>
+                        <select name="categoryBox">
+                            <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
+                            <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                                <option value="${dto.categoryID}">${dto.categoryName}</option>
+                            </c:forEach>
+                            `<c:if test="${not empty INVALID_USER}">
                                 <font color="red">
-                                ${requestScope.ERROR_TITLE}
+                                ${requestScope.INVALID_USER}
                                 </font><br/>
                             </c:if>
-                            <div class="category-area">
-                                <span>Category: </span>
-                                <select name="categoryBox">
-                                    <c:set var="dtoList" value="${requestScope.CATEGORY_LIST}"/>
-                                    <c:forEach var="dto" items="${dtoList}" varStatus="counter">
-                                        <option value="${dto.categoryID}">${dto.categoryName}</option>
-                                    </c:forEach>
-                                    `<c:if test="${not empty INVALID_USER}">
-                                        <font color="red">
-                                        ${requestScope.INVALID_USER}
-                                        </font><br/>
-                                    </c:if>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="user-write">
-                            <textarea id="summernote" name="txtContent">${editBlog.content}</textarea>
-                        </div>
-                        <div class="user-footer">
-                            <button class="btn-action" type="submit" value="Update" name="btAction">Update</button>
-                            <button class="btn-action" type="reset" value="Reset" >Reset</button>
-                        </div>
-                        <a href="home">Return to Home</a>
-                </div>
-                <div class="right-colum col-lg-4">
-                    <div class="row justify-content-center">
-                        <div class="author-introduce col-md-6 col-lg-11">
-                            <h4>Author of this article</h4>
-                            <h2>${user.getFullname()}</h2>
-                            <div class="reward">
-                                <i class="fas fa-trophy fa-lg">
-                                    <p>3</p>
-                                </i>
-                                <i class="fas fa-pen fa-lg">
-                                    <p>5</p>
-                                </i>
-                                <i class="fas fa-star fa-lg">
-                                    <p>7</p>
-                                </i>
-                            </div>
-                        </div>
-                        <div class="web-introduce col-md-6 col-lg-11">
-                            <div class="logo-title">
-                                <img src="UI/Icon/FPTLogo.jpg" alt="">
-                                <h3>FPT Academy</h3>
-                            </div>
-                            <p>Hello, We’re content writer who is fascinated by content academy. We help students access the
-                                articles with a wide range of knowledge.</p>
-                        </div>
-                    </div>
-                    <div class="explore-topics">
-                        <h3>Explore Topic</h3>
-                        <div class="topic-list">
-                            <ul>
-                                <c:forEach var="dto" items="${requestScope.CAT_LIST}">
-                                    <li>
-                                        <a href="">${dto.categoryName}</a>
-                                        <a href="">(10)</a>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
+                        </select>
                     </div>
                 </div>
-            </div>
+                <div class="user-write">
+                    <textarea id="summernote" name="txtContent">${editBlog.content}</textarea>
+                </div>
+                <div class="user-footer">
+                    <button class="btn-action" type="submit" value="Update" name="btAction">Update</button>
+                    <button class="btn-action" type="reset" value="Reset" >Reset</button>
+                </div>
+                <a href="home">Return to Home</a>
         </div>
 
         <!-- FOOTER -->
