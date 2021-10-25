@@ -71,7 +71,8 @@ body {
     display: flex;
     justify-content: space-around;
 }
-.user-footer .btn-action,
+
+.btn-action,
 .user-footer .post,
 .user-footer .reset{
     padding: 0.3rem 1rem;
@@ -82,7 +83,7 @@ body {
     position: relative;
 }
 
-.user-footer .btn-action::after,
+.btn-action::after,
 .user-footer .post::after,
 .user-footer .reset::after{
     content: "";
@@ -97,7 +98,7 @@ body {
     transition: all 0.3s;
 }
 
-.user-footer .btn-action:hover::after,
+.btn-action:hover::after,
 .user-footer .post:hover::after,
 .user-footer .reset:hover::after{
     transform: scale(1.5);
@@ -142,4 +143,21 @@ form a:hover{
 #imgReview{
     max-width: 100%;
     height: 30vh;
+}
+
+.user-footer .btn-action.deactive {
+    background: red;
+}
+
+.user-footer .btn-action.deactive::after{
+    background: red;
+}
+
+.edit-button{
+    width: 100%;
+    text-align: right;
+}
+
+.blog-view{
+    word-break: break-word;
 }

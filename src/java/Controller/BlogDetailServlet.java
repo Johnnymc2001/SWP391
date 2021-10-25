@@ -53,32 +53,37 @@ public class BlogDetailServlet extends HttpServlet {
         if (null != txtBlogID) {
             blogID = Integer.parseInt(txtBlogID);
         } else {
-            blogID = 2;
+            blogID = 0;
         }
+        if (blogID != 0) {
+            try {
+                BlogDAO blogDao = new BlogDAO();
+                BlogDTO blog = blogDao.getBlogFromBlogID(blogID);
+                AccountDTO author = blog.getAccount();
 
-        try {
-            BlogDAO blogDao = new BlogDAO();
-            BlogDTO blog = blogDao.getBlogFromBlogID(blogID);
-            AccountDTO author = blog.getAccount();
-            System.out.println(author.getFullname());
-            
-            request.setAttribute("BLOG", blog);
-            request.setAttribute("AUTHOR", author);
-            
-            if (blog == null) {
-                url = roadmap.get(HOME_PAGE);
-                response.sendRedirect(url);
-            } else {
-                url = roadmap.get(BLOGDETAIL_PAGE);
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
+                request.setAttribute("BLOG", blog);
+                request.setAttribute("AUTHOR", author);
+
+                if (blog == null) {
+                    url = roadmap.get(HOME_PAGE);
+                    response.sendRedirect(url);
+                } else {
+                    url = roadmap.get(BLOGDETAIL_PAGE);
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                }
+            } catch (SQLException ex) {
+                String msg = ex.getMessage();
+                log("CreateBlogServlet _ SQL " + msg);
+            } finally {
+
             }
-        } catch (SQLException ex) {
-            String msg = ex.getMessage();
-            log("CreateBlogServlet _ SQL " + msg);
-        } finally {
-
+        } else {
+            url = roadmap.get(HOME_PAGE);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

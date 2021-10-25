@@ -48,19 +48,25 @@
             <div class="col-md-12 col-lg-8">
                 <div class="blog-title">
                     <h1>${blog.title}</h1>
-                    <c:if test="${blog.studentID==user.accountID}">
-                        <form action="edit" method="POST" >
-                            <input type="hidden" name="txtBlogID" value="${blog.blogID}">
-                            <button class="edit-btn" type="submit" name="btAction" value="Edit">Edit</button>
-                        </form>
+                    <c:if test="${blog.studentID == user.accountID}">
+                        <c:if test="${blog.status != 'PENDING'}">
+                            <form action="edit" method="POST" >
+                                <input type="hidden" name="txtBlogID" value="${blog.blogID}">
+                                <button class="edit-btn" type="submit" name="btAction" value="Edit">Edit</button>
+                            </form>
+                        </c:if>
                     </c:if>
-                    <div class="blog-note">
-                        <ul>
-                            <li><a href="">${author.getFullname()}</a></li>
-                            <li>11/10/2001</li>
-                            <li>comment(${blog.getAllComments().size()})</li>
-                        </ul>
-                    </div>
+                    <c:if test="${blog.status == 'PENDING'}">
+                        <h2>[PENDING]</h2>
+                        </c:if>
+                        <div class="blog-note">
+                            <ul>
+
+                                <li><a href="">${author.getFullname()}</a></li>
+                                <li>11/10/2001</li>
+                                <li>comment(${blog.getAllComments().size()})</li>
+                            </ul>
+                        </div>
                 </div>
                 <div class="blog-content">
                     <p class="blog-text">
@@ -100,8 +106,9 @@
                         </div>
                         <%-- ----------- Rating 63 ---------------------------   --%>   
                         <div>
-                            <i class="fas fa-trophy fa-lg"></i>
-                            <span>5</span>
+                            <form action="awardPage" method="POST">
+                                <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg"> How many award ?</i></button>
+                            </form>
                         </div>
                     </div>
 

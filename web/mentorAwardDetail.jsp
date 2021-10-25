@@ -19,6 +19,10 @@
         <link rel="stylesheet" href="UI/CSS/homePageStyle.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--this is exernal CSS-->
+        <link rel="stylesheet" href="UI/CSS/navbar.css">
+        <!--this is font awsome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     </head>
 
 
