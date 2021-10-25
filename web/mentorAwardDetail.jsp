@@ -35,7 +35,7 @@
 
     <body>
         <c:set var="user" value="${sessionScope.USER}"/>
-        <div class="container award-container " style="margin-top: 5vh;">
+        <div class="container award-container">
             <div>
                 <button class="btn-action" onclick="ShowCreateAward()" >Create an Award</button>
                 <div id="CreateAward" class="d-none">
