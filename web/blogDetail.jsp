@@ -106,8 +106,9 @@
                         </div>
                         <%-- ----------- Rating 63 ---------------------------   --%>   
                         <div>
-                            <i class="fas fa-trophy fa-lg"></i>
-                            <span>5</span>
+                            <form action="awardPage" method="POST">
+                                <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg"> How many award ?</i></button>
+                            </form>
                         </div>
                     </div>
 
