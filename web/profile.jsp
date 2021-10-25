@@ -70,7 +70,7 @@
 
                 </div>
                 <div class="col-md-8 profile-container">
-                    <c:if test="${user.role == 'Student'}">
+                    <c:if test="${user.role == 'Student' || user.role == 'Mentor'}">
                         <jsp:directive.include file="studentProfile.jsp" /> 
                     </c:if>
                 </div>
