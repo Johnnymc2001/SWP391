@@ -18,6 +18,7 @@ body {
 
 .container{
     min-height: max-content;
+    padding:1px;
 }
 
 /* BLOG_CONTAINER */
@@ -156,13 +157,13 @@ s
     line-height: 1.6;
 }
 
-.register-invitation button {
+.register-invitation button{
     padding: 0.5rem;
     border-radius: 20px;
     border: none;
     background: orange;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
-    margin-top: 7rem;
+    margin-top: 3rem;
 }
 
 .user-vote{
@@ -175,6 +176,13 @@ s
 
 .user-vote .vote-menu{
     min-width: 5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.vote-register{
+     text-align: center;
+    min-width: 20rem;
     padding: 0;
     margin: 0;
 }
@@ -273,3 +281,14 @@ button.award-btn{
     padding: 0.3rem;
     border-radius: 5px;
 }
+
+.comment-section{
+    height: 80vh;
+}/*
+
+.comment-window{
+    height: 90vh;
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+    padding-right: 40vh;
+}*/
