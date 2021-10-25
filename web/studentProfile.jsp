@@ -3,38 +3,38 @@
     <div>
         <form action="profile" method="POST">
             <div class="row">
-                <input type ="hidden" name ="userID" value="${account.accountID}" >
+                <input type ="hidden" name ="userID" value="${account.accountID}" readonly>
                 <div class="enter-field col-sm-12 col-md-6">
                     <label>Username</label>
-                    <input type ="text" name ="username" value="${account.username}" >
+                    <input type ="text" name ="username" value="${account.username}" readonly>
                 </div>
                 <div class="enter-field col-sm-12 col-md-6">
                     <label>Full name</label>
-                    <input type ="text" name ="fullname" value="${account.fullname}" >
+                    <input type ="text" name ="fullname" value="${account.fullname}" readonly>
                 </div>
                 <div class="enter-field col-sm-12 col-md-6">
                     <label>Address</label>
-                    <input type ="text" name ="address" value="${account.address}" >
+                    <input type ="text" name ="address" value="${account.address}" readonly>
                 </div>
                 <div class="enter-field col-sm-12 col-md-6">
                     <label>Password</label>
-                    <input type ="password" name ="password" value="${account.password}" >
+                    <input type ="password" name ="password" value="${account.password}" readonly>
                 </div>
                 <div class="enter-field col-sm-12 col-md-6">
                     <label>Email</label>
-                    <input type ="text" name ="email" value="${account.email}" >
+                    <input type ="text" name ="email" value="${account.email}" readonly>
                 </div>
                 <div class="enter-field col-sm-12 col-md-6">
                     <label>Phone</label>
-                    <input type ="text" name ="phone" value="${account.phone}" >
+                    <input type ="text" name ="phone" value="${account.phone}" readonly>
                 </div>
                 <div class="enter-field col-sm-12 col-md-6">
                     <label>Birth</label>
-                    <input type="date" id="birthdate" name ="birthdate" value="${account.birthday}"></br>
+                    <input type="date" id="birthdate" name ="birthdate" value="${account.birthday}" readonly></br>
                 </div>
             </div>
             <br>
-            <button class="btn-action" type="submit" name ="btAction" value="UpdateProfile">Update Profile</button>
+            <button class="btn-action d-none" type="submit" name ="btAction" value="UpdateProfile">Update Profile</button>
         </form>
     </div>   
 </c:if>
