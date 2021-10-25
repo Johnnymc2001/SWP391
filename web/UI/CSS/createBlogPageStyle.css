@@ -157,3 +157,7 @@ form a:hover{
     width: 100%;
     text-align: right;
 }
+
+.blog-view{
+    word-break: break-word;
+}

@@ -75,6 +75,7 @@ s
     border-right: none;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .blog-vote .fas{
@@ -264,4 +265,11 @@ s
 .web-footer button:active {
     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.15);
     transform: translateY(-1px);
+}
+
+button.award-btn{
+    background: orange;
+    border: none;
+    padding: 0.3rem;
+    border-radius: 5px;
 }
