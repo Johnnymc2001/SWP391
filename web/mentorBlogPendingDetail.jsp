@@ -49,19 +49,9 @@
             <jsp:directive.include file="navbar.jsp" /> 
         </header>
         <!-- END OF NAVBAR -->
-        <div class="view-blog-container">
-            <div class="blog-detail"></div>
-        </div>
-        <div class="edit-button">
-            <button class="btn-action" id="editBtn" onclick="EnableEditAndSave();">Edit</button>
-            <button class="btn-action" id="saveBtn" onclick="SaveEdit();" style="display: none;">Save</button>
-            <button class="btn-action" id="undoBtn" onclick="Undo();" style="display: none;">Undo</button>
-        </div>
-
-        <div class="create-blog-container container">
+        <div class="create-blog-container container-fluid"> 
             <form action="blogPendingDetail" method="POST" accept-charset="utf-8">
                 <input type="hidden" name="blogid" value="${blog.blogID}">
-
                 <div class="title-area">
                     <span>Title: </span>
                     <br>
@@ -72,40 +62,58 @@
                 </font>
                 <div class="thumbnail-area">
                     <span>Thumbnail: </span>
-                    <button type="button" class="btn-action" id="deleteThumnailBtn" onclick="deleteThumbnail()">Default</button>
-                    <button type="button" class="btn-action" id="undoDeleteBtn" onclick="undoDeleteThumbnail()">Undo</button>
-                    <br/>
-                    <input type="hidden" value="${blog.thumbnail}" id="txtImageUrl" name="txtImageUrl"/>
-                    <img id="imgReview" src="${blog.thumbnail}" alt="Student Thumbnail" />
-                    <!--<button type="submit"  name="submitAction" value="ChangeThumbnail">Change Image</button>-->
-
-                </div>
-
-                <div class="blog-view" id="blog-view">
-                    ${blog.content}
-                </div>
-
-                <div class="user-write">
-                    <font color="orange">
-                    ${requestScope.MESSAGE}
-                    </font>
-                    <textarea id="summernote" name="content"></textarea>
-                </div>
-
-                <div class="user-footer">
-                    <button class="btn-action" id="updateBtn" type="submit" name="submitAction" value="Update" style="display: none;">Update</button>
-                    <textarea class="form-control" name="note" rows="7"></textarea>
-                    <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
-                    <button class="btn-action" id="disapproveBtn" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
+                    <div>
+                        <input type="hidden" value="${blog.thumbnail}" id="txtImageUrl" name="txtImageUrl"/>
+                        <img class="d-block" id="imgReview" src="${blog.thumbnail}" alt="Student Thumbnail" />
+                    </div>
+                    <br>
+                    <button type="button" class="btn-action d-none" id="deleteThumnailBtn" onclick="deleteThumbnail()">Default</button>
+                    <button type="button" class="btn-action d-none" id="undoDeleteBtn" onclick="undoDeleteThumbnail()">Undo</button>
+                    <!--<button type="submit"  name="submitAction" value="ChangeThumbnail">Change Image</button>-->                   
+                </div>                 
+                <div class="row">
+                    <div class="col-lg-8">  
+                        <div class="edit-button">
+                            <button type="button" class="btn-action d-inline" id="editBtn" onclick="EnableEditAndSave()">Edit</button>
+                            <button type="button" class="btn-action d-none" id="saveBtn" onclick="SaveEdit()">Save</button>
+                            <button type="button" class="btn-action d-none" id="undoBtn" onclick="Undo()">Undo</button>
+                        </div> 
+                        <br>
+                        <div class="blog-view d-block" id="blog-view">
+                            ${blog.content}
+                        </div>
+                        <div id="user-write" class="user-write d-none">
+                            <font color="orange">
+                            ${requestScope.MESSAGE}
+                            </font>
+                            <textarea id="summernote" name="content"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="user-footer">
+                            <button class="btn-action d-none" id="updateBtn" type="submit" name="submitAction" value="Update">Update</button>
+                            <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
+                            <button class="btn-action deactive" id="disapproveBtn" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
+                        </div>
+                        <h1>Note:</h1>
+                        <textarea class="form-control" name="note" rows="10"></textarea>
+                    </div>
                 </div>
                 <a href="blogPendingList">Return</a>
             </form>
 
             <!-- We need CSS for 3 of this button. -->
 
+            <!-- FOOTER -->
+            <div class="web-footer">
+                <p>2021 Henry. FE by Henry</p>
+                <button onclick="goTop()">Back to top</button>
+            </div>
+
         </div>
+        <!--this is Js-->
         <script>
-            const blogContent = `${blog.content}`;
+            const blogContent = '${blog.content}';
         </script>
         <script type="text/javascript" src="./UI/script/summernote.js"></script>
         <script type="text/javascript" src="./UI/script/mentorBlogPendingDetail.js"></script>
