@@ -20,8 +20,11 @@ function EnableEditAndSave() {
     saveBtn.classList.replace("d-none", "d-inline");
     undoBtn.classList.replace("d-none", "d-inline");
     blogView.classList.replace("d-block", "d-none");
-    updateBtn.classList.replace("d-none", "d-block");
-    deleteThumnailBtn.classList.replace("d-none", "d-inline");
+    if ($('#txtImageUrl').val() === "") {
+        undoDeleteBtn.classList.replace("d-none", "d-inline");
+    } else {
+        deleteThumnailBtn.classList.replace("d-none", "d-inline");
+    }
     userWrite.classList.replace("d-none", "d-block");
 }
 
@@ -30,6 +33,7 @@ function SaveEdit() {
     saveBtn.classList.replace("d-inline", "d-none");
     undoBtn.classList.replace("d-inline", "d-none");
     deleteThumnailBtn.classList.replace("d-inline", "d-none");
+    updateBtn.classList.replace("d-none", "d-block");
     undoDeleteBtn.classList.replace("d-inline", "d-none");
     $('.blog-view').html($('#summernote').summernote('code'));
     userWrite.classList.replace("d-block", "d-none");
@@ -55,7 +59,7 @@ function Undo() {
 
 function deleteThumbnail() {
     imgReview.classList.replace("d-block", "d-none");
-
+    $('#txtImageUrl').val("");
     deleteThumnailBtn.classList.replace("d-inline", "d-none");
     undoDeleteBtn.classList.replace("d-none", "d-inline");
 
@@ -63,7 +67,7 @@ function deleteThumbnail() {
 
 function undoDeleteThumbnail() {
     imgReview.classList.replace("d-none", "d-block");
-
+    $('#txtImageUrl').val(backupThumbnail);
     deleteThumnailBtn.classList.replace("d-none", "d-inline");
     undoDeleteBtn.classList.replace("d-inline", "d-none");
 }

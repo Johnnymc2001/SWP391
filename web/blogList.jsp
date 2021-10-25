@@ -46,12 +46,7 @@
                 <div class="d-none d-md-block col-md-3">
                     <ul class="option-table list-group">
                         <div class="user-avatar">
-                            <h2>Mentor</h2>
-                        </div>
-                        <div class="user-option">
-                            <a href="blogPendingList">
-                                <li class="list-group-item active">Blog List</li>
-                            </a>
+                            <h2>Blog List</h2>
                         </div>
                         <div class="public-option">
                             <a href="home">
