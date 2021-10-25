@@ -41,8 +41,9 @@ function uploadImage(image) {
         type: "post",
         success: function (json) {
             if (json.status === "OK") {
-                var image = $('<img>').attr('src', json.imageUrl);
+                var image = $('<img>').attr('src', json.imageUrl).css("width", "50%");
                 $('#summernote').summernote("insertNode", image[0]);
+                
             } else {
                 console.log(json);
             }

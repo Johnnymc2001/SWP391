@@ -32,7 +32,7 @@
                 </div>
                 <!-- personal menu -->
                 <div class="personal-menu">
-                    <a href="studentDashboard"><li>Profile</li></a>
+                    <a href="profile"><li>Profile</li></a>
                     <a href="create"><li>Create Blog</li></a>
                     <a href="blogList"><li>Blog List</li></a>
                     <a href="logout"><li>Log out</li></a>

@@ -42,9 +42,7 @@ public class StudentProfileServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-        
-        
-        
+
         String txtID = request.getParameter("userID");
         String username = request.getParameter("username");
         String fullname = request.getParameter("fullname");
@@ -56,68 +54,69 @@ public class StudentProfileServlet extends HttpServlet {
         String button = request.getParameter("btAction");
         String url = "";
         int id = 0;
+
+        BlogDAO blogdao = new BlogDAO();
+        AccountDAO accDao = new AccountDAO();
+
+        AccountDTO curUser = (AccountDTO) request.getSession().getAttribute("USER");
+        AccountDTO profileAccount = null;
+
         try {
-            
             if (null != txtID && !txtID.equals("")) {
-                
                 id = Integer.parseInt(txtID);
-                if (id != 0) {
-                    AccountDTO curUser = (AccountDTO) request.getSession().getAttribute("USER");
-                    BlogDAO blogdao = new BlogDAO();
-                    AccountDAO dao = new AccountDAO();
-                    AccountDTO account = dao.getAccountFromAcoountID(id);
-                    System.out.println("account : " + account.getAccountID());
-                    
-                    if (button != null) {
-                        if (button.equals("UpdateProfile") && account.getAccountID() == curUser.getAccountID()) {
-                            java.sql.Date sqlDate;
-                            sqlDate = java.sql.Date.valueOf(birthdate);
-//                            account = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
-                            account.setUsername(username);
-                            account.setPassword(password);
-                            account.setFullname(fullname);
-                            account.setBirthday(sqlDate);
-                            account.setEmail(email);
-                            account.setPhone(phone);
-                            account.setAddress(address);
-                          
-                            dao.updateAccount(account.getAccountID(), account);
-                            request.setAttribute("ACCOUNT", account);
-                            url = roadmap.get("profilePage");
-                            RequestDispatcher rd = request.getRequestDispatcher(url);
-                            rd.forward(request, response);
-                        }
-                    } else {
-                        account = dao.getAccountFromAcoountID(id);
-                        request.setAttribute("ACCOUNT", account);
-                        url = roadmap.get("profilePage");
-                        RequestDispatcher rd = request.getRequestDispatcher(url);
-                        rd.forward(request, response);
-                    }
-                    
-                    ArrayList<BlogDTO> bloglist = blogdao.getAllBlogFromAccountId(account.getAccountID());
-                    request.setAttribute("CURBLOG", bloglist);
-//                    request.setAttribute("ACCOUNT", account);
-                    System.out.println("bloglist: " + bloglist);
-                    System.out.println("account :" + account.toString());
-                    
-                }
             }
-//                     url = roadmap.get("");
-            RequestDispatcher rd = request.getRequestDispatcher("404.html");
+            // Parse Profile Account From Parameter Or Current Account
+            if (id != 0) {
+                profileAccount = accDao.getAccountFromAcoountID(id);
+            } else if (null != curUser) {
+                profileAccount = curUser;
+                System.out.println("Get Self Profile!");
+            }
+
+            if (null != profileAccount) {
+                if (button != null) {
+                    if (button.equals("UpdateProfile") && profileAccount.getAccountID() == curUser.getAccountID()) {
+                        java.sql.Date sqlDate;
+                        sqlDate = java.sql.Date.valueOf(birthdate);
+//                            account = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
+                        profileAccount.setUsername(username);
+                        profileAccount.setPassword(password);
+                        profileAccount.setFullname(fullname);
+                        profileAccount.setBirthday(sqlDate);
+                        profileAccount.setEmail(email);
+                        profileAccount.setPhone(phone);
+                        profileAccount.setAddress(address);
+
+                        accDao.updateAccount(profileAccount.getAccountID(), profileAccount);
+                        request.setAttribute("ACCOUNT", profileAccount);
+                        url = roadmap.get("profilePage");
+
+                    }
+                } else {
+                    request.setAttribute("ACCOUNT", profileAccount);
+                    url = roadmap.get("profilePage");
+
+                }
+
+                ArrayList<BlogDTO> bloglist = blogdao.getAllBlogFromAccountId(profileAccount.getAccountID());
+                request.setAttribute("CURBLOG", bloglist);
+                request.setAttribute("ACCOUNT", profileAccount);
+//                    System.out.println("bloglist: " + bloglist);
+//                    System.out.println("account :" + account.toString());
+
+            } else {
+                url = roadmap.get("home");
+            }
+
+        } catch (Exception ex) {
+        } finally {
+//            url = roadmap.get("profilePage");
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            
-        } catch (IOException | NumberFormatException | SQLException | ServletException ex) {
-            
         }
-//         finally {
-////            url = roadmap.get("profilePage");
-////            RequestDispatcher rd = request.getRequestDispatcher(url);
-////            rd.forward(request, response);
-//        }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
