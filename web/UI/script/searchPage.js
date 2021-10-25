@@ -29,10 +29,13 @@ function changePage(page) {
     let url = "search";
 
     var searchValue = findGetParameter("txtSearchValue");
-
-    if (searchValue != null) {
+    var searchType = findGetParameter("txtSearchType");
+    
+    if (searchValue !== null) {
         url += `?txtSearchValue=${searchValue}&page=${page}`;
-    } else {
+    } else if (searchType !== null) {
+        url += `?txtSearchType=${searchType}&page=${page}`;
+    } else{
         url += "?page=" + page;
     }
 
