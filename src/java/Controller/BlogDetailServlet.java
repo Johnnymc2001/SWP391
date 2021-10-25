@@ -1,13 +1,11 @@
 package Controller;
 
 import DAO.AccountDTO;
+import DAO.AwardListDAO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
-import Utils.ImageUtils;
-import static Utils.ImageUtils.BytesToBase64;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,6 +66,9 @@ public class BlogDetailServlet extends HttpServlet {
                     url = roadmap.get(HOME_PAGE);
                     response.sendRedirect(url);
                 } else {
+                    
+                    int numOfAward = new AwardListDAO().getAwardListFromBlogId(blogID).size();
+                    request.setAttribute("BLOGAWARDS", numOfAward);
                     url = roadmap.get(BLOGDETAIL_PAGE);
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);

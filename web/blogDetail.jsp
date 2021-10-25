@@ -119,8 +119,14 @@
                         <%-- ----------- Rating 63 ---------------------------   --%>   
                         <div>
                             <form action="awardPage" method="POST">
-                                <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg"> How many award ?</i></button>
+                                <c:set var="role" value="Mentor"/>
+                                <c:if test="${user.role eq role}">
+                                    <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>
+                                    </c:if>
                             </form>
+                            <c:if test="${not (user.role  eq role)}">
+                                <button class="award-btn"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>
+                                </c:if>
                         </div>
                     </div>
 
