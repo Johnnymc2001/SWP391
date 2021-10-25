@@ -17,12 +17,13 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="UI/CSS/homePageStyle.css">
+        <link rel="stylesheet" href="UI/CSS/adminIframe.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--this is exernal CSS-->
         <link rel="stylesheet" href="UI/CSS/navbar.css">
         <!--this is font awsome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     </head>
 
 
@@ -31,19 +32,24 @@
         <jsp:directive.include file="navbar.jsp" /> 
     </header>
     <!-- END OF NAVBAR -->
-    
+
     <body>
         <c:set var="user" value="${sessionScope.USER}"/>
-        <div>
+        <div class="container award-container " style="margin-top: 5vh;">
             <div>
-                <button onclick="ShowCreateAward()" >Create an Award</button>
+                <button class="btn-action" onclick="ShowCreateAward()" >Create an Award</button>
                 <div id="CreateAward" class="d-none">
                     <form action="awardCreate" method="POST">
-                        <span>Award Name: </span>
-                        <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
-                        <span>Effective Days: </span>
-                        <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
-                        <input type="submit"  value="Create Award"/>
+                        <div class="enter-field">
+                            <span>Award Name: </span>
+                            <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
+                        </div>
+                        <div class="enter-field">
+                            <span>Effective Days: </span>
+                            <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
+                        </div>
+                        <br>
+                        <button class="btn-action" type="submit"  value="Create Award">Create Award</button>
                     </form>
                 </div>
             </div>
