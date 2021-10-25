@@ -102,8 +102,6 @@ public class LoginServlet extends HttpServlet {
                     response.sendRedirect(url);
                 }
 
-
-                response.sendRedirect(url);
                 System.out.println(url);
             }
         } catch(IOException | SQLException | ServletException ex){

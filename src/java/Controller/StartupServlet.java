@@ -41,29 +41,29 @@ public class StartupServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
-            ServletContext sc = request.getServletContext();
+        ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url = "";
         try {
 
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
-                
+
                 for (Cookie c : cookies) {
-                  
+
                     String username = c.getName();
                     if (!username.equals("JSESSIONID")) {
 
                         String password = c.getValue();
-                      
+
                         AccountDAO dao = new AccountDAO();
                         AccountDTO dto = dao.checkLogin(username, password);
 
                         if (null != dto) {
-
                             HttpSession session = request.getSession();
-                            session.setAttribute("USERNAME", username);
-                            url="home";
+                            session.setAttribute("USER", dto);
+                            
+                            url = "home";
                             break;
                         }
                     } else {
@@ -74,7 +74,7 @@ public class StartupServlet extends HttpServlet {
             }
 
         } finally {
-            url=roadmap.get(url);
+            url = roadmap.get(url);
             response.sendRedirect(url);
         }
     }

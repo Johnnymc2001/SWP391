@@ -10,7 +10,7 @@ import DAO.AccountDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
@@ -20,7 +20,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,13 +43,11 @@ public class StudentProfileServlet extends HttpServlet {
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         
-        int id = 0;
+        
         
         String txtID = request.getParameter("userID");
         String username = request.getParameter("username");
-        System.out.println("username: " + username);
         String fullname = request.getParameter("fullname");
-        System.out.println("full name : " + fullname);
         String address = request.getParameter("address");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
@@ -58,7 +55,7 @@ public class StudentProfileServlet extends HttpServlet {
         String birthdate = request.getParameter("birthdate");
         String button = request.getParameter("btAction");
         String url = "";
-        PrintWriter out = response.getWriter();
+        int id = 0;
         try {
             
             if (null != txtID && !txtID.equals("")) {
@@ -110,13 +107,14 @@ public class StudentProfileServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("404.html");
             rd.forward(request, response);
             
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-//            url = roadmap.get("profilePage");
-//            RequestDispatcher rd = request.getRequestDispatcher(url);
-//            rd.forward(request, response);
+        } catch (IOException | NumberFormatException | SQLException | ServletException ex) {
+            
         }
+//         finally {
+////            url = roadmap.get("profilePage");
+////            RequestDispatcher rd = request.getRequestDispatcher(url);
+////            rd.forward(request, response);
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

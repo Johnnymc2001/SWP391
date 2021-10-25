@@ -49,13 +49,12 @@ public class CreateAccountServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+        
         String username = request.getParameter("username");
         String fullname = request.getParameter("fullname");
         String address = request.getParameter("address");
         String password = request.getParameter("password");
-
         String confirm_password = request.getParameter("confirm-password");
-
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
@@ -63,9 +62,10 @@ public class CreateAccountServlet extends HttpServlet {
         AccountError error = new AccountError();
         String url = "";
         System.out.println("birthdate: " + birthdate);
-        AccountDAO dao = new AccountDAO();
+       
 
         try {
+             AccountDAO dao = new AccountDAO();
             AccountDTO user = dao.getAccountFromUsername(username);
             // KIEM TRA CAC LOI KHI TAO TAI KHOAN MOI
 //             int i = dao.getAccountIDByUsername(username);
@@ -129,8 +129,8 @@ public class CreateAccountServlet extends HttpServlet {
                 }
             }
 
-        } finally {
-
+        }catch(IOException | SQLException | ServletException ex){
+            
         }
     }
 
