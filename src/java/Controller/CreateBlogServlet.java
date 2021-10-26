@@ -27,8 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Safelist;
+//import org.jsoup.Jsoup;
+//import org.jsoup.safety.Safelist;
 
 /**
  *
@@ -144,7 +144,7 @@ public class CreateBlogServlet extends HttpServlet {
                         imageUrl = ImageUtils.uploadImage(base64Image);
                     }
                     
-                    content = Jsoup.clean(content, Safelist.basic());
+//                    content = Jsoup.clean(content, Safelist.basic());
                     BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, "", tags, studentID, imageUrl);
 
                     BlogDAO dao = new BlogDAO();
