@@ -72,6 +72,7 @@
                     <p class="blog-text">
                         ${blog.content}
                     </p>
+                    <c:if test="${blog.status == 'APPROVED'}">
                     <div class="blog-vote">
                         <%-- ----------- Khu Vuc Rating 52 ---------------------------   --%>
                         <div class="user-vote">
@@ -119,10 +120,17 @@
                         <%-- ----------- Rating 63 ---------------------------   --%>   
                         <div>
                             <form action="awardPage" method="POST">
-                                <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg"> How many award ?</i></button>
+                                <c:set var="role" value="Mentor"/>
+                                <c:if test="${user.role eq role}">
+                                    <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>
+                                    </c:if>
                             </form>
+                            <c:if test="${not (user.role  eq role)}">
+                                <button class="award-btn"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>
+                                </c:if>
                         </div>
                     </div>
+                    </c:if>
 
 
                     <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -141,13 +149,13 @@
                         <h2>${author.getFullname()}</h2>
                         <div class="reward">
                             <i class="fas fa-trophy fa-lg">
-                                <p>3</p>
+                                <p>${requestScope.BLOGAWARDS}</p>
                             </i>
                             <i class="fas fa-pen fa-lg">
                                 <p>5</p>
                             </i>
                             <i class="fas fa-star fa-lg">
-                                <p>7</p>
+                                <p>${blog.getAverageRating()}</p>
                             </i>
                         </div>
                     </div>
@@ -190,13 +198,14 @@
 
 
     <!-- THIS IS COMMENT SECTION -->
+    <c:if test="${blog.status == 'APPROVED'}">
     <div id="comment-section" class="comment-section container">
         <h2>Comment</h2>
         <div id="comment-post" class="comment-post">
             <iframe id="comment-window" class="comment-window" src="comment?txtBlogID=${BLOG.blogID}" frameborder="0"></iframe>
         </div>
     </div>
-
+    </c:if>
     <!-- FOOTER -->
     <div class="web-footer">
         <p>2021 Henry. FE by Henry</p>

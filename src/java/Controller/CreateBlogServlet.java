@@ -136,16 +136,16 @@ public class CreateBlogServlet extends HttpServlet {
                 } else {
                     //4. Call DAO to insert to DB
                     Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-                    String imageUrl = "UI/Icon/selfmademan.jpg";
-                    if(null != base64Image){
-                         imageUrl=ImageUtils.uploadImage(base64Image);
+//                    String imageUrl = "UI/Icon/selfmademan.jpg";
+                    String imageUrl = "UI/Icon/Career HCM FPT UNI OJT.jpg";
+                    if (null != base64Image) {
+                        imageUrl = ImageUtils.uploadImage(base64Image);
                     }
                     BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, "", tags, studentID, imageUrl);
-                    
 
                     BlogDAO dao = new BlogDAO();
                     int result = dao.createBlog(dto);
-                    if (result > 0) {     
+                    if (result > 0) {
                         url = roadmap.get(HOME_PAGE);
                         response.sendRedirect(url);
                     } else {
