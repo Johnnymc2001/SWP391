@@ -88,7 +88,23 @@
                                 <c:forEach var="dto" items="${blogList}">
                                     <tr>
                                         <th>${dto.title}</th>
-                                        <td>${dto.status}</td>
+                                        <td>
+                                            <c:if test="${dto.status == "APPROVED"}">
+                                                <font style="color: green">
+                                                ${dto.status}
+                                                </font>
+                                            </c:if>
+                                            <c:if test="${dto.status == "DISAPPROVED"}">
+                                                <font style="color: red">
+                                                ${dto.status}
+                                                </font>
+                                            </c:if>
+                                            <c:if test="${dto.status == "PENDING"}">
+                                                <font style="color: orange">
+                                                ${dto.status}
+                                                </font>
+                                            </c:if>
+                                        </td>
                                         <td>
                                             <button class="btn-action"><a href="blog?txtBlogID=${dto.blogID}">View</a></button>
                                             <c:if test="${dto.status} == 'APPROVED' || ${dto.status} == 'DISAPPROVED'">
