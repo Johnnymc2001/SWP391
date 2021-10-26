@@ -58,7 +58,6 @@
                 <th>Title</th>
                 <th>Date</th>
                 <th>Thumbnail</th>
-                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -68,23 +67,6 @@
                 <td><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></td>
                 <td>${blog.postDate}</td>
                 <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
-                <td>
-            <c:if test="${blog.status == "APPROVED"}">
-                <font style="color: green">
-                ${blog.status}
-                </font>
-            </c:if>
-            <c:if test="${blog.status == "DISAPPROVED"}">
-                <font style="color: red">
-                ${blog.status}
-                </font>
-            </c:if>
-            <c:if test="${blog.status == "PENDING"}">
-                <font style="color: orange">
-                ${blog.status}
-                </font>
-            </c:if>
-            </td>
             <td><button class="btnView"><a href="blog?txtBlogID=${blog.blogID}">View</a></button></td>
             </tr>
         </c:forEach>
