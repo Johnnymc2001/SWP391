@@ -58,7 +58,7 @@
                     <c:forEach var="dto" items="${requestScope.CAT_LIST}">
                         <div class="swiper-slide">
                             <a class="category-card" href="search?txtSearchCategory=${dto.categoryID}">
-                                <img src="UI/Icon/selfmademan.jpg" alt="">
+                                <img src="UI/Icon/Category_background.png" alt="">
                                 <p>${dto.categoryName}</p>
                             </a>
                         </div>   
