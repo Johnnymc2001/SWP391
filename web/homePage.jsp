@@ -41,15 +41,16 @@
         <div id="body-container-1" class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    <c:set var="blogLD" value="${requestScope.LANDING_BLOG}"/>
                     <div class="landing-blog">
-                        <a href=""><img src="UI/Icon/selfmademan.jpg" alt="landing-blog"></a>
+                        <a href="blog?txtBlogID=${blogLD.blogID}"><img src="${blogLD.thumbnail}" alt="landing-blog"></a>
                         <div class="landing-content">
                             <h2>
-                                <a href="">This is blog's title to go to blog detail</a>
+                                <a href="blog?txtBlogID=${blogLD.blogID}">${blogLD.title}</a>
                             </h2>
                             <p>
-                                <a href="">Author name</a>
-                                <span>11/10/2001</span>
+                                <a href="">${blogLD.getAccount().getFullname()}</a>
+                                <span>${blogLD.postDate}</span>
                             </p>
                         </div>
                     </div>

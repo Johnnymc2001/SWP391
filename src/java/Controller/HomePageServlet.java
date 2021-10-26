@@ -37,8 +37,6 @@ public class HomePageServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -55,6 +53,9 @@ public class HomePageServlet extends HttpServlet {
 //            }
             BlogDAO blogDao = new BlogDAO();
 
+            BlogDTO landingBlog = blogDao.getBlogFromBlogID(73);
+            request.setAttribute("LANDING_BLOG", landingBlog);
+            
             // Most Award And Rate [Popular]
             ArrayList<BlogDTO> mostAwardAndRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
             request.setAttribute("MOST_AWARD_AND_RATE", mostAwardAndRate);
@@ -63,7 +64,6 @@ public class HomePageServlet extends HttpServlet {
             ArrayList<BlogDTO> mostAward = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
             BlogDTO mostAwardFirst = mostAward.remove(0);
 
-            
             request.setAttribute("MOST_AWARD_FIRST", mostAwardFirst);
             request.setAttribute("MOST_AWARD", mostAward);
 
@@ -73,18 +73,17 @@ public class HomePageServlet extends HttpServlet {
 
             // Most Comment
             ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(6);
-            
-            BlogDTO mostCommentFirst = mostComment.get(0);   
+
+            BlogDTO mostCommentFirst = mostComment.get(0);
             BlogDTO mostCommentSecond = mostComment.get(1);
-            
+
             ArrayList<BlogDTO> mostCommentRow1 = new ArrayList<>();
             mostCommentRow1.add(mostComment.get(2));
             mostCommentRow1.add(mostComment.get(3));
             ArrayList<BlogDTO> mostCommentRow2 = new ArrayList<>();
             mostCommentRow2.add(mostComment.get(4));
             mostCommentRow2.add(mostComment.get(5));
-            
-            
+
             request.setAttribute("MOST_COMMENT", mostComment);
             request.setAttribute("MOST_COMMENT_FIRST", mostCommentFirst);
             request.setAttribute("MOST_COMMENT_SECOND", mostCommentSecond);
@@ -92,7 +91,7 @@ public class HomePageServlet extends HttpServlet {
             request.setAttribute("MOST_COMMENT_ROW_2", mostCommentRow2);
 
             // Recent [Recent]
-            ArrayList<BlogDTO> recent = blogDao.getAllBlogWithStatus("APPROVED" , 5);
+            ArrayList<BlogDTO> recent = blogDao.getAllBlogWithStatus("APPROVED", 5);
             request.setAttribute("MOST_RECENT", recent);
 
             // Landing Post [Epic]
