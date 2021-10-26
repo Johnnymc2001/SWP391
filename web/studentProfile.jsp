@@ -58,6 +58,7 @@
                 <th>Title</th>
                 <th>Date</th>
                 <th>Thumbnail</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -67,6 +68,7 @@
                 <td><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></td>
                 <td>${blog.postDate}</td>
                 <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
+                <td>${blog.status}</td>
                 <td><button class="btnView"><a href="blog?txtBlogID=${blog.blogID}">View</a></button></td>
             </tr>
         </c:forEach>
