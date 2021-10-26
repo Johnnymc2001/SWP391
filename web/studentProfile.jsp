@@ -68,10 +68,25 @@
                 <td><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></td>
                 <td>${blog.postDate}</td>
                 <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
-                <td id="status">${blog.status}</td>
-                <td><button class="btnView"><a href="blog?txtBlogID=${blog.blogID}">View</a></button></td>
+                <td>
+            <c:if test="${blog.status == "APPROVED"}">
+                <font style="color: green">
+                ${blog.status}
+                </font>
+            </c:if>
+            <c:if test="${blog.status == "DISAPPROVED"}">
+                <font style="color: red">
+                ${blog.status}
+                </font>
+            </c:if>
+            <c:if test="${blog.status == "PENDING"}">
+                <font style="color: orange">
+                ${blog.status}
+                </font>
+            </c:if>
+            </td>
+            <td><button class="btnView"><a href="blog?txtBlogID=${blog.blogID}">View</a></button></td>
             </tr>
-            <script src="./UI/script/profile.js"></script>
         </c:forEach>
         </tbody>
     </table>
