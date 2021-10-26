@@ -10,7 +10,11 @@ import DAO.BlogDTO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,26 +57,40 @@ public class HomePageServlet extends HttpServlet {
 //            }
             BlogDAO blogDao = new BlogDAO();
 
+            // Landing Blog
             BlogDTO landingBlog = blogDao.getBlogFromBlogID(73);
             request.setAttribute("LANDING_BLOG", landingBlog);
-            
+
+            // Get all blog with award, comment and rate support
+            ArrayList<BlogDTO> blogList = blogDao.getBlogDetailed(6);
+
             // Most Award And Rate [Popular]
-            ArrayList<BlogDTO> mostAwardAndRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
+//            ArrayList<BlogDTO> mostAwardAndRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
+            ArrayList<BlogDTO> mostAwardAndRate = blogList;
+            mostAwardAndRate.sort(Comparator.comparing(BlogDTO::getAwardCount).thenComparing(BlogDTO::getAvgRate));
+
             request.setAttribute("MOST_AWARD_AND_RATE", mostAwardAndRate);
 
             // Most Award 
-            ArrayList<BlogDTO> mostAward = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
+//            ArrayList<BlogDTO> mostAward = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
+            ArrayList<BlogDTO> mostAward = blogList;
+            mostAward.sort(Comparator.comparing(BlogDTO::getAwardCount));
+
             BlogDTO mostAwardFirst = mostAward.remove(0);
 
             request.setAttribute("MOST_AWARD_FIRST", mostAwardFirst);
             request.setAttribute("MOST_AWARD", mostAward);
 
             // Most Rate
-            ArrayList<BlogDTO> mostRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
+//            ArrayList<BlogDTO> mostRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
+            ArrayList<BlogDTO> mostRate = blogList;
+            mostRate.sort(Comparator.comparing(BlogDTO::getAvgRate));
             request.setAttribute("MOST_RATE", mostRate);
 
             // Most Comment
-            ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(6);
+//            ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(6);
+            ArrayList<BlogDTO> mostComment = mostComment = blogList;
+            mostComment.sort(Comparator.comparing(BlogDTO::getCommentCount));
 
             BlogDTO mostCommentFirst = mostComment.get(0);
             BlogDTO mostCommentSecond = mostComment.get(1);
