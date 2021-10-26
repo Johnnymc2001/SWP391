@@ -68,10 +68,12 @@
                 <td><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></td>
                 <td>${blog.postDate}</td>
                 <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
-                <td>${blog.status}</td>
+                <td id="status">${blog.status}</td>
                 <td><button class="btnView"><a href="blog?txtBlogID=${blog.blogID}">View</a></button></td>
             </tr>
+            <script src="./UI/script/profile.js"></script>
         </c:forEach>
         </tbody>
     </table>
 </div>
+
