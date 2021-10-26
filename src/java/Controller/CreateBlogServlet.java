@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 
 /**
  *
@@ -137,10 +139,12 @@ public class CreateBlogServlet extends HttpServlet {
                     //4. Call DAO to insert to DB
                     Date postDate = new Date(Calendar.getInstance().getTime().getTime());
 //                    String imageUrl = "UI/Icon/selfmademan.jpg";
-                    String imageUrl = "UI/Icon/Career HCM FPT UNI OJT.jpg";
+                    String imageUrl = "UI/Icon/selfmademan.jpg";
                     if (null != base64Image) {
                         imageUrl = ImageUtils.uploadImage(base64Image);
                     }
+                    
+                    content = Jsoup.clean(content, Safelist.basic());
                     BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, "", tags, studentID, imageUrl);
 
                     BlogDAO dao = new BlogDAO();
