@@ -1069,7 +1069,7 @@ public class BlogDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "UPDATE Blog "
-                        + "SET status = ? , note = ?"
+                        + "SET status = ? , note = ? "
                         + "WHERE blogID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
