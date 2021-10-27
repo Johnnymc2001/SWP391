@@ -28,7 +28,31 @@ public class BlogDTO implements Serializable {
     private String tags;
     private int studentID;
     private String thumbnail;
+    // for SQL 
+    private int awardCount;
+    private double avgRate;
+    private int commentCount;
 
+    // CONSTRUCTOR USE FOR SQL ONLY!
+    public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String note, String tags, int studentID, String thumbnail, int awardCount, double avgRate, int commentCount) {
+        this.blogID = blogID;
+        this.title = title;
+        this.content = content;
+        this.postDate = postDate;
+        this.categoryID = categoryID;
+        this.status = status;
+        this.mentorID = mentorID;
+        this.approvedDate = approvedDate;
+        this.note = note;
+        this.tags = tags;
+        this.studentID = studentID;
+        this.thumbnail = thumbnail;
+        // SQL ONLY
+        this.awardCount = awardCount;
+        this.avgRate = avgRate;
+        this.commentCount = commentCount;
+    }
+    
     public BlogDTO(int blogID, String title, String content, Date postDate, String categoryID, String status, int mentorID, Date approvedDate, String note, String tags, int studentID, String thumbnail) {
         this.blogID = blogID;
         this.title = title;
@@ -207,6 +231,31 @@ public class BlogDTO implements Serializable {
         return blogDao.getAverageRatingFromBlogID(this.blogID);
     }
 
+    public int getAwardCount() {
+        return awardCount;
+    }
+
+    public void setAwardCount(int awardCount) {
+        this.awardCount = awardCount;
+    }
+
+    public double getAvgRate() {
+        return avgRate;
+    }
+
+    public void setAvgRate(double avgRate) {
+        this.avgRate = avgRate;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    
     @Override
     public String toString() {
         return "BlogDTO{" + "blogID=" + blogID + ", title=" + title + ", content=" + content + ", postDate=" + postDate + ", categoryID=" + categoryID + ", status=" + status + ", mentorID=" + mentorID + ", approvedDate=" + approvedDate + ", tags=" + tags + ", studentID=" + studentID + '}';
