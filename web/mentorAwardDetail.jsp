@@ -55,16 +55,16 @@
             </div>
             <c:set var="blogInfo" value="${requestScope.BLOG}"/>
             <c:if test="${not empty blogInfo}">
-                <form action="award" method="POST">
+                <form action="award?txtBlogID=${blogInfo.blogID}" method="POST">
                     <span>Blog: ${blogInfo.title}</span><br>
                     <input type="hidden" name="txtBlogID" value="${blogInfo.blogID}"/>
-                    <select name="awardBox">
+                    <select name="txtAwardID">
                         <c:set var="dtoList" value="${requestScope.ALL_AWARD}"/>  
-                        <c:forEach var="dto" items="${dtoList}" varStatus="counter">
+                        <c:forEach var="dto" items="${dtoList}">
                             <option value="${dto.awardID}">${dto.awardName}</option>
                         </c:forEach>
                     </select>
-                    <input type="submit" name="btnAction" value="Award Post"/>
+                    <input type="submit" name="btnAction" value="Award Blog"/>
                 </form>
             </c:if>
         </div>

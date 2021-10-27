@@ -119,7 +119,7 @@
                         </div>
                         <%-- ----------- Rating 63 ---------------------------   --%>   
                         <div>
-                            <form action="awardPage" method="POST">
+                            <form action="award?txtBlogID=${blog.blogID}" method="POST">
                                 <c:set var="role" value="Mentor"/>
                                 <c:if test="${user.role eq role}">
                                     <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>

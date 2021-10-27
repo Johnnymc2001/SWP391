@@ -57,10 +57,11 @@ public class StudentProfileServlet extends HttpServlet {
 
         BlogDAO blogdao = new BlogDAO();
         AccountDAO accDao = new AccountDAO();
-
+        
         AccountDTO curUser = (AccountDTO) request.getSession().getAttribute("USER");
         AccountDTO profileAccount = null;
-
+//        System.out.println(curUser.getAccountID());
+        
         try {
             if (null != txtID && !txtID.equals("")) {
                 id = Integer.parseInt(txtID);
@@ -102,13 +103,13 @@ public class StudentProfileServlet extends HttpServlet {
                 request.setAttribute("CURBLOG", bloglist);
                 request.setAttribute("ACCOUNT", profileAccount);
 //                    System.out.println("bloglist: " + bloglist);
-//                    System.out.println("account :" + account.toString());
+//                    System.out.println("account :" + profileAccount.toString());
 
             } else {
                 url = roadmap.get("home");
             }
 
-        } catch (Exception ex) {
+        } catch (NumberFormatException | SQLException ex) {
         } finally {
 //            url = roadmap.get("profilePage");
             RequestDispatcher rd = request.getRequestDispatcher(url);

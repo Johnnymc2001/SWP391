@@ -62,36 +62,39 @@ public class MentorAwardServlet extends HttpServlet {
         int EffectiveDays = 0;
         int blogID = 0;
         int awardID = 0;
-        
 
         try {
             if (null != txtBlogID) {
-            blogID = Integer.parseInt(txtBlogID);
-            BlogDAO dao = new BlogDAO();
-            BlogDTO dto = dao.getBlogFromBlogID(blogID);
-            request.setAttribute("BLOG", dto);
-        } else {
-            System.out.println("Blog ID NULL!");
-        }
-        if (null != txtAwardID) {
-            awardID = Integer.parseInt(txtAwardID);
-        } else {
-            System.out.println("Award ID NULL!");
-        }
-        if (null != txtEffectiveDays) {
-            awardID = Integer.parseInt(txtEffectiveDays);
-        } else {
-            System.out.println("Award ID NULL!");
-        }
-            
-            if (null == Action) {
+                blogID = Integer.parseInt(txtBlogID);
+                BlogDAO dao = new BlogDAO();
+                BlogDTO dto = dao.getBlogFromBlogID(blogID);
+                System.out.println(dto.toString());
+                request.setAttribute("BLOG", dto);
+            } else {
+                System.out.println("Blog ID NULL!");
+            }
+            if (null != txtAwardID) {
+                awardID = Integer.parseInt(txtAwardID);
+            } else {
+                System.out.println("Award ID NULL!");
+            }
+            if (null != txtEffectiveDays) {
+                awardID = Integer.parseInt(txtEffectiveDays);
+            } else {
+                System.out.println("txtEffectiveDays NULL");
+            }
+            System.out.println(txtAwardID);
+            System.out.println(Action);
+            if (null == txtAwardID) {
+                System.out.println(" ko có con denào !!");
                 url = roadmap.get(AWARD_PAGE);
                 AwardDAO Adao = new AwardDAO();
                 request.setAttribute("ALL_AWARD", Adao.getAllAward());
+                System.out.println(Adao.getAllAward());
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
-                
             } else if (Action.equals("Create Award")) {
+                System.out.println("Create Award !!");
                 AwardDAO dao = new AwardDAO();
                 AwardDTO dto = new AwardDTO(txtAwardName, EffectiveDays);
                 if (dao.createAward(dto)) {
@@ -106,8 +109,8 @@ public class MentorAwardServlet extends HttpServlet {
                 Date date = new Date(Calendar.getInstance().getTime().getTime());
                 ALdao.createAwardList(new AwardListDTO(blogID, awardID, date, account.getAccountID()));
                 url = roadmap.get(BLOG_DETAIL);
-
-                RequestDispatcher rd = request.getRequestDispatcher(url);
+                System.out.println(url+"?txtBlogID="+blogID);
+                RequestDispatcher rd = request.getRequestDispatcher(url+"?txtBlogID="+blogID);
                 rd.forward(request, response);
             }
         } catch (SQLException ex) {
