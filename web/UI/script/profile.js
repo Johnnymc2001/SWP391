@@ -29,6 +29,6 @@ function Cancel() {
         saveBtn.classList.replace("d-inline", "d-none");
         undoBtn.classList.replace("d-inline", "d-none");
         updateBtn.classList.replace("d-block", "d-none");
-        $$('.txt-edit').forEach((el) => el.readOnly = false);
+        $$('.txt-edit').forEach((el) => el.readOnly = true);
     }
 }
