@@ -14,12 +14,18 @@ var summerNote = document.getElementById("summernote");
 var txtImageUrl = document.getElementById("txtImageUrl");
 var imgReview = document.getElementById("imgReview");
 var updateBtn = document.getElementById("updateBtn");
+var titleH1 = document.getElementById("blog-title-h1");
+var titleInput = document.getElementById("blog-title-input");
+var note = document.getElementById("note");
 
 function EnableEditAndSave() {
     editBtn.classList.replace("d-inline", "d-none");
     saveBtn.classList.replace("d-none", "d-inline");
     undoBtn.classList.replace("d-none", "d-inline");
     blogView.classList.replace("d-block", "d-none");
+    titleH1.classList.replace("d-block", "d-none");
+    titleInput.classList.replace("d-none", "d-block");
+    note.classList.replace("d-none", "d-block");
     if ($('#txtImageUrl').val() === "") {
         undoDeleteBtn.classList.replace("d-none", "d-inline");
     } else {
@@ -38,6 +44,9 @@ function SaveEdit() {
     $('.blog-view').html($('#summernote').summernote('code'));
     userWrite.classList.replace("d-block", "d-none");
     blogView.classList.replace("d-none", "d-block");
+    titleH1.classList.replace("d-none", "d-block");
+    titleInput.classList.replace("d-block", "d-none");
+//    note.classList.replace("d-none", "d-block");
 }
 
 function Undo() {
@@ -49,11 +58,14 @@ function Undo() {
         deleteThumnailBtn.classList.replace("d-inline", "d-none");
         undoDeleteBtn.classList.replace("d-inline", "d-none");
         blogView.classList.replace("d-none", "d-block");
+        note.classList.replace("d-block", "d-none");
         $('.blog-view').html(backupContent);
         $('#summernote').summernote('code', blogView.innerHTML);
         userWrite.classList.replace("d-block", "d-none");
         $('#txtImageUrl').val(backupThumbnail);
         imgReview.classList.replace("d-none", "d-block");
+        titleH1.classList.replace("d-none", "d-block");
+        titleInput.classList.replace("d-block", "d-none");
     }
 }
 

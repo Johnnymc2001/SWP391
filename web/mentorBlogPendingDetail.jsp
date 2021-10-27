@@ -51,14 +51,6 @@
         <div class="create-blog-container container-fluid"> 
             <form action="blogPendingDetail" method="POST" accept-charset="utf-8">
                 <input type="hidden" name="blogid" value="${blog.blogID}">
-                <div class="title-area">
-                    <span>Title: </span>
-                    <br>
-                    <input type="text" value="${blog.title}" name="title"/>
-                </div> 
-                <font color="orange">
-                ${requestScope.ERROR_TITLE}<br/>
-                </font>
                 <div class="thumbnail-area">
                     <span>Thumbnail: </span>
                     <div>
@@ -69,7 +61,16 @@
                     <button type="button" class="btn-action d-none" id="deleteThumnailBtn" onclick="deleteThumbnail()">Default</button>
                     <button type="button" class="btn-action d-none" id="undoDeleteBtn" onclick="undoDeleteThumbnail()">Undo</button>
                     <!--<button type="submit"  name="submitAction" value="ChangeThumbnail">Change Image</button>-->                   
-                </div>                 
+                </div> 
+                <div class="title-area">
+                    <span>Title: </span>
+                    <br>
+                    <h1 class="d-block" id="blog-title-h1">${blog.title}</h1>
+                    <input class="d-none" id="blog-title-input" type="text" value="${blog.title}" name="title"/>
+                </div> 
+                <font color="orange">
+                ${requestScope.ERROR_TITLE}<br/>
+                </font>
                 <div class="row">
                     <div class="col-lg-8">  
                         <div class="edit-button">
@@ -94,8 +95,10 @@
                             <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
                             <button class="btn-action deactive" id="disapproveBtn" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
                         </div>
-                        <h1>Note:</h1>
-                        <textarea class="form-control" name="note" rows="10"></textarea>
+                        <div class="d-none" id="note">
+                            <h1>Note:</h1>
+                            <textarea class="form-control" name="note" rows="10"></textarea>
+                        </div>
                     </div>
                 </div>
                 <a href="blogPendingList">Return</a>
@@ -111,7 +114,7 @@
 
         </div>
         <!--this is Js-->
-        
+
         <script>
             const blogContent = '${blog.content}';
         </script>

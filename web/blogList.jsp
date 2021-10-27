@@ -79,27 +79,29 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th>No. </th>
                                     <th>Title</th>
                                     <th>Status</th>
                                     <th>Aciton</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="dto" items="${blogList}">
+                                <c:forEach var="dto" items="${blogList}" varStatus="count">
                                     <tr>
+                                        <td>${count.count}</td>
                                         <th>${dto.title}</th>
                                         <td>
-                                            <c:if test="${dto.status == "APPROVED"}">
+                                            <c:if test="${dto.status == 'APPROVED'}">
                                                 <font style="color: green">
                                                 ${dto.status}
                                                 </font>
                                             </c:if>
-                                            <c:if test="${dto.status == "DISAPPROVED"}">
+                                            <c:if test="${dto.status == 'DISAPPROVED'}">
                                                 <font style="color: red">
                                                 ${dto.status}
                                                 </font>
                                             </c:if>
-                                            <c:if test="${dto.status == "PENDING"}">
+                                            <c:if test="${dto.status == 'PENDING'}">
                                                 <font style="color: orange">
                                                 ${dto.status}
                                                 </font>

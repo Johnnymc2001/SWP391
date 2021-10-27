@@ -32,13 +32,13 @@
                     <label>Birth</label>
                     <input type="date" class="txt-edit" id="birthdate" name ="birthdate" value="${account.birthday}" readonly="true"></br>
                 </div>
+                <div class="edit-button enter-field col-sm-12">
+                    <button type="button" class="btn-action d-inline" id="editBtn" onclick="EnableEditAndSave()">Edit Profile</button>
+                    <button type="button" class="btn-action d-none" id="saveBtn" type="submit" name ="btAction" value="UpdateProfile" onclick="SaveEdit()">Save</button>
+                    <button type="button" class="btn-action d-none" id="undoBtn" onclick="Cancel()">Cancel</button>
+                </div> 
+                <!--<button class="btn-action d-none" type="submit" name ="btAction" value="UpdateProfile">Update Profile</button>-->
             </div>
-            <div class="edit-button">
-                <button type="button" class="btn-action d-inline" id="editBtn" onclick="EnableEditAndSave()">Edit Profile</button>
-                <button type="button" class="btn-action d-none" id="saveBtn" type="submit" name ="btAction" value="UpdateProfile" onclick="SaveEdit()">Save</button>
-                <button type="button" class="btn-action d-none" id="undoBtn" onclick="Cancel()">Cancel</button>
-            </div> 
-            <!--<button class="btn-action d-none" type="submit" name ="btAction" value="UpdateProfile">Update Profile</button>-->
         </form>
     </div>   
 </c:if>

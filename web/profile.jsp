@@ -141,6 +141,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th>No. </th>
                                     <th>Title</th>
                                     <th>Date</th>
                                     <th>Thumbnail</th>
@@ -148,8 +149,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="blog" items="${requestScope.CURBLOG}">
+                                <c:forEach var="blog" items="${requestScope.CURBLOG}" varStatus="count">
                                     <tr>
+                                        <td>${count.count}</td>
                                         <td><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></td>
                                         <td>${blog.postDate}</td>
                                         <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
