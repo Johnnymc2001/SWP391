@@ -4,9 +4,6 @@ import DAO.AccountDAO;
 import DAO.AccountDTO;
 import DAO.BlogCommentDAO;
 import DAO.BlogCommentDTO;
-import DAO.BlogDAO;
-import DAO.BlogDTO;
-import static Utils.ImageUtils.BytesToBase64;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -23,8 +20,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author Admin
@@ -92,7 +87,6 @@ public class BlogCommentServlet extends HttpServlet {
                 }
                 BlogCommentDAO commentDao = new BlogCommentDAO();
                 ArrayList<BlogCommentDTO> commentList = commentDao.getAllBlogCommentFromBlogID(blogID);
-//                System.out.println(" COMMMEEENNTTTTTT!!!!!!!!!" + commentList.toString());
                 AccountDAO accountDao = new AccountDAO();
 
                 HashMap<BlogCommentDTO, AccountDTO> CommentToAccountMap = new HashMap<>();
@@ -106,6 +100,7 @@ public class BlogCommentServlet extends HttpServlet {
 //                } else {
 //
 //                }
+                request.setAttribute("COMMENTQTY", commentList.size());
                 request.setAttribute("COMMENT_MAP", CommentToAccountMap);
                 url = roadmap.get(COMMENT_PAGE);
                 RequestDispatcher rd = request.getRequestDispatcher(url);

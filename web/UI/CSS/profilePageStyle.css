@@ -99,3 +99,11 @@
 .profile-container{
     margin-top: 70px;
 }
+
+.btn-action{
+    background: orange;
+    border: none;
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.1);
+}

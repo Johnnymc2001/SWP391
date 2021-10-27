@@ -152,7 +152,7 @@
                                 <p>${requestScope.BLOGAWARDS}</p>
                             </i>
                             <i class="fas fa-pen fa-lg">
-                                <p>5</p>
+                                <p>${requestScope.COMMENTQTY}</p>
                             </i>
                             <i class="fas fa-star fa-lg">
                                 <p>${blog.getAverageRating()}</p>
