@@ -74,10 +74,11 @@ public class CreateAccountServlet extends HttpServlet {
                 url = roadmap.get(url);
                 request.getRequestDispatcher(url).forward(request, response);
             }
-            if (username == null || username.trim().length() < 6 || username.trim().length() > 20) {
+            if (username == null || username.trim().length() < 6 || username.trim().length() > 20 || username.matches("[a-zA-Z]+[0-9]*")==false) {
                 foundError = true;
-                error.setUserNameLengthError("User name must be from 6-20 character");
-            }
+                error.setUserNameLengthError("User name must be from 6-20 character and must contain 1 character at the begining");
+               
+            }  
             if (password == null || password.trim().length() < 6 || password.trim().length() > 30) {
                 foundError = true;
                 error.setPasswordLengthError("Password must be from 6-30 character");

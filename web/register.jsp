@@ -39,6 +39,13 @@ and open the template in the editor.
                         ${error.userNameExisted}<br/>
                         </font>
                     </c:if>
+                    <c:if test="${not empty USER_NAME_FORMAT_ERROR}">
+                        <br/>
+                        <font color="red">
+                        ${USER_NAME_FORMAT_ERROR}<br/>
+                        </font>
+                    </c:if>    
+                            
 
                 </div>
                 <div class="enter-field">

@@ -104,5 +104,12 @@ public class AccountError {
         Pattern pat = Pattern.compile(regex);
         return pat.matcher(phone).matches();
     }
+    
+    
+    public boolean checkValidUserName(String username) {
+        String regex = "[a-zA-Z]+[0-9]*";
+        Pattern pat = Pattern.compile(regex);
+        return pat.matcher(username).matches();
+    }
 
 }
