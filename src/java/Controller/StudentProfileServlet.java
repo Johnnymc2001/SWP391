@@ -51,17 +51,17 @@ public class StudentProfileServlet extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
-        String button = request.getParameter("btAction");
+        String button = request.getParameter("btnAction");
+        System.out.println(button+address);
         String url = "";
         int id = 0;
 
         BlogDAO blogdao = new BlogDAO();
         AccountDAO accDao = new AccountDAO();
-        
+
         AccountDTO curUser = (AccountDTO) request.getSession().getAttribute("USER");
         AccountDTO profileAccount = null;
-//        System.out.println(curUser.getAccountID());
-        
+
         try {
             if (null != txtID && !txtID.equals("")) {
                 id = Integer.parseInt(txtID);
@@ -73,23 +73,25 @@ public class StudentProfileServlet extends HttpServlet {
                 profileAccount = curUser;
                 System.out.println("Get Self Profile!");
             }
-
+            System.out.println(button+address);
             if (null != profileAccount) {
+                System.out.println("Button?"+button);
                 if (button != null) {
-                    if (button.equals("UpdateProfile") && profileAccount.getAccountID() == curUser.getAccountID()) {
+                    System.out.println("Button?");
+                    if (button.equals("UpdateProfile") && (profileAccount.getAccountID() == curUser.getAccountID())) {
+                        System.out.println("update");
                         java.sql.Date sqlDate;
                         sqlDate = java.sql.Date.valueOf(birthdate);
-//                            account = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
-                        profileAccount.setUsername(username);
-                        profileAccount.setPassword(password);
-                        profileAccount.setFullname(fullname);
-                        profileAccount.setBirthday(sqlDate);
-                        profileAccount.setEmail(email);
-                        profileAccount.setPhone(phone);
-                        profileAccount.setAddress(address);
-
-                        accDao.updateAccount(profileAccount.getAccountID(), profileAccount);
-                        request.setAttribute("ACCOUNT", profileAccount);
+                        profileAccount = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
+//                        profileAccount.setUsername(username);
+//                        profileAccount.setPassword(password);
+//                        profileAccount.setFullname(fullname);
+//                        profileAccount.setBirthday(sqlDate);
+//                        profileAccount.setEmail(email);
+//                        profileAccount.setPhone(phone);
+//                        profileAccount.setAddress(address);
+                        accDao.updateAccount(curUser.getAccountID(), profileAccount);
+                        request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
                         url = roadmap.get("profilePage");
 
                     }

@@ -81,7 +81,7 @@
                     <c:if test="${user.accountID==account.accountID}">
                         <h1>${account.username}</h1> 
                         <div>
-                            <form action="profile" method="POST">
+                            <form id="userProfile" action="profile" method="POST">
                                 <div class="row">
                                     <input type ="hidden" name ="userID" value="${account.accountID}" readonly>
                                     <div class="enter-field col-sm-12 col-md-6">
@@ -89,20 +89,20 @@
                                         <input type ="text" name ="username" value="${account.username}" readonly>
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
+                                        <label>Email</label>
+                                        <input type ="text"  name ="email" value="${account.email}" readonly>
+                                    </div>
+                                    <div class="enter-field col-sm-12 col-md-6">
                                         <label>Full name</label>
                                         <input type ="text" class="txt-edit" name ="fullname" value="${account.fullname}" readonly=true>
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Address</label>
-                                        <input type ="text" class="txt-edit" name="address" value="${account.address}" readonly="true">
+                                        <input type ="text" class="txt-edit" name="address" value="${account.address}">
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Password</label>
                                         <input type ="password" class="txt-edit" name ="password" value="${account.password}" readonly="true">
-                                    </div>
-                                    <div class="enter-field col-sm-12 col-md-6">
-                                        <label>Email</label>
-                                        <input type ="text"  name ="email" value="${account.email}" readonly>
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Phone</label>
@@ -112,11 +112,12 @@
                                         <label>Birth</label>
                                         <input type="date" class="txt-edit" id="birthdate" name ="birthdate" value="${account.birthday}" readonly="true"></br>
                                     </div>
+                                    <input type="hidden" name="btnAction" value="UpdateProfile">
                                 </div>
                                 <div class="edit-button">
-                                    <button type="button" class="btn-action d-inline" id="editBtn" onclick="EnableEditAndSave()">Edit Profile</button>
-                                    <button type="button" class="btn-action d-none" id="saveBtn" type="submit" name ="btAction" value="UpdateProfile" data-toggle="modal" data-target="#saveModal">Save</button>
-                                    <button type="button" class="btn-action d-none" id="undoBtn" data-toggle="modal" data-target="#cancelModal">Cancel</button>
+                                    <button type="button" class="btn-action d-inline" id="editBtn" onclick="EnableEditAndSaveProfile()">Edit Profile</button>
+                                    <button type="button"class="btn-action d-none" id="saveBtn"  data-toggle="modal" data-target="#saveModal" data-backdrop="false">Save</button>
+                                    <button type="button" class="btn-action d-none" id="undoBtn" data-toggle="modal" data-target="#cancelModal" data-backdrop="false">Cancel</button>
 
                                     <%--         Boostrap Modal         --%>
 
@@ -133,7 +134,7 @@
                                                     Are you sure you want to save your profile?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" onclick="SaveEdit()">Yes</button>
+                                                    <button class="btn btn-secondary" data-dismiss="modal" onclick="SaveEditProfile()">Yes</button>
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
                                                 </div>
                                             </div>
@@ -153,7 +154,7 @@
                                                     Are you sure you want to cancel?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" onclick="Cancel()">Yes</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="CancelProfile()">Yes</button>
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
                                                 </div>
                                             </div>
