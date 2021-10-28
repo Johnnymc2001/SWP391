@@ -26,12 +26,10 @@ function SaveEdit() {
 }
 
 function Cancel() {
-    if (confirm('Are you sure you want cancel?')) {
         editBtn.classList.replace("d-none", "d-inline");
         saveBtn.classList.replace("d-inline", "d-none");
         undoBtn.classList.replace("d-inline", "d-none");
         $(document).ready(function () {
             $('.txt-edit').attr("readonly", true);
         });
-    }
 }

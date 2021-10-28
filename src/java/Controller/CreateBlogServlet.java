@@ -58,7 +58,7 @@ public class CreateBlogServlet extends HttpServlet {
 
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-
+        
         AccountDAO accDao = new AccountDAO();
         HttpSession session = request.getSession();
         AccountDTO account = (AccountDTO) session.getAttribute("USER");
