@@ -121,7 +121,7 @@
                                     <%--         Boostrap Modal         --%>
 
                                     <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
@@ -141,7 +141,7 @@
                                     </div>
                                     
                                     <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
@@ -153,7 +153,7 @@
                                                     Are you sure you want to cancel?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" onclick="Cacnel()">Yes</button>
+                                                    <button type="button" class="btn btn-secondary" onclick="Cancel()">Yes</button>
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
                                                 </div>
                                             </div>
