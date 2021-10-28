@@ -141,14 +141,14 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                         } else if ("Approve".equals(action)) {
                             request.setAttribute("MESSAGE", "Blog Approved");
                             blogDao.approveBlog(blogID, note);
-                            notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_APPROVED", "Your blog is approved, congratz!", new Date(Calendar.getInstance().getTime().getTime()), "blog?txtblogID=" + blog.getBlogID()));
+                            notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_APPROVED", "Your blog is approved [" + blog.getTitle() + "]", new Date(Calendar.getInstance().getTime().getTime()), "blog?txtBlogID=" + blog.getBlogID()));
                             url = roadmap.get(PENDING_LIST);
                             RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);
                         } else if ("Disapprove".equals(action)) {
                             request.setAttribute("MESSAGE", "Blog Disapproved");
                             url = roadmap.get(PENDING_LIST);
-                            notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_DISAPPROVED", "Your blog have been disapproved!", new Date(Calendar.getInstance().getTime().getTime()), "blog?txtblogID=" + blog.getBlogID()));
+                            notiDao.createNotification(new NotificationDTO(blog.getStudentID(), false, "BLOG_DISAPPROVED", "Your blog have been disapproved! [" + blog.getTitle() + "]", new Date(Calendar.getInstance().getTime().getTime()), "blog?txtBlogID=" + blog.getBlogID()));
                             blogDao.disapproveBlog(blogID, note);
                             RequestDispatcher rd = request.getRequestDispatcher(url);
                             rd.forward(request, response);
