@@ -9,8 +9,13 @@ package Controller;
 import DAO.AccountDAO;
 import DAO.AccountDTO;
 import DAO.AccountError;
+import DAO.VerificationDAO;
+import DAO.VerificationDTO;
+import Utils.MailUtils;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -74,11 +79,11 @@ public class CreateAccountServlet extends HttpServlet {
                 url = roadmap.get(url);
                 request.getRequestDispatcher(url).forward(request, response);
             }
-            if (username == null || username.trim().length() < 6 || username.trim().length() > 20 || username.matches("[a-zA-Z]+[0-9]*")==false) {
+            if (username == null || username.trim().length() < 6 || username.trim().length() > 20 || username.matches("[a-zA-Z]+[0-9]*") == false) {
                 foundError = true;
                 error.setUserNameLengthError("User name must be from 6-20 character and must contain 1 character at the begining");
-               
-            }  
+
+            }
             if (password == null || password.trim().length() < 6 || password.trim().length() > 30) {
                 foundError = true;
                 error.setPasswordLengthError("Password must be from 6-30 character");
@@ -111,8 +116,13 @@ public class CreateAccountServlet extends HttpServlet {
                 AccountDTO dto = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
 
 //               AccountDAO.createAccount(dto);
-                dao.createAccount(dto);
+                VerificationDAO veriDao = new VerificationDAO();
 
+                dao.createAccount(dto);
+                
+                veriDao.AddVerification(new VerificationDTO(dto.getAccountID(), java.util.UUID.randomUUID().toString(), new Timestamp(System.currentTimeMillis())));
+                MailUtils.sendVerification(dto.getAccountID());
+                
                 url = "home";
                 url = roadmap.get(url);
                 request.getRequestDispatcher(url).forward(request, response);
