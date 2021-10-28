@@ -53,7 +53,6 @@ public class BlogListServlet extends HttpServlet {
         BlogDAO blogDao = new BlogDAO();
         ArrayList<BlogDTO> blogList = new ArrayList<BlogDTO>();
         AccountDTO account = (AccountDTO) session.getAttribute("USER");
-      
         if (null == account || !account.getRole().equals("Student") && !account.getRole().equals("Mentor")) {
             response.sendRedirect(sc.getContextPath());
             return;

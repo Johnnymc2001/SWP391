@@ -39,7 +39,7 @@
         </c:if>
 
         <c:if test="${not empty sessionScope.USER}">
-            <c:if test="${sessionScope.USER.role != 'Mentor' || sessionScope.USER.role != 'Student'}">
+                <c:if test="${sessionScope.USER.role != 'Mentor' && sessionScope.USER.role != 'Student'}">
                 <c:redirect url="/"/>
             </c:if>
         </c:if>

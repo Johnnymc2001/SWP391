@@ -86,12 +86,13 @@ public class BlogRatingServlet extends HttpServlet {
                 rd.forward(request, response);
                 return;
             }
+            else{
+                response.sendRedirect(BLOG_DETAIL);
+            }
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("BlogRatingServlet _ SQL " + msg);
-        } finally {
-            response.sendRedirect(BLOG_DETAIL);
-        }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
