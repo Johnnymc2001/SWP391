@@ -58,112 +58,121 @@ public class CreateBlogServlet extends HttpServlet {
 
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-        
-        AccountDAO accDao = new AccountDAO();
-        HttpSession session = request.getSession();
-        AccountDTO account = (AccountDTO) session.getAttribute("USER");
-        if (null == account || !account.getRole().equals("Student") && !account.getRole().equals("Mentor")) {
-            response.sendRedirect(sc.getContextPath());
-            return;
-        }
-        String url;
-        String title = request.getParameter("txtTitle");
-        String content = request.getParameter("txtContent");
-        String categoryID = request.getParameter("categoryBox");
-
-        String tags = request.getParameter("txtTags");
-
-        int studentID = 0;
-
-        if (null != account) {
-            studentID = account.getAccountID();
-        } else {
-            response.sendRedirect(ERROR_PAGE);
-            return;
-        }
-
-        String header = request.getContentType();
-        String base64Image = null;
-
-        boolean foundErr = false;
-
-        CategoryDAO catDao = new CategoryDAO();
-        ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-
-        request.setAttribute("CATEGORY_LIST", catList);
-
         try {
-            if (null == title) {
-                url = roadmap.get(CREATE_PAGE);
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-            } else {
-                if (null != header && header.contains("multipart/form-data")) { // When Image Exists
-                    Part part = request.getPart("fileAttachment");
-                    System.out.println(part.getSize());
-                    if (part.getSize() > 0 && part.getSize() < 4194304) {
-                        ArrayList<String> allowedFileType = new ArrayList<>(Arrays.asList("jpg", "png", "jpeg"));
-                        String fileName = part.getSubmittedFileName();
-                        String[] fileTypeSplit = fileName.split("\\.");
-                        String fileType = fileTypeSplit[fileTypeSplit.length - 1];
+            String url;
+            BlogDAO blogDao = new BlogDAO();
+            HttpSession session = request.getSession();
+            AccountDTO account = (AccountDTO) session.getAttribute("USER");
+            if (null == account || !account.getRole().equals("Student") && !account.getRole().equals("Mentor")) {
+                response.sendRedirect(sc.getContextPath());
+                return;
+            }
+            else{
+                System.out.println("getAllBlogWithStatusAndAccountID not working?");
+            ArrayList<BlogDTO> blogList = blogDao.getAllBlogWithStatusAndAccountID("PENDING", account.getAccountID());
+                System.out.println( account.getAccountID());
+            if (blogList.size()<5) {
+                
+                String title = request.getParameter("txtTitle");
+                String content = request.getParameter("txtContent");
+                String categoryID = request.getParameter("categoryBox");
 
-                        if (!allowedFileType.contains(fileType)) {
-                            request.setAttribute("ERROR_UPLOAD", "You can only upload .jpg, .png, .jpeg");
-                        } else {
-                            InputStream data = part.getInputStream();
-                            base64Image = ImageUtils.BytesToBase64(ImageUtils.InputStreamToBytes(data));
-                        }
-//                        bytesImage = ImageUtils.InputStreamToBytes(data);
-//                        base64Image = ImageUtils.BytesToBase64(bytesImage);
-                    } else {
-                        request.setAttribute("ERROR_UPLOAD", "Max file size is 4MB!");
+                String tags = request.getParameter("txtTags");
 
-                    }
-                }
-                //1. Check all user error
-                if (title.trim().length() < 6 || title.trim().length() > 60) {
-                    foundErr = true;
-                    request.setAttribute("ERROR_TITLE", "title is required from 6 to 60 characters");
+                int studentID = 0;
+
+                if (null != account) {
+                    studentID = account.getAccountID();
+                } else {
+                    response.sendRedirect(ERROR_PAGE);
+                    return;
                 }
 
-                if (content.trim().length() < 10) {
-                    foundErr = true;
-                    request.setAttribute("ERROR_CONTENT", "Content is required at least 10 characters");
-                }
+                String header = request.getContentType();
+                String base64Image = null;
 
-                if (foundErr) {
+                boolean foundErr = false;
+
+                CategoryDAO catDao = new CategoryDAO();
+                ArrayList<CategoryDTO> catList = catDao.getAllCategory();
+
+                request.setAttribute("CATEGORY_LIST", catList);
+
+                if (null == title) {
                     url = roadmap.get(CREATE_PAGE);
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
                 } else {
-                    //4. Call DAO to insert to DB
-                    Date postDate = new Date(Calendar.getInstance().getTime().getTime());
-//                    String imageUrl = "UI/Icon/selfmademan.jpg";
-                    String imageUrl = "UI/Icon/selfmademan.jpg";
-                    if (null != base64Image) {
-                        imageUrl = ImageUtils.uploadImage(base64Image);
-                    }
-                    
-//                    content = Jsoup.clean(content, Safelist.basic());
-                    BlogDTO dto = new BlogDTO(title, content, postDate, categoryID, "", tags, studentID, imageUrl);
+                    if (null != header && header.contains("multipart/form-data")) { // When Image Exists
+                        Part part = request.getPart("fileAttachment");
+                        System.out.println(part.getSize());
+                        if (part.getSize() > 0 && part.getSize() < 4194304) {
+                            ArrayList<String> allowedFileType = new ArrayList<>(Arrays.asList("jpg", "png", "jpeg"));
+                            String fileName = part.getSubmittedFileName();
+                            String[] fileTypeSplit = fileName.split("\\.");
+                            String fileType = fileTypeSplit[fileTypeSplit.length - 1];
 
-                    BlogDAO dao = new BlogDAO();
-                    int result = dao.createBlog(dto);
-                    if (result > 0) {
-                        url = roadmap.get(HOME_PAGE);
-                        response.sendRedirect(url);
-                    } else {
+                            if (!allowedFileType.contains(fileType)) {
+                                request.setAttribute("ERROR_UPLOAD", "You can only upload .jpg, .png, .jpeg");
+                            } else {
+                                InputStream data = part.getInputStream();
+                                base64Image = ImageUtils.BytesToBase64(ImageUtils.InputStreamToBytes(data));
+                            }
+//                        bytesImage = ImageUtils.InputStreamToBytes(data);
+//                        base64Image = ImageUtils.BytesToBase64(bytesImage);
+                        } else {
+                            request.setAttribute("ERROR_UPLOAD", "Max file size is 4MB!");
+
+                        }
+                    }
+                    //1. Check all user error
+                    if (title.trim().length() < 6 || title.trim().length() > 60) {
+                        foundErr = true;
+                        request.setAttribute("ERROR_TITLE", "title is required from 6 to 60 characters");
+                    }
+
+                    if (content.trim().length() < 10) {
+                        foundErr = true;
+                        request.setAttribute("ERROR_CONTENT", "Content is required at least 10 characters");
+                    }
+
+                    if (foundErr) {
                         url = roadmap.get(CREATE_PAGE);
                         RequestDispatcher rd = request.getRequestDispatcher(url);
                         rd.forward(request, response);
+                    } else {
+                        //4. Call DAO to insert to DB
+                        Date postDate = new Date(Calendar.getInstance().getTime().getTime());
+//                    String imageUrl = "UI/Icon/selfmademan.jpg";
+                        String imageUrl = "UI/Icon/selfmademan.jpg";
+                        if (null != base64Image) {
+                            imageUrl = ImageUtils.uploadImage(base64Image);
+                        }
+
+//                    content = Jsoup.clean(content, Safelist.basic());
+                        BlogDTO blogDto = new BlogDTO(title, content, postDate, categoryID, "", tags, studentID, imageUrl);
+                        int result = blogDao.createBlog(blogDto);
+                        if (result > 0) {
+                            url = roadmap.get(HOME_PAGE);
+                            response.sendRedirect(url);
+                        } else {
+                            url = roadmap.get(CREATE_PAGE);
+                            RequestDispatcher rd = request.getRequestDispatcher(url);
+                            rd.forward(request, response);
+                        }
                     }
                 }
+            } else {
+                url = roadmap.get(CREATE_PAGE);
+                request.setAttribute("MAXBLOG", true);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            }
             }
 
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("CreateBlogServlet _ SQL " + msg);
-        } finally {
         }
     }
 

@@ -718,11 +718,12 @@ public class BlogDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT blogID, title, content, postDate, categoryID, status, approvedByID, approvedDate, note, tags, ownerID, thumbnail "
                         + "FROM Blog "
-                        + "WHERE status = ? AND ownerID = ?"
+                        + "WHERE status = ? AND ownerID = ? "
                         + "ORDER BY postDate DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, s);
+                 stm.setInt(2, accountID);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {

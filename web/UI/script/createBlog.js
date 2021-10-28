@@ -12,3 +12,7 @@ attachment.onchange = evt => {
         imgReview.style.height = '30vh';
     }
 };
+
+if(maxBlog===true){
+    $('#maxBlogModal').modal('show');
+}

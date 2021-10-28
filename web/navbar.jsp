@@ -19,7 +19,9 @@
             <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
         </form>
     </div>
+
     <c:if test="${not empty user}">
+       
         <button type="button" class="menu-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             ${user.fullname}
         </button>
@@ -37,6 +39,7 @@
                     <a href="blogList"><li>Blog List</li></a>
                     <a href="logout"><li>Log out</li></a>
                 </div>
+               
         </c:if>
         <c:if test="${user.role == 'Mentor'}">
             <ul class="dropdown-menu dropdown-menu-end">

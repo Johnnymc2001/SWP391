@@ -48,6 +48,31 @@
         </header>
         <!-- END OF NAVBAR -->
 
+        <c:set var="maxBlogCreated" value="${requestScope.MAXBLOG}"/>
+        <c:if test="${not empty maxBlogCreated}">
+            <script>
+                const maxBlog = true;
+                
+            </script>
+            <div class="modal fade " data-backdrop="static" data-keyboard="false" id="maxBlogModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                            
+                        </div>
+                        <div class="modal-body">
+                            You have reached max pending blog (5)
+                            Please wait for mentor to approve before 
+                            posting more.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='home'">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:if>
         <div class="create-blog-container container">
             <form action="create" method="POST" enctype='multipart/form-data'>
                 <div class="user-pick">
