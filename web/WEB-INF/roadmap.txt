@@ -1,4 +1,4 @@
-=HomePageServlet
+=StartupServlet
 
 ### MAIN FILE
 
@@ -39,6 +39,9 @@ blogList=BlogListServlet
 blogListPage=blogList.jsp
 
 about=aboutUs.html
+
+verify=AccountVerifyServlet
+
 ### STUDENT
 
 profile=StudentProfileServlet

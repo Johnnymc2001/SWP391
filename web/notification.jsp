@@ -25,8 +25,8 @@ Sammy Guergachi
             <c:set var="notificationList" value="${requestScope.LIST_NOTIFICATION}" />
             <c:if test="${not empty notificationList}">
                 <c:forEach var="dto" items="${notificationList}">
-                <li>
-                    <a onclick="redirect(`./${dto.redirectUrl})`">
+                <li onclick="redirect(`./${dto.redirectUrl}`)">
+                    <a>
                         <i class="notify-icon fas fa-star fa-lg"></i>
                         <div class="notify-content">
                             <span class="title">${dto.content}</span><br>
@@ -43,12 +43,12 @@ Sammy Guergachi
             <h2>There is no Notification</h2>
         </c:if>
     </body>
-    
+
     <script>
         const redirect = (url) => {
             window.parent.location.href = url
         }
     </script>
-    
+
 </html>
 </sguergachi>

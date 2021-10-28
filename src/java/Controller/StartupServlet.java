@@ -74,7 +74,7 @@ public class StartupServlet extends HttpServlet {
             }
 
         } finally {
-            url = roadmap.get(url);
+//            url = roadmap.get(url);
             response.sendRedirect(url);
         }
     }

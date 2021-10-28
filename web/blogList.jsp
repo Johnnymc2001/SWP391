@@ -33,6 +33,17 @@
         <link rel="stylesheet" href="UI/CSS/navbar.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+        
+        <c:if test="${empty sessionScope.USER}">
+            <c:redirect url="/"/>
+        </c:if>
+
+        <c:if test="${not empty sessionScope.USER}">
+            <c:if test="${sessionScope.USER.role != 'Mentor' || sessionScope.USER.role != 'Student'}">
+                <c:redirect url="/"/>
+            </c:if>
+        </c:if>
+        
     </head>
     <body>
         <c:set var="blogList" value="${requestScope.BLOG_LIST}"/>

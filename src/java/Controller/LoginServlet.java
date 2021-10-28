@@ -85,7 +85,8 @@ public class LoginServlet extends HttpServlet {
                     cookie.setMaxAge(60 * 5);
                 }
                 response.addCookie(cookie);
-                url = roadmap.get("home");
+//              url = roadmap.get("home");
+                url = "home";
                 HttpSession session = request.getSession(true);
                 session.setAttribute("USER", curUser);
                 response.sendRedirect(url);
