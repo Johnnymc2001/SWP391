@@ -40,10 +40,11 @@ public class MailUtils {
         String from = USER_NAME;
         String pass = PASSWORD;
 
+        System.out.println("Send Email to Account : " + accountId);
         String[] to = new String[100];
         to[0] = dto.getEmail();
         String subject = "Academy Blog Account Verification";
-        String body = "Please verify your account with this link : http://localhost:8081/verify?id=" + code.getCode();
+        String body = "Please verify your account with this link : https://academyblog.azurewebsites.net/SWP391_Project/verify?code=" + code.getCode();
         System.out.println(body);
         sendFromGMail(from, pass, to, subject, body, to[0]);
         return true;

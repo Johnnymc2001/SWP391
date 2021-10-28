@@ -967,7 +967,12 @@ public class BlogDAO implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
         return 0;
     }

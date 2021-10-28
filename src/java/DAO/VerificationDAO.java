@@ -26,7 +26,7 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "INSERT INTO AccountVerfication VALUES(?, ?, ?)";
+                String sql = "INSERT INTO AccountVerification VALUES(?, ?, ?)";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, dto.getAccountID());

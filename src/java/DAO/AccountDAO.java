@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class AccountDAO implements Serializable {
@@ -19,7 +20,7 @@ public class AccountDAO implements Serializable {
      * @return true if success, false if failed
      * @throws SQLException
      */
-    public boolean createAccount(AccountDTO dto) throws SQLException {
+    public int createAccount(AccountDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         int line = 0;
@@ -32,7 +33,7 @@ public class AccountDAO implements Serializable {
                 String sql = "INSERT INTO Account (username, password, fullname, address, birthdate, email, phone, role ,categoryID, status) "
                         + "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-                stm = con.prepareStatement(sql);
+                stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
                 stm.setString(1, dto.getUsername());
                 stm.setString(2, dto.getPassword());
@@ -43,10 +44,19 @@ public class AccountDAO implements Serializable {
                 stm.setString(7, dto.getPhone());
                 stm.setString(8, dto.getRole());
                 stm.setString(9, "Mentor".equals(dto.getRole()) ? dto.getCategoryID() : null);
-                stm.setString(10, "AVAILABLE");
+                stm.setString(10, "PENDING");
 
                 line = stm.executeUpdate();
-                return line != 0;
+                
+                if (line > 0) {
+                    ResultSet keys = stm.getGeneratedKeys();
+                    if (keys.next()) {
+                        int key = (int) stm.getGeneratedKeys().getLong(1);
+                        System.out.println(key);
+                        return key;
+                    }
+                    return 0;
+                }
 
             }
         } finally {
@@ -57,7 +67,7 @@ public class AccountDAO implements Serializable {
                 con.close();
             }
         }
-        return false;
+        return 0;
     }
 
     /**
@@ -234,7 +244,7 @@ public class AccountDAO implements Serializable {
         }
         return null;
     }
-    
+
     public ArrayList<AccountDTO> getAllAccount() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -310,7 +320,7 @@ public class AccountDAO implements Serializable {
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, searchRole);
-                
+
                 rs = stm.executeQuery();
 
                 while (rs.next()) {

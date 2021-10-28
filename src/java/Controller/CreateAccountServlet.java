@@ -118,17 +118,19 @@ public class CreateAccountServlet extends HttpServlet {
 //               AccountDAO.createAccount(dto);
                 VerificationDAO veriDao = new VerificationDAO();
 
-                dao.createAccount(dto);
-                
-                veriDao.AddVerification(new VerificationDTO(dto.getAccountID(), java.util.UUID.randomUUID().toString(), new Timestamp(System.currentTimeMillis())));
-                MailUtils.sendVerification(dto.getAccountID());
-                
+                int key = dao.createAccount(dto);
+
+                if (key != 0) {
+                    veriDao.AddVerification(new VerificationDTO(key, java.util.UUID.randomUUID().toString(), new Timestamp(System.currentTimeMillis())));
+                    MailUtils.sendVerification(key);
+                }
+
                 url = "home";
                 url = roadmap.get(url);
                 request.getRequestDispatcher(url).forward(request, response);
             }
         } catch (IOException | SQLException | ServletException ex) {
-
+            ex.printStackTrace();
         }
     }
 
