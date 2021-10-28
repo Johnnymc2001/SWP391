@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+
 <div class="header-left">
     <!-- site logo -->
     <div class="site-logo">
@@ -6,10 +9,54 @@
     </div>
     <!-- navigate options -->
     <div class="collapse navbar-collapse options-btn">
-        <a href="home"><button class="active-btn">Home</button></a>
-        <a href="search?txtSearchType=popular"><button class="btn">Popular</button></a>
-        <a href="search?txtSearchType=recent"><button class="btn">Recent</button></a>
-        <a href="aboutUs.html"><button class="btn">About</button></a>
+
+        <a href="home">
+            <button class="
+                    <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], 'home')}">
+                        active-btn
+                    </c:if>
+                    <c:if test="${!fn:contains(requestScope['javax.servlet.forward.request_uri'], 'home')}">
+                        btn
+                    </c:if>
+                    ">
+                Home
+            </button>
+        </a>
+        <a href="search?txtSearchType=popular">
+            <button class="btn
+                    <c:if test="${(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'search') && param.txtSearchType == 'popular')}">
+                        active-btn
+                    </c:if>
+                    <c:if test="${!(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'search') && param.txtSearchType == 'popular')}">
+                        btn
+                    </c:if>">
+                Popular
+            </button>
+        </a>
+        <a href="search?txtSearchType=recent">
+            <button class="
+                    <c:if test="${(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'search') && param.txtSearchType == 'recent')}">
+                        active-btn
+                    </c:if>
+                    <c:if test="${!(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'search') && param.txtSearchType == 'recent')}">
+                        btn
+                    </c:if>
+                    ">
+                Recent
+            </button>
+        </a>
+        <a href="aboutUs.html">
+            <button class="
+                    <c:if test="${(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'aboutUs.html'))}">
+                        active-btn
+                    </c:if>
+                    <c:if test="${!(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'aboutUs.html'))}">
+                        btn
+                    </c:if>"
+                    >
+                About
+            </button>
+        </a>
     </div>
 </div>
 <div class="header-right">
@@ -21,7 +68,7 @@
     </div>
 
     <c:if test="${not empty user}">
-       
+
         <button type="button" class="menu-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             ${user.fullname}
         </button>
@@ -39,57 +86,56 @@
                     <a href="blogList"><li>Blog List</li></a>
                     <a href="logout"><li>Log out</li></a>
                 </div>
-               
-        </c:if>
-        <c:if test="${user.role == 'Mentor'}">
-            <ul class="dropdown-menu dropdown-menu-end">
-                <!-- this is user img -->
-                <div class="avatar">
-                    <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
-                    <p>${user.fullname}</p>
+            </c:if>
+            <c:if test="${user.role == 'Mentor'}">
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <!-- this is user img -->
+                    <div class="avatar">
+                        <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
+                        <p>${user.fullname}</p>
+                    </div>
+                    <!-- personal menu -->
+                    <div class="personal-menu">
+                        <a href="profile"><li>Profile</li></a>
+                        <a href="create"><li>Create Blog</li></a>
+                        <a href="blogPendingList"><li>Pending Blog</li></a>
+                        <a href="blogList"><li>Blog List</li></a>
+                        <a href="logout"><li>Log out</li></a>
+                    </div>
+                </c:if>
+                <c:if test="${user.role == 'Admin'}">
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <!-- this is user img -->
+                        <div class="avatar">
+                            <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
+                            <p>${user.fullname}</p>
+                        </div>
+                        <!-- personal menu -->
+                        <div class="personal-menu">
+                            <a href="admin/dashboard"><li>Dashboard</li></a>
+                            <a href="admin/accountList"><li>Manage Accounts</li></a>
+                            <a href="logout"><li>Log out</li></a>
+                        </div>
+                    </c:if>
+                    <!-- public menu -->
+                    <div class="public-menu">
+                        <a href="home"><li>Home</li></a>
+                        <a href="search"><li>Search</li></a>
+                        <a href="about"><li>About</li></a>
+                        <a href="contact"><li>Contact</li></a>
+                    </div>
+                </ul>
+                <div class="notify">
+                    <button type="button" class="notify-button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell"></i>
+                        <span class="num">${notificationList.size()}</span>
+                    </button>
+                    <ul class="notify-box dropdown-menu dropdown-menu-end">
+                        <iframe class="notify-window" src="notification" frameborder="0"></iframe>
+                    </ul>
                 </div>
-                <!-- personal menu -->
-                <div class="personal-menu">
-                    <a href="profile"><li>Profile</li></a>
-                    <a href="create"><li>Create Blog</li></a>
-                    <a href="blogPendingList"><li>Pending Blog</li></a>
-                    <a href="blogList"><li>Blog List</li></a>
-                    <a href="logout"><li>Log out</li></a>
-                </div>
-        </c:if>
-        <c:if test="${user.role == 'Admin'}">
-            <ul class="dropdown-menu dropdown-menu-end">
-                <!-- this is user img -->
-                <div class="avatar">
-                    <img src="UI/Icon/maleteacher-icon.png" alt="avatar">
-                    <p>${user.fullname}</p>
-                </div>
-                <!-- personal menu -->
-                <div class="personal-menu">
-                    <a href="admin/dashboard"><li>Dashboard</li></a>
-                    <a href="admin/accountList"><li>Manage Accounts</li></a>
-                    <a href="logout"><li>Log out</li></a>
-                </div>
-        </c:if>
-        <!-- public menu -->
-        <div class="public-menu">
-            <a href="home"><li>Home</li></a>
-            <a href="search"><li>Search</li></a>
-            <a href="about"><li>About</li></a>
-            <a href="contact"><li>Contact</li></a>
-        </div>
-        </ul>
-        <div class="notify">
-            <button type="button" class="notify-button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-bell"></i>
-                <span class="num">${notificationList.size()}</span>
-            </button>
-            <ul class="notify-box dropdown-menu dropdown-menu-end">
-                <iframe class="notify-window" src="notification" frameborder="0"></iframe>
-            </ul>
-        </div>
-    </c:if>
-    <c:if test="${empty user}">
-        <a href="loginPage">Login</a>
-    </c:if>
-</div>
+            </c:if>
+            <c:if test="${empty user}">
+                <a href="loginPage">Login</a>
+            </c:if>
+            </div>
