@@ -43,7 +43,7 @@ public class StartupServlet extends HttpServlet {
 
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-        String url = "";
+        String url = "home";
         try {
 
             Cookie[] cookies = request.getCookies();
@@ -61,9 +61,7 @@ public class StartupServlet extends HttpServlet {
 
                         if (null != dto) {
                             HttpSession session = request.getSession();
-                            session.setAttribute("USER", dto);
-                            
-                            url = "home";
+                            session.setAttribute("USER", dto);                     
                             break;
                         }
                     } else {
