@@ -63,7 +63,7 @@ public class AccountVerifyServlet extends HttpServlet {
                                 long cooldownLeft = 86400000 - (dto.getTime().getTime() - now.getTime());
                                 if (cooldownLeft > 0) {
                                     request.setAttribute("TYPE", "EMAIL_COOLDOWN");
-                                    String times = DateTime(cooldownLeft);
+//                                    String times = DateTime(cooldownLeft);
                                     request.setAttribute("MESSASGE", cooldownLeft);
                                 } else {
                                     // Email is not on cooldown
