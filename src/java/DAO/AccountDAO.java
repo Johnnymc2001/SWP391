@@ -244,6 +244,59 @@ public class AccountDAO implements Serializable {
         }
         return null;
     }
+    
+     public AccountDTO getAccountFromEmail(String Email) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            AccountDTO dto = null;
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role , categoryID, status "
+                        + "FROM Account "
+                        + "Where email = ? "
+                        + "ORDER BY role";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, Email);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int accountID = rs.getInt("accountID");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String fullname = rs.getString("fullname");
+                    String address = rs.getString("address");
+                    Date birthdate = rs.getDate("birthdate");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String role = rs.getString("role");
+                    String categoryID = "Mentor".equals(role) ? rs.getString("categoryID") : "None";
+                    String status = rs.getString("status");
+
+                    dto = new AccountDTO(accountID, username, password, fullname, address, birthdate, email, phone, role, categoryID, status);
+                }
+
+                return dto;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 
     public ArrayList<AccountDTO> getAllAccount() throws SQLException {
         Connection con = null;

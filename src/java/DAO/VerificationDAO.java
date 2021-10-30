@@ -26,10 +26,11 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "INSERT INTO AccountVerification VALUES(?, ?, ?)";
+                String sql = "INSERT INTO AccountVerification VALUES(?, ?, ?, ?)";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, dto.getAccountID());
+                stm.setString(2, dto.getEmail());
                 stm.setString(2, dto.getCode());
                 stm.setTimestamp(3, dto.getTime());
 
@@ -62,15 +63,52 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, verifyCode, time FROM AccountVerification WHERE verifyCode = ?";
+                String sql = "SELECT accountID, email, verifyCode, time FROM AccountVerification WHERE verifyCode = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, code);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
                     int accountID = rs.getInt("accountID");
+                    String email = rs.getString("email");
                     Timestamp time = rs.getTimestamp("time");
-                    dto = new VerificationDTO(accountID, code, time);
+                    dto = new VerificationDTO(accountID, email, code, time);
+                }
+            }
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return dto;
+    }
+
+    public VerificationDTO GetVerificationDTOUsingAccountID(int accountId) throws SQLException {
+        ResultSet rs = null;
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        VerificationDTO dto = null;
+
+        try {
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT accountID, email, verifyCode, time FROM AccountVerification WHERE accountID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, accountId);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    String code = rs.getString("verifyCode");
+                    String email = rs.getString("email");
+                    Timestamp time = rs.getTimestamp("time");
+                    dto = new VerificationDTO(accountId, email, code, time);
                 }
             }
         } finally {
@@ -85,7 +123,7 @@ public class VerificationDAO {
         return dto;
     }
     
-     public VerificationDTO GetCodeUsingAccountId(int accountId) throws SQLException {
+     public VerificationDTO GetVerificationDTOUsingEmail(String email) throws SQLException {
         ResultSet rs = null;
         Connection con = null;
         PreparedStatement stm = null;
@@ -97,15 +135,16 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, verifyCode, time FROM AccountVerification WHERE accountID = ?";
+                String sql = "SELECT accountID, email, verifyCode, time FROM AccountVerification WHERE accountID = ?";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, accountId);
+                stm.setString(1, email);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
+                    int accountId = rs.getInt("accountID");
                     String code = rs.getString("verifyCode");
                     Timestamp time = rs.getTimestamp("time");
-                    dto = new VerificationDTO(accountId, code, time);
+                    dto = new VerificationDTO(accountId, email, code, time);
                 }
             }
         } finally {

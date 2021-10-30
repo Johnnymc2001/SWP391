@@ -14,14 +14,16 @@ import java.sql.Timestamp;
  */
 public class VerificationDTO implements Serializable {
     private int accountID;
+    private String email;
     private String code;
     private Timestamp time;
 
     public VerificationDTO() {
     }
 
-    public VerificationDTO(int accountID, String code, Timestamp time) {
+    public VerificationDTO(int accountID, String email, String code, Timestamp time) {
         this.accountID = accountID;
+        this.email = email;
         this.code = code;
         this.time = time;
     }
@@ -49,4 +51,12 @@ public class VerificationDTO implements Serializable {
     public void setTime(Timestamp time) {
         this.time = time;
     }   
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

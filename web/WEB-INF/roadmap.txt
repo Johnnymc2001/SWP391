@@ -41,6 +41,7 @@ blogListPage=blogList.jsp
 about=aboutUs.html
 
 verify=AccountVerifyServlet
+verifyPage=verify.jsp
 
 profile=StudentProfileServlet
 profilePage=profile.jsp

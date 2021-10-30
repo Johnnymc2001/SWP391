@@ -35,7 +35,7 @@ public class MailUtils {
         VerificationDAO veriDao = new VerificationDAO();
 
         AccountDTO dto = accDao.getAccountFromAcoountID(accountId);
-        VerificationDTO code = veriDao.GetCodeUsingAccountId(accountId);
+        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId);
 
         String from = USER_NAME;
         String pass = PASSWORD;
