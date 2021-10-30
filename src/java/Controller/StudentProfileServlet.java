@@ -82,14 +82,14 @@ public class StudentProfileServlet extends HttpServlet {
                         System.out.println("update");
                         java.sql.Date sqlDate;
                         sqlDate = java.sql.Date.valueOf(birthdate);
-                        profileAccount = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
-//                        profileAccount.setUsername(username);
-//                        profileAccount.setPassword(password);
-//                        profileAccount.setFullname(fullname);
-//                        profileAccount.setBirthday(sqlDate);
-//                        profileAccount.setEmail(email);
-//                        profileAccount.setPhone(phone);
-//                        profileAccount.setAddress(address);
+//                        profileAccount = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
+                        profileAccount.setUsername(username);
+                        profileAccount.setPassword(password);
+                        profileAccount.setFullname(fullname);
+                        profileAccount.setBirthday(sqlDate);
+                        profileAccount.setEmail(email);
+                        profileAccount.setPhone(phone);
+                        profileAccount.setAddress(address);
                         accDao.updateAccount(curUser.getAccountID(), profileAccount);
                         request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
                         url = roadmap.get("profilePage");
@@ -113,7 +113,7 @@ public class StudentProfileServlet extends HttpServlet {
 
         } catch (NumberFormatException | SQLException ex) {
         } finally {
-//            url = roadmap.get("profilePage");
+            url = roadmap.get("profilePage");
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
