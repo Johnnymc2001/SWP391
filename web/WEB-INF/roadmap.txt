@@ -42,10 +42,9 @@ about=aboutUs.html
 
 verify=AccountVerifyServlet
 
-### STUDENT
-
 profile=StudentProfileServlet
 profilePage=profile.jsp
+
 ### MENTOR
 
 mentor=MentorServlet

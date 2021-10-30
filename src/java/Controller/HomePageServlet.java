@@ -68,6 +68,7 @@ public class HomePageServlet extends HttpServlet {
 //            ArrayList<BlogDTO> mostAwardAndRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
             ArrayList<BlogDTO> mostAwardAndRate = blogList;
             mostAwardAndRate.sort(Comparator.comparing(BlogDTO::getAwardCount).thenComparing(BlogDTO::getAvgRate));
+            mostAwardAndRate = mostAwardAndRate.stream().limit(5).collect(Collectors.toCollection(ArrayList::new));
 
             request.setAttribute("MOST_AWARD_AND_RATE", mostAwardAndRate);
 
@@ -75,6 +76,7 @@ public class HomePageServlet extends HttpServlet {
 //            ArrayList<BlogDTO> mostAward = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
             ArrayList<BlogDTO> mostAward = blogList;
             mostAward.sort(Comparator.comparing(BlogDTO::getAwardCount));
+            mostAward = mostAward.stream().limit(5).collect(Collectors.toCollection(ArrayList::new));
 
             BlogDTO mostAwardFirst = mostAward.remove(0);
 
@@ -85,12 +87,16 @@ public class HomePageServlet extends HttpServlet {
 //            ArrayList<BlogDTO> mostRate = blogDao.getAllApprovedBlogWithMostAwardAndHighestRating(5);
             ArrayList<BlogDTO> mostRate = blogList;
             mostRate.sort(Comparator.comparing(BlogDTO::getAvgRate));
+            mostRate = mostRate.stream().limit(4).collect(Collectors.toCollection(ArrayList::new));
+
             request.setAttribute("MOST_RATE", mostRate);
 
             // Most Comment
 //            ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(6);
             ArrayList<BlogDTO> mostComment = mostComment = blogList;
             mostComment.sort(Comparator.comparing(BlogDTO::getCommentCount));
+           
+            mostComment = mostComment.stream().limit(6).collect(Collectors.toCollection(ArrayList::new));
 
             BlogDTO mostCommentFirst = mostComment.get(0);
             BlogDTO mostCommentSecond = mostComment.get(1);
