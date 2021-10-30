@@ -78,4 +78,10 @@ public class AwardListDTO implements Serializable {
         this.awardBy = awardBy;
     }
 
+    @Override
+    public String toString() {
+        return "AwardListDTO{" + "awardListID=" + awardListID + ", blogID=" + blogID + ", awardID=" + awardID + ", date=" + date + ", awardBy=" + awardBy + '}';
+    }
+
+    
 }

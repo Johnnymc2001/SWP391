@@ -95,7 +95,7 @@
                             <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
                             <button class="btn-action deactive" id="disapproveBtn" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
                         </div>
-                        <div class="d-none" id="note">
+                        <div class="" id="note">
                             <h1>Note:</h1>
                             <textarea class="form-control" name="note" rows="10"></textarea>
                         </div>

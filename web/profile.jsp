@@ -177,11 +177,11 @@
                             </div>     
                             <div class="enter-field col-sm-12 col-md-6">
                                 <label>Phone</label>
-                                <p>${account.email}</p> 
+                                <p>${account.phone}</p> 
                             </div>
                             <div class="enter-field col-sm-12 col-md-6">
                                 <label>Birth</label>
-                                <p>${account.email}</p><br>  
+                                <p>${account.birthday}</p><br>  
                             </div>
                         </div>
                     </c:if>

@@ -54,4 +54,10 @@ public class AwardDTO {
         this.effectiveDay = effectiveDay;
     }
 
+    @Override
+    public String toString() {
+        return "AwardDTO{" + "awardID=" + awardID + ", awardName=" + awardName + ", effectiveDay=" + effectiveDay + '}';
+    }
+
+    
 }
