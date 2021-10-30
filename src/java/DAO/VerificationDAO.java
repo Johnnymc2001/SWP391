@@ -31,8 +31,8 @@ public class VerificationDAO {
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, dto.getAccountID());
                 stm.setString(2, dto.getEmail());
-                stm.setString(2, dto.getCode());
-                stm.setTimestamp(3, dto.getTime());
+                stm.setString(3, dto.getCode());
+                stm.setTimestamp(4, dto.getTime());
 
                 int line = stm.executeUpdate();
 
@@ -122,8 +122,8 @@ public class VerificationDAO {
         }
         return dto;
     }
-    
-     public VerificationDTO GetVerificationDTOUsingEmail(String email) throws SQLException {
+
+    public VerificationDTO GetVerificationDTOUsingEmail(String email) throws SQLException {
         ResultSet rs = null;
         Connection con = null;
         PreparedStatement stm = null;
@@ -135,7 +135,7 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, email, verifyCode, time FROM AccountVerification WHERE accountID = ?";
+                String sql = "SELECT accountID, email, verifyCode, time FROM AccountVerification WHERE email = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
                 rs = stm.executeQuery();
@@ -157,6 +157,40 @@ public class VerificationDAO {
             }
         }
         return dto;
+    }
+
+    public boolean UpdateVerification(VerificationDTO dto) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "UPDATE AccountVerification SET email = ?, verifyCode = ?, time = ? WHERE accountID = ?";
+
+                stm = con.prepareStatement(sql);
+
+                stm.setString(1, dto.getEmail());
+                stm.setString(2, dto.getCode());
+                stm.setTimestamp(3, dto.getTime());
+                stm.setInt(4, dto.getAccountID());
+
+                int line = stm.executeUpdate();
+
+                return line != 0;
+
+            }
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
     }
 
     public boolean RemoveVerification(int accountId) throws SQLException {

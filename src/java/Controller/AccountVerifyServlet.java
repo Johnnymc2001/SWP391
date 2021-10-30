@@ -9,6 +9,7 @@ import DAO.AccountDAO;
 import DAO.AccountDTO;
 import DAO.VerificationDAO;
 import DAO.VerificationDTO;
+import Utils.MailUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Time;
@@ -54,54 +55,72 @@ public class AccountVerifyServlet extends HttpServlet {
         try {
             if (null != action) {
                 if ("Send Verify Link".equals(action)) {
-                    if (email != null) {
-                        VerificationDTO dto = veriDao.GetVerificationDTOUsingEmail(email);
-                        if (null != dto) {
-                            AccountDTO accDto = accDao.getAccountFromEmail(email);
-                            if (accDto != null) {
-                                Timestamp now = new Timestamp(System.currentTimeMillis());
-                                long cooldownLeft = 86400000 - (dto.getTime().getTime() - now.getTime());
-                                if (cooldownLeft > 0) {
-                                    request.setAttribute("TYPE", "EMAIL_COOLDOWN");
+                    if (email != null) { // Email Inputted
+                        AccountDTO accDto = accDao.getAccountFromEmail(email);
+                        if (accDto != null) {   // ACcount exited in database
+                            if ("PENDING".equals(accDto.getStatus())) { // Account is in pending mode
+                                VerificationDTO veriDto = veriDao.GetVerificationDTOUsingEmail(email);
+                                if (null != veriDto) {  // Account existed in verfication list
+
+                                    Timestamp now = new Timestamp(System.currentTimeMillis());
+                                    long cooldownLeft = (10800000 - (now.getTime() - veriDto.getTime().getTime()))/1000;
+                                    System.out.println("Cooldown Left : " + cooldownLeft);
+                                    if (cooldownLeft > 0) {
+                                        request.setAttribute("TYPE", "EMAIL_COOLDOWN");
 //                                    String times = DateTime(cooldownLeft);
-                                    request.setAttribute("MESSASGE", cooldownLeft);
-                                } else {
-                                    // Email is not on cooldown
+                                        int hours = (int) (cooldownLeft / 3600);
+                                        int minutes = (int) ((cooldownLeft % 3600) / 60);
+                                        int seconds = (int) (cooldownLeft % 60);
+
+                                        String timeString = String.format("%02dh:%02dm:%02ds", hours, minutes, seconds);
+                                        System.out.println(timeString);
+                                        request.setAttribute("TIMELEFT", timeString);
+                                    } else {
+                                        request.setAttribute("TYPE", "SUCCESS");
+                                        // Email not on cooldown
+                                        veriDto.setTime(now);
+                                        veriDao.AddVerification(veriDto);
+                                        MailUtils.sendVerification(accDto.getAccountID());
+                                    }
+                                } else {// Account not exited in verfication list
+                                    request.setAttribute("TYPE", "SUCCESS");
+                                    veriDao.AddVerification(new VerificationDTO(accDto.getAccountID(), email, java.util.UUID.randomUUID().toString(), new Timestamp(System.currentTimeMillis())));
+                                    MailUtils.sendVerification(accDto.getAccountID());
                                 }
                             } else {
-                                request.setAttribute("TYPE", "EMAIL_NOT_EXISTED");
-                                    request.setAttribute("MESSASGE", "");
-                                // Email doens't exist in database
+                                request.setAttribute("TYPE", "EMAIL_ALREADY_VERIFIED");
+                                // Account is verified
                             }
-
                         } else {
-                            // Email doesn't exist in Verification List
-
+                            request.setAttribute("TYPE", "EMAIL_NOT_EXISTED");
+                            // Email doens't exist in database
                         }
                     } else {
                         // Email input is null!
                         request.setAttribute("TYPE", "EMAIL_INPUT_MISSING");
 //                            request.setAttribute("MESSASGE", now);
                     }
-                }
-            }
-            if (null != verifyCode) {
-
-                VerificationDTO dto = veriDao.GetAccountIdUsingCode(verifyCode);
-                if (dto != null) {
-                    veriDao.RemoveVerification(dto.getAccountID());
-                    AccountDTO acc = accDao.getAccountFromAcoountID(dto.getAccountID());
-                    acc.setStatus("AVAILABLE");
-                    accDao.updateAccount(dto.getAccountID(), acc);
                 } else {
-                    request.setAttribute("MESSAGE", "Your verification link isn't correct, please use another one!");
+                    // Another action
+                }
+            } else {
+                if (null != verifyCode) {
+
+                    VerificationDTO dto = veriDao.GetAccountIdUsingCode(verifyCode);
+                    if (dto != null) {
+                        veriDao.RemoveVerification(dto.getAccountID());
+                        AccountDTO acc = accDao.getAccountFromAcoountID(dto.getAccountID());
+                        acc.setStatus("AVAILABLE");
+                        accDao.updateAccount(dto.getAccountID(), acc);
+                    } else {
+                        request.setAttribute("MESSAGE", "Your verification link isn't correct, please use another one!");
+                    }
                 }
             }
-
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            roadmap.get(url);
+            url = roadmap.get(url);
             request.getRequestDispatcher(url).forward(request, response);
         }
 

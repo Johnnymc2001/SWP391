@@ -29,8 +29,8 @@
 
         <div class="container">
             <h1 class="display-1 pb-5">Verify Your Account</h1>
-            <c:set var="msg" value="${requestScope.MESSAGE}"/>
-            <c:if test="${msg == 'SUCCESS'}">
+            <c:set var="type" value="${requestScope.TYPE}"/>
+            <c:if test="${type == 'SUCCESS'}">
                 <div class="alert alert-success">
                     Your account has been verified! You will be redirected to
                     homepage in 3 seconds!<br />
@@ -39,26 +39,38 @@
                 </div>
             </c:if>
 
-            <c:if test="${msg == 'INVALID'}">
+            <c:if test="${type == 'INVALID'}">
                 <div class="alert alert-warning">
                     Your link is invalid! Please enter your email below to get a new
                     one!
                 </div>  
             </c:if>
 
-            <c:if test="${msg == 'EMAIL_NOT_EXIST'}">
+            <c:if test="${type == 'EMAIL_ALREADY_VERIFIED'}">
+                <div class="alert alert-warning">
+                    This email is already verified!
+                </div>  
+            </c:if>
+
+            <c:if test="${type == 'EMAIL_NOT_EXISTED'}">
                 <div class="alert alert-danger">
-                    Email doesn't exist in our system, perhaps you want to <a href="/loginPage" class="alert-link">register</a>?
+                    Email doesn't exist in our system, perhaps you want to <a href="./loginPage" class="alert-link">register</a>?
                 </div>
             </c:if>
 
-            <c:if test="${msg == 'EMAIL_COOLDOWN'}">
+            <c:if test="${type == 'EMAIL_COOLDOWN'}">
                 <div class="alert alert-danger">
-                    You can only get verify link every 24 hour!
+                    You can get a new verification link after ${requestScope.TIMELEFT}!
                 </div>
             </c:if>
 
-            <c:if test="${msg != 'SUCCESS'}">
+            <c:if test="${type == 'EMAIL_INPUT_MISSING'}">
+                <div class="alert alert-danger">
+                    Email is not valid!
+                </div>
+            </c:if>
+
+            <c:if test="${type != 'SUCCESS'}">
                 <div class="bg-light">
                     <form action="verify">
                         <div class="form-group">
@@ -66,16 +78,16 @@
                                    >Email address</label
                             >
                             <input
+                                name="email"
                                 type="email"
                                 class="form-control"
                                 id="emailInput"
                                 placeholder="name@example.com"
+                                required
                                 />
                         </div>
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" name="action" value="Send Verify Link"/>  
                     </form>
-                    <input type="submit" class="btn btn-primary btn-lg btn-block" name="action" value="GetVerifyLink">
-                        Get Verify Link
-                    </button>
                 </div>
             </c:if>
         </div>
