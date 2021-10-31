@@ -97,9 +97,11 @@ public class CreateAccountServlet extends HttpServlet {
             }
             if (email == null || error.checkValidEmail(email) == false) {
                 error.setEmailErrorFormat("Email is not valid");
+                foundError = true;
             }
             if (phone == null || error.checkValidPhoneNumber(phone) == false) {
                 error.setPhoneErrorFormat("Phone is not valid");
+                foundError = true;
             }
 
             if (foundError) {

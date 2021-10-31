@@ -103,6 +103,14 @@
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Full name</label>
                                         <input type ="text" class="txt-edit" name ="fullname" value="${account.fullname}" readonly=true>
+                                        <c:if test="${not empty FULL_NAME_ERROR}">
+                                            <br/>
+                                            <font color="red">
+                                            ${FULL_NAME_ERROR}<br/>
+                                            <p> Update Fail !!   </p>
+                                            </font>
+                                        </c:if>
+
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Address</label>
@@ -111,10 +119,24 @@
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Password</label>
                                         <input type ="password" class="txt-edit" name ="password" value="${account.password}" readonly="true">
+                                         <c:if test="${not empty PASSWORD_ERROR}">
+                                            <br/>
+                                            <font color="red">
+                                            ${PASSWORD_ERROR}<br/>
+                                            <p> Update Fail !!   </p>
+                                            </font>
+                                        </c:if>
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Phone</label>
                                         <input type ="text" class="txt-edit" name ="phone" value="${account.phone}" readonly="true">
+                                         <c:if test="${not empty PHONE_ERROR}">
+                                            <br/>
+                                            <font color="red">
+                                            ${PHONE_ERROR}<br/>
+                                            <p> Update Fail !!   </p>
+                                            </font>
+                                        </c:if>
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Birth</label>

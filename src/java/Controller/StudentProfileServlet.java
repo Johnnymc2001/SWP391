@@ -52,9 +52,10 @@ public class StudentProfileServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
         String button = request.getParameter("btnAction");
-        System.out.println(button+address);
+        System.out.println(button + address);
         String url = "";
         int id = 0;
+        boolean foundError = false;
 
         BlogDAO blogdao = new BlogDAO();
         AccountDAO accDao = new AccountDAO();
@@ -73,16 +74,33 @@ public class StudentProfileServlet extends HttpServlet {
                 profileAccount = curUser;
                 System.out.println("Get Self Profile!");
             }
-            System.out.println(button+address);
+            System.out.println(button + address);
             if (null != profileAccount) {
-                System.out.println("Button?"+button);
+                System.out.println("Button?" + button);
                 if (button != null) {
                     System.out.println("Button?");
                     if (button.equals("UpdateProfile") && (profileAccount.getAccountID() == curUser.getAccountID())) {
-                        System.out.println("update");
-                        java.sql.Date sqlDate;
+                           
+                        //Add constrain
+                        
+                        if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20|| fullname.matches("([A-Z]){1,}[a-z]+") == false)  {
+                            foundError = true;
+                            request.setAttribute("FULL_NAME_ERROR", "Full Name must be from 6-20 character and must contain 1 character at the begining and cant contain a number ");
+                        }
+
+                        else if (password == null || password.trim().length() < 6 || password.trim().length() > 30) {
+                            foundError = true;
+                            request.setAttribute("PASSWORD_ERROR", "Password must be from 6-20 character");
+
+                        }
+                        else if (phone == null || phone.matches("([0-9]){8,12}") == false) {
+                            foundError = true;
+                            request.setAttribute("PHONE_ERROR", "Phone Number  invalid ");
+                        } 
+                        
+                        if (foundError==false){
+                              java.sql.Date sqlDate;
                         sqlDate = java.sql.Date.valueOf(birthdate);
-//                        profileAccount = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
                         profileAccount.setUsername(username);
                         profileAccount.setPassword(password);
                         profileAccount.setFullname(fullname);
@@ -93,6 +111,22 @@ public class StudentProfileServlet extends HttpServlet {
                         accDao.updateAccount(curUser.getAccountID(), profileAccount);
                         request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
                         url = roadmap.get("profilePage");
+                        }
+                        
+
+//                        System.out.println("update");
+//                        java.sql.Date sqlDate;
+//                        sqlDate = java.sql.Date.valueOf(birthdate);
+//                        profileAccount.setUsername(username);
+//                        profileAccount.setPassword(password);
+//                        profileAccount.setFullname(fullname);
+//                        profileAccount.setBirthday(sqlDate);
+//                        profileAccount.setEmail(email);
+//                        profileAccount.setPhone(phone);
+//                        profileAccount.setAddress(address);
+//                        accDao.updateAccount(curUser.getAccountID(), profileAccount);
+//                        request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
+//                        url = roadmap.get("profilePage");
 
                     }
                 } else {
