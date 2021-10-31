@@ -37,6 +37,11 @@
                     <a href="/" class="alert-link">Click here</a> if it's take too
                     long
                 </div>
+                <script>
+                    setTimeout(function () {
+                        window.location.href = "./"
+                    }, 3000);
+                </script>
             </c:if>
 
             <c:if test="${type == 'INVALID'}">

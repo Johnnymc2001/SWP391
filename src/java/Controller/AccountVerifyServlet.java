@@ -63,7 +63,7 @@ public class AccountVerifyServlet extends HttpServlet {
                                 if (null != veriDto) {  // Account existed in verfication list
 
                                     Timestamp now = new Timestamp(System.currentTimeMillis());
-                                    long cooldownLeft = (10800000 - (now.getTime() - veriDto.getTime().getTime()))/1000;
+                                    long cooldownLeft = (600 - (now.getTime() - veriDto.getTime().getTime()) / 1000);
                                     System.out.println("Cooldown Left : " + cooldownLeft);
                                     if (cooldownLeft > 0) {
                                         request.setAttribute("TYPE", "EMAIL_COOLDOWN");
@@ -73,13 +73,12 @@ public class AccountVerifyServlet extends HttpServlet {
                                         int seconds = (int) (cooldownLeft % 60);
 
                                         String timeString = String.format("%02dh:%02dm:%02ds", hours, minutes, seconds);
-                                        System.out.println(timeString);
                                         request.setAttribute("TIMELEFT", timeString);
                                     } else {
                                         request.setAttribute("TYPE", "SUCCESS");
                                         // Email not on cooldown
                                         veriDto.setTime(now);
-                                        veriDao.AddVerification(veriDto);
+                                        veriDao.UpdateVerification(veriDto);
                                         MailUtils.sendVerification(accDto.getAccountID());
                                     }
                                 } else {// Account not exited in verfication list
@@ -112,8 +111,9 @@ public class AccountVerifyServlet extends HttpServlet {
                         AccountDTO acc = accDao.getAccountFromAcoountID(dto.getAccountID());
                         acc.setStatus("AVAILABLE");
                         accDao.updateAccount(dto.getAccountID(), acc);
+                        request.setAttribute("TYPE", "SUCCESS");
                     } else {
-                        request.setAttribute("MESSAGE", "Your verification link isn't correct, please use another one!");
+                        request.setAttribute("TYPE", "INVALID");
                     }
                 }
             }
