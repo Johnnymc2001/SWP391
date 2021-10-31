@@ -60,9 +60,17 @@
                             <h2>Blog List</h2>
                         </div>
                         <div class="user-option">
+                            <a href="profile">
+                                <li class="list-group-item">Profile</li>
+                            </a>
                             <a href="blogList">
                                 <li class="list-group-item active">Your Blogs</li>
                             </a>
+                            <c:if test="${user.role == 'Mentor'}">
+                                <a href="blogPendingList">
+                                    <li class="list-group-item">Pending Blog</li>
+                                </a>
+                            </c:if>
                         </div>
                         <div class="public-option">
                             <a href="home">

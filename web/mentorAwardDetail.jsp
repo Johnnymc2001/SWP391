@@ -36,9 +36,34 @@
     <body>
 
         <c:set var="user" value="${sessionScope.USER}"/>
-        <div class="container award-container">
-            <div>
-                <button class="btn-action" onclick="ShowCreateAward()" >Create an Award</button>
+        <div class="container-fluid award-container">
+            <div class="title">
+                <c:set var="awardDtoList" value="${requestScope.ALL_AWARD}"/>
+                <c:set var="blogInfo" value="${requestScope.BLOG}"/>
+                <c:set var="blogAwardList" value="${requestScope.BLOGAWARD}" />
+                <c:if test="${not empty blogInfo}">
+                    <form action="award?txtBlogID=${blogInfo.blogID}" method="POST">
+                        <h1>Blog: ${blogInfo.title}</h1>
+                        <input type="hidden" name="txtBlogID" value="${blogInfo.blogID}"/>
+                        <select class="select-award" name="txtAwardID">
+                            <c:forEach var="dto" items="${awardDtoList}">
+                                <c:set var="contain" value="${false}"/>
+                                <c:forEach var="blogAward" items="${blogAwardList}">
+                                    <c:if test="${blogAward.awardID==dto.awardID}"> 
+                                        <c:set var="contain" value="${true}"/>
+                                    </c:if>
+                                </c:forEach>
+                                <c:if test="${contain!=true}">
+                                    <option value="${dto.awardID}">${dto.awardName}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                        <button class="btn-action" type="submit" name="btnAction" value="Award Blog">Award Blog</button>
+                    </form>
+                </c:if>
+            </div>
+            <div class="create-award col-md-6">
+                <button id="award-btn" class="btn-action" onclick="ShowCreateAward()" >Create an Award</button>
                 <div id="CreateAward" class="d-none">
                     <form action="awardCreate" method="POST">
                         <div class="enter-field">
@@ -54,78 +79,43 @@
                     </form>
                 </div>
             </div>
+            <div class="award-table">
+                <c:if test="${not empty requestScope.BLOGAWARD}">
+                    <h3>Blog's Award List</h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>No. </th>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Award By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:set var="mentorList" value="${requestScope.MENTORLIST}" />
+                            <c:forEach var="blogAward" items="${blogAwardList}" varStatus="count">
+                                <tr>
+                                    <td>${count.count}</td>
+                                    <c:forEach var="awardDto" items="${awardDtoList}">
+                                        <c:if test="${awardDto.awardID==blogAward.awardID}">
+                                            <td class="award-name">${awardDto.awardName}</td>
+                                        </c:if>
+                                    </c:forEach>
+                                    <td>${blogAward.date}</td>
+                                    <c:forEach var="mentorDto" items="${mentorList}">
+                                        <c:if test="${mentorDto.accountID==blogAward.awardBy}">
+                                            <td>${mentorDto.fullname}</td>
+                                        </c:if>
+                                    </c:forEach>
 
-            <div>
-
-                <c:set var="awardDtoList" value="${requestScope.ALL_AWARD}"/>
-                <c:set var="blogInfo" value="${requestScope.BLOG}"/>
-                <c:set var="blogAwardList" value="${requestScope.BLOGAWARD}" />
-                <c:if test="${not empty blogInfo}">
-                    <form action="award?txtBlogID=${blogInfo.blogID}" method="POST">
-                        <span>Blog: ${blogInfo.title}</span><br>
-                        <input type="hidden" name="txtBlogID" value="${blogInfo.blogID}"/>
-                        <select name="txtAwardID">
-                            
-                            <c:forEach var="dto" items="${awardDtoList}">
-                                <c:set var="contain" value="${false}"/>
-                                <c:forEach var="blogAward" items="${blogAwardList}">
-                                    <c:if test="${blogAward.awardID==dto.awardID}"> 
-                                        <c:set var="contain" value="${true}"/>
-                                    </c:if>
-                                </c:forEach>
-                                <c:if test="${contain!=true}">
-                                    <option value="${dto.awardID}">${dto.awardName}</option>
-                                </c:if>
+                                    <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
+                                </tr>
                             </c:forEach>
-                        </select>
-
-                        <input type="submit" name="btnAction" value="Award Blog"/>
-                    </form>
+                        </tbody>
+                    </table>
                 </c:if>
             </div>
-
         </div>
-        <c:if test="${not empty requestScope.BLOGAWARD}">
-
-            <div class="">
-                <h1>Blog's Award List</h1>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>No. </th>
-                            <th>Title</th>
-                            <th>Date</th>
-                            <th>Award By</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <c:set var="mentorList" value="${requestScope.MENTORLIST}" />
-                        <c:forEach var="blogAward" items="${blogAwardList}" varStatus="count">
-                            <tr>
-                                <td>${count.count}</td>
-                                <c:forEach var="awardDto" items="${awardDtoList}">
-                                    <c:if test="${awardDto.awardID==blogAward.awardID}">
-                                        <td>${awardDto.awardName}</td>
-                                    </c:if>
-                                </c:forEach>
-                                <td>${blogAward.date}</td>
-                                <c:forEach var="mentorDto" items="${mentorList}">
-                                    <c:if test="${mentorDto.accountID==blogAward.awardBy}">
-                                        <td>${mentorDto.fullname}</td>
-                                    </c:if>
-                                </c:forEach>
-
-                                <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
-
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </c:if>
-
-
     </body>
 
 

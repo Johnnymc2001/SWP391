@@ -35,7 +35,7 @@
     <body>
         <c:set var="blogList" value="${requestScope.PENDING_BLOG_LIST}"/>
         <header class="navbar navbar-expand-lg" id="header-default">
-           <jsp:directive.include file="navbar.jsp" /> 
+            <jsp:directive.include file="navbar.jsp" /> 
         </header>
         <!-- END OF NAVBAR -->
 
@@ -47,8 +47,14 @@
                             <h2>Mentor</h2>
                         </div>
                         <div class="user-option">
+                            <a href="profile">
+                                <li class="list-group-item">Profile</li>
+                            </a>
+                            <a href="blogList">
+                                <li class="list-group-item">Your Blogs</li>
+                            </a>
                             <a href="blogPendingList">
-                                <li class="list-group-item active">Pending Blogs</li>
+                                <li class="list-group-item active">Pending Blog</li>
                             </a>
                         </div>
                         <div class="public-option">

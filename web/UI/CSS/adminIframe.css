@@ -131,5 +131,18 @@ img{
 
 .award-container{
     margin-top: 5vh;
-    text-align: center;
+    text-align: left;
+}
+
+.award-table{
+    text-align: left;
+}
+
+.title,
+.create-award{
+    margin-bottom: 3rem;
+}
+
+.select-award{
+    padding: 0.3rem;
 }

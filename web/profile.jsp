@@ -55,6 +55,14 @@
                             <a href="blogPendingList">
                                 <li class="list-group-item active">Profile</li>
                             </a>
+                            <a href="blogList">
+                                <li class="list-group-item">Your Blogs</li>
+                            </a>
+                            <c:if test="${user.role == 'Mentor'}">
+                                <a href="blogPendingList">
+                                    <li class="list-group-item">Pending Blog</li>
+                                </a>
+                            </c:if>
                         </div>
                         <div class="public-option">
                             <a href="home">
@@ -140,7 +148,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -185,31 +193,33 @@
                             </div>
                         </div>
                     </c:if>
-                    <div class="blog-list">
-                        <h1>Blog List</h1>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>No. </th>
-                                    <th>Title</th>
-                                    <th>Date</th>
-                                    <th>Thumbnail</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach var="blog" items="${requestScope.CURBLOG}" varStatus="count">
+                    <c:if test="${user.role == 'Student' && not empty requestScope.CURBLOG}">
+                        <div class="blog-list">
+                            <h1>Blog Pending List</h1>
+                            <table class="table table-hover">
+                                <thead>
                                     <tr>
-                                        <td>${count.count}</td>
-                                        <td><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></td>
-                                        <td>${blog.postDate}</td>
-                                        <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
-                                        <td><button class="btnView"><a href="blog?txtBlogID=${blog.blogID}">View</a></button></td>
+                                        <th>No. </th>
+                                        <th>Title</th>
+                                        <th>Date</th>
+                                        <th>Thumbnail</th>
+                                        <th>Action</th>
                                     </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="blog" items="${requestScope.CURBLOG}" varStatus="count">
+                                        <tr>
+                                            <td>${count.count}</td>
+                                            <td><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></td>
+                                            <td>${blog.postDate}</td>
+                                            <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
+                                            <td><button class="btnView"><a href="blog?txtBlogID=${blog.blogID}">View</a></button></td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>
