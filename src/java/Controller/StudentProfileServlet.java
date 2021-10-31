@@ -58,7 +58,8 @@ public class StudentProfileServlet extends HttpServlet {
         String url = "";
         int id = 0;
         boolean foundError = false;
-
+        boolean updatePassword = false;
+        
         BlogDAO blogdao = new BlogDAO();
         AccountDAO accDao = new AccountDAO();
 
@@ -96,6 +97,8 @@ public class StudentProfileServlet extends HttpServlet {
                             } else if (null == confirmPassword || !confirmPassword.equals(password)) {
                                 foundError = true;
                                 request.setAttribute("PASSWORD_ERROR", "Confirm Password must be same!");
+                            } else {
+                                updatePassword = true;
                             }
                         } else {
 
@@ -110,7 +113,7 @@ public class StudentProfileServlet extends HttpServlet {
                             java.sql.Date sqlDate;
                             sqlDate = java.sql.Date.valueOf(birthdate);
                             profileAccount.setUsername(username);
-                            if (null != password || password != "") {
+                            if (updatePassword) {
                                 profileAccount.setPassword(password);
                             }
                             profileAccount.setFullname(fullname);
