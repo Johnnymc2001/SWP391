@@ -113,7 +113,7 @@ public class StudentProfileServlet extends HttpServlet {
                             java.sql.Date sqlDate;
                             sqlDate = java.sql.Date.valueOf(birthdate);
                             profileAccount.setUsername(username);
-                            if (updatePassword) {
+                            if (null != password || password != "") {
                                 profileAccount.setPassword(password);
                             }
                             profileAccount.setFullname(fullname);
