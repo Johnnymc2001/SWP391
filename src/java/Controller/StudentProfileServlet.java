@@ -48,10 +48,12 @@ public class StudentProfileServlet extends HttpServlet {
         String fullname = request.getParameter("fullname");
         String address = request.getParameter("address");
         String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
         String button = request.getParameter("btnAction");
+
         System.out.println(button + address);
         String url = "";
         int id = 0;
@@ -80,39 +82,46 @@ public class StudentProfileServlet extends HttpServlet {
                 if (button != null) {
                     System.out.println("Button?");
                     if (button.equals("UpdateProfile") && (profileAccount.getAccountID() == curUser.getAccountID())) {
-                           
+
                         //Add constrain
-                        
-                        if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20|| fullname.matches("([A-Z]){1,}[a-z]+") == false)  {
+                        if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20 || fullname.matches("([A-Z]){1,}[a-z]+") == false) {
                             foundError = true;
                             request.setAttribute("FULL_NAME_ERROR", "Full Name must be from 6-20 character and must contain 1 character at the begining and cant contain a number ");
                         }
 
-                        else if (password == null || password.trim().length() < 6 || password.trim().length() > 30) {
-                            foundError = true;
-                            request.setAttribute("PASSWORD_ERROR", "Password must be from 6-20 character");
+                        if (null != password && !"".equals(password)) {
+                            if (password.trim().length() < 6 || password.trim().length() > 30) {
+                                foundError = true;
+                                request.setAttribute("PASSWORD_ERROR", "Password must be from 6-20 character");
+                            } else if (null == confirmPassword || !confirmPassword.equals(password)) {
+                                foundError = true;
+                                request.setAttribute("PASSWORD_ERROR", "Confirm Password must be same!");
+                            }
+                        } else {
 
                         }
-                        else if (phone == null || phone.matches("([0-9]){8,12}") == false) {
+
+                        if (phone == null || phone.matches("([0-9]){8,12}") == false) {
                             foundError = true;
                             request.setAttribute("PHONE_ERROR", "Phone Number  invalid ");
-                        } 
-                        
-                        if (foundError==false){
-                              java.sql.Date sqlDate;
-                        sqlDate = java.sql.Date.valueOf(birthdate);
-                        profileAccount.setUsername(username);
-                        profileAccount.setPassword(password);
-                        profileAccount.setFullname(fullname);
-                        profileAccount.setBirthday(sqlDate);
-                        profileAccount.setEmail(email);
-                        profileAccount.setPhone(phone);
-                        profileAccount.setAddress(address);
-                        accDao.updateAccount(curUser.getAccountID(), profileAccount);
-                        request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
-                        url = roadmap.get("profilePage");
                         }
-                        
+
+                        if (foundError == false) {
+                            java.sql.Date sqlDate;
+                            sqlDate = java.sql.Date.valueOf(birthdate);
+                            profileAccount.setUsername(username);
+                            if (null != password || password != "") {
+                                profileAccount.setPassword(password);
+                            }
+                            profileAccount.setFullname(fullname);
+                            profileAccount.setBirthday(sqlDate);
+                            profileAccount.setEmail(email);
+                            profileAccount.setPhone(phone);
+                            profileAccount.setAddress(address);
+                            accDao.updateAccount(curUser.getAccountID(), profileAccount);
+                            request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
+                            url = roadmap.get("profilePage");
+                        }
 
 //                        System.out.println("update");
 //                        java.sql.Date sqlDate;
@@ -127,7 +136,6 @@ public class StudentProfileServlet extends HttpServlet {
 //                        accDao.updateAccount(curUser.getAccountID(), profileAccount);
 //                        request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
 //                        url = roadmap.get("profilePage");
-
                     }
                 } else {
                     request.setAttribute("ACCOUNT", profileAccount);

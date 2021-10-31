@@ -118,8 +118,8 @@
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Password</label>
-                                        <input type ="password" class="txt-edit" name ="password" value="${account.password}" readonly="true">
-                                         <c:if test="${not empty PASSWORD_ERROR}">
+                                        <input type ="password" class="txt-edit" name="password" value="" readonly="true">
+                                        <c:if test="${not empty PASSWORD_ERROR}">
                                             <br/>
                                             <font color="red">
                                             ${PASSWORD_ERROR}<br/>
@@ -127,10 +127,16 @@
                                             </font>
                                         </c:if>
                                     </div>
+
+                                    <div class="enter-field col-sm-12 col-md-6">
+                                        <label>Confirm Password</label>
+                                        <input type ="password" class="txt-edit" name="confirmPassword" value="" readonly="true">
+                                    </div>
+                                        
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Phone</label>
                                         <input type ="text" class="txt-edit" name ="phone" value="${account.phone}" readonly="true">
-                                         <c:if test="${not empty PHONE_ERROR}">
+                                        <c:if test="${not empty PHONE_ERROR}">
                                             <br/>
                                             <font color="red">
                                             ${PHONE_ERROR}<br/>
