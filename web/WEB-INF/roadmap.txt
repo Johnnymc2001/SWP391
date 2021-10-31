@@ -38,7 +38,7 @@ imageUpload=ImageUploadServlet
 blogList=BlogListServlet
 blogListPage=blogList.jsp
 
-about=aboutUs.html
+about=aboutUs.jsp
 
 verify=AccountVerifyServlet
 verifyPage=verify.jsp

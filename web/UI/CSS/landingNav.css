@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+    position: relative;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: #203656;
+}
+/* NAVBAR */
+.navbar {
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: white;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    color: orange;
+    text-decoration: none;
+}
+
+.navbar-brand:hover {
+    text-decoration: none;
+    color: orange;
+}
+
+.navbar img {
+    width: 4rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.navbar-toggler-icon {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-toggler {
+    position: absolute;
+    width: 40px;
+    height: 4px;
+    background: orange;
+    top: 50%;
+    border-radius: 10px;
+    transform: translateY(-50%);
+    transition: all 0.3s;
+}
+
+.menu-toggler::before,
+.menu-toggler::after {
+    content: "";
+    width: 40px;
+    height: 4px;
+    left: 0;
+    position: absolute;
+    background: orange;
+    transition: all 0.3s;
+    border-radius: 10px;
+}
+
+.menu-toggler::before {
+    transform: translateY(-10px);
+}
+
+.menu-toggler::after {
+    transform: translateY(10px);
+}
+
+.collapse {
+    display: flex;
+    justify-content: right;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-link {
+    color: rgba(128, 128, 128, 0.5);
+    margin: 0 1rem;
+    position: relative;
+}
+
+.nav-link:not(.btn-link):before {
+    content: "";
+    position: absolute;
+    background: orange;
+    width: 0;
+    height: 1px;
+    bottom: 10%;
+    right: 0;
+    transition: all 0.5s;
+}
+
+.nav-link:hover::before {
+    left: 0;
+    right: auto;
+    width: 100%;
+    color: orange;
+}
+
+.nav-link:hover {
+    color: orange;
+}
+
+.btn-register {
+    padding: 0.3rem 1rem;
+    background: orange;
+    color: white;
+}
+
+.btn-register:hover {
+    color: white;
+}
+
+/* LEFT NAVIGATOR */
+.left-nav {
+    position: fixed;
+    background: white;
+    width: 260px;
+    height: 100vh;
+    top: 0;
+    left: -260px;
+    transition: all 0.5s;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.left-nav-item {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* END OF LEFT NAVIGATOR */
+
+/* TOGGLE BUTTON ANIMATION */
+.navbar-toggler-icon.open .menu-toggler {
+    transform: translateX(-40px);
+    background: transparent;
+}
+
+.navbar-toggler-icon.open .menu-toggler::before {
+    transform: rotate(45deg) translate(25px, -30px);
+}
+
+.navbar-toggler-icon.open .menu-toggler::after {
+    transform: rotate(-45deg) translate(30px, 25px);
+}
+
+.left-nav.open {
+    left: 0;
+}
+
+/* END OF ANIMATION */
+/* END OF NAVBAR */
+
+/* WEB INTRO */
+.web-intro {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    color: #203656;
+}
+
+.web-intro h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.web-intro h3 {
+    line-height: 1.7;
+    padding: 1rem;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.user-name{
+    color: black;
+    font-size: 20px;
+}
+/* END OF WEB INTRO */

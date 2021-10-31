@@ -45,12 +45,12 @@
                 Recent
             </button>
         </a>
-        <a href="aboutUs.html">
+        <a href="about">
             <button class="
-                    <c:if test="${(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'aboutUs.html'))}">
+                    <c:if test="${(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'aboutUs.jsp'))}">
                         active-btn
                     </c:if>
-                    <c:if test="${!(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'aboutUs.html'))}">
+                    <c:if test="${!(fn:contains(requestScope['javax.servlet.forward.request_uri'], 'aboutUs.jsp'))}">
                         btn
                     </c:if>"
                     >
