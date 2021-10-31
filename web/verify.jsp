@@ -27,61 +27,61 @@
             <jsp:directive.include file="navbar.jsp" /> 
         </header>
 
-        <div class="container">
-            <h1 class="display-1 pb-5">Verify Your Account</h1>
+        <div class="container mt-5">
+            <h1 class="">Verify Your Account</h1>
             <c:set var="type" value="${requestScope.TYPE}"/>
-            <c:if test="${type == 'SUCCESS'}">
-                <div class="alert alert-success">
-                    Your account has been verified! You will be redirected to
-                    homepage in 3 seconds!<br />
-                    <a href="/" class="alert-link">Click here</a> if it's take too
-                    long
-                </div>
-                <script>
-                    setTimeout(function () {
-                        window.location.href = "./"
-                    }, 3000);
-                </script>
-            </c:if>
+            <div class="mb-5">
+                <c:if test="${type == 'SUCCESS'}">
+                    <div class="alert alert-success">
+                        Your account has been verified! You will be redirected to
+                        homepage in 3 seconds!<br />
+                        <a href="/" class="alert-link">Click here</a> if it's take too
+                        long
+                    </div>
+                    <script>
+                        setTimeout(function () {
+                            window.location.href = "./"
+                        }, 3000);
+                    </script>
+                </c:if>
 
-            <c:if test="${type == 'INVALID'}">
-                <div class="alert alert-warning">
-                    Your link is invalid! Please enter your email below to get a new
-                    one!
-                </div>  
-            </c:if>
+                <c:if test="${type == 'INVALID'}">
+                    <div class="alert alert-warning">
+                        Your link is invalid! Please enter your email below to get a new
+                        one!
+                    </div>  
+                </c:if>
 
-            <c:if test="${type == 'EMAIL_ALREADY_VERIFIED'}">
-                <div class="alert alert-warning">
-                    This email is already verified!
-                </div>  
-            </c:if>
+                <c:if test="${type == 'EMAIL_ALREADY_VERIFIED'}">
+                    <div class="alert alert-warning">
+                        This email is already verified!
+                    </div>  
+                </c:if>
 
-            <c:if test="${type == 'EMAIL_NOT_EXISTED'}">
-                <div class="alert alert-danger">
-                    Email doesn't exist in our system, perhaps you want to <a href="./loginPage" class="alert-link">register</a>?
-                </div>
-            </c:if>
+                <c:if test="${type == 'EMAIL_NOT_EXISTED'}">
+                    <div class="alert alert-danger">
+                        Email doesn't exist in our system, perhaps you want to <a href="./loginPage" class="alert-link">register</a>?
+                    </div>
+                </c:if>
 
-            <c:if test="${type == 'EMAIL_COOLDOWN'}">
-                <div class="alert alert-danger">
-                    You can get a new verification link after ${requestScope.TIMELEFT}!
-                </div>
-            </c:if>
+                <c:if test="${type == 'EMAIL_COOLDOWN'}">
+                    <div class="alert alert-danger">
+                        You can get a new verification link after ${requestScope.TIMELEFT}!
+                    </div>
+                </c:if>
 
-            <c:if test="${type == 'EMAIL_INPUT_MISSING'}">
-                <div class="alert alert-danger">
-                    Email is not valid!
-                </div>
-            </c:if>
+                <c:if test="${type == 'EMAIL_INPUT_MISSING'}">
+                    <div class="alert alert-danger">
+                        Email is not valid!
+                    </div>
+                </c:if>
+            </div>
 
             <c:if test="${type != 'SUCCESS'}">
                 <div class="bg-light">
                     <form action="verify">
                         <div class="form-group">
-                            <label for="emailInput"
-                                   >Email address</label
-                            >
+                            <label class="mb-1" for="emailInput">Email address</label>
                             <input
                                 name="email"
                                 type="email"
@@ -91,7 +91,7 @@
                                 required
                                 />
                         </div>
-                        <input type="submit" class="btn btn-primary btn-lg btn-block" name="action" value="Send Verify Link"/>  
+                        <input type="submit" class="btn btn-warning btn-lg btn-block mt-3" name="action" value="Send Verify Link"/>  
                     </form>
                 </div>
             </c:if>
