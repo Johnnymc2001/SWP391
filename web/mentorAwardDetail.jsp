@@ -66,19 +66,27 @@
 
             </div>
             <div class="create-award col-md-6">
+                <c:set var="awardNameExist" value="${requestScope.ERROR_AWARD_NAME}"/>
+                <c:if test="${not empty awardNameExist}">
+                    <font color="red">
+                    <p>${awardNameExist}</p>
+                    </font>
+                </c:if>
                 <button id="award-btn" class="btn-action" onclick="ShowCreateAward()" >Create an Award</button>
                 <div id="CreateAward" class="d-none">
+                    <form action="award?txtBlogID=${blogInfo.blogID}" method="POST">
+                        <div class="enter-field">
+                            <span>Award Name: </span>
+                            <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
+                        </div>
+                        <div class="enter-field">
+                            <span>Effective Days: </span>
+                            <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
+                        </div>
+                        <br>
+                        <input class="btn-action" type="submit" name="btnAction" value="Create Award">Create Award</input>
+                    </form>
 
-                    <div class="enter-field">
-                        <span>Award Name: </span>
-                        <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
-                    </div>
-                    <div class="enter-field">
-                        <span>Effective Days: </span>
-                        <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
-                    </div>
-                    <br>
-                    <input class="btn-action" type="submit" name="btnAction" value="Create Award">Create Award</input>
                 </div>
             </div>
 
@@ -99,23 +107,23 @@
                             <c:forEach var="blogAward" items="${blogAwardList}" varStatus="count">
                             <form action="award?txtBlogID=${blogInfo.blogID}" method="POST">
                                 <tr>
-                                    <input type="hidden" name="txtAwardListID" value="${blogAward.awardListID}"/>
-                                    <td>${count.count}</td>
-                                    <c:forEach var="awardDto" items="${awardDtoList}">
-                                        <c:if test="${awardDto.awardID==blogAward.awardID}">
-                                            <td class="award-name">${awardDto.awardName}</td>
-                                        </c:if>
-                                    </c:forEach>
-                                    <td>${blogAward.date}</td>
-                                    <c:forEach var="mentorDto" items="${mentorList}">
-                                        <c:if test="${mentorDto.accountID==blogAward.awardBy}">
-                                            <td>${mentorDto.fullname}</td>
-                                        </c:if>
-                                    </c:forEach>
+                                <input type="hidden" name="txtAwardListID" value="${blogAward.awardListID}"/>
+                                <td>${count.count}</td>
+                                <c:forEach var="awardDto" items="${awardDtoList}">
+                                    <c:if test="${awardDto.awardID==blogAward.awardID}">
+                                        <td class="award-name">${awardDto.awardName}</td>
+                                    </c:if>
+                                </c:forEach>
+                                <td>${blogAward.date}</td>
+                                <c:forEach var="mentorDto" items="${mentorList}">
+                                    <c:if test="${mentorDto.accountID==blogAward.awardBy}">
+                                        <td>${mentorDto.fullname}</td>
+                                    </c:if>
+                                </c:forEach>
 
-                                    <td><input class="btn-action" type="submit" name="btnAction" value="Remove Award"></input></td>
+                                <td><input class="btn-action" type="submit" name="btnAction" value="Remove Award"></input></td>
 
-                                    
+
 
                                 </tr>
                             </form>
