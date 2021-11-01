@@ -19,9 +19,7 @@ body {
 
 .comment-post .header-comment {
     margin-top: 40px;
-}
-
-.comment-post .header-comment {
+    position: relative;
     display: flex;
     align-items: center;
 }
@@ -39,8 +37,9 @@ body {
 
 .comment-post .comment-field {
     background: rgb(231, 231, 231);
-    padding: 0 0.5rem;
-    border-radius: 20px;
+    padding: 0.5rem 1rem 0;
+    border-radius: 10px 5px 10px 10px;
+    position: relative;
 }
 
 .comment-input {
@@ -97,4 +96,7 @@ body {
     border: none;
     background: transparent;
     color: red;
+    position: absolute;
+    top: -10px;
+    right: -4px;
 }

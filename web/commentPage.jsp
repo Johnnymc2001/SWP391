@@ -50,15 +50,15 @@
                     <div class="comment-field">
                         <h5>${dtoCm.value.fullname}</h5>
                         <p>${dtoCm.key.content}</p>
+                        <c:if test="${user.role == 'Admin'}">
+                            <div>
+                                <button class="admin-cmt-btn" onclick="window.location.href = `adminCommentManage?commentID=${dtoCm.key.commentID}&action=Delete`">
+                                    <i class="fas fa-times fa-sm">         
+                                    </i>
+                                </button>
+                            </div>
+                        </c:if>
                     </div>
-                    <c:if test="${user.role == 'Admin'}">
-                        <div>
-                            <button class="admin-cmt-btn" onclick="window.location.href = `adminCommentManage?commentID=${dtoCm.key.commentID}&action=Delete`">
-                                <i class="fas fa-times fa-sm">         
-                                </i>
-                            </button>
-                        </div>
-                    </c:if>
                 </div>
             </c:forEach>
         </div>
