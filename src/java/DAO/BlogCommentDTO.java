@@ -7,6 +7,7 @@ package DAO;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -15,28 +16,26 @@ import java.sql.Date;
 public class BlogCommentDTO implements Serializable {
     private int commentID;
     private int blogID;
-    private Date dateTime;
+    private Timestamp time;
     private String content;
     private int ownerID;
 
-    public BlogCommentDTO() {
-    }
-
-    public BlogCommentDTO(int commentID, int blogID, Date dateTime, String content, int ownerID) {
+    public BlogCommentDTO(int commentID, int blogID, Timestamp time, String content, int ownerID) {
         this.commentID = commentID;
         this.blogID = blogID;
-        this.dateTime = dateTime;
+        this.time = time;
         this.content = content;
         this.ownerID = ownerID;
     }
 
-    public BlogCommentDTO(int blogID, Date dateTime, String content, int ownerID) {
+    public BlogCommentDTO(int blogID, Timestamp time, String content, int ownerID) {
         this.blogID = blogID;
-        this.dateTime = dateTime;
+        this.time = time;
         this.content = content;
         this.ownerID = ownerID;
     }
 
+    
     public int getCommentID() {
         return commentID;
     }
@@ -53,12 +52,12 @@ public class BlogCommentDTO implements Serializable {
         this.blogID = blogID;
     }
 
-    public Date getDate() {
-        return dateTime;
+    public Timestamp getTime() {
+        return time;
     }
 
-    public void setDate(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 
     public String getContent() {
@@ -76,6 +75,7 @@ public class BlogCommentDTO implements Serializable {
     public void setOwnerID(int ownerID) {
         this.ownerID = ownerID;
     }
-    
+
+
     
 }

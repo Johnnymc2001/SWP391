@@ -202,7 +202,7 @@
     <div id="comment-section" class="comment-section container">
         <h2>Comment</h2>
         <div id="comment-post" class="comment-post">
-            <iframe id="comment-window" class="comment-window" src="comment?txtBlogID=${BLOG.blogID}" frameborder="0"></iframe>
+            <iframe id="comment-window" class="comment-window" src="comment?txtBlogID=${BLOG.blogID}" width="100%" height="500px" frameborder="0"></iframe>
         </div>
     </div>
     </c:if>

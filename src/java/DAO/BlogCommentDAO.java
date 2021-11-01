@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -30,12 +31,12 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "INSERT INTO BlogComment (blogID, datetime, content, ownerID) "
+                String sql = "INSERT INTO BlogComment (blogID, time, content, ownerID) "
                         + "VALUES (?, ?, ? ,?)";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, dto.getBlogID());
-                stm.setDate(2, dto.getDate());
+                stm.setTimestamp(2, dto.getTime());
                 stm.setString(3, dto.getContent());
                 stm.setInt(4, dto.getOwnerID());
 
@@ -68,9 +69,9 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT commentID, blogID, datetime, content, ownerID "
+                String sql = "SELECT commentID, blogID, time, content, ownerID "
                         + "FROM BlogComment "
-                        + "ORDER BY datetime DESC";
+                        + "ORDER BY time DESC";
                 stm = con.prepareStatement(sql);
 
                 rs = stm.executeQuery();
@@ -78,11 +79,11 @@ public class BlogCommentDAO implements Serializable {
                 while (rs.next()) {
                     int commentID = rs.getInt("commentID");
                     int blogID = rs.getInt("blogID");
-                    Date datetime = rs.getDate("datetime");
+                    Timestamp time = rs.getTimestamp("time");
                     String content = rs.getString("content");
                     int ownerID = rs.getInt("ownerID");
 
-                    dto = new BlogCommentDTO(commentID, blogID, datetime, content, ownerID);
+                    dto = new BlogCommentDTO(commentID, blogID, time, content, ownerID);
                     commentList.add(dto);
                 }
 
@@ -113,10 +114,10 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT commentID, blogID, datetime, content, ownerID "
+                String sql = "SELECT commentID, blogID, time, content, ownerID "
                         + "FROM BlogComment "
                         + "WHERE commentID = ? "
-                        + "ORDER BY datetime DESC";
+                        + "ORDER BY time DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, commentId);
@@ -126,11 +127,11 @@ public class BlogCommentDAO implements Serializable {
                 while (rs.next()) {
                     int commentID = rs.getInt("commentID");
                     int blogID = rs.getInt("blogID");
-                    Date datetime = rs.getDate("datetime");
+                    Timestamp time = rs.getTimestamp("time");
                     String content = rs.getString("content");
                     int ownerID = rs.getInt("ownerID");
 
-                    dto = new BlogCommentDTO(commentID, blogID, datetime, content, ownerID);
+                    dto = new BlogCommentDTO(commentID, blogID, time, content, ownerID);
                 }
 
                 return dto;
@@ -161,10 +162,10 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT commentID, blogID, datetime, content, ownerID "
+                String sql = "SELECT commentID, blogID, time, content, ownerID "
                         + "FROM BlogComment "
                         + "WHERE blogID = ? "
-                        + "ORDER BY datetime DESC";
+                        + "ORDER BY time DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, blogId);
@@ -174,11 +175,11 @@ public class BlogCommentDAO implements Serializable {
                 while (rs.next()) {
                     int commentID = rs.getInt("commentID");
                     int blogID = rs.getInt("blogID");
-                    Date datetime = rs.getDate("datetime");
+                    Timestamp time = rs.getTimestamp("time");
                     String content = rs.getString("content");
                     int ownerID = rs.getInt("ownerID");
 
-                    dto = new BlogCommentDTO(commentID, blogID, datetime, content, ownerID);
+                    dto = new BlogCommentDTO(commentID, blogID, time, content, ownerID);
                     commentList.add(dto);
                 }
 
@@ -210,10 +211,10 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT commentID, blogID, datetime, content, ownerID "
+                String sql = "SELECT commentID, blogID, time, content, ownerID "
                         + "FROM BlogComment "
                         + "WHERE ownerID = ? "
-                        + "ORDER BY datetime DESC";
+                        + "ORDER BY time DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, accountID);
@@ -223,11 +224,11 @@ public class BlogCommentDAO implements Serializable {
                 while (rs.next()) {
                     int commentID = rs.getInt("commentID");
                     int blogID = rs.getInt("blogID");
-                    Date datetime = rs.getDate("datetime");
+                    Timestamp time = rs.getTimestamp("time");
                     String content = rs.getString("content");
                     int ownerID = rs.getInt("ownerID");
 
-                    dto = new BlogCommentDTO(commentID, blogID, datetime, content, ownerID);
+                    dto = new BlogCommentDTO(commentID, blogID, time, content, ownerID);
                     commentList.add(dto);
                 }
 
@@ -257,13 +258,13 @@ public class BlogCommentDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "UPDATE BlogComment "
-                        + "SET blogID = ?, datetime = ?, content = ?, ownerID = ?  "
+                        + "SET blogID = ?, time = ?, content = ?, ownerID = ?  "
                         + "WHERE commentID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
 
                 stm.setInt(1, dto.getBlogID());
-                stm.setDate(2, dto.getDate());
+                stm.setTimestamp(2, dto.getTime());
                 stm.setString(3, dto.getContent());
                 stm.setInt(4, dto.getOwnerID());
 
