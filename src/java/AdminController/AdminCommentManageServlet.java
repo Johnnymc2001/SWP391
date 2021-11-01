@@ -8,6 +8,7 @@ package AdminController;
 import DAO.AccountDAO;
 import DAO.AccountDTO;
 import DAO.BlogCommentDAO;
+import DAO.BlogCommentDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class AdminCommentManageServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                ServletContext sc = request.getServletContext();
+        ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
         AccountDAO accDao = new AccountDAO();
@@ -49,9 +50,36 @@ public class AdminCommentManageServlet extends HttpServlet {
             return;
         }
 
-        String commentID = request.getParameter("commentID");
+        String url = "401.html";
+
+        String commentId = request.getParameter("commentID");
+        String action = request.getParameter("action");
         BlogCommentDAO dao = new BlogCommentDAO();
-        
+
+        if (null != commentId) {
+            try {
+                int commentID = Integer.parseInt(commentId);
+                BlogCommentDTO dto = dao.getBlogCommentFromCommentID(commentID);
+                if (dto != null) {
+                    if (null != action) {
+                        if ("Delete".equals(action)) {
+                            dao.deleteBlogComment(commentID);
+                            url = roadmap.get("comment");
+                            url += "?txtBlogID=" + dto.getBlogID();
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                
+            } finally {
+               
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } else {
+            url = roadmap.get(url);
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

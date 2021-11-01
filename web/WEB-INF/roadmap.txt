@@ -46,6 +46,9 @@ verifyPage=verify.jsp
 profile=StudentProfileServlet
 profilePage=profile.jsp
 
+error401=401.html
+error404=404.html
+error500=500.html
 ### MENTOR
 
 mentor=MentorServlet
@@ -84,3 +87,5 @@ adminAccountDetailPage=adminAccountDetail.jsp
 
 adminCategoryManage=AdminCategoryManageServlet
 adminCategoryManagePage=adminCategoryManage.jsp
+
+adminCommentManage=AdminCommentManageServlet

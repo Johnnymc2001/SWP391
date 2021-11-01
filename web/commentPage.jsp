@@ -30,7 +30,7 @@
             <c:if test="${user.role == 'Mentor' || user.role == 'Student' || user.role == 'Admin'}">
                 <form class="comment-input" action="comment" method="post">
                     <input type="hidden" name="txtBlogID" value="${param.txtBlogID}"
-                    <div class="avatar">
+                           <div class="avatar">
                         <img src="UI/Icon/avatar-login.png" alt="">
                     </div>
                     <div class="enter-field">
@@ -51,9 +51,14 @@
                         <h5>${dtoCm.value.fullname}</h5>
                         <p>${dtoCm.key.content}</p>
                     </div>
-                    <div>
-                        <button class="admin-cmt-btn"><i class="fas fa-times fa-sm"></i></button>
-                    </div>
+                    <c:if test="${user.role == 'Admin'}">
+                        <div>
+                            <button class="admin-cmt-btn" onclick="window.location.href = `adminCommentManage?commentID=${dtoCm.key.commentID}&action=Delete`">
+                                <i class="fas fa-times fa-sm">         
+                                </i>
+                            </button>
+                        </div>
+                    </c:if>
                 </div>
             </c:forEach>
         </div>

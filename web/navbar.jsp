@@ -112,8 +112,7 @@
                         </div>
                         <!-- personal menu -->
                         <div class="personal-menu">
-                            <a href="admin/dashboard"><li>Dashboard</li></a>
-                            <a href="admin/accountList"><li>Manage Accounts</li></a>
+                            <a href="admin"><li>Dashboard</li></a>
                             <a href="logout"><li>Log out</li></a>
                         </div>
                     </c:if>
