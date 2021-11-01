@@ -116,7 +116,7 @@ public class BlogCommentDAO implements Serializable {
                 String sql = "SELECT commentID, blogID, datetime, content, ownerID "
                         + "FROM BlogComment "
                         + "WHERE commentID = ? "
-                        + "ORDER BY date DESC";
+                        + "ORDER BY datetime DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, commentId);
@@ -164,7 +164,7 @@ public class BlogCommentDAO implements Serializable {
                 String sql = "SELECT commentID, blogID, datetime, content, ownerID "
                         + "FROM BlogComment "
                         + "WHERE blogID = ? "
-                        + "ORDER BY date DESC";
+                        + "ORDER BY datetime DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, blogId);
@@ -213,7 +213,7 @@ public class BlogCommentDAO implements Serializable {
                 String sql = "SELECT commentID, blogID, datetime, content, ownerID "
                         + "FROM BlogComment "
                         + "WHERE ownerID = ? "
-                        + "ORDER BY date DESC";
+                        + "ORDER BY datetime DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, accountID);
