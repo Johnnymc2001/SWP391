@@ -228,37 +228,23 @@
                 </div>
                 <div class="category-table col-lg-3">
                     <div class="explore-topics">
-                        <h3>Explore Topic</h3>
+                        <h3>Student interest</h3>
                         <div class="topic-list">
                             <ul>
                                 <li>
-                                    <a href="">Topic 1</a>
-                                    <a href="">(10)</a>
+                                    <a href="search?txtSearchType=popular">Popular Blog</a>
+                                    <a href="search?txtSearchType=popular"><i class="fas fa-fire-alt" style="color: red"></i></a>
                                 </li>
                                 <li>
-                                    <a href="">Topic 1</a>
-                                    <a href="">(10)</a>
+                                    <a href="search?txtSearchType=recent">Recent Blog</a>
+                                    <a href="search?txtSearchType=recent"><i class="fas fa-history" style="color: orange"></i></a>
                                 </li>
                                 <li>
-                                    <a href="">Topic 1</a>
-                                    <a href="">(10)</a>
-                                </li>
-                                <li>
-                                    <a href="">Topic 1</a>
-                                    <a href="">(10)</a>
-                                </li>
-                                <li>
-                                    <a href="">Topic 1</a>
-                                    <a href="">(10)</a>
+                                    <a href="search?txtSearchCategory=SE">Software Engineering</a>
+                                    <a href="search?txtSearchCategory=SE"><i class="fas fa-code" style="color: blue"></i></a>
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="register-invitation">
-                        <h3>Join us now</h3>
-                        <h6>Be one of us to reaches the world's knowledge</h6>
-                        <a href=""><button>Register to join</button></a>
-                        <p><a href="">Already have an account ?</a></p>
                     </div>
                 </div>
             </div>
@@ -295,22 +281,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="tag-table">
-                        <h3>Interesting Tags</h3>
-                        <div class="swiper swiper-tag">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 1</button></div>
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 2</button></div>
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 3</button></div>
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 4</button></div>
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 5</button></div>
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 6</button></div>
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 7</button></div>
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 8</button></div>
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 9</button></div>
-                                <div class="swiper-slide"><button class="tag-btn" name="tag-btn">#Tag 10</button></div>
-                            </div>
-                        </div>
+                    <div class="register-invitation">
+                        <h3>Join us now</h3>
+                        <h6>Be one of us to reaches the world's knowledge</h6>
+                        <a href=""><button>Register to join</button></a>
+                        <p><a href="">Already have an account ?</a></p>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@
                 integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
         <!-- this is external css -->
-        <link rel="stylesheet" href="UI/CSS/commentPage.css">
+        <link rel="stylesheet" href="./UI/CSS/commentPage.css">
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     </head>
@@ -31,7 +31,7 @@
                 <form class="comment-input" action="comment" method="post">
                     <input type="hidden" name="txtBlogID" value="${param.txtBlogID}"
                     <div class="avatar">
-                        <img src="UI/Icon/Haotn.jpg" alt="">
+                        <img src="UI/Icon/avatar-login.png" alt="">
                     </div>
                     <div class="enter-field">
                         <input class="user-comment" type="text" name="content" id="txtComment">
@@ -45,11 +45,14 @@
             <c:forEach var="dtoCm" items="${dtoCmMAP}">
                 <div class="header-comment">
                     <div class="avatar">
-                        <img src="UI/Icon/tamt.jpg" alt="">
+                        <img src="UI/Icon/avatar-login.png" alt="">
                     </div>
                     <div class="comment-field">
                         <h5>${dtoCm.value.fullname}</h5>
                         <p>${dtoCm.key.content}</p>
+                    </div>
+                    <div>
+                        <button class="admin-cmt-btn"><i class="fas fa-times fa-sm"></i></button>
                     </div>
                 </div>
             </c:forEach>

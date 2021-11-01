@@ -73,63 +73,63 @@
                         ${blog.content}
                     </p>
                     <c:if test="${blog.status == 'APPROVED'}">
-                    <div class="blog-vote">
-                        <%-- ----------- Khu Vuc Rating 52 ---------------------------   --%>
-                        <div class="user-vote">
-                            <div class="btn-group dropend">
+                        <div class="blog-vote">
+                            <%-- ----------- Khu Vuc Rating 52 ---------------------------   --%>
+                            <div class="user-vote">
+                                <div class="btn-group dropend">
 
-                                <button type="submit" class="btn btnRate" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                    <i class="fas fa-star fa-lg">${blog.getAverageRating()}</i> 
-                                </button>
-                                <c:if test="${not empty user}">
-                                    <ul class="vote-menu dropdown-menu">
-                                        <li onclick="rate(${blog.blogID}, 5)">
-                                            <i class="fas fa-star fa-lg"></i>
-                                            <span>5</span>
-                                        </li>
-                                        <li onclick="rate(${blog.blogID}, 4)">
-                                            <i class="fas fa-star fa-lg"></i>
-                                            <span>4</span>
-                                        </li>
-                                        <li onclick="rate(${blog.blogID}, 3)">
-                                            <i class="fas fa-star fa-lg"></i>
-                                            <span>3</span>
-                                        </li>
-                                        <li onclick="rate(${blog.blogID}, 2)">
-                                            <i class="fas fa-star fa-lg"></i>
-                                            <span>2</span>
-                                        </li>
-                                        <li onclick="rate(${blog.blogID}, 1)">
-                                            <i class="fas fa-star fa-lg"></i>
-                                            <span>1</span>
-                                        </li>
-                                    </ul>
-                                </c:if>
-                                <c:if test="${empty user}">
-                                    <div class="vote-register dropdown-menu register-invitation">
-                                        <br>
-                                        <h3>Join us now</h3>
-                                        <h6>Be one of us to reaches the world's knowledge</h6>
-                                        <a href="registerPage"><button>Register to join</button></a>
-                                        <p><a href="loginPage">Already have an account ?</a></p>
-                                    </div>
-                                </c:if>
+                                    <button type="submit" class="btn btnRate" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <i class="fas fa-star fa-lg">${blog.getAverageRating()}</i> 
+                                    </button>
+                                    <c:if test="${not empty user}">
+                                        <ul class="vote-menu dropdown-menu">
+                                            <li onclick="rate(${blog.blogID}, 5)">
+                                                <i class="fas fa-star fa-lg"></i>
+                                                <span>5</span>
+                                            </li>
+                                            <li onclick="rate(${blog.blogID}, 4)">
+                                                <i class="fas fa-star fa-lg"></i>
+                                                <span>4</span>
+                                            </li>
+                                            <li onclick="rate(${blog.blogID}, 3)">
+                                                <i class="fas fa-star fa-lg"></i>
+                                                <span>3</span>
+                                            </li>
+                                            <li onclick="rate(${blog.blogID}, 2)">
+                                                <i class="fas fa-star fa-lg"></i>
+                                                <span>2</span>
+                                            </li>
+                                            <li onclick="rate(${blog.blogID}, 1)">
+                                                <i class="fas fa-star fa-lg"></i>
+                                                <span>1</span>
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${empty user}">
+                                        <div class="vote-register dropdown-menu register-invitation">
+                                            <br>
+                                            <h3>Join us now</h3>
+                                            <h6>Be one of us to reaches the world's knowledge</h6>
+                                            <a href="registerPage"><button>Register to join</button></a>
+                                            <p><a href="loginPage">Already have an account ?</a></p>
+                                        </div>
+                                    </c:if>
+                                </div>
+                            </div>
+                            <%-- ----------- Rating 63 ---------------------------   --%>   
+                            <div>
+                                <form action="award?txtBlogID=${blog.blogID}" method="POST">
+                                    <c:set var="role" value="Mentor"/>
+                                    <c:if test="${user.role eq role}">
+                                        <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>
+                                        </c:if>
+                                </form>
+                                <c:if test="${not (user.role  eq role)}">
+                                    <button class="award-btn"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>
+                                    </c:if>
                             </div>
                         </div>
-                        <%-- ----------- Rating 63 ---------------------------   --%>   
-                        <div>
-                            <form action="award?txtBlogID=${blog.blogID}" method="POST">
-                                <c:set var="role" value="Mentor"/>
-                                <c:if test="${user.role eq role}">
-                                    <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>
-                                    </c:if>
-                            </form>
-                            <c:if test="${not (user.role  eq role)}">
-                                <button class="award-btn"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>
-                                </c:if>
-                        </div>
-                    </div>
                     </c:if>
 
 
@@ -169,15 +169,21 @@
                     </div>
                 </div>
                 <div class="explore-topics">
-                    <h3>Explore Topic</h3>
+                    <h3>Student interest</h3>
                     <div class="topic-list">
                         <ul>
-                            <c:forEach var="dto" items="${requestScope.CAT_LIST}">
-                                <li>
-                                    <a href="">${dto.categoryName}</a>
-                                    <a href="">(10)</a>
-                                </li>
-                            </c:forEach>
+                            <li>
+                                <a href="search?txtSearchType=popular">Popular Blog</a>
+                                <a href="search?txtSearchType=popular"><i class="fas fa-fire-alt" style="color: red"></i></a>
+                            </li>
+                            <li>
+                                <a href="search?txtSearchType=recent">Recent Blog</a>
+                                <a href="search?txtSearchType=recent"><i class="fas fa-history" style="color: orange"></i></a>
+                            </li>
+                            <li>
+                                <a href="search?txtSearchCategory=SE">Software Engineering</a>
+                                <a href="search?txtSearchCategory=SE"><i class="fas fa-code" style="color: blue"></i></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -199,12 +205,12 @@
 
     <!-- THIS IS COMMENT SECTION -->
     <c:if test="${blog.status == 'APPROVED'}">
-    <div id="comment-section" class="comment-section container">
-        <h2>Comment</h2>
-        <div id="comment-post" class="comment-post">
-            <iframe id="comment-window" class="comment-window" src="comment?txtBlogID=${BLOG.blogID}" width="100%" height="500px" frameborder="0"></iframe>
+        <div id="comment-section" class="comment-section container">
+            <h2>Comment</h2>
+            <div id="comment-post" class="comment-post">
+                <iframe id="comment-window" class="comment-window" src="comment?txtBlogID=${BLOG.blogID}" width="100%" height="500px" frameborder="0"></iframe>
+            </div>
         </div>
-    </div>
     </c:if>
     <!-- FOOTER -->
     <div class="web-footer">

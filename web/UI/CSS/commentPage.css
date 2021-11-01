@@ -92,3 +92,9 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
+
+.admin-cmt-btn{
+    border: none;
+    background: transparent;
+    color: red;
+}
