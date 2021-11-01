@@ -7,6 +7,7 @@ import DAO.BlogCommentDTO;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author Admin
@@ -74,17 +76,39 @@ public class BlogCommentServlet extends HttpServlet {
         if (blogID == 0) {
             response.sendRedirect(sc.getContextPath());
         } else {
-
             try {
                 if (null != content) {
                     if (content.trim().length() < 4) {
                         request.setAttribute("ERROR_COMMENT", "Your comment need at least 4 character");
                     } else {
-                        Date commentDate = new Date(Calendar.getInstance().getTime().getTime());
-                        BlogCommentDTO dto = new BlogCommentDTO(blogID, commentDate, content, ownerID);
-                        dao.createBlogComment(dto);
+                        ArrayList<BlogCommentDTO> listCommentSelf = new ArrayList<>();
+                        listCommentSelf = dao.getAllBlogCommentFromAccountID(curUser.getAccountID());
+                        
+                        if (listCommentSelf.size() > 0) {
+                            BlogCommentDTO mostRecentComment = listCommentSelf.get(0);
+                            long lastCommentTime = mostRecentComment.getTime().getTime() / 1000;
+                            long now = new Timestamp(System.currentTimeMillis()).getTime() / 1000;
+                            
+                            int time = (int) (now - lastCommentTime);
+                            if (time > 10) {
+                                // Last comment is more than 10s, ok!
+                                Timestamp commentDate = new Timestamp(System.currentTimeMillis());
+                                BlogCommentDTO dto = new BlogCommentDTO(blogID, commentDate, content, ownerID);
+                                dao.createBlogComment(dto);
+                            } else {
+                                request.setAttribute("MESSAGE", "You are comment too fast! Please wait 10 second!");
+                            }
+                            
+                        } else {
+                            // User hadn't has any comment yet!
+                            Timestamp commentDate = new Timestamp(System.currentTimeMillis());
+                            BlogCommentDTO dto = new BlogCommentDTO(blogID, commentDate, content, ownerID);
+                            dao.createBlogComment(dto);
+                        }
+
                     }
                 }
+
                 BlogCommentDAO commentDao = new BlogCommentDAO();
                 ArrayList<BlogCommentDTO> commentList = commentDao.getAllBlogCommentFromBlogID(blogID);
                 AccountDAO accountDao = new AccountDAO();
