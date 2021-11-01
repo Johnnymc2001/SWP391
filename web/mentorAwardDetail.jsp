@@ -34,12 +34,14 @@
     <!-- END OF NAVBAR -->
 
     <body>
+        <c:set var="blogInfo" value="${requestScope.BLOG}"/>
+
 
         <c:set var="user" value="${sessionScope.USER}"/>
         <div class="container-fluid award-container">
+
             <div class="title">
                 <c:set var="awardDtoList" value="${requestScope.ALL_AWARD}"/>
-                <c:set var="blogInfo" value="${requestScope.BLOG}"/>
                 <c:set var="blogAwardList" value="${requestScope.BLOGAWARD}" />
                 <c:if test="${not empty blogInfo}">
                     <form action="award?txtBlogID=${blogInfo.blogID}" method="POST">
@@ -58,27 +60,28 @@
                                 </c:if>
                             </c:forEach>
                         </select>
-                        <button class="btn-action" type="submit" name="btnAction" value="Award Blog">Award Blog</button>
+                        <input class="btn-action" type="submit" name="btnAction" value="Award Blog">Award Blog</input>
                     </form>
                 </c:if>
+
             </div>
             <div class="create-award col-md-6">
                 <button id="award-btn" class="btn-action" onclick="ShowCreateAward()" >Create an Award</button>
                 <div id="CreateAward" class="d-none">
-                    <form action="awardCreate" method="POST">
-                        <div class="enter-field">
-                            <span>Award Name: </span>
-                            <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
-                        </div>
-                        <div class="enter-field">
-                            <span>Effective Days: </span>
-                            <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
-                        </div>
-                        <br>
-                        <button class="btn-action" type="submit"  value="Create Award">Create Award</button>
-                    </form>
+
+                    <div class="enter-field">
+                        <span>Award Name: </span>
+                        <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
+                    </div>
+                    <div class="enter-field">
+                        <span>Effective Days: </span>
+                        <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
+                    </div>
+                    <br>
+                    <input class="btn-action" type="submit" name="btnAction" value="Create Award">Create Award</input>
                 </div>
             </div>
+
             <div class="award-table">
                 <c:if test="${not empty requestScope.BLOGAWARD}">
                     <h3>Blog's Award List</h3>
@@ -94,7 +97,9 @@
                         <tbody>
                             <c:set var="mentorList" value="${requestScope.MENTORLIST}" />
                             <c:forEach var="blogAward" items="${blogAwardList}" varStatus="count">
+                            <form action="award?txtBlogID=${blogInfo.blogID}" method="POST">
                                 <tr>
+                                    <input type="hidden" name="txtAwardListID" value="${blogAward.awardListID}"/>
                                     <td>${count.count}</td>
                                     <c:forEach var="awardDto" items="${awardDtoList}">
                                         <c:if test="${awardDto.awardID==blogAward.awardID}">
@@ -108,14 +113,22 @@
                                         </c:if>
                                     </c:forEach>
 
-                                    <td><a href="blog?txtBlogID=${blog.blogID}"><img src="${blog.thumbnail}" alt=""></a></td>
+                                    <td><input class="btn-action" type="submit" name="btnAction" value="Remove Award"></input></td>
+
+                                    
+
                                 </tr>
-                            </c:forEach>
+                            </form>
+                        </c:forEach>
                         </tbody>
+
                     </table>
+
                 </c:if>
             </div>
+
         </div>
+
     </body>
 
 
