@@ -24,6 +24,7 @@
     </head>
     <body>
 
+        ${requestScope.MESSAGE}
         <c:set var="user" value="${sessionScope.USER}"/>
         <c:if test="${not empty user}">
             <c:if test="${user.role == 'Mentor' || user.role == 'Student' || user.role == 'Admin'}">

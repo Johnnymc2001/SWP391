@@ -5,6 +5,7 @@
  */
 package AdminController;
 
+import DAO.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -41,6 +42,13 @@ public class AdminDashboardServlet extends HttpServlet {
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
+        HttpSession session = request.getSession();
+        AccountDTO account = (AccountDTO) session.getAttribute("USER");
+        if (null == account || !account.getRole().equals("Admin")) {
+            response.sendRedirect(sc.getContextPath());
+            return;
+        }
+        
         String url = roadmap.get(SUCCESS);
         request.getRequestDispatcher(url).forward(request, response);
     }

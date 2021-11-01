@@ -5,14 +5,11 @@
  */
 package AdminController;
 
+import DAO.AccountDAO;
 import DAO.AccountDTO;
-import DAO.BlogDAO;
-import DAO.CategoryDAO;
-import DAO.CategoryDTO;
+import DAO.BlogCommentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -26,10 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author JohnnyMC
  */
-@WebServlet(name = "AdminCategoryManageServlet", urlPatterns = {"/AdminCategoryManageServlet"})
-public class AdminCategoryManageServlet extends HttpServlet {
-
-    private final String SUCCESS = "adminCategoryManagePage";
+@WebServlet(name = "AdminCommentManageServlet", urlPatterns = {"/AdminCommentManageServlet"})
+public class AdminCommentManageServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,65 +38,20 @@ public class AdminCategoryManageServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        ServletContext sc = request.getServletContext();
+                ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
+        AccountDAO accDao = new AccountDAO();
         HttpSession session = request.getSession();
         AccountDTO account = (AccountDTO) session.getAttribute("USER");
         if (null == account || !account.getRole().equals("Admin")) {
             response.sendRedirect(sc.getContextPath());
             return;
         }
-        try {
-            response.setContentType("text/html;charset=UTF-8");
 
-            CategoryDAO catDao = new CategoryDAO();
-            BlogDAO blogDao = new BlogDAO();
-
-            String action = request.getParameter("submitAction");
-
-            if ("Edit".equals(action)) {
-                String categoryid = request.getParameter("categoryid");
-                String categoryName = request.getParameter("categoryname");
-
-                catDao.updateCategory(categoryid, new CategoryDTO(categoryid, categoryName));
-                request.setAttribute("MESSAGE", "Category Updated!");
-            } else if ("Add".equals(action)) {
-                String categoryid = request.getParameter("categoryid");
-                String categoryName = request.getParameter("categoryname");
-
-                if (catDao.createCategory(new CategoryDTO(categoryid, categoryName))) {
-                    request.setAttribute("MESSAGE", "Category Added!");
-                } else {
-                    request.setAttribute("MESSAGE", "CategoryID maybe already existed!!");
-                }
-            } else if ("Delete".equals(action)) {
-                String categoryid = request.getParameter("categoryid");
-                String categoryName = request.getParameter("categoryname");
-
-                if (catDao.deleteCategory(categoryid)) {
-                    request.setAttribute("MESSAGE", "Category Deleted!");
-                } else {
-                    request.setAttribute("MESSAGE", "Unexpected Error!");
-                }
-            }
-
-            ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-            HashMap<CategoryDTO, Integer> list = new HashMap<>();
-
-            for (CategoryDTO dto : catList) {
-                list.put(dto, blogDao.getAllBlogFromCategoryId(dto.getCategoryID()).size());
-            }
-
-            request.setAttribute("LIST", list);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            String url = roadmap.get(SUCCESS);
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+        String commentID = request.getParameter("commentID");
+        BlogCommentDAO dao = new BlogCommentDAO();
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

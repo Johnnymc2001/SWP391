@@ -30,7 +30,7 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "INSERT INTO BlogComment (blogID, date, content, ownerID) "
+                String sql = "INSERT INTO BlogComment (blogID, datetime, content, ownerID) "
                         + "VALUES (?, ?, ? ,?)";
 
                 stm = con.prepareStatement(sql);
@@ -68,9 +68,9 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT commentID, blogID, date, content, ownerID "
+                String sql = "SELECT commentID, blogID, datetime, content, ownerID "
                         + "FROM BlogComment "
-                        + "ORDER BY date DESC";
+                        + "ORDER BY datetime DESC";
                 stm = con.prepareStatement(sql);
 
                 rs = stm.executeQuery();
@@ -78,11 +78,11 @@ public class BlogCommentDAO implements Serializable {
                 while (rs.next()) {
                     int commentID = rs.getInt("commentID");
                     int blogID = rs.getInt("blogID");
-                    Date date = rs.getDate("date");
+                    Date datetime = rs.getDate("datetime");
                     String content = rs.getString("content");
                     int ownerID = rs.getInt("ownerID");
 
-                    dto = new BlogCommentDTO(commentID, blogID, date, content, ownerID);
+                    dto = new BlogCommentDTO(commentID, blogID, datetime, content, ownerID);
                     commentList.add(dto);
                 }
 
@@ -113,7 +113,7 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT commentID, blogID, date, content, ownerID "
+                String sql = "SELECT commentID, blogID, datetime, content, ownerID "
                         + "FROM BlogComment "
                         + "WHERE commentID = ? "
                         + "ORDER BY date DESC";
@@ -126,11 +126,11 @@ public class BlogCommentDAO implements Serializable {
                 while (rs.next()) {
                     int commentID = rs.getInt("commentID");
                     int blogID = rs.getInt("blogID");
-                    Date date = rs.getDate("date");
+                    Date datetime = rs.getDate("datetime");
                     String content = rs.getString("content");
                     int ownerID = rs.getInt("ownerID");
 
-                    dto = new BlogCommentDTO(commentID, blogID, date, content, ownerID);
+                    dto = new BlogCommentDTO(commentID, blogID, datetime, content, ownerID);
                 }
 
                 return dto;
@@ -161,7 +161,7 @@ public class BlogCommentDAO implements Serializable {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT commentID, blogID, date, content, ownerID "
+                String sql = "SELECT commentID, blogID, datetime, content, ownerID "
                         + "FROM BlogComment "
                         + "WHERE blogID = ? "
                         + "ORDER BY date DESC";
@@ -174,11 +174,60 @@ public class BlogCommentDAO implements Serializable {
                 while (rs.next()) {
                     int commentID = rs.getInt("commentID");
                     int blogID = rs.getInt("blogID");
-                    Date date = rs.getDate("date");
+                    Date datetime = rs.getDate("datetime");
                     String content = rs.getString("content");
                     int ownerID = rs.getInt("ownerID");
 
-                    dto = new BlogCommentDTO(commentID, blogID, date, content, ownerID);
+                    dto = new BlogCommentDTO(commentID, blogID, datetime, content, ownerID);
+                    commentList.add(dto);
+                }
+
+                return commentList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+    
+    public  ArrayList<BlogCommentDTO> getAllBlogCommentFromAccountID(int accountID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            BlogCommentDTO dto = null;
+            ArrayList<BlogCommentDTO> commentList = new ArrayList<BlogCommentDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT commentID, blogID, datetime, content, ownerID "
+                        + "FROM BlogComment "
+                        + "WHERE ownerID = ? "
+                        + "ORDER BY date DESC";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, accountID);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int commentID = rs.getInt("commentID");
+                    int blogID = rs.getInt("blogID");
+                    Date datetime = rs.getDate("datetime");
+                    String content = rs.getString("content");
+                    int ownerID = rs.getInt("ownerID");
+
+                    dto = new BlogCommentDTO(commentID, blogID, datetime, content, ownerID);
                     commentList.add(dto);
                 }
 
@@ -208,7 +257,7 @@ public class BlogCommentDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "UPDATE BlogComment "
-                        + "SET blogID = ?, date = ?, content = ?, ownerID = ?  "
+                        + "SET blogID = ?, datetime = ?, content = ?, ownerID = ?  "
                         + "WHERE commentID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);

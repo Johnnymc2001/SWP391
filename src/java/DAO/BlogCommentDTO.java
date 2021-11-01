@@ -15,24 +15,24 @@ import java.sql.Date;
 public class BlogCommentDTO implements Serializable {
     private int commentID;
     private int blogID;
-    private Date date;
+    private Date dateTime;
     private String content;
     private int ownerID;
 
     public BlogCommentDTO() {
     }
 
-    public BlogCommentDTO(int commentID, int blogID, Date date, String content, int ownerID) {
+    public BlogCommentDTO(int commentID, int blogID, Date dateTime, String content, int ownerID) {
         this.commentID = commentID;
         this.blogID = blogID;
-        this.date = date;
+        this.dateTime = dateTime;
         this.content = content;
         this.ownerID = ownerID;
     }
 
-    public BlogCommentDTO(int blogID, Date date, String content, int ownerID) {
+    public BlogCommentDTO(int blogID, Date dateTime, String content, int ownerID) {
         this.blogID = blogID;
-        this.date = date;
+        this.dateTime = dateTime;
         this.content = content;
         this.ownerID = ownerID;
     }
@@ -54,11 +54,11 @@ public class BlogCommentDTO implements Serializable {
     }
 
     public Date getDate() {
-        return date;
+        return dateTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getContent() {

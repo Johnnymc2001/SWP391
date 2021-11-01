@@ -143,13 +143,12 @@ public class StudentProfileServlet extends HttpServlet {
                 } else {
                     request.setAttribute("ACCOUNT", profileAccount);
                     url = roadmap.get("profilePage");
-
                 }
 
                 ArrayList<BlogDTO> bloglist = blogdao.getAllBlogFromAccountId(profileAccount.getAccountID());
-                request.setAttribute("CURBLOG", bloglist);
+                request.setAttribute("BLOGLIST", bloglist);
                 request.setAttribute("ACCOUNT", profileAccount);
-//                    System.out.println("bloglist: " + bloglist);
+//                    System.out.println("bloglist: " + bloglist.size());
 //                    System.out.println("account :" + profileAccount.toString());
 
             } else {
@@ -158,7 +157,6 @@ public class StudentProfileServlet extends HttpServlet {
 
         } catch (NumberFormatException | SQLException ex) {
         } finally {
-            url = roadmap.get("profilePage");
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

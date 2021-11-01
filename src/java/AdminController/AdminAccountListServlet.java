@@ -49,6 +49,12 @@ public class AdminAccountListServlet extends HttpServlet {
             ServletContext sc = request.getServletContext();
             HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
 
+            HttpSession session = request.getSession();
+            AccountDTO account = (AccountDTO) session.getAttribute("USER");
+            if (null == account || !account.getRole().equals("Admin")) {
+                response.sendRedirect(sc.getContextPath());
+                return;
+            }
 //            String maxPageItemString = request.getParameter("maxPageItem");
             String pageString = request.getParameter("page");
             String searchValue = request.getParameter("txtSearchValue");
@@ -69,7 +75,6 @@ public class AdminAccountListServlet extends HttpServlet {
             } else {
                 page = 1;
             }
-
 
             ArrayList<AccountDTO> list = new ArrayList<>();
             ArrayList<AccountDTO> listAccount = null;

@@ -118,6 +118,12 @@ public class AdminAccountCreateServlet extends HttpServlet {
                 if (!email.matches("([\\w\\d\\_\\-])+@[\\w]+\\.[\\w\\.]+")) {
                     request.setAttribute("ERROR_EMAIL", "Email Address is in incorrect format");
                     foundError = true;
+                } else {
+                    if (null != accDao.getAccountFromEmail(email)) {
+                        request.setAttribute("ERROR_EMAIL", "Email is existed!");
+                        foundError = true;
+
+                    }
                 }
 
                 if (null == birthdate) {

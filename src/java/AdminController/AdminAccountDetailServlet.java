@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AdminAccountDetailServlet", urlPatterns = {"/AdminAccountDetailServlet"})
 public class AdminAccountDetailServlet extends HttpServlet {
-    
+
     public final String SUCCESS = "adminAccountDetailPage";
     public final String BACK = "adminAccountListPage";
 
@@ -46,20 +47,26 @@ public class AdminAccountDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
-            
+
             ServletContext sc = request.getServletContext();
             HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-            
+
+            HttpSession session = request.getSession();
+            AccountDTO account = (AccountDTO) session.getAttribute("USER");
+            if (null == account || !account.getRole().equals("Admin")) {
+                response.sendRedirect(sc.getContextPath());
+                return;
+            }
             String accountIDString = request.getParameter("accountid");
-            
+
             String action = request.getParameter("submitAction");
-            
+
             AccountDAO accDao = new AccountDAO();
             AccountDTO oldAcc = null;
             AccountDTO showDto = null;
-            
+
             int accountID = 0;
-            
+
             if (null != accountIDString) {
                 try {
                     accountID = Integer.parseInt(accountIDString);
@@ -70,7 +77,7 @@ public class AdminAccountDetailServlet extends HttpServlet {
             }
             CategoryDAO catDao = new CategoryDAO();
             ArrayList<CategoryDTO> catList = catDao.getAllCategory();
-            
+
             ArrayList<String> roleList = new ArrayList<String>() {
                 {
                     add("Student");
@@ -78,7 +85,7 @@ public class AdminAccountDetailServlet extends HttpServlet {
                     add("Admin");
                 }
             };
-            
+
             System.out.println(action);
             if (null != action) {
                 switch (action) {
@@ -136,7 +143,7 @@ public class AdminAccountDetailServlet extends HttpServlet {
 //                                foundError = true;
 //                            }
 //                        }
-                        
+
                         if (!foundError) {
                             AccountDTO newDto = accDao.getAccountFromAcoountID(accountID);
                             newDto.setRole(role);
@@ -145,7 +152,7 @@ public class AdminAccountDetailServlet extends HttpServlet {
                             request.setAttribute("MESSAGE", "Update Successfully!");
                         }
                         break;
-                    
+
                     case "Enable":
                         accDao.activateAccount(accountID);
                         request.setAttribute("MESSAGE", "Account Activated!");
@@ -158,21 +165,21 @@ public class AdminAccountDetailServlet extends HttpServlet {
                         break;
                 }
             }
-            
+
             if (accountID != 0) {
                 showDto = accDao.getAccountFromAcoountID(accountID);
             }
-            
+
             request.setAttribute("CATEGORY_LIST", catList);
             request.setAttribute("ROLE_LIST", roleList);
             request.setAttribute("ACCOUNT", showDto);
-            
+
             String url = roadmap.get(SUCCESS);
             request.getRequestDispatcher(url).forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

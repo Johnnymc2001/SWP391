@@ -62,7 +62,7 @@
                     <div class="blog-note">
                         <ul>
 
-                            <li><a href="">${author.getFullname()}</a></li>
+                            <li><a href="profile?userID=${author.accountID}">${author.getFullname()}</a></li>
                             <li>11/10/2001</li>
                             <li>comment(${blog.getAllComments().size()})</li>
                         </ul>

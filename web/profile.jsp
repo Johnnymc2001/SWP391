@@ -221,7 +221,7 @@
                             </div>
                         </div>
                     </c:if>
-                    <c:if test="${user.role == 'Student' && not empty requestScope.CURBLOG}">
+                    <c:if test="${(account.role == 'Student' || account.role == 'Mentor') && not empty requestScope.BLOGLIST}">
                         <div class="blog-list">
                             <h1>Blog Pending List</h1>
                             <table class="table table-hover">
@@ -235,7 +235,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="blog" items="${requestScope.CURBLOG}" varStatus="count">
+                                    <c:forEach var="blog" items="${requestScope.BLOGLIST}" varStatus="count">
                                         <tr>
                                             <td>${count.count}</td>
                                             <td><a href="blog?txtBlogID=${blog.blogID}">${blog.title}</a></td>
