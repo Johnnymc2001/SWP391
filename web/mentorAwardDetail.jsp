@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     </head>
 
-
+    <c:set var="user" value="${sessionScope.USER}"/>
     <!-- THIS IS NAVBAR -->
     <header class="navbar navbar-expand-lg" id="header-default">
         <jsp:directive.include file="navbar.jsp" /> 
@@ -37,7 +37,7 @@
         <c:set var="blogInfo" value="${requestScope.BLOG}"/>
 
 
-        <c:set var="user" value="${sessionScope.USER}"/>
+
         <div class="container-fluid award-container">
 
             <div class="title">

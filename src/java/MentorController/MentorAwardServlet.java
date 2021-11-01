@@ -60,6 +60,7 @@ public class MentorAwardServlet extends HttpServlet {
         String Action = request.getParameter("btnAction");
         String txtEffectiveDays = request.getParameter("txtEffectiveDays");
         String txtAwardName = request.getParameter("txtAwardName");
+        
         int EffectiveDays = 0;
         int blogID = 0;
         int awardID = 0;

@@ -17,6 +17,7 @@
             <c:redirect url="/"/>
         </c:if>
     </c:if>
+    
     <c:set var="user" value="${sessionScope.USER}"/>
     <head>
         <!-- this is bootstrap 5 -->
