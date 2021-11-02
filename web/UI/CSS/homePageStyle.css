@@ -39,7 +39,7 @@ h1 {
 }
 
 .landing-blog img {
-    max-width: 100%;
+    width: 100%;
     filter: brightness(80%);
     transition: all 0.8s;
 }
