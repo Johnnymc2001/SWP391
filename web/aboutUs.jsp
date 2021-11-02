@@ -1,4 +1,3 @@
-``
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,7 +11,6 @@
         <!-- this is bootstrap 5 -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-
         <!-- this is external css -->
         <link rel="stylesheet" href="./UI/CSS/aboutPage.css">
         <link rel="stylesheet" href="./UI/CSS/landingNav.css">
