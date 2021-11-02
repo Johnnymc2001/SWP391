@@ -71,7 +71,7 @@ and open the template in the editor.
                 <div class="enter-field">
                     <input type="text" id="phone" placeholder="Phone number" name ="phone">
 
-                    <c:if test="${not empty error.phoneErrorFormat}">
+                    <c:if test="${not empty ERROR_EMAIL}">
                         <br/>
                         <font color="red">
                         ${ERROR_EMAIL}<br/>
