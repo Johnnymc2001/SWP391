@@ -91,7 +91,8 @@ public class AccountDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT accountID, username, password, fullname, address, birthdate, email, phone, role ,categoryID, status "
                         + "FROM Account "
-                        + "WHERE username = ? AND password = ? ";
+                        + "WHERE username = ? COLLATE SQL_Latin1_General_CP1_CS_AS "
+                        + "AND password = ? COLLATE SQL_Latin1_General_CP1_CS_AS ";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, usr);

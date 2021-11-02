@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
             AccountDAO dao = new AccountDAO();
             AccountDTO curUser = dao.checkLogin(username, password);
             if (username == null || password == null) {
-                foundError=true;
+                foundError = true;
                 request.setAttribute("LOGIN_NULL", "User Name or Password Is Empty!");
             } else {
 
@@ -70,6 +70,10 @@ public class LoginServlet extends HttpServlet {
                     if (curUser.getStatus().equals("UNAVAILABLE")) {
                         foundError = true;
                         request.setAttribute("LOGIN_FAIL", "Your Account is not AVAILABLE anymore ");
+                    }
+                    if (curUser.getStatus().equals("PENDING")) {
+                        foundError = true;
+                        request.setAttribute("LOGIN_FAIL", "You account is not verified! Please check your mailbox or <a href=\"verify\">send again?</a>");
                     }
                 }
             }
