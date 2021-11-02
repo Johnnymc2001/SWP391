@@ -35,11 +35,7 @@
 
     <body>
         <c:set var="blogInfo" value="${requestScope.BLOG}"/>
-
-
-
         <div class="container-fluid award-container">
-
             <div class="title">
                 <c:set var="awardDtoList" value="${requestScope.ALL_AWARD}"/>
                 <c:set var="blogAwardList" value="${requestScope.BLOGAWARD}" />
@@ -60,10 +56,9 @@
                                 </c:if>
                             </c:forEach>
                         </select>
-                        <input class="btn-action" type="submit" name="btnAction" value="Award Blog">Award Blog</input>
+                        <input class="btn-action" type="submit" name="btnAction" value="Award Blog"></input>
                     </form>
                 </c:if>
-
             </div>
             <div class="create-award col-md-6">
                 <c:set var="awardNameExist" value="${requestScope.ERROR_AWARD_NAME}"/>
@@ -84,7 +79,7 @@
                             <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
                         </div>
                         <br>
-                        <input class="btn-action" type="submit" name="btnAction" value="Create Award">Create Award</input>
+                        <input class="btn-action" type="submit" name="btnAction" value="Create Award"></input>
                     </form>
 
                 </div>
@@ -100,6 +95,7 @@
                                 <th>Title</th>
                                 <th>Date</th>
                                 <th>Award By</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
