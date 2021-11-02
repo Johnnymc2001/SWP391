@@ -81,7 +81,6 @@
                         <br>
                         <input class="btn-action" type="submit" name="btnAction" value="Create Award"></input>
                     </form>
-
                 </div>
             </div>
 
