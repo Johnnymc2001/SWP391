@@ -74,7 +74,7 @@ and open the template in the editor.
                     <c:if test="${not empty error.phoneErrorFormat}">
                         <br/>
                         <font color="red">
-                        ${error.phoneErrorFormat}<br/>
+                        ${ERROR_EMAIL}<br/>
                         </font>
                     </c:if>
 
