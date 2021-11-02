@@ -58,7 +58,7 @@ public class HomePageServlet extends HttpServlet {
             BlogDAO blogDao = new BlogDAO();
 
             // Landing Blog
-            BlogDTO landingBlog = blogDao.getBlogFromBlogID(73);
+            BlogDTO landingBlog = blogDao.getBlogFromBlogID(70);
             request.setAttribute("LANDING_BLOG", landingBlog);
 
             // Get all blog with award, comment and rate support
