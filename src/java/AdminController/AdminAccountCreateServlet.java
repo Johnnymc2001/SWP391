@@ -98,8 +98,8 @@ public class AdminAccountCreateServlet extends HttpServlet {
 
                     }
                 }
-                if (!password.trim().matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}")) {
-                    request.setAttribute("ERROR_PASSWORD", "Password must be from 8 to 20 characters and contains at least 1 uppercase, 1 lowercase, 1 number and 1 special characters!!");
+                if (!password.trim().matches("^([\\d\\w]{8,20})$")) {
+                    request.setAttribute("ERROR_PASSWORD", "Password must be from 8 to 20 characters");
                     foundError = true;
 
                 } else if (!confirm_password.equals(password)) {
