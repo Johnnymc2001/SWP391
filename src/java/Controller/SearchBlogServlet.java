@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,7 +73,8 @@ public class SearchBlogServlet extends HttpServlet {
                     blogList = blogDao.getAllApprovedBlogLikeTitle(searchValue);
                 }
             }
-
+            blogList = blogList.stream().filter(Blog -> "APPROVED".equals(Blog.getStatus()))
+                        .collect(Collectors.toCollection(ArrayList::new));
             int maxPageItem = 5;
             int page;
 

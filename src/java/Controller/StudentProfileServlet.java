@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -145,7 +146,10 @@ public class StudentProfileServlet extends HttpServlet {
                     url = roadmap.get("profilePage");
                 }
 
-                ArrayList<BlogDTO> bloglist = blogdao.getAllBlogFromAccountId(profileAccount.getAccountID());
+                ArrayList<BlogDTO> bloglist = blogdao.getAllBlogFromAccountId(profileAccount.getAccountID())
+                        .stream().filter(Blog -> "APPROVED".equals(Blog.getStatus()))
+                        .collect(Collectors.toCollection(ArrayList::new));
+                
                 request.setAttribute("BLOGLIST", bloglist);
                 request.setAttribute("ACCOUNT", profileAccount);
 //                    System.out.println("bloglist: " + bloglist.size());
