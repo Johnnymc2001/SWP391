@@ -50,6 +50,10 @@ h1 {
     left: 4%;
 }
 
+.landing-content h2{
+    margin-right: 40px;
+}
+
 .landing-blog .landing-content a,
 .landing-blog .landing-content p,
 .landing-blog .landing-content span {

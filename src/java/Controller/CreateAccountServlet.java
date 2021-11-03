@@ -84,21 +84,27 @@ public class CreateAccountServlet extends HttpServlet {
                 error.setUserNameLengthError("User name must be from 6-20 character and must contain 1 character at the begining");
 
             }
-            if (password == null || password.trim().length() < 6 || password.trim().length() > 30) {
+            if (!password.trim().matches("^([\\d\\w]{8,20})$")) {
                 foundError = true;
-                error.setPasswordLengthError("Password must be from 6-30 character");
+                error.setPasswordLengthError("Password must be from 8 to 20 characters");
             } else if (confirm_password == null || !confirm_password.trim().equals(password.trim())) {
                 foundError = true;
                 error.setConfirmNotMatched("Confirm Password is Not Matched");
             }
-            if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20) {
+            if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20|| fullname.matches("([A-Z]){1,}[a-z]+") == false  ) {
                 foundError = true;
-                error.setFullNameLengthError("Full Name must be from 6-20 character");
+                error.setFullNameLengthError("Full Name must be from 6-20 character and must contain 1 character at the begining ");
             }
-            if (email == null || error.checkValidEmail(email) == false) {
-                error.setEmailErrorFormat("Email is not valid");
-                foundError = true;
-            }
+            if (!email.matches("([\\w\\d\\_\\-])+@[\\w]+\\.[\\w\\.]+")) {
+                    request.setAttribute("ERROR_EMAIL", "Email Address is in incorrect format");
+                    foundError = true;
+                } else {
+                    if (null != dao.getAccountFromEmail(email)) {
+                        request.setAttribute("ERROR_EMAIL", "Email is existed!");
+                        foundError = true;
+
+                    }
+                }
             if (phone == null || error.checkValidPhoneNumber(phone) == false) {
                 error.setPhoneErrorFormat("Phone is not valid");
                 foundError = true;
