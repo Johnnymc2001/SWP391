@@ -50,8 +50,8 @@ public class AdminAccountCreateServlet extends HttpServlet {
 
         String username = null == request.getParameter("username") ? "" : request.getParameter("username");
         String password = null == request.getParameter("password") ? "" : request.getParameter("password");
-        String fullname = null == request.getParameter("fullname") ? "" : request.getParameter("fullname");
-        Date birthdate = null == request.getParameter("birthday") ? null : Date.valueOf(request.getParameter("birthday"));
+        String fullname = null == request.getParameter("fullname") ? "" : request.getParameter("fullname");    
+        Date birthdate = null;      
         String confirm_password = null == request.getParameter("confirm_password") ? "" : request.getParameter("confirm_password");
         String address = null == request.getParameter("address") ? "" : request.getParameter("address");
         String email = null == request.getParameter("email") ? "" : request.getParameter("email");
@@ -62,6 +62,16 @@ public class AdminAccountCreateServlet extends HttpServlet {
         String action = request.getParameter("submitAction");
 
         boolean foundError = false;
+        
+                
+        try {
+            if (null != request.getParameter("birthday")){
+                birthdate = Date.valueOf(request.getParameter("birthday"));
+            }          
+        } catch (Exception ex) {
+            foundError = true;
+            request.setAttribute("ERROR_BIRTHDAY", "Birthday is not valid!");
+        }
 
         String url = CREATE_PAGE;
         AccountDAO accDao = new AccountDAO();
@@ -98,11 +108,12 @@ public class AdminAccountCreateServlet extends HttpServlet {
 
                     }
                 }
-                if (!password.trim().matches("^([\\d\\w]{8,20})$")) {
-                    request.setAttribute("ERROR_PASSWORD", "Password must be from 8 to 20 characters");
-                    foundError = true;
+//                if (!password.trim().matches("[A-Za-z\\d@$!%*?&]{8,20}")) {
+//                    request.setAttribute("ERROR_PASSWORD", "Password must be from 8 to 20 characters and contains at least 1 uppercase, 1 lowercase, 1 number and 1 special characters!!");
+//                    foundError = true;
 
-                } else if (!confirm_password.equals(password)) {
+//                } else 
+                if (!confirm_password.equals(password)) {
                     request.setAttribute("ERROR_CONFIRM_PASSWORD", "Password must be the same!");
 
                     foundError = true;
