@@ -43,35 +43,43 @@
             <form action="adminAccountCreate" method="POST">
                 <div class="row">
                     <div class="enter-field col-md-6">
-                        Username${requestScope.ERROR_USERNAME}
+                        Username<br/>
+                        ${requestScope.ERROR_USERNAME}
                         <input type="text" name="username" id="username" value="${param.username}" required/>
                     </div>
                     <div class="enter-field col-md-6">
-                        Fullname${requestScope.ERROR_FULLNAME}
+                        Fullname<br/>
+                        ${requestScope.ERROR_FULLNAME}
                         <input type="text" name="fullname" id="fullname" value="${param.fullname}" required/>
                     </div>
                     <div class="enter-field col-md-6">
-                        Password${requestScope.ERROR_PASSWORD}
+                        Password<br/>
+                        ${requestScope.ERROR_PASSWORD}
                         <input type="password" name="password" id="password" value="${param.password}" required/>
                     </div>
                     <div class="enter-field col-md-6">
-                        Confirm Password${requestScope.ERROR_CONFIRM_PASSWORD}
+                        Confirm Password<br/>
+                        ${requestScope.ERROR_CONFIRM_PASSWORD}
                         <input type="password" name="confirm_password" id="confirm_password" value="${param.confirm_password}" required/>
                     </div>
                     <div class="enter-field col-md-6">
-                        Address${requestScope.ERROR_ADDRESS}
+                        Address<br/>
+                        ${requestScope.ERROR_ADDRESS}
                         <input type="text" name="address" id="address" value="${param.address}" required/>
                     </div>
                     <div class="enter-field col-md-6">
-                        Birthday
+                        Birthday<br/>
+                        ${requestScope.ERROR_BIRTHDAY}
                         <input type="date" name="birthday" id="birthday" value="${param.birthday}" required/>
                     </div>
                     <div class="enter-field col-md-6">
-                        Email${requestScope.ERROR_EMAIL}
+                        Email<br/>
+                        ${requestScope.ERROR_EMAIL}
                         <input type="text" name="email" id="email"value="${param.email}" required/>
                     </div>
                     <div class="enter-field col-md-6">
-                        Phone${requestScope.ERROR_PHONE}
+                        Phone<br/>
+                        ${requestScope.ERROR_PHONE}
                         <input type="text" name="phone" id="phone" value="${param.phone}" required/>
                     </div>
                     <div class="enter-field col-md-6">

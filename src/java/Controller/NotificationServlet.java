@@ -49,6 +49,8 @@ public class NotificationServlet extends HttpServlet {
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
         String url = "notificationPage";
+        boolean isReadAll = true;
+        
         try {
 
             if (null == curUser) {

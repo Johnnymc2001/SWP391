@@ -44,7 +44,12 @@ public class AccountDAO implements Serializable {
                 stm.setString(7, dto.getPhone());
                 stm.setString(8, dto.getRole());
                 stm.setString(9, "Mentor".equals(dto.getRole()) ? dto.getCategoryID() : null);
-                stm.setString(10, "PENDING");
+                if (null != dto.getStatus()) {
+                    stm.setString(10, dto.getStatus());
+                } else {
+                    stm.setString(10, "PENDING");
+                }
+                
 
                 line = stm.executeUpdate();
                 

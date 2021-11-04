@@ -114,6 +114,7 @@ public class CreateBlogServlet extends HttpServlet {
 
                             if (!allowedFileType.contains(fileType)) {
                                 request.setAttribute("ERROR_UPLOAD", "You can only upload .jpg, .png, .jpeg");
+                                foundErr = true;
                             } else {
                                 InputStream data = part.getInputStream();
                                 base64Image = ImageUtils.BytesToBase64(ImageUtils.InputStreamToBytes(data));
@@ -122,6 +123,7 @@ public class CreateBlogServlet extends HttpServlet {
 //                        base64Image = ImageUtils.BytesToBase64(bytesImage);
                         } else {
                             request.setAttribute("ERROR_UPLOAD", "Max file size is 4MB!");
+                            foundErr = true;
 
                         }
                     }
