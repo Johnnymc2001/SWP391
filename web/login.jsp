@@ -22,10 +22,8 @@
         <!-- this is fontawsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
         <!-- this is external JS -->
-
     </head>
     <body>
-
         <div class="container-fluid">
             <img class="wave" src="UI/Icon/wave.png" alt="">
             <div class="page-row row align-items-center">
@@ -188,6 +186,7 @@
                 </div>
             </div>
         </div>
+        <jsp:directive.include file="loading.jsp" />
         <script src="UI/script/loginPage.js"></script>
     </body>
 </html>
