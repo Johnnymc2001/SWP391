@@ -70,7 +70,7 @@
                                     <label for="checkbox">Remember me</label>
                                 </div>
                                 <div class="forgot-link col-12 col-sm-6">
-                                    <a href="">forgot password ?</a>
+                                    <!--<a href="">forgot password ?</a>-->
                                 </div>
                             </div>
                         </div>
