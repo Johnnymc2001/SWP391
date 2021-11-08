@@ -1,7 +1,10 @@
 package Controller;
 
 import DAO.AccountDTO;
+import DAO.AwardDAO;
+import DAO.AwardDTO;
 import DAO.AwardListDAO;
+import DAO.AwardListDTO;
 import DAO.BlogCommentDAO;
 import DAO.BlogCommentDTO;
 import DAO.BlogDAO;
@@ -10,6 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -61,7 +65,20 @@ public class BlogDetailServlet extends HttpServlet {
                 BlogDAO blogDao = new BlogDAO();
                 BlogDTO blog = blogDao.getBlogFromBlogID(blogID);
                 AccountDTO author = blog.getAccount();
+                AwardDAO awardDao = new AwardDAO();
+                AwardListDAO awardListDao = new AwardListDAO();
+                ArrayList<String> awawdNames = new ArrayList<>();
 
+                for (AwardDTO award : awardDao.getAllAward()) {
+                    for (AwardListDTO awardList : awardListDao.getAwardListFromBlogId(blogID)) {
+                        if (award.getAwardID() == awardList.getAwardID()) {
+                            awawdNames.add(award.getAwardName());
+                            System.out.println(award.getAwardName());
+                        }
+                    }
+                }
+
+                request.setAttribute("AWARDSNAME", awawdNames);
                 request.setAttribute("BLOG", blog);
                 request.setAttribute("AUTHOR", author);
 

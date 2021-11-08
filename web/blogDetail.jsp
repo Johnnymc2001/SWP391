@@ -60,8 +60,11 @@
                         <h2>[PENDING]</h2>
                     </c:if>
                     <div class="blog-note">
+                        <c:set var="blogNameAwards" value="${requestScope.AWARDSNAME}"/>
+                            <c:forEach var="awardName" items="${blogNameAwards}">
+                                <li class="fas fa-trophy fa-lg">${awardName}</li>
+                            </c:forEach>
                         <ul>
-
                             <li><a href="profile?userID=${author.accountID}">${author.getFullname()}</a></li>
                             <li>11/10/2001</li>
                             <li>comment(${blog.getAllComments().size()})</li>
