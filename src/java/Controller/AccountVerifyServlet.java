@@ -59,7 +59,7 @@ public class AccountVerifyServlet extends HttpServlet {
                         AccountDTO accDto = accDao.getAccountFromEmail(email);
                         if (accDto != null) {   // ACcount exited in database
                             if ("PENDING".equals(accDto.getStatus())) { // Account is in pending mode
-                                VerificationDTO veriDto = veriDao.GetVerificationDTOUsingEmail(email);
+                                VerificationDTO veriDto = veriDao.GetVerificationDTOUsingEmail(email, "VERIFICATION");
                                 if (null != veriDto) {  // Account existed in verfication list
 
                                     Timestamp now = new Timestamp(System.currentTimeMillis());
@@ -83,7 +83,7 @@ public class AccountVerifyServlet extends HttpServlet {
                                     }
                                 } else {// Account not exited in verfication list
                                     request.setAttribute("TYPE", "SUCCESS");
-                                    veriDao.AddVerification(new VerificationDTO(accDto.getAccountID(), email, java.util.UUID.randomUUID().toString(), new Timestamp(System.currentTimeMillis())));
+                                    veriDao.AddVerification(new VerificationDTO(accDto.getAccountID(), email, java.util.UUID.randomUUID().toString(), new Timestamp(System.currentTimeMillis()), "VERIFICATION"));
                                     MailUtils.sendVerification(accDto.getAccountID());
                                 }
                             } else {
@@ -105,9 +105,9 @@ public class AccountVerifyServlet extends HttpServlet {
             } else {
                 if (null != verifyCode) {
 
-                    VerificationDTO dto = veriDao.GetAccountIdUsingCode(verifyCode);
+                    VerificationDTO dto = veriDao.GetVerificationDTOUsingCode(verifyCode, "VERIFICATION");
                     if (dto != null) {
-                        veriDao.RemoveVerification(dto.getAccountID());
+                        veriDao.RemoveVerification(dto.getAccountID(), "VERIFICATION");
                         AccountDTO acc = accDao.getAccountFromAcoountID(dto.getAccountID());
                         acc.setStatus("AVAILABLE");
                         accDao.updateAccount(dto.getAccountID(), acc);
@@ -123,7 +123,6 @@ public class AccountVerifyServlet extends HttpServlet {
             url = roadmap.get(url);
             request.getRequestDispatcher(url).forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

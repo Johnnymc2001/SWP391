@@ -17,15 +17,25 @@ public class VerificationDTO implements Serializable {
     private String email;
     private String code;
     private Timestamp time;
+    private String type;
 
     public VerificationDTO() {
     }
 
-    public VerificationDTO(int accountID, String email, String code, Timestamp time) {
+    public VerificationDTO(int accountID, String email, String code, Timestamp time, String type) {
         this.accountID = accountID;
         this.email = email;
         this.code = code;
         this.time = time;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getAccountID() {

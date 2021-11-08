@@ -43,6 +43,10 @@ about=aboutUs.jsp
 verify=AccountVerifyServlet
 verifyPage=verify.jsp
 
+forgotPassword=ForgotPasswordServlet
+forgotPasswordPage=forgotPassword.jsp
+changePasswordPage=changePassword.jsp
+
 profile=StudentProfileServlet
 profilePage=profile.jsp
 

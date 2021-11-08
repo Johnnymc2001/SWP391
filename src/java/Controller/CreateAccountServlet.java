@@ -129,7 +129,7 @@ public class CreateAccountServlet extends HttpServlet {
                 int key = dao.createAccount(dto);
 
                 if (key != 0) {
-                    veriDao.AddVerification(new VerificationDTO(key, email, java.util.UUID.randomUUID().toString(), new Timestamp(System.currentTimeMillis())));
+                    veriDao.AddVerification(new VerificationDTO(key, email, java.util.UUID.randomUUID().toString(), new Timestamp(System.currentTimeMillis()), "VERIFICATION"));
                     MailUtils.sendVerification(key);
                 }
 

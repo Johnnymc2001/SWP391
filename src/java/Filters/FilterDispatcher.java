@@ -136,7 +136,6 @@ public class FilterDispatcher implements Filter {
             
             RequestDispatcher rd = req.getRequestDispatcher(url);
             rd.forward(request, response);
-
         } catch (Throwable t) {
             log("FilterDispatcher _ Throwable " + t.getMessage());
         } finally {

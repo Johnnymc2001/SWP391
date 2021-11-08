@@ -30,12 +30,32 @@ public class MailUtils {
     private static String USER_NAME = "academyblog.fpt@gmail.com";
     private static String PASSWORD = "Ka563^qvw!2K#sL@aXvL";
 
+    public static boolean sendForgotPassword(int accountId) throws SQLException {
+        AccountDAO accDao = new AccountDAO();
+        VerificationDAO veriDao = new VerificationDAO();
+
+        AccountDTO dto = accDao.getAccountFromAcoountID(accountId);
+        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "VERIFICATION");
+
+        String from = USER_NAME;
+        String pass = PASSWORD;
+
+        System.out.println("Send Email to Account : " + accountId);
+        String[] to = new String[100];
+        to[0] = dto.getEmail();
+        String subject = "Academy Blog Account Forgot Password";
+        String body = "Please change your account password with this link : https://academyblog.azurewebsites.net/SWP391_Project/forgotPassword?code=" + code.getCode();
+        System.out.println(body);
+        sendFromGMail(from, pass, to, subject, body, to[0]);
+        return true;
+    }
+
     public static boolean sendVerification(int accountId) throws SQLException {
         AccountDAO accDao = new AccountDAO();
         VerificationDAO veriDao = new VerificationDAO();
 
         AccountDTO dto = accDao.getAccountFromAcoountID(accountId);
-        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId);
+        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "FORGOT_PASSWORD");
 
         String from = USER_NAME;
         String pass = PASSWORD;
@@ -83,9 +103,9 @@ public class MailUtils {
 
             msg.setSubject(subject, "UTF-8");
             String text = "<h1>Please Verify Your Account</h1>";
-            text +=  "<p>Your Email : " + toEmail + "</p>\n";
+            text += "<p>Your Email : " + toEmail + "</p>\n";
             text += body;
-            
+
 //            msg.setText(text, "UTF-8", "html");
             msg.setContent(text, "text/html");
             msg.setSentDate(new Date());
@@ -97,14 +117,6 @@ public class MailUtils {
             System.out.println("EMail Sent Successfully!!");
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            sendVerification(1);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
     }
 }

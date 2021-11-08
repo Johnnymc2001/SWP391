@@ -26,13 +26,14 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "INSERT INTO AccountVerification VALUES(?, ?, ?, ?)";
+                String sql = "INSERT INTO AccountVerification VALUES(?, ?, ?, ?, ?)";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, dto.getAccountID());
                 stm.setString(2, dto.getEmail());
                 stm.setString(3, dto.getCode());
                 stm.setTimestamp(4, dto.getTime());
+                stm.setString(5, dto.getType());
 
                 int line = stm.executeUpdate();
 
@@ -51,7 +52,7 @@ public class VerificationDAO {
         return false;
     }
 
-    public VerificationDTO GetAccountIdUsingCode(String code) throws SQLException {
+    public VerificationDTO GetVerificationDTOUsingCode(String code, String type) throws SQLException {
         ResultSet rs = null;
         Connection con = null;
         PreparedStatement stm = null;
@@ -63,16 +64,18 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, email, verifyCode, time FROM AccountVerification WHERE verifyCode = ?";
+                String sql = "SELECT accountID, email, verifyCode, time, type FROM AccountVerification WHERE verifyCode = ? and type = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, code);
+                stm.setString(2, type);
+
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
                     int accountID = rs.getInt("accountID");
                     String email = rs.getString("email");
                     Timestamp time = rs.getTimestamp("time");
-                    dto = new VerificationDTO(accountID, email, code, time);
+                    dto = new VerificationDTO(accountID, email, code, time, type);
                 }
             }
         } finally {
@@ -87,7 +90,7 @@ public class VerificationDAO {
         return dto;
     }
 
-    public VerificationDTO GetVerificationDTOUsingAccountID(int accountId) throws SQLException {
+    public VerificationDTO GetVerificationDTOUsingAccountID(int accountId, String type) throws SQLException {
         ResultSet rs = null;
         Connection con = null;
         PreparedStatement stm = null;
@@ -99,16 +102,17 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, email, verifyCode, time FROM AccountVerification WHERE accountID = ?";
+                String sql = "SELECT accountID, email, verifyCode, time, type FROM AccountVerification WHERE accountID = ? and type = ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, accountId);
+                stm.setString(2, type);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
                     String code = rs.getString("verifyCode");
                     String email = rs.getString("email");
                     Timestamp time = rs.getTimestamp("time");
-                    dto = new VerificationDTO(accountId, email, code, time);
+                    dto = new VerificationDTO(accountId, email, code, time, type);
                 }
             }
         } finally {
@@ -123,7 +127,7 @@ public class VerificationDAO {
         return dto;
     }
 
-    public VerificationDTO GetVerificationDTOUsingEmail(String email) throws SQLException {
+    public VerificationDTO GetVerificationDTOUsingEmail(String email, String type) throws SQLException {
         ResultSet rs = null;
         Connection con = null;
         PreparedStatement stm = null;
@@ -135,16 +139,17 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "SELECT accountID, email, verifyCode, time FROM AccountVerification WHERE email = ?";
+                String sql = "SELECT accountID, email, verifyCode, time, type FROM AccountVerification WHERE email = ? and type = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
+                stm.setString(2, type);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
                     int accountId = rs.getInt("accountID");
                     String code = rs.getString("verifyCode");
                     Timestamp time = rs.getTimestamp("time");
-                    dto = new VerificationDTO(accountId, email, code, time);
+                    dto = new VerificationDTO(accountId, email, code, time, type);
                 }
             }
         } finally {
@@ -167,15 +172,16 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "UPDATE AccountVerification SET email = ?, verifyCode = ?, time = ? WHERE accountID = ?";
+                String sql = "UPDATE AccountVerification SET email = ?, verifyCode = ?, time = ? WHERE accountID = ? and type = ? ";
 
                 stm = con.prepareStatement(sql);
 
                 stm.setString(1, dto.getEmail());
                 stm.setString(2, dto.getCode());
                 stm.setTimestamp(3, dto.getTime());
-                stm.setInt(4, dto.getAccountID());
+                stm.setString(4, dto.getType());
 
+                stm.setInt(5, dto.getAccountID());
                 int line = stm.executeUpdate();
 
                 return line != 0;
@@ -193,7 +199,7 @@ public class VerificationDAO {
         return false;
     }
 
-    public boolean RemoveVerification(int accountId) throws SQLException {
+    public boolean RemoveVerification(int accountId, String type) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -202,10 +208,11 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "DELETE FROM AccountVerification WHERE accountID = ?";
+                String sql = "DELETE FROM AccountVerification WHERE accountID = ? and type = ";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, accountId);
+                stm.setString(2, type);
                 int line = stm.executeUpdate();
 
                 return line != 0;
