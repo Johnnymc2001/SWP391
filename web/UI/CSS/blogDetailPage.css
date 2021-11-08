@@ -171,7 +171,12 @@ s
 }
 
 .user-vote button{
-    background: orange;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.user-vote button:hover i{
+    transform: scale(1.1);
 }
 
 .user-vote .vote-menu{
@@ -276,10 +281,15 @@ s
 }
 
 button.award-btn{
-    background: orange;
+    background: transparent;
     border: none;
     padding: 0.3rem;
     border-radius: 5px;
+    transition: all 0.2s;
+}
+
+button.award-btn:hover i{
+    transform: scale(1.1);
 }
 
 .comment-section{

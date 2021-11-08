@@ -61,12 +61,14 @@
                     </c:if>
                     <div class="blog-note">
                         <c:set var="blogNameAwards" value="${requestScope.AWARDSNAME}"/>
+                        <ul>
                             <c:forEach var="awardName" items="${blogNameAwards}">
-                                <li class="fas fa-trophy fa-lg">${awardName}</li>
-                            </c:forEach>
+                                <li class="fa fa-trophy fa-sm"> ${awardName}</li>
+                                </c:forEach>
+                        </ul>
                         <ul>
                             <li><a href="profile?userID=${author.accountID}">${author.getFullname()}</a></li>
-                            <li>11/10/2001</li>
+                            <li>${blog.postDate}</li>
                             <li>comment(${blog.getAllComments().size()})</li>
                         </ul>
                     </div>
@@ -80,10 +82,10 @@
                             <%-- ----------- Khu Vuc Rating 52 ---------------------------   --%>
                             <div class="user-vote">
                                 <div class="btn-group dropend">
-
                                     <button type="submit" class="btn btnRate" data-bs-toggle="dropdown"
                                             aria-expanded="false">
-                                        <i class="fas fa-star fa-lg">${blog.getAverageRating()}</i> 
+                                        <i class="fas fa-star fa-lg"></i> 
+                                        <span> ${blog.getAverageRating()}</span>
                                     </button>
                                     <c:if test="${not empty user}">
                                         <ul class="vote-menu dropdown-menu">
@@ -129,8 +131,11 @@
                                         </c:if>
                                 </form>
                                 <c:if test="${not (user.role  eq role)}">
-                                    <button class="award-btn"><i class="fas fa-trophy fa-lg">${requestScope.BLOGAWARDS}</i></button>
-                                    </c:if>
+                                    <button class="award-btn">
+                                        <i class="fas fa-trophy fa-lg"></i>
+                                        <span> ${requestScope.BLOGAWARDS}</span>
+                                    </button>
+                                </c:if>
                             </div>
                         </div>
                     </c:if>

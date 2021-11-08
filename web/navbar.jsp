@@ -127,7 +127,6 @@
                 <div class="notify">
                     <button type="button" class="notify-button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-bell"></i>
-                        <span class="num">*</span>
                     </button>
                     <ul class="notify-box dropdown-menu dropdown-menu-end">
                         <iframe class="notify-window" src="notification" frameborder="0"></iframe>

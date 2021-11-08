@@ -35,7 +35,6 @@
             <jsp:directive.include file="navbar.jsp" /> 
         </header>
         <!-- END OF NAVBAR -->
-        <jsp:directive.include file="loading.jsp" />
         <!-- THIS IS BODY -->
         <!-- THIS IS BODY CONTAINER 1 -->
         <div id="body-container-1" class="container">

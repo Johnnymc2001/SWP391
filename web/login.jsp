@@ -186,7 +186,6 @@
                 </div>
             </div>
         </div>
-        <jsp:directive.include file="loading.jsp" />
         <script src="UI/script/loginPage.js"></script>
     </body>
 </html>

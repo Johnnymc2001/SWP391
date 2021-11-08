@@ -25,15 +25,12 @@ Sammy Guergachi
             <c:set var="notificationList" value="${requestScope.LIST_NOTIFICATION}" />
             <c:if test="${not empty notificationList}">
                 <c:forEach var="dto" items="${notificationList}">
-                <li onclick=" window.parent.location.href =`${dto.redirectUrl}`">
+                <li onclick=" window.parent.location.href = `${dto.redirectUrl}`">
                     <a>
                         <i class="notify-icon fas fa-star fa-lg"></i>
                         <div class="notify-content">
                             <span class="title">${dto.content}</span><br>
                             <span class="date">${dto.date}</span>
-                        </div>
-                        <div class="notify-status">
-                            <i class="fas fa-circle fa-xs"></i>
                         </div>
                     </a>
                 </li>

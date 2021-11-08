@@ -37,16 +37,13 @@ a {
 li {
     list-style: none;
     padding: 0.5rem;
+    cursor: pointer;
 }
 
 a:link,
 a:visited {
     text-decoration: none;
     color: black;
-}
-
-.notify-status {
-    color: orange;
 }
 
 .date {
@@ -60,10 +57,6 @@ li:hover .notify-content .date {
 
 .notify-content .date {
     font-size: small;
-}
-
-li:hover .notify-status {
-    color: red;
 }
 
 ::-webkit-scrollbar {
