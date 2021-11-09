@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -47,11 +48,16 @@ public class AdminAccountCreateServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
-
+        HttpSession session = request.getSession();
+        AccountDTO account = (AccountDTO) session.getAttribute("USER");
+        if (null == account || !account.getRole().equals("Admin")) {
+            response.sendError(401);
+            return;
+        }
         String username = null == request.getParameter("username") ? "" : request.getParameter("username");
         String password = null == request.getParameter("password") ? "" : request.getParameter("password");
-        String fullname = null == request.getParameter("fullname") ? "" : request.getParameter("fullname");    
-        Date birthdate = null;      
+        String fullname = null == request.getParameter("fullname") ? "" : request.getParameter("fullname");
+        Date birthdate = null;
         String confirm_password = null == request.getParameter("confirm_password") ? "" : request.getParameter("confirm_password");
         String address = null == request.getParameter("address") ? "" : request.getParameter("address");
         String email = null == request.getParameter("email") ? "" : request.getParameter("email");
@@ -62,12 +68,11 @@ public class AdminAccountCreateServlet extends HttpServlet {
         String action = request.getParameter("submitAction");
 
         boolean foundError = false;
-        
-                
+
         try {
-            if (null != request.getParameter("birthday")){
+            if (null != request.getParameter("birthday")) {
                 birthdate = Date.valueOf(request.getParameter("birthday"));
-            }          
+            }
         } catch (Exception ex) {
             foundError = true;
             request.setAttribute("ERROR_BIRTHDAY", "Birthday is not valid!");
@@ -108,12 +113,10 @@ public class AdminAccountCreateServlet extends HttpServlet {
 
                     }
                 }
-//                if (!password.trim().matches("[A-Za-z\\d@$!%*?&]{8,20}")) {
-//                    request.setAttribute("ERROR_PASSWORD", "Password must be from 8 to 20 characters and contains at least 1 uppercase, 1 lowercase, 1 number and 1 special characters!!");
-//                    foundError = true;
-
-//                } else 
-                if (!confirm_password.equals(password)) {
+                if (!password.trim().matches("^([\\d\\w]{8,20})$")) {
+                    request.setAttribute("ERROR_PASSWORD", "Password must be from 8 to 20 characters and contains at least 1 uppercase, 1 lowercase, 1 number and 1 special characters!!");
+                    foundError = true;
+                } else if (!confirm_password.equals(password)) {
                     request.setAttribute("ERROR_CONFIRM_PASSWORD", "Password must be the same!");
 
                     foundError = true;

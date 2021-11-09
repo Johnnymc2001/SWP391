@@ -46,7 +46,7 @@ public class AdminCommentManageServlet extends HttpServlet {
         HttpSession session = request.getSession();
         AccountDTO account = (AccountDTO) session.getAttribute("USER");
         if (null == account || !account.getRole().equals("Admin")) {
-            response.sendRedirect(sc.getContextPath());
+            response.sendError(401);
             return;
         }
 
