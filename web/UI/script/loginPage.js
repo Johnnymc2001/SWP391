@@ -81,3 +81,6 @@ function hidecoPassword() {
     eyeC.classList.add("d-block");
     x.type = "password";
 }
+
+//Limit birthdate
+

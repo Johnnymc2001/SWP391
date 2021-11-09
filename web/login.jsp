@@ -126,19 +126,31 @@
                                     Address</label>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="birthdate" id="birthdate" value="${param.birthdate}" type="text" onfocus="(this.type = 'date')"
-                                       onblur="if (!this.value)
-                                                   this.type = 'text'" required>
-                                <label class="birthdate-label" for="birthdate"><i class="fas fa-calendar-alt"></i>
-                                    Birthdate</label>
+                                <input name="birthdate" id="birthdate" value="${param.birthdate}" type="text" max="9999-12-31" onfocus="(this.type = 'date')"
+                                       onblur="if (!this.value) this.type = 'text'" required>
+                                <label class="birthdate-label" for="birthdate"><i class="fas fa-calendar-alt"></i>Birthdate</label>
+                                <c:set var="birthError" value="${requestScope.ERROR_BIRTHDATE}"/>
+                                <c:if test="${not empty birthError}">
+                                    <br/>
+                                    <font color="red">
+                                    ${birthError}<br/>
+                                    </font>
+                                </c:if>
                             </div>
                             <div class="enter-field col-md-6">
                                 <input name="email" id="email" value="${param.email}" type="text" required>
                                 <label class="email-label" for="email"><i class="fas fa-envelope"></i> Email</label>
+                                <c:set var="emailError" value="${requestScope.ERROR_EMAIL}"/>
                                 <c:if test="${not empty error.emailErrorFormat}">
                                     <br/>
                                     <font color="red">
                                     ${error.emailErrorFormat}<br/>
+                                    </font>
+                                </c:if>
+                                <c:if test="${not empty emailError}">
+                                    <br/>
+                                    <font color="red">
+                                    ${emailError}<br/>
                                     </font>
                                 </c:if>
                             </div>

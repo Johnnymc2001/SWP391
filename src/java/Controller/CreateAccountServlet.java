@@ -17,6 +17,9 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import static java.time.temporal.TemporalQueries.localDate;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +66,14 @@ public class CreateAccountServlet extends HttpServlet {
         boolean foundError = false;
         AccountError error = new AccountError();
         String url;
-
+        java.sql.Date birthDateValue;
+        java.sql.Date presentDate = new Date(System.currentTimeMillis());
+        System.out.println(presentDate);
+        birthDateValue = java.sql.Date.valueOf(birthdate);
+        
+        System.out.println(birthDateValue);
+        System.out.println(birthDateValue.after(presentDate));
+        
         try {
             AccountDAO dao = new AccountDAO();
             AccountDTO user = dao.getAccountFromUsername(username);
@@ -91,20 +101,24 @@ public class CreateAccountServlet extends HttpServlet {
                 foundError = true;
                 error.setConfirmNotMatched("Confirm Password is Not Matched");
             }
-            if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20|| fullname.matches("([A-Z]){1,}[a-z]+") == false  ) {
+            if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20 || fullname.matches("([A-Z]){1,}[a-z]+") == false) {
                 foundError = true;
                 error.setFullNameLengthError("Full Name must be from 6-20 character and must contain 1 character at the begining ");
             }
             if (!email.matches("([\\w\\d\\_\\-])+@[\\w]+\\.[\\w\\.]+")) {
-                    request.setAttribute("ERROR_EMAIL", "Email Address is in incorrect format");
+                request.setAttribute("ERROR_EMAIL", "Email Address is in incorrect format");
+                foundError = true;
+            } else {
+                if (null != dao.getAccountFromEmail(email)) {
+                    request.setAttribute("ERROR_EMAIL", "Email is existed!");
                     foundError = true;
-                } else {
-                    if (null != dao.getAccountFromEmail(email)) {
-                        request.setAttribute("ERROR_EMAIL", "Email is existed!");
-                        foundError = true;
 
-                    }
                 }
+            }
+            if (birthDateValue.after(presentDate)) {
+                foundError = true;
+                request.setAttribute("ERROR_BIRTHDATE", "Birthdate is not valid");
+            }
             if (phone == null || error.checkValidPhoneNumber(phone) == false) {
                 error.setPhoneErrorFormat("Phone is not valid");
                 foundError = true;
@@ -119,9 +133,8 @@ public class CreateAccountServlet extends HttpServlet {
 
             } else {
 //                   Date  date =new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);  
-                java.sql.Date sqlDate;
-                sqlDate = java.sql.Date.valueOf(birthdate);
-                AccountDTO dto = new AccountDTO(username, password, fullname, address, sqlDate, email, phone);
+
+                AccountDTO dto = new AccountDTO(username, password, fullname, address, birthDateValue, email, phone);
 
 //               AccountDAO.createAccount(dto);
                 VerificationDAO veriDao = new VerificationDAO();
