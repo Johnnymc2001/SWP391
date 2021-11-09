@@ -90,12 +90,12 @@
                      </c:if>
                      col-lg-6">
                     <img class="avatar" src="UI/Icon/avatar-login.png" alt="">
-                    <h1>register</h1>
+                    <h1>Register</h1>
                     <form class="register-form" action="register" method="POST">
                         <div class="row">
                             <div class="enter-field col-md-6">
                                 <input name="username" id="username-register" value="${param.username}" type="text" required>
-                                <label class="username-label" for="username"><i class="fas fa-user"></i> Username</label>
+                                <label class="username-label" for="username-register"><i class="fas fa-user"></i> Username</label>
                                 <c:if test="${not empty error.userNameLengthError}">
                                     <br/>
                                     <font color="red">
@@ -155,7 +155,7 @@
 
                             <div class="enter-field col-md-6">
                                 <input name="password" id="password-register" type="password" required>
-                                <label class="password-label" for="password"><i class="fas fa-lock"></i> Password</label>
+                                <label class="password-label" for="password-register"><i class="fas fa-lock"></i> Password</label>
                                 <c:if test="${not empty error.passwordLengthError}">
                                     <br/>
                                     <font color="red">

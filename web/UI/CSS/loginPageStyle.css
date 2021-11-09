@@ -163,7 +163,7 @@ h1 {
 }
 
 .register-form input:focus+label,
-.register-form input:valid+label {
+.register-form input:valid+label{
     transform: translateY(-100%);
     color: orange;
 }

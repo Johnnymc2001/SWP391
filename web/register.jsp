@@ -45,8 +45,6 @@ and open the template in the editor.
                         ${USER_NAME_FORMAT_ERROR}<br/>
                         </font>
                     </c:if>    
-                            
-
                 </div>
                 <div class="enter-field">
                     <input type="text" id="fullname" placeholder="Fullname" name ="fullname">
@@ -59,7 +57,6 @@ and open the template in the editor.
                 </div>
                 <div class="enter-field">
                     <input type="text" id="email" placeholder="Email" name="email">
-
                     <c:if test="${not empty error.emailErrorFormat}">
                         <br/>
                         <font color="red">
@@ -70,7 +67,6 @@ and open the template in the editor.
                 </div>
                 <div class="enter-field">
                     <input type="text" id="phone" placeholder="Phone number" name ="phone">
-
                     <c:if test="${not empty ERROR_EMAIL}">
                         <br/>
                         <font color="red">

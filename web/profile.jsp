@@ -44,48 +44,10 @@
         <c:if test="${ empty account }">
             <h1>account empty</h1>
         </c:if>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
-                <div class="d-none d-md-block col-md-3">
-                    <ul class="option-table list-group">
-                        <div class="user-avatar">
-                            <h2>Student</h2>
-                        </div>
-                        <div class="user-option">
-                            <a href="blogPendingList">
-                                <li class="list-group-item active">Profile</li>
-                            </a>
-                            <a href="blogList">
-                                <li class="list-group-item">Your Blogs</li>
-                            </a>
-                            <c:if test="${user.role == 'Mentor'}">
-                                <a href="blogPendingList">
-                                    <li class="list-group-item">Pending Blog</li>
-                                </a>
-                            </c:if>
-                        </div>
-                        <div class="public-option">
-                            <a href="home">
-                                <li>Home</li>
-                            </a>
-                            <a href="search">
-                                <li>Search</li>
-                            </a>
-                            <a href="">
-                                <li>Contact</li>
-                            </a>
-                        </div>
-                        <a href="logout">
-                            <li>Log out</li>
-                        </a>
-                    </ul>
-                </div>
-                <div class="d-sm-none d-md-block d-lg-none col-md-1">
-
-                </div>
-
                 <%--  ---------       PROFILE       ----------  --%>
-                <div class="col-md-8 profile-container">
+                <div class="profile-container">
                     <c:if test="${user.accountID==account.accountID}">
                         <h1>${account.username}</h1> 
                         <div>
