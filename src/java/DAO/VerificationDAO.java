@@ -179,9 +179,9 @@ public class VerificationDAO {
                 stm.setString(1, dto.getEmail());
                 stm.setString(2, dto.getCode());
                 stm.setTimestamp(3, dto.getTime());
-                stm.setString(4, dto.getType());
+                stm.setInt(4, dto.getAccountID());
+                stm.setString(5, dto.getType());
 
-                stm.setInt(5, dto.getAccountID());
                 int line = stm.executeUpdate();
 
                 return line != 0;
