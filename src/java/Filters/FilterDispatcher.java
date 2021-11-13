@@ -5,6 +5,8 @@ package Filters;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import DAO.AccountDAO;
+import DAO.AccountDTO;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -18,7 +20,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.apache.http.HttpRequest;
 
 /**
  *
@@ -107,7 +112,7 @@ public class FilterDispatcher implements Filter {
         String uri = req.getRequestURI();
         String url = roadmap.get("default");
 
-        request.setCharacterEncoding("UTF-8"); 
+        request.setCharacterEncoding("UTF-8");
 
         try {
             int lastIndex = uri.lastIndexOf("/");
@@ -129,11 +134,38 @@ public class FilterDispatcher implements Filter {
                     url = roadmap.get(name);
                 }
             }
-            
+
             if (url == null) {
                 url = roadmap.get("default");
             }
-            
+
+            // Set Current User By Cookies
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+            Cookie[] cookies = httpRequest.getCookies();
+            if (cookies != null) {
+
+                for (Cookie c : cookies) {
+
+                    String username = c.getName();
+                    if (!username.equals("JSESSIONID")) {
+
+                        String password = c.getValue();
+
+                        AccountDAO dao = new AccountDAO();
+                        AccountDTO dto = dao.checkLogin(username, password);
+
+                        if (null != dto) {
+                            HttpSession session = httpRequest.getSession();
+                            session.setAttribute("USER", dto);
+                            break;
+                        }
+                    } else {
+
+                    }
+                }
+
+            }
+
             RequestDispatcher rd = req.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (Throwable t) {
