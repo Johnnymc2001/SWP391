@@ -81,14 +81,13 @@ public class LoginServlet extends HttpServlet {
                 url = roadmap.get(url);
                 request.getRequestDispatcher(url).forward(request, response);
             } else {
-                Cookie cookie = new Cookie(username, password);
                 if (null != Remember && Remember.equals("true")) {
-                    cookie.setMaxAge(60 * 24 * 7);
+                    Cookie cookie = new Cookie(username, password);
+                    cookie.setMaxAge(60 * 10 * 7);
 
-                } else {
-                    cookie.setMaxAge(60 * 5);
+                    response.addCookie(cookie);
                 }
-                response.addCookie(cookie);
+
 //              url = roadmap.get("home");
                 url = "home";
                 HttpSession session = request.getSession(true);

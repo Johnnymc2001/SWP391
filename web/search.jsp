@@ -77,7 +77,7 @@
                         <div class="post-box">
                             <div class="author-inform">
                                 <ul>
-                                    <li><a href="">${blog.getAccount().getFullname()}</a></li>
+                                    <li><a href="profile?userID=${blog.getAccount().accountID}">${blog.getAccount().getFullname()}</a></li>
                                     <li>${blog.postDate}</li>
                                     <li>Comments (${blog.getAllComments().size()})</li>
                                 </ul>

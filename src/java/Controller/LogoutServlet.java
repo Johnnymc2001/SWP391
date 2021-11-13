@@ -46,8 +46,18 @@ public class LogoutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = request.getServletContext();
         HashMap<String, String> roadmap = (HashMap<String, String>) sc.getAttribute("ROADMAP");
+//
+//        request.setCharacterEncoding("ISO-8859-1");
+//        response.setContentType("text/html");
+
+        for (Cookie cookie : request.getCookies()) {
+            cookie.setMaxAge(0);
+
+            response.addCookie(cookie);
+        }
 
         request.getSession().invalidate();
+
         response.sendRedirect(HOME_PAGE);
 
     }
