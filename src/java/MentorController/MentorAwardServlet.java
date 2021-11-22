@@ -98,6 +98,10 @@ public class MentorAwardServlet extends HttpServlet {
             } else {
                 System.out.println("txtEffectiveDays NULL");
             }
+            
+            //Remove expired rewards:
+            ALdao.deleteExpiredAwardFromBlogId(blogID);
+            
             if (Action.equals("Create Award")) {
                 Adto = new AwardDTO(txtAwardName, EffectiveDays);
                 boolean exist = true;
