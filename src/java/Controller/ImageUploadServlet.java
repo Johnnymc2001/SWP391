@@ -43,7 +43,7 @@ public class ImageUploadServlet extends HttpServlet {
 
         InputStream data = part.getInputStream();
 //        String base64 = ImageUtils.BytesToBase64(ImageUtils.InputStreamToBytes(data));
-        String url = ImageUtils.uploadImage(data);
+        String url = ImageUtils.uploadImageOriginal(data);
 
         String json = "";
 

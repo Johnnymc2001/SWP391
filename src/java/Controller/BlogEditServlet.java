@@ -168,7 +168,7 @@ public class BlogEditServlet extends HttpServlet {
                                 String imageUrl = "UI/Icon/selfmademan.jpg";
                                 
                                 if (null != base64Image) {
-                                    imageUrl = ImageUtils.uploadImage(base64Image);
+                                    imageUrl = ImageUtils.uploadImageAndCrop(base64Image);
                                     blogEdit.setThumbnail(imageUrl);
                                 }
 

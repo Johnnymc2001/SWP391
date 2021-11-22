@@ -153,7 +153,7 @@ public class CreateBlogServlet extends HttpServlet {
 //                    String imageUrl = "UI/Icon/selfmademan.jpg";
                             String imageUrl = "UI/Icon/selfmademan.jpg";
                             if (null != base64Image) {
-                                imageUrl = ImageUtils.uploadImage(base64Image);
+                                imageUrl = ImageUtils.uploadImageAndCrop(base64Image);
                             }
 
                             content = Jsoup.clean(content, Safelist.relaxed());

@@ -6,11 +6,14 @@
 package Utils;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.EagerTransformation;
+import com.cloudinary.Transformation;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
 import org.apache.commons.io.IOUtils;
 import com.cloudinary.utils.ObjectUtils;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -29,7 +32,34 @@ public class ImageUtils {
 
     // SET IS TO BYTE ARRAY
     // Main Image Upload
-    public static String uploadImage(String base64) {
+    public static String uploadImageAndCrop(String base64) {
+        try {
+            String finalImageData = "data:image/png;base64," + base64;
+
+            Map authConfig = ObjectUtils.asMap(
+                    "cloud_name", "swpgogogo",
+                    "api_key", "274465474966931",
+                    "api_secret", "XfhGKe_VQyV8X1tdnNwDuvlf47k",
+                    "secure", true);
+
+            Map uploadConfig = ObjectUtils.asMap(
+                    "folder", "attachments",
+                    "transformation", new Transformation().width(1280).height(720).crop("pad"));
+
+            Cloudinary cloudinary = new Cloudinary(authConfig);
+            System.out.println("New file is being uploading....");
+
+            Map uploadResult = cloudinary.uploader().upload(finalImageData, uploadConfig);
+
+            System.out.println(uploadResult);
+            System.out.println("File uploaded! [URL : " + uploadResult.get("secure_url") + " ]");
+            return (String) uploadResult.get("secure_url");
+        } catch (Exception ex) {
+        }
+        return null;
+    }
+
+    public static String uploadImageOriginal(String base64) {
         try {
             String finalImageData = "data:image/png;base64," + base64;
 
@@ -44,7 +74,10 @@ public class ImageUtils {
 
             Cloudinary cloudinary = new Cloudinary(authConfig);
             System.out.println("New file is being uploading....");
+
             Map uploadResult = cloudinary.uploader().upload(finalImageData, uploadConfig);
+
+            System.out.println(uploadResult);
             System.out.println("File uploaded! [URL : " + uploadResult.get("secure_url") + " ]");
             return (String) uploadResult.get("secure_url");
         } catch (Exception ex) {
@@ -58,15 +91,27 @@ public class ImageUtils {
 //
 //        return url;
 //    }
-    public static String uploadImage(InputStream is) {
+    public static String uploadImageAndCrop(InputStream is) {
         try {
             String base64 = BytesToBase64(InputStreamToBytes(is));
 
-            return uploadImage(base64);
+            return ImageUtils.uploadImageAndCrop(base64);
         } catch (IOException ex) {
         }
         return "";
     }
+    
+        public static String uploadImageOriginal(InputStream is) {
+        try {
+            String base64 = BytesToBase64(InputStreamToBytes(is));
+
+            return uploadImageOriginal(base64);
+        } catch (IOException ex) {
+        }
+        return "";
+    }
+    
+    
     // Multi Image Upload
 //    public static boolean uploadImage(ArrayList<String> listOfBase64, int blogId) {
 //        boolean sucess = true;
