@@ -140,10 +140,10 @@ public class AwardDAO {
 
             if (con != null) {
                 String sql = "SELECT awardID, awardName, effectiveDay "
-                        + "FROM getAllUnexpiredRewardFromBlogId ";
+                        + "FROM getAllUnexpiredRewardFromBlogId(?)";
 
                 stm = con.prepareStatement(sql);
-
+                stm.setInt(1, blogId);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
