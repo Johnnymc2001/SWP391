@@ -174,6 +174,35 @@ public class AwardListDAO implements Serializable {
         return null;
     }
 
+    public boolean deleteExpiredAwardFromBlogId(int blogId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            ArrayList<AwardListDTO> awardList = new ArrayList<AwardListDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "EXECUTE deletedExpiredAwardFromBlogId @blogId = ?";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, blogId);
+                int row = stm.executeUpdate();
+
+                return row > 0;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
     public boolean updateAwardList(int awardListId, AwardListDTO dto) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
