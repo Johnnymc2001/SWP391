@@ -75,7 +75,10 @@
                         <button class="login-btn" type="submit">Login</button><br>
                     </form>
                     <button class="goto-register" onclick="goToRegister()">Don't have an account ?</button>
+                    
+                    <div><button class="goto-register"><a href="home">Go to Home Page</a></button></div>
                 </div>
+                        
 
                 <%--            END OF LOGIN             --%>
 

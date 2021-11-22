@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Birth</label>
-                                        <input type="date" class="txt-edit" id="birthdate" name ="birthdate" value="${account.birthday}" readonly="true"></br>
+                                        <input type="date" class="txt-edit" id="birthdate" name ="birthdate" value="${account.birthday}" max="9999-12-31" readonly="true"></br>
                                     </div>
                                     <input type="hidden" name="btnAction" value="UpdateProfile">
                                 </div>
@@ -185,7 +185,7 @@
                     </c:if>
                     <c:if test="${(account.role == 'Student' || account.role == 'Mentor') && not empty requestScope.BLOGLIST}">
                         <div class="blog-list">
-                            <h1>Blog Pending List</h1>
+                            <h1>Blog List</h1>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
