@@ -169,6 +169,48 @@ public class AwardDAO {
         }
         return null;
     }
+    
+    public ArrayList<AwardDTO> getAllAwardExpiredFromBlogID(int blogId) throws SQLException {
+         Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            ArrayList<AwardDTO> awardList = new ArrayList<AwardDTO>();
+
+            con = DBHelpers.makeConnection();
+
+            if (con != null) {
+                String sql = "SELECT awardID, awardName, effectiveDay "
+                        + "FROM getAllExpiredRewardFromBlogId(?)";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, blogId);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int awardID = rs.getInt("awardID");
+                    String awardname = rs.getString("awardName");
+                    int effectiveDay = rs.getInt("effectiveDay");
+                    AwardDTO dto = new AwardDTO(awardID, awardname, effectiveDay);
+                    awardList.add(dto);
+                }
+
+                return awardList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 
     public boolean updateAward(int awardId, AwardDTO dto) throws SQLException {
         Connection con = null;
