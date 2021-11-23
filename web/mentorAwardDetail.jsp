@@ -66,32 +66,45 @@
                     </form>
                 </c:if>
             </div>
-                
-                <div><a href="blog?txtBlogID=${blogInfo.blogID}">Go back to blog</a></div>
+
+            <div><a href="blog?txtBlogID=${blogInfo.blogID}">Go back to blog</a></div>
+
+            <c:set var="awardNameExist" value="${requestScope.ERROR_AWARD_NAME}"/>
+            <c:if test="${not empty awardNameExist}">
+                <font color="red">
+                <p>${awardNameExist}</p>
+                </font>
+            </c:if>
+
+            <c:set var="error" value="${requestScope.ERROR_EFFECTIVE}"/>
+            <c:if test="${not empty error}">
+                <font color="red">
+                <p>${error}</p>
+                </font>
+            </c:if>
                 
             <div class="create-award col-md-6">
-                <c:set var="awardNameExist" value="${requestScope.ERROR_AWARD_NAME}"/>
-                <c:if test="${not empty awardNameExist}">
-                    <font color="red">
-                    <p>${awardNameExist}</p>
-                    </font>
-                </c:if>
+
                 <button id="award-btn" class="btn-action" onclick="ShowCreateAward()" >Create an Award</button>
                 <div id="CreateAward" class="d-none">
                     <form action="award?txtBlogID=${blogInfo.blogID}" method="POST">
                         <div class="enter-field">
                             <span>Award Name: </span>
                             <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
+
                         </div>
                         <div class="enter-field">
                             <span>Effective Days: </span>
-                            <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/>
+                            <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/></br>
+
                         </div>
                         <br>
                         <input class="btn-action" type="submit" name="btnAction" value="Create Award"></input>
                     </form>
                 </div>
             </div>
+
+
 
             <div class="award-table">
                 <c:if test="${not empty requestScope.BLOGAWARD}">

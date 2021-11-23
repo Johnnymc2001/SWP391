@@ -12,7 +12,7 @@ import DAO.AwardDTO;
 import DAO.AwardListDAO;
 import DAO.AwardListDTO;
 import DAO.BlogDAO;
-import DAO.BlogDTO;
+//import DAO.BlogDTO;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -79,7 +79,7 @@ public class MentorAwardServlet extends HttpServlet {
             AwardListDTO ALdto = new AwardListDTO();
             blogID = Integer.parseInt(txtBlogID);
             BlogDAO Bdao = new BlogDAO();
-            BlogDTO Bdto = new BlogDTO();
+//            BlogDTO Bdto = new BlogDTO();
             AwardDAO Adao = new AwardDAO();
             AwardDTO Adto = new AwardDTO();
 
@@ -95,24 +95,27 @@ public class MentorAwardServlet extends HttpServlet {
             }
             if (null != txtEffectiveDays) {
                 awardID = Integer.parseInt(txtEffectiveDays);
+
             } else {
                 System.out.println("txtEffectiveDays NULL");
             }
 
             if (null != Action && Action.equals("Create Award")) {
                 Adto = new AwardDTO(txtAwardName, EffectiveDays);
-                boolean exist = true;
+                boolean error = true;
                 for (AwardDTO adto : Adao.getAllAward()) {
                     if (adto.getAwardName().equals(txtAwardName)) {
-                        exist = false;
+                        error = false;
                         request.setAttribute("ERROR_AWARD_NAME", "Award name already exist!");
                     }
+                    if (awardID < 1) {
+                        error = false;
+                        request.setAttribute("ERROR_EFFECTIVE", "Effective days should be longer than 0 days!");
+                    }
                 }
-                if (exist) {
+                if (error) {
                     Adao.createAward(Adto);
                 }
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
             } else if (null != Action && Action.equals("Award Blog")) {
                 Date date = new Date(Calendar.getInstance().getTime().getTime());
                 ALdto = new AwardListDTO(blogID, awardID, date, account.getAccountID());
