@@ -4,5 +4,11 @@ function goTop() {
 }
 
 async function rate(blogid, rate) {
-    await fetch(`rate?txtBlogID=${blogid}&txtRate=${rate}`);
+    var data = "";
+    await fetch(`rate?txtBlogID=${blogid}&txtRate=${rate}`).then(resp => {
+        data = resp;
+    });
+
+    var json = await data.json();
+    document.querySelector(".blog-vote .user-vote div span").innerText = json.rating;
 }

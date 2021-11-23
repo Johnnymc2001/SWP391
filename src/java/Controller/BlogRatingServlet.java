@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.AccountDTO;
+import DAO.BlogDAO;
 import DAO.BlogRatingDAO;
 import DAO.BlogRatingDTO;
 import java.io.IOException;
@@ -55,8 +56,9 @@ public class BlogRatingServlet extends HttpServlet {
 
             AccountDTO account = (AccountDTO) request.getSession().getAttribute("USER");
 
-            BlogRatingDAO dao = new BlogRatingDAO();
-            BlogRatingDTO dto = dao.getBlogRatingFromBlogIDAndOwnerID(blogID, account.getAccountID());
+            BlogDAO blogDAO = new BlogDAO();
+            BlogRatingDAO blogRatingDAO = new BlogRatingDAO();
+            BlogRatingDTO dto = blogRatingDAO.getBlogRatingFromBlogIDAndOwnerID(blogID, account.getAccountID());
 
             if (null != txtRate) {
                 double rate = Integer.parseInt(txtRate);
@@ -67,17 +69,20 @@ public class BlogRatingServlet extends HttpServlet {
                     BlogRatingDTO newDto = new BlogRatingDTO(blogID, date, rate, account.getAccountID());
 
                     if (null == dto) {
-                        if (dao.createBlogRating(newDto)) {
-                        }
+                        blogRatingDAO.createBlogRating(newDto);
                     } else {
-                        dao.updateBlogRating(dto.getRatingID(), newDto);
-                        RequestDispatcher rd = request.getRequestDispatcher(url);
-                        rd.forward(request, response);
+                        blogRatingDAO.updateBlogRating(dto.getRatingID(), newDto);
                     }
-                    request.setAttribute("RATING", rate);
-                    RequestDispatcher rd = request.getRequestDispatcher(url);
-                    rd.forward(request, response);
-                    return;
+
+                    int rating = blogDAO.getAverageRatingFromBlogID(blogID);
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("utf-8");
+                    
+                    String json = "{\"rating\":\"" + rating + "\"}";
+
+                    PrintWriter out = response.getWriter();
+                    out.write(json);
+                    out.flush();
                 }
 
             } else if (null != dto) {
@@ -85,14 +90,14 @@ public class BlogRatingServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
                 return;
-            }
-            else{
-                response.sendRedirect(BLOG_DETAIL);
+            } else {
+                response.sendRedirect("blog?txtBlogID=" + blogID);
+                return;
             }
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("BlogRatingServlet _ SQL " + msg);
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
