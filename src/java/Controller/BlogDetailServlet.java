@@ -69,6 +69,12 @@ public class BlogDetailServlet extends HttpServlet {
                 AwardListDAO awardListDao = new AwardListDAO();
                 ArrayList<String> awawdNames = new ArrayList<>();
 
+                //Remove expired rewards:
+                System.out.println("Blog ID: " + blogID);
+                if (awardListDao.deleteExpiredAwardFromBlogId(blogID)) {
+                    System.out.println("Expired Award Cleared");
+                }
+                
                 for (AwardDTO award : awardDao.getAllAward()) {
                     for (AwardListDTO awardList : awardListDao.getAwardListFromBlogId(blogID)) {
                         if (award.getAwardID() == awardList.getAwardID()) {
@@ -78,6 +84,7 @@ public class BlogDetailServlet extends HttpServlet {
                     }
                 }
 
+                
                 request.setAttribute("AWARDSNAME", awawdNames);
                 request.setAttribute("BLOG", blog);
                 request.setAttribute("AUTHOR", author);

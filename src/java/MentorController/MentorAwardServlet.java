@@ -60,7 +60,7 @@ public class MentorAwardServlet extends HttpServlet {
         String Action = request.getParameter("btnAction");
         String txtEffectiveDays = request.getParameter("txtEffectiveDays");
         String txtAwardName = request.getParameter("txtAwardName");
-        
+
         int EffectiveDays = 0;
         int blogID = 0;
         int awardID = 0;
@@ -98,16 +98,13 @@ public class MentorAwardServlet extends HttpServlet {
             } else {
                 System.out.println("txtEffectiveDays NULL");
             }
-            
-            //Remove expired rewards:
-            ALdao.deleteExpiredAwardFromBlogId(blogID);
-            
-            if (Action.equals("Create Award")) {
+
+            if (null != Action && Action.equals("Create Award")) {
                 Adto = new AwardDTO(txtAwardName, EffectiveDays);
                 boolean exist = true;
                 for (AwardDTO adto : Adao.getAllAward()) {
                     if (adto.getAwardName().equals(txtAwardName)) {
-                        exist=false;
+                        exist = false;
                         request.setAttribute("ERROR_AWARD_NAME", "Award name already exist!");
                     }
                 }
@@ -116,25 +113,27 @@ public class MentorAwardServlet extends HttpServlet {
                 }
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
-            } else if (Action.equals("Award Blog")) {
+            } else if (null != Action && Action.equals("Award Blog")) {
                 Date date = new Date(Calendar.getInstance().getTime().getTime());
                 ALdto = new AwardListDTO(blogID, awardID, date, account.getAccountID());
                 ALdao.createAwardList(ALdto);
                 request.setAttribute("BLOGAWARD", ALdao.getAwardListFromBlogId(blogID));
 
-                url = roadmap.get(AWARD_PAGE);
-            } else if (Action.equals("Remove Award")) {
-                System.out.println("ok con de " + awardListID);
+                response.sendRedirect("award?txtBlogID=" + blogID);
+                return;
+            } else if (null != Action && Action.equals("Remove Award")) {
+                System.out.println("MentorAward award removed " + awardListID);
 
                 if (ALdao.deleteAwardList(awardListID)) {
                     request.setAttribute("BLOGAWARD", ALdao.getAwardListFromBlogId(blogID));
+                    response.sendRedirect("award?txtBlogID=" + blogID);
+                    return;
                 } else {
                     System.out.println("Delete Fail");
                 }
 
             }
             if (null != txtBlogID) {
-
                 request.setAttribute("ALL_AWARD", Adao.getAllAward());
                 request.setAttribute("BLOG", Bdao.getBlogFromBlogID(blogID));
                 request.setAttribute("BLOGAWARD", ALdao.getAwardListFromBlogId(blogID));

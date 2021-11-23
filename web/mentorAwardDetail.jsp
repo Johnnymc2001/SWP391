@@ -66,6 +66,9 @@
                     </form>
                 </c:if>
             </div>
+                
+                <div><a href="blog?txtBlogID=${blogInfo.blogID}">Go back to blog</a></div>
+                
             <div class="create-award col-md-6">
                 <c:set var="awardNameExist" value="${requestScope.ERROR_AWARD_NAME}"/>
                 <c:if test="${not empty awardNameExist}">
@@ -124,20 +127,14 @@
 
                                 <td><input class="btn-action" type="submit" name="btnAction" value="Remove Award"></input></td>
 
-
-
                                 </tr>
                             </form>
                         </c:forEach>
                         </tbody>
-
                     </table>
-
                 </c:if>
             </div>
-
         </div>
-
     </body>
 
 
