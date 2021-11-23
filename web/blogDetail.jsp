@@ -84,7 +84,11 @@
                                 <div class="btn-group dropend">
                                     <button type="submit" class="btn btnRate" data-bs-toggle="dropdown"
                                             aria-expanded="false">
-                                        <i class="fas fa-star fa-lg"></i> 
+                                        <i class="fas fa-star fa-lg" 
+                                           <c:if test="${requestScope.ALREADY_RATED eq 'true'}">
+                                               style="color: yellow"
+                                           </c:if>
+                                           ></i> 
                                         <span> ${blog.getAverageRating()}</span>
                                     </button>
                                     <c:if test="${not empty user}">
@@ -128,7 +132,7 @@
                                     <c:set var="role" value="Mentor"/>
                                     <c:if test="${user.role eq role}">
                                         <button class="award-btn" type="submit" name="btnAction"><i class="fas fa-trophy fa-lg"> ${requestScope.BLOGAWARDS}</i></button>
-                                        </c:if>
+                                    </c:if>
                                 </form>
                                 <c:if test="${not (user.role  eq role)}">
                                     <button class="award-btn">

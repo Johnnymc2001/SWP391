@@ -9,6 +9,8 @@ import DAO.BlogCommentDAO;
 import DAO.BlogCommentDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
+import DAO.BlogRatingDAO;
+import DAO.BlogRatingDTO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -74,7 +77,7 @@ public class BlogDetailServlet extends HttpServlet {
                 if (awardListDao.deleteExpiredAwardFromBlogId(blogID)) {
                     System.out.println("Expired Award Cleared");
                 }
-                
+
                 for (AwardDTO award : awardDao.getAllAward()) {
                     for (AwardListDTO awardList : awardListDao.getAwardListFromBlogId(blogID)) {
                         if (award.getAwardID() == awardList.getAwardID()) {
@@ -84,10 +87,21 @@ public class BlogDetailServlet extends HttpServlet {
                     }
                 }
 
-                
                 request.setAttribute("AWARDSNAME", awawdNames);
                 request.setAttribute("BLOG", blog);
                 request.setAttribute("AUTHOR", author);
+
+                // Check if already rated
+                HttpSession session = request.getSession();
+                AccountDTO account = (AccountDTO) session.getAttribute("USER");
+                if (null != account) {
+                    BlogRatingDAO blogRatingDAO = new BlogRatingDAO();
+                    BlogRatingDTO blogRatingDTO = blogRatingDAO.getBlogRatingFromBlogIDAndOwnerID(blogID, account.getAccountID());
+
+                    if (null != blogRatingDTO) {
+                        request.setAttribute("ALREADY_RATED", "true");
+                    }
+                }
 
                 if (blog == null) {
                     url = roadmap.get(HOME_PAGE);
