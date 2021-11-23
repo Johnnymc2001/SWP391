@@ -31,6 +31,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 
 /**
  *
@@ -158,12 +160,20 @@ public class BlogEditServlet extends HttpServlet {
                                 rd.forward(request, response);
                             } else {
 
+                                content = Jsoup.clean(content, Safelist.relaxed());
+                                
                                 //4. Call DAO to insert to DB
                                 blogEdit.setContent(content);
                                 blogEdit.setCategoryID(categoryID);
 //                        blogEdit.setTags(tags);
                                 blogEdit.setTitle(title);
-                                blogEdit.setStatus("PENDING");
+                                
+                                if ("Mentor".equals(curUser.getRole()) && curUser.getCategoryID().equals(blogEdit.getCategoryID())) {
+                                    
+                                } else {
+                                     blogEdit.setStatus("PENDING");
+                                }
+                               
 
                                 String imageUrl = "UI/Icon/selfmademan.jpg";
                                 

@@ -207,6 +207,25 @@
                         <p><a href="loginPage">Already have an account ?</a></p>
                     </div>
                 </c:if>
+                <c:if test="${not empty user}">
+                    <c:if test="${(blog.status == 'APPROVED' || blog.status == 'DISAPPROVED') && blog.studentID == user.accountID}">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Note
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        ${blog.note}
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </c:if>
+                </c:if>
+
             </div>
         </div>
     </div>
