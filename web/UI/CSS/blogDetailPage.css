@@ -188,7 +188,7 @@ s
 .vote-register{
     text-align: center;
     min-width: 20rem;
-    padding: 0;
+    padding: 0 0 1rem 0;
     margin: 0;
 }
 

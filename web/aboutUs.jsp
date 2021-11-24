@@ -549,7 +549,7 @@
         <!-- END OF PAGE CONTENT -->
         <!-- FOOTER -->
         <div class="web-footer">
-            <p>2021 Henry. FE by Henry</p>
+            <p>&copy; 2021 Henry. FE by Henry</p>
             <button onclick="goTop()">Back to top</button>
         </div>
 

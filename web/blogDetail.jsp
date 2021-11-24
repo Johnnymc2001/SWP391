@@ -27,6 +27,7 @@
     <script src="UI/script/blogDetail.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="UI/script/parallax.min.js"></script>
+
 </head>
 
 <c:set var="user" value="${sessionScope.USER}"/>
@@ -120,8 +121,7 @@
                                             <br>
                                             <h3>Join us now</h3>
                                             <h6>Be one of us to reaches the world's knowledge</h6>
-                                            <a href="registerPage"><button>Register to join</button></a>
-                                            <p><a href="loginPage">Already have an account ?</a></p>
+                                            <a href="registerPage"><button>Login to rate</button></a>
                                         </div>
                                     </c:if>
                                 </div>
@@ -203,8 +203,7 @@
                     <div class="register-invitation">
                         <h3>Join us now</h3>
                         <h6>Be one of us to reaches the world's knowledge</h6>
-                        <a href="registerPage"><button>Register to join</button></a>
-                        <p><a href="loginPage">Already have an account ?</a></p>
+                        <a href="registerPage"><button>Join now !!!</button></a>
                     </div>
                 </c:if>
                 <c:if test="${not empty user}">
@@ -245,14 +244,12 @@
     </c:if>
     <!-- FOOTER -->
     <div class="web-footer">
-        <p>2021 Henry. FE by Henry</p>
+        <p>&copy; 2021 Henry. FE by Henry</p>
         <button onclick="goTop()">Back to top</button>
     </div>
 
     <!-- This is JS -->
     <script type="text/javascript" src="UI/script/vanilla-tilt.js"></script>
-
-
 
 </body>
 

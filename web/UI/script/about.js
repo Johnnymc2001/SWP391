@@ -4,8 +4,6 @@ window.addEventListener('load', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("start-animation");
-            } else {
-                entry.target.classList.remove("start-animation");
             }
         });
     });
