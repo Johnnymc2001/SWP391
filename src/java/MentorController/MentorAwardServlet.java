@@ -115,6 +115,7 @@ public class MentorAwardServlet extends HttpServlet {
                 }
                 if (error) {
                     Adao.createAward(Adto);
+                    request.setAttribute("CREATE_SUCCESS", "Award name created successfully!");
                 }
             } else if (null != Action && Action.equals("Award Blog")) {
                 Date date = new Date(Calendar.getInstance().getTime().getTime());
