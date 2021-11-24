@@ -10,7 +10,7 @@ import DAO.AccountDTO;
 import DAO.BlogDAO;
 import DAO.BlogDTO;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
@@ -54,10 +54,11 @@ public class StudentProfileServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
         String button = request.getParameter("btnAction");
-
+        System.out.println("conm de"+birthdate);
         System.out.println(button + address);
         String url = "";
         int id = 0;
+        java.sql.Date birthDateValue = null;
         boolean foundError = false;
         boolean updatePassword = false;
 
@@ -77,55 +78,67 @@ public class StudentProfileServlet extends HttpServlet {
             } else if (null != curUser) {
                 profileAccount = curUser;
             }
-            
+
             if (null != profileAccount) {
                 if (button != null) {
                     if (button.equals("UpdateProfile") && (profileAccount.getAccountID() == curUser.getAccountID())) {
+                        java.sql.Date presentDate = new Date(System.currentTimeMillis());
 
                         //Add constrain
-                        if (null == fullname || fullname.matches("([A-Za-z\\s]){8,20}") == false) {
+                        if (fullname == null || fullname.matches("[\\sA-Za-z]{2,30}") == false) {
                             foundError = true;
-                            request.setAttribute("FULL_NAME_ERROR", "Full Name must be from 6-20 character!");
+                            request.setAttribute("FULL_NAME_ERROR", "Full Name must be from 2 - 30 characters (No Number Or Special Character!)");
                         }
 
                         if (null != password && !"".equals(password)) {
-                            if (password.trim().length() < 6 || password.trim().length() > 30) {
+                            if (!password.trim().matches("^[\\d\\w\\@\\-\\_\\#\\$\\%\\^\\&\\*\\!\\(\\)]{8,20}$")) {
                                 foundError = true;
-                                request.setAttribute("PASSWORD_ERROR", "Password must be from 6-20 character");
-                            } else if (null == confirmPassword || !confirmPassword.equals(password)  ) {
+                                request.setAttribute("PASSWORD_ERROR", "Password must be from 8-20 character");
+                            } else if (confirmPassword == null || !confirmPassword.trim().equals(password.trim())) {
                                 foundError = true;
-                                
                                 request.setAttribute("PASSWORD_ERROR", "Confirm Password must be same!");
                             } else {
                                 updatePassword = true;
                             }
-                        } else {
-
+                        }
+                        if (null == address || !address.matches("[\\s\\d\\w\\\\.\\\\,]{4,100}")) {
+                            foundError = true;
+                            request.setAttribute("ADDRESS_ERROR", "Address must be from 4 - 100 characters");
                         }
 
                         if (phone == null || phone.matches("([0-9]){8,12}") == false) {
                             foundError = true;
                             request.setAttribute("PHONE_ERROR", "Phone Number  invalid ");
                         }
+                        if (birthdate == null || "".equals(birthdate)) {
+                            foundError = true;
+                            request.setAttribute("BIRTHDATE_ERROR", "Birthdate is not valid");
+                        } else {
+                            birthDateValue = java.sql.Date.valueOf(birthdate);
+                            if (birthDateValue.after(presentDate)) {
+                                foundError = true;
+                                request.setAttribute("BIRTHDATE_ERROR", "Birthdate is not valid");
+                            }
+                        }
 
                         if (foundError == false) {
-                            java.sql.Date sqlDate;
-                            sqlDate = java.sql.Date.valueOf(birthdate);
                             profileAccount.setUsername(username);
                             if (updatePassword == true) {
                                 profileAccount.setPassword(password);
                             }
                             profileAccount.setFullname(fullname);
-                            profileAccount.setBirthday(sqlDate);
+                            profileAccount.setBirthday(birthDateValue);
                             profileAccount.setEmail(email);
                             profileAccount.setPhone(phone);
                             profileAccount.setAddress(address);
-                            accDao.updateAccount(curUser.getAccountID(), profileAccount);
+                            if (accDao.updateAccount(curUser.getAccountID(), profileAccount)) {
+                                request.setAttribute("UPDATE_SUCCESS", "Profile Updated Successfully!");
+                            }
                             request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
+
                             url = roadmap.get("profilePage");
-                        }
-                        else {
-                              request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
+                        } else {
+                            request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
                             url = roadmap.get("profilePage");
                         }
 

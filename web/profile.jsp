@@ -64,55 +64,65 @@
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Full name</label>
-                                        <input type ="text" class="txt-edit" name ="fullname" value="${account.fullname}" readonly=true>
+                                        <input type ="text" class="txt-edit" name ="fullname" value="${account.fullname}" readonly=true required>
                                         <c:if test="${not empty FULL_NAME_ERROR}">
-                                            <br/>
                                             <font color="red">
                                             ${FULL_NAME_ERROR}<br/>
-                                            <p> Update Fail !!   </p>
                                             </font>
                                         </c:if>
-
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Address</label>
-                                        <input type ="text" class="txt-edit" name="address" value="${account.address}" readonly="true">
-                                    </div>
-                                    <div class="enter-field col-sm-12 col-md-6">
-                                        <label>Password</label>
-                                        <input type ="password" class="txt-edit" name="password" value="" readonly="true">
-                                        <c:if test="${not empty PASSWORD_ERROR}">
-                                            <br/>
+                                        <input type ="text" class="txt-edit" name="address" value="${account.address}" readonly="true" required>
+                                        <c:if test="${not empty ADDRESS_ERROR}">
                                             <font color="red">
-                                            ${PASSWORD_ERROR}<br/>
-                                            <p> Update Fail !!   </p>
+                                            ${ADDRESS_ERROR}<br/>
                                             </font>
                                         </c:if>
                                     </div>
-
-                                    <div class="enter-field col-sm-12 col-md-6">
-                                        <label>Confirm Password</label>
-                                        <input type ="password" class="txt-edit" name="confirmPassword" value="" readonly="true">
-                                    </div>
-                                        
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Phone</label>
-                                        <input type ="text" class="txt-edit" name ="phone" value="${account.phone}" readonly="true">
+                                        <input type ="text" class="txt-edit" name ="phone" value="${account.phone}" readonly="true" required>
                                         <c:if test="${not empty PHONE_ERROR}">
-                                            <br/>
                                             <font color="red">
                                             ${PHONE_ERROR}<br/>
-                                            <p> Update Fail !!   </p>
                                             </font>
                                         </c:if>
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Birth</label>
-                                        <input type="date" class="txt-edit" id="birthdate" name ="birthdate" value="${account.birthday}" max="9999-12-31" readonly="true"></br>
+                                        <input type="date" class="txt-edit" id="birthdate" name ="birthdate" value="${account.birthday}" max="9999-12-31" readonly="true" required>
+                                        <c:if test="${not empty BIRTHDATE_ERROR}">
+                                            <font color="red">
+                                            ${BIRTHDATE_ERROR}<br/>
+                                            </font>
+                                        </c:if>
+                                    </div>
+                                    <div class="enter-field col-sm-12 col-md-6 d-none" id="passwordTextBox1">
+                                        <label >New Password</label>
+                                        <input type ="password" class="txt-edit" name="password" value="" readonly="true">
+                                    </div>
+                                    <div class="enter-field col-sm-12 col-md-6 d-none" id="passwordTextBox2">
+                                        <label>Confirm Password</label>
+                                        <input type ="password" class="txt-edit" name="confirmPassword" value="" readonly="true">
                                     </div>
                                     <input type="hidden" name="btnAction" value="UpdateProfile">
                                 </div>
                                 <div class="edit-button">
+                                    <c:if test="${not empty PASSWORD_ERROR}">
+                                        <font>
+                                        ${PASSWORD_ERROR}<br/>
+                                        </font>
+                                    </c:if>
+                                    <c:if test="${not empty FULL_NAME_ERROR || not empty PASSWORD_ERROR || not empty BIRTHDATE_ERROR || not empty PHONE_ERROR || not empty ADDRESS_ERROR}">                 
+                                        <p style="color:red;">
+                                            Update Fail !!<br/></p>
+                                    </c:if>
+                                    <c:if test="${not empty UPDATE_SUCCESS}">
+                                        <p style="color:green;">
+                                        ${UPDATE_SUCCESS}<br/>
+                                        </p>
+                                    </c:if>
                                     <button type="button" class="btn-action d-inline" id="editBtn" onclick="EnableEditAndSaveProfile()">Edit Profile</button>
                                     <button type="button"class="btn-action d-none" id="saveBtn"  data-toggle="modal" data-target="#saveModal" data-backdrop="false">Save</button>
                                     <button type="button" class="btn-action d-none" id="undoBtn" data-toggle="modal" data-target="#cancelModal" data-backdrop="false">Cancel</button>
@@ -132,7 +142,7 @@
                                                     Are you sure you want to save your profile?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-secondary" data-dismiss="modal" onclick="SaveEditProfile()">Yes</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="SaveEditProfile()">Yes</button>
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
                                                 </div>
                                             </div>

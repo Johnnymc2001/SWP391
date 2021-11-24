@@ -17,9 +17,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,11 +65,8 @@ public class CreateAccountServlet extends HttpServlet {
         String url;
         java.sql.Date birthDateValue;
         java.sql.Date presentDate = new Date(System.currentTimeMillis());
-        System.out.println(presentDate);
         birthDateValue = java.sql.Date.valueOf(birthdate);
 
-        System.out.println(birthDateValue);
-        System.out.println(birthDateValue.after(presentDate));
 
         try {
             AccountDAO dao = new AccountDAO();
@@ -101,9 +95,9 @@ public class CreateAccountServlet extends HttpServlet {
                 foundError = true;
                 error.setConfirmNotMatched("Confirm Password is Not Matched");
             }
-            if (fullname == null || fullname.matches("[\\sA-Za-z]{4,30}") == false) {
+            if (fullname == null || fullname.matches("[\\sA-Za-z]{2,30}") == false) {
                 foundError = true;
-                error.setFullNameLengthError("Full Name must be from 4 - 30 characters (No Number Or Special Character!)");
+                error.setFullNameLengthError("Full Name must be from 2 - 30 characters (No Number Or Special Character!)");
             }
 
             if (null == address || !address.matches("[\\s\\d\\w\\\\.\\\\,]{4,100}")) {
