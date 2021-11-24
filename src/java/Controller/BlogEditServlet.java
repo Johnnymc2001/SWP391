@@ -68,6 +68,12 @@ public class BlogEditServlet extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         AccountDTO curUser = (AccountDTO) session.getAttribute("USER");
+
+        if (null == curUser || !curUser.getRole().equals("Mentor") && !curUser.getRole().equals("Student")) {
+            response.sendError(401);
+            return;
+        }
+        
         CategoryDAO catDao = new CategoryDAO();
 
         if (null != curUser) {
@@ -78,8 +84,7 @@ public class BlogEditServlet extends HttpServlet {
                 BlogDTO blogEdit = blogDao.getBlogFromBlogID(blogID);
                 if (null == blogEdit) {
                     //dieu huong 404
-                    RequestDispatcher rd = request.getRequestDispatcher("404.html");
-                    rd.forward(request, response);
+                    response.sendError(404);
 //                System.out.println("url tai blog edit servlet: " + url);
                 } else {
                     if (blogEdit.getStudentID() == curUser.getAccountID()) {
@@ -161,22 +166,21 @@ public class BlogEditServlet extends HttpServlet {
                             } else {
 
                                 content = Jsoup.clean(content, Safelist.relaxed());
-                                
+
                                 //4. Call DAO to insert to DB
                                 blogEdit.setContent(content);
                                 blogEdit.setCategoryID(categoryID);
 //                        blogEdit.setTags(tags);
                                 blogEdit.setTitle(title);
-                                
+
                                 if ("Mentor".equals(curUser.getRole()) && curUser.getCategoryID().equals(blogEdit.getCategoryID())) {
-                                    
+
                                 } else {
-                                     blogEdit.setStatus("PENDING");
+                                    blogEdit.setStatus("PENDING");
                                 }
-                               
 
                                 String imageUrl = "UI/Icon/selfmademan.jpg";
-                                
+
                                 if (null != base64Image) {
                                     imageUrl = ImageUtils.uploadImageAndCrop(base64Image);
                                     blogEdit.setThumbnail(imageUrl);
@@ -193,7 +197,7 @@ public class BlogEditServlet extends HttpServlet {
                             // loi : dieu huong jsp de hien loi
                         }
                     } else {
-                        response.sendRedirect("home");
+                        response.sendError(403);
                     }
                 }
             }

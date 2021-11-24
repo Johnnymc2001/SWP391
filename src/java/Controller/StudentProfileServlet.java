@@ -60,7 +60,7 @@ public class StudentProfileServlet extends HttpServlet {
         int id = 0;
         boolean foundError = false;
         boolean updatePassword = false;
-        
+
         BlogDAO blogdao = new BlogDAO();
         AccountDAO accDao = new AccountDAO();
 
@@ -76,19 +76,15 @@ public class StudentProfileServlet extends HttpServlet {
                 profileAccount = accDao.getAccountFromAcoountID(id);
             } else if (null != curUser) {
                 profileAccount = curUser;
-                System.out.println("Get Self Profile!");
             }
-            System.out.println(button + address);
             if (null != profileAccount) {
-                System.out.println("Button?" + button);
                 if (button != null) {
-                    System.out.println("Button?");
                     if (button.equals("UpdateProfile") && (profileAccount.getAccountID() == curUser.getAccountID())) {
 
                         //Add constrain
-                        if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20 || fullname.matches("([A-Z]){1,}[a-z]+") == false) {
+                        if (null == fullname || fullname.matches("([A-Za-z\\s]){8,20}") == false) {
                             foundError = true;
-                            request.setAttribute("FULL_NAME_ERROR", "Full Name must be from 6-20 character and must contain 1 character at the begining and cant contain a number ");
+                            request.setAttribute("FULL_NAME_ERROR", "Full Name must be from 6-20 character!");
                         }
 
                         if (null != password && !"".equals(password)) {
@@ -149,7 +145,7 @@ public class StudentProfileServlet extends HttpServlet {
                 ArrayList<BlogDTO> bloglist = blogdao.getAllBlogFromAccountId(profileAccount.getAccountID())
                         .stream().filter(Blog -> "APPROVED".equals(Blog.getStatus()))
                         .collect(Collectors.toCollection(ArrayList::new));
-                
+
                 request.setAttribute("BLOGLIST", bloglist);
                 request.setAttribute("ACCOUNT", profileAccount);
 //                    System.out.println("bloglist: " + bloglist.size());
@@ -159,7 +155,8 @@ public class StudentProfileServlet extends HttpServlet {
                 url = roadmap.get("home");
             }
 
-        } catch (NumberFormatException | SQLException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
