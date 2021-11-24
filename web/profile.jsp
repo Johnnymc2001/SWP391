@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Address</label>
-                                        <input type ="text" class="txt-edit" name="address" value="${account.address}">
+                                        <input type ="text" class="txt-edit" name="address" value="${account.address}" readonly="true">
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Password</label>
