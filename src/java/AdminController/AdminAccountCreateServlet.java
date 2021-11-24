@@ -120,12 +120,12 @@ public class AdminAccountCreateServlet extends HttpServlet {
                     request.setAttribute("ERROR_CONFIRM_PASSWORD", "Password must be the same!");
                     foundError = true;
                 }
-                if (!fullname.matches("([\\ a-zA-Z]){4,}")) {
-                    request.setAttribute("ERROR_FULLNAME", "Fullname must be more than 4 characters and must not contains any special characters and number!");
+                if (!fullname.matches("[\\sA-Za-z]{4,30}")) {
+                    request.setAttribute("ERROR_FULLNAME", "Fullname must be from 4 to 30 characters, must not contains any special characters and number!");
                     foundError = true;
                 }
-                if (!address.matches("([\\ a-zA-Z0-9]){4,}")) {
-                    request.setAttribute("ERROR_ADDRESS", "Address must be more than 4 characters and must not contains any special characters and number!");
+                if (!address.matches("[\\s\\d\\w\\\\.\\\\,]{4,100}")) {
+                    request.setAttribute("ERROR_ADDRESS", "Address must be more than 4 to 100 characters");
                     foundError = true;
                 }
                 if (!email.matches("([\\w\\d\\_\\-])+@[\\w]+\\.[\\w\\.]+")) {

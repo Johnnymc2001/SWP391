@@ -35,7 +35,7 @@ public class MailUtils {
         VerificationDAO veriDao = new VerificationDAO();
 
         AccountDTO dto = accDao.getAccountFromAcoountID(accountId);
-        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "VERIFICATION");
+        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "FORGOT_PASSWORD");
 
         String from = USER_NAME;
         String pass = PASSWORD;
@@ -55,7 +55,7 @@ public class MailUtils {
         VerificationDAO veriDao = new VerificationDAO();
 
         AccountDTO dto = accDao.getAccountFromAcoountID(accountId);
-        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "FORGOT_PASSWORD");
+        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "VERIFICATION");
 
         String from = USER_NAME;
         String pass = PASSWORD;
@@ -65,6 +65,7 @@ public class MailUtils {
         to[0] = dto.getEmail();
         String subject = "Academy Blog Account Verification";
         String body = "Please verify your account with this link : https://academyblog.azurewebsites.net/SWP391_Project/verify?code=" + code.getCode();
+        
         System.out.println(body);
         sendFromGMail(from, pass, to, subject, body, to[0]);
         return true;

@@ -70,10 +70,10 @@ public class CreateAccountServlet extends HttpServlet {
         java.sql.Date presentDate = new Date(System.currentTimeMillis());
         System.out.println(presentDate);
         birthDateValue = java.sql.Date.valueOf(birthdate);
-        
+
         System.out.println(birthDateValue);
         System.out.println(birthDateValue.after(presentDate));
-        
+
         try {
             AccountDAO dao = new AccountDAO();
             AccountDTO user = dao.getAccountFromUsername(username);
@@ -101,10 +101,16 @@ public class CreateAccountServlet extends HttpServlet {
                 foundError = true;
                 error.setConfirmNotMatched("Confirm Password is Not Matched");
             }
-            if (fullname == null || fullname.trim().length() < 6 || fullname.trim().length() > 20 || fullname.matches("([A-Z]){1,}[a-z]+") == false) {
+            if (fullname == null || fullname.matches("[\\sA-Za-z]{4,30}") == false) {
                 foundError = true;
-                error.setFullNameLengthError("Full Name must be from 6-20 character and must contain 1 character at the begining ");
+                error.setFullNameLengthError("Full Name must be from 4 - 30 characters (No Number Or Special Character!)");
             }
+
+            if (null == address || !address.matches("[\\s\\d\\w\\\\.\\\\,]{4,100}")) {
+                foundError = true;
+                request.setAttribute("ERROR_ADDRESS", "Address must be from 4 - 100 characters");
+            }
+
             if (!email.matches("([\\w\\d\\_\\-])+@[\\w]+\\.[\\w\\.]+")) {
                 request.setAttribute("ERROR_EMAIL", "Email Address is in incorrect format");
                 foundError = true;
@@ -147,8 +153,8 @@ public class CreateAccountServlet extends HttpServlet {
                 }
 
                 url = "home";
-                url = roadmap.get(url);
-                request.getRequestDispatcher(url).forward(request, response);
+//                url = roadmap.get(url);
+                response.sendRedirect("loginPage");
             }
         } catch (IOException | SQLException | ServletException ex) {
             ex.printStackTrace();

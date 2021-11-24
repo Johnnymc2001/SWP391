@@ -75,10 +75,10 @@
                         <button class="login-btn" type="submit">Login</button><br>
                     </form>
                     <button class="goto-register" onclick="goToRegister()">Don't have an account ?</button>
-                    
+
                     <div><button class="goto-register"><a class="homeLink" href="home">Go to Home Page</a></button></div>
                 </div>
-                        
+
 
                 <%--            END OF LOGIN             --%>
 
@@ -127,10 +127,15 @@
                                 <input name="address" id="address" value="${param.address}" type="text" required>
                                 <label class="address-label" for="address"><i class="fas fa-map-marked-alt"></i>
                                     Address</label>
+                                <br/>
+                                <font color="red">
+                                ${requestScope.ERROR_ADDRESS}<br/>
+                                </font>
                             </div>
                             <div class="enter-field col-md-6">
                                 <input name="birthdate" id="birthdate" value="${param.birthdate}" type="text" max="9999-12-31" onfocus="(this.type = 'date')"
-                                       onblur="if (!this.value) this.type = 'text'" required>
+                                       onblur="if (!this.value)
+                                                   this.type = 'text'" required>
                                 <label class="birthdate-label" for="birthdate"><i class="fas fa-calendar-alt"></i>Birthdate</label>
                                 <c:set var="birthError" value="${requestScope.ERROR_BIRTHDATE}"/>
                                 <c:if test="${not empty birthError}">

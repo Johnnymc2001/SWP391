@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.util.Base64;
 import org.apache.commons.io.IOUtils;
 import com.cloudinary.utils.ObjectUtils;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -22,6 +23,12 @@ import java.util.Map;
  */
 public class ImageUtils {
 
+    static Map authConfig = ObjectUtils.asMap(
+            "cloud_name", "swpgogogo",
+            "api_key", "274465474966931",
+            "api_secret", "XfhGKe_VQyV8X1tdnNwDuvlf47k",
+            "secure", true);
+
     public static byte[] InputStreamToBytes(InputStream is) throws IOException {
         return IOUtils.toByteArray(is);
     }
@@ -30,17 +37,29 @@ public class ImageUtils {
         return Base64.getEncoder().encodeToString(b);
     }
 
+    public static ArrayList<String> getAllImage() {
+        try {
+
+            Cloudinary cloudinary = new Cloudinary(authConfig);
+            
+            Map config = ObjectUtils.asMap(
+                    "folder", "attachments");
+            Map response = cloudinary.api().resources(config);
+//            for (int i = 0; i < response.size(); i++) {
+
+            System.out.println(response);
+
+//            }
+        } catch (Exception ex) {
+        }
+        return null;
+    }
+
     // SET IS TO BYTE ARRAY
     // Main Image Upload
     public static String uploadImageAndCrop(String base64) {
         try {
             String finalImageData = "data:image/png;base64," + base64;
-
-            Map authConfig = ObjectUtils.asMap(
-                    "cloud_name", "swpgogogo",
-                    "api_key", "274465474966931",
-                    "api_secret", "XfhGKe_VQyV8X1tdnNwDuvlf47k",
-                    "secure", true);
 
             Map uploadConfig = ObjectUtils.asMap(
                     "folder", "attachments",
@@ -100,8 +119,8 @@ public class ImageUtils {
         }
         return "";
     }
-    
-        public static String uploadImageOriginal(InputStream is) {
+
+    public static String uploadImageOriginal(InputStream is) {
         try {
             String base64 = BytesToBase64(InputStreamToBytes(is));
 
@@ -110,8 +129,7 @@ public class ImageUtils {
         }
         return "";
     }
-    
-    
+
     // Multi Image Upload
 //    public static boolean uploadImage(ArrayList<String> listOfBase64, int blogId) {
 //        boolean sucess = true;
