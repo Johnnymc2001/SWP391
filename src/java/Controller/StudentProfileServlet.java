@@ -94,6 +94,7 @@ public class StudentProfileServlet extends HttpServlet {
                                 request.setAttribute("PASSWORD_ERROR", "Password must be from 6-20 character");
                             } else if (null == confirmPassword || !confirmPassword.equals(password)  ) {
                                 foundError = true;
+                                
                                 request.setAttribute("PASSWORD_ERROR", "Confirm Password must be same!");
                             } else {
                                 updatePassword = true;
