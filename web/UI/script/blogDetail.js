@@ -14,5 +14,5 @@ async function rate(blogid, rate) {
     var json = await data.json();
 
     document.querySelector(".blog-vote .user-vote div span").innerText = json.rating;
-    document.querySelector(".blog-vote .user-vote .btn-group .btn i").style.color = "yellow";
+    document.querySelector(".blog-vote .user-vote .btn-group .btn i").style.color = "orange";
 }

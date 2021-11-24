@@ -150,3 +150,13 @@ img{
 .btn-action:hover{
     cursor: pointer;
 }
+
+.returnToHome{
+    transition: all 0.2s;
+}
+
+.returnToHome:hover{
+    text-decoration: underline;
+    color: orange;
+    margin-left: 10px;
+}

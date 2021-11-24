@@ -16,3 +16,8 @@ attachment.onchange = evt => {
 if(maxBlog===true){
     $('#maxBlogModal').modal('show');
 }
+
+function goTop(){
+    
+}
+

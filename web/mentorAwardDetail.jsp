@@ -67,22 +67,27 @@
                 </c:if>
             </div>
 
-            <div><a href="blog?txtBlogID=${blogInfo.blogID}">Go back to blog</a></div>
-
             <c:set var="awardNameExist" value="${requestScope.ERROR_AWARD_NAME}"/>
             <c:if test="${not empty awardNameExist}">
-                <font color="red">
-                <p>${awardNameExist}</p>
-                </font>
+                <div class="alert alert-danger" role="alert">
+                    ${awardNameExist}
+                </div>
             </c:if>
 
             <c:set var="error" value="${requestScope.ERROR_EFFECTIVE}"/>
             <c:if test="${not empty error}">
-                <font color="red">
-                <p>${error}</p>
-                </font>
+                <div class="alert alert-danger" role="alert">
+                    ${error}
+                </div>
             </c:if>
-                
+
+            <c:set var="success" value="${requestScope.CREATE_SUCCESS}"/>
+            <c:if test="${not empty success}">
+                <div class="alert alert-info" role="alert">
+                    ${success}
+                </div>
+            </c:if>
+            
             <div class="create-award col-md-6">
 
                 <button id="award-btn" class="btn-action" onclick="ShowCreateAward()" >Create an Award</button>
@@ -147,7 +152,9 @@
                     </table>
                 </c:if>
             </div>
+                    <div><a class="returnToHome" href="blog?txtBlogID=${blogInfo.blogID}">Go back to blog</a></div>
         </div>
+
     </body>
 
 

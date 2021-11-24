@@ -52,7 +52,6 @@
         <c:if test="${not empty maxBlogCreated}">
             <script>
                 const maxBlog = true;
-                
             </script>
             <div class="modal fade " data-backdrop="static" data-keyboard="false" id="maxBlogModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">

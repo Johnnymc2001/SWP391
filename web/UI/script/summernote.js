@@ -54,3 +54,4 @@ function uploadImage(image) {
         }
     });
 }
+

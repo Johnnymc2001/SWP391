@@ -90,13 +90,13 @@ public class BlogCommentServlet extends HttpServlet {
                             long now = new Timestamp(System.currentTimeMillis()).getTime() / 1000;
                             
                             int time = (int) (now - lastCommentTime);
-                            if (time > 10) {
+                            if (time > 60) {
                                 // Last comment is more than 10s, ok!
                                 Timestamp commentDate = new Timestamp(System.currentTimeMillis());
                                 BlogCommentDTO dto = new BlogCommentDTO(blogID, commentDate, content, ownerID);
                                 dao.createBlogComment(dto);
                             } else {
-                                request.setAttribute("MESSAGE", "You are comment too fast! Please wait 10 second!");
+                                request.setAttribute("MESSAGE", "You are comment too fast! Please wait 60 second!");
                             }
                             
                         } else {

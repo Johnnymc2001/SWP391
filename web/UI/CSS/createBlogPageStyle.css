@@ -115,6 +115,10 @@ form a:hover{
     color: orange;
 }
 
+.note-editor a:hover{
+    margin: 0;
+}
+
 /* Footer */
 .web-footer {
     height: 100px;

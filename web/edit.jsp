@@ -96,17 +96,17 @@
                 <a href="home">Return to Home</a>
         </div>
 
-        <!-- FOOTER -->
-        <div class="web-footer">
-            <p>2021 Henry. FE by Henry</p>
-            <button onclick="goTop()">Back to top</button>
-        </div>
-        
         <script>
-            const blogContent = `${blog.content}`;
+                    const blogContent = `${blog.content}`;
         </script>
-        <script type="text/javascript" src="./UI/script/summernote.js"></script>
-        <script type="text/javascript" src="./UI/script/createBlog.js"></script>
     </form> 
+    <!-- FOOTER -->
+    <div class="web-footer">
+        <p>&copy; 2021 Henry. FE by Henry</p>
+        <button onclick="goTop()">Back to top</button>
+    </div>
+
+    <script type="text/javascript" src="./UI/script/summernote.js"></script>
+    <script type="text/javascript" src="./UI/script/createBlog.js"></script>
 </body>
 </html>

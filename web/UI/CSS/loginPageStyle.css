@@ -200,3 +200,11 @@ h1 {
     top: 50%;
     transform: translateY(-50%);
 }
+
+.homeLink{
+    color: black;
+}
+
+.homeLink:hover{
+    color: orange;
+}
