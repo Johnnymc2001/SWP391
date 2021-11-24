@@ -92,7 +92,7 @@ public class StudentProfileServlet extends HttpServlet {
                             if (password.trim().length() < 6 || password.trim().length() > 30) {
                                 foundError = true;
                                 request.setAttribute("PASSWORD_ERROR", "Password must be from 6-20 character");
-                            } else if (null == confirmPassword || !confirmPassword.equals(password)) {
+                            } else if (null == confirmPassword || !confirmPassword.equals(password)  ) {
                                 foundError = true;
                                 request.setAttribute("PASSWORD_ERROR", "Confirm Password must be same!");
                             } else {
@@ -111,7 +111,7 @@ public class StudentProfileServlet extends HttpServlet {
                             java.sql.Date sqlDate;
                             sqlDate = java.sql.Date.valueOf(birthdate);
                             profileAccount.setUsername(username);
-                            if (null != password || password != "" || confirmPassword!="" ||null!= confirmPassword ) {
+                            if (updatePassword == true) {
                                 profileAccount.setPassword(password);
                             }
                             profileAccount.setFullname(fullname);
@@ -121,6 +121,10 @@ public class StudentProfileServlet extends HttpServlet {
                             profileAccount.setAddress(address);
                             accDao.updateAccount(curUser.getAccountID(), profileAccount);
                             request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
+                            url = roadmap.get("profilePage");
+                        }
+                        else {
+                              request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
                             url = roadmap.get("profilePage");
                         }
 
