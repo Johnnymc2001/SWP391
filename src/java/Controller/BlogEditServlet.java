@@ -73,7 +73,7 @@ public class BlogEditServlet extends HttpServlet {
             response.sendError(401);
             return;
         }
-        
+
         CategoryDAO catDao = new CategoryDAO();
 
         if (null != curUser) {
@@ -200,6 +200,8 @@ public class BlogEditServlet extends HttpServlet {
                         response.sendError(403);
                     }
                 }
+            } else {
+                response.sendError(404);
             }
         } else {
             response.sendRedirect("home");

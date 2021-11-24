@@ -66,7 +66,7 @@ public class CreateBlogServlet extends HttpServlet {
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("USER");
             if (null == account || !account.getRole().equals("Student") && !account.getRole().equals("Mentor")) {
-                response.sendRedirect(sc.getContextPath());
+                response.sendError(401);
                 return;
             } else {
                 System.out.println("getAllBlogWithStatusAndAccountID not working?");

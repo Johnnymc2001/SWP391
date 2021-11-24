@@ -77,6 +77,7 @@ public class StudentProfileServlet extends HttpServlet {
             } else if (null != curUser) {
                 profileAccount = curUser;
             }
+            
             if (null != profileAccount) {
                 if (button != null) {
                     if (button.equals("UpdateProfile") && (profileAccount.getAccountID() == curUser.getAccountID())) {
