@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 
                 if (curUser == null) {
                     foundError = true;
-                    request.setAttribute("LOGIN_ERROR", "Account not exist");
+                    request.setAttribute("LOGIN_ERROR", "Your Username or Password is incorrect!");
                 } else {
                     if (curUser.getStatus().equals("UNAVAILABLE")) {
                         foundError = true;

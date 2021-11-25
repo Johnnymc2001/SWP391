@@ -251,7 +251,7 @@
 
         <!-- THIS IS BODY CONTAINER 4 -->
         <div id="body-container-4" class="container-fluid">
-            <h1>Everyone love</h1>
+            <h1>Most Interact</h1>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="content-wrap">
@@ -279,6 +279,7 @@
                         </div>
                     </div>
                 </div>
+                <c:if test="${empty user}">
                 <div class="col-lg-4">
                     <div class="register-invitation">
                         <h3>Join us now</h3>
@@ -287,6 +288,7 @@
                         <p><a href="">Already have an account ?</a></p>
                     </div>
                 </div>
+                </c:if>
             </div>
 
             <!-- FOOTER -->
