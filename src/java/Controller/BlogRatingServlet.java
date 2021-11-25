@@ -60,6 +60,10 @@ public class BlogRatingServlet extends HttpServlet {
             BlogRatingDAO blogRatingDAO = new BlogRatingDAO();
             BlogRatingDTO dto = blogRatingDAO.getBlogRatingFromBlogIDAndOwnerID(blogID, account.getAccountID());
 
+            if (null == account || !account.getRole().equals("Student") && !account.getRole().equals("Mentor")) {
+                response.sendError(401);
+                return;
+            }
             if (null != txtRate) {
                 double rate = Integer.parseInt(txtRate);
 
@@ -77,7 +81,7 @@ public class BlogRatingServlet extends HttpServlet {
                     int rating = blogDAO.getAverageRatingFromBlogID(blogID);
                     response.setContentType("application/json");
                     response.setCharacterEncoding("utf-8");
-                    
+
                     String json = "{\"rating\":\"" + rating + "\"}";
 
                     PrintWriter out = response.getWriter();
