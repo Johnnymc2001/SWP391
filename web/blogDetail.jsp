@@ -87,7 +87,7 @@
                                             aria-expanded="false">
                                         <i class="fas fa-star fa-lg" 
                                            <c:if test="${requestScope.ALREADY_RATED eq 'true'}">
-                                               style="color: yellow"
+                                               style="color: orange"
                                            </c:if>
                                            ></i> 
                                         <span> ${blog.getAverageRating()}</span>
