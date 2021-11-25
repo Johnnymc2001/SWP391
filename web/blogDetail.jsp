@@ -58,7 +58,10 @@
                         </c:if>
                     </c:if>
                     <c:if test="${blog.status == 'PENDING'}">
-                        <h2>[PENDING]</h2>
+                        <h2 style="color:orange;">[PENDING]</h2>
+                    </c:if>
+                    <c:if test="${blog.status == 'DISAPPROVED'}">
+                        <h2 style="color:red;">[DISAPPROVED]</h2>
                     </c:if>
                     <div class="blog-note">
                         <c:set var="blogNameAwards" value="${requestScope.AWARDSNAME}"/>

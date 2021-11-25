@@ -83,7 +83,7 @@ public class CreateAccountServlet extends HttpServlet {
                 url = roadmap.get(url);
                 request.getRequestDispatcher(url).forward(request, response);
             }
-            if (username == null || username.trim().length() < 6 || username.trim().length() > 20 || username.matches("[a-zA-Z]+[0-9]*") == false) {
+            if (username == null || !username.trim().matches("[a-zA-Z0-9]{6,20}")) {
                 foundError = true;
                 error.setUserNameLengthError("User name must be from 6-20 character and must contain 1 character at the begining");
 

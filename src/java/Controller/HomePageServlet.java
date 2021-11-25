@@ -93,7 +93,7 @@ public class HomePageServlet extends HttpServlet {
 
             // Most Comment
 //            ArrayList<BlogDTO> mostComment = blogDao.getAllApprovedBlogWithHighestComment(6);
-            ArrayList<BlogDTO> mostComment = mostComment = blogList;
+            ArrayList<BlogDTO> mostComment = blogList;
             mostComment.sort(Comparator.comparing(BlogDTO::getCommentCount));
            
             mostComment = mostComment.stream().limit(6).collect(Collectors.toCollection(ArrayList::new));

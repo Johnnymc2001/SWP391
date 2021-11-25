@@ -120,7 +120,8 @@ public class NotificationDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT notificationID, ownerID, isRead, type, content, date, redirectUrl "
                         + "FROM Notification "
-                        + "WHERE ownerID = ?";
+                        + "WHERE ownerID = ? "
+                        + "ORDER BY date DESC";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, accountId);

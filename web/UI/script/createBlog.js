@@ -28,6 +28,7 @@ function goTop(){
 
 function UpdatePost() {
     $("#userPost").submit();
+    
 }
 
 function CancelUpdate() {

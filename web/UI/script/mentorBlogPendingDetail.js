@@ -83,3 +83,17 @@ function undoDeleteThumbnail() {
     deleteThumnailBtn.classList.replace("d-none", "d-inline");
     undoDeleteBtn.classList.replace("d-inline", "d-none");
 }
+
+
+//Modal buttons:
+
+function Approve() {
+    document.getElementById("ActionBtn").value = "Approve";
+    $("#pendingBlog").submit();
+    
+}
+
+function Disapprove() {
+    document.getElementById("ActionBtn").value = "Disapprove";
+    $("#pendingBlog").submit();
+}

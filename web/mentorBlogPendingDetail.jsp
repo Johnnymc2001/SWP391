@@ -50,7 +50,7 @@
         </header>
         <!-- END OF NAVBAR -->
         <div class="create-blog-container container-fluid"> 
-            <form action="blogPendingDetail" method="POST" accept-charset="utf-8">
+            <form name="formPendingBlog" id="pendingBlog" action="blogPendingDetail" method="POST" accept-charset="utf-8">
                 <input type="hidden" name="blogid" value="${blog.blogID}">
                 <div class="row">
                     <div class="thumbnail-area">
@@ -94,9 +94,10 @@
                     <div class="right-colum col-lg-4">
                         <div class="row justify-content-center">
                             <div class="user-footer">
+                                <input type="hidden" id="ActionBtn" name="submitAction" value="">
                                 <button class="btn-action d-none" id="updateBtn" type="submit" name="submitAction" value="Update">Update</button>
-                                <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
-                                <button class="btn-action deactive" id="disapproveBtn" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
+                                <button class="btn-action" id="approveBtn" type="button"  data-toggle="modal" data-target="#approveModal" data-backdrop="false">Approve</button>
+                                <button class="btn-action deactive" id="disapproveBtn" type="button" data-toggle="modal" data-target="#dispproveModal" data-backdrop="false">Disapprove</button>
                             </div>
                             <div class="d-none" id="note">
                                 <h1>Note:</h1>
@@ -105,6 +106,51 @@
                         </div>
                     </div>
                 </div>
+
+                <%--         Boostrap Modal for update buttons         --%>
+
+                <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Approve this blog?
+                            </div>
+                            <div class="modal-footer">
+                                <button  type="button" class="btn btn-secondary" data-dismiss="modal" onclick="Approve()">Yes</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="dispproveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Disapprove this blog?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="Disapprove()">Yes</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%--         End for Boostrap Modal for update buttons         --%> 
+
                 <a href="blogPendingList">Return</a>
             </form>
 
