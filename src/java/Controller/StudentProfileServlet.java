@@ -21,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -54,7 +55,7 @@ public class StudentProfileServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
         String button = request.getParameter("btnAction");
-        System.out.println("conm de"+birthdate);
+        System.out.println("conm de" + birthdate);
         System.out.println(button + address);
         String url = "";
         int id = 0;
@@ -66,6 +67,7 @@ public class StudentProfileServlet extends HttpServlet {
         AccountDAO accDao = new AccountDAO();
 
         AccountDTO curUser = (AccountDTO) request.getSession().getAttribute("USER");
+
         AccountDTO profileAccount = null;
 
         try {
@@ -132,7 +134,14 @@ public class StudentProfileServlet extends HttpServlet {
                             profileAccount.setPhone(phone);
                             profileAccount.setAddress(address);
                             if (accDao.updateAccount(curUser.getAccountID(), profileAccount)) {
-                                request.setAttribute("UPDATE_SUCCESS", "Profile Updated Successfully!");
+                                
+                                HttpSession session = request.getSession();
+                                session.setAttribute("USER", profileAccount);
+                                if (updatePassword == true) {
+                                    request.setAttribute("UPDATE_SUCCESS", "Profile & Password Updated Successfully!");
+                                }else{
+                                    request.setAttribute("UPDATE_SUCCESS", "Profile Updated Successfully!");
+                                }
                             }
                             request.setAttribute("ACCOUNT", accDao.getAccountFromAcoountID(curUser.getAccountID()));
 
