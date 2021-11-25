@@ -24,12 +24,13 @@
     </head>
     <body>
 
-        ${requestScope.MESSAGE}
+        <div>${requestScope.MESSAGE}</div>
         <c:set var="user" value="${sessionScope.USER}"/>
         <c:if test="${not empty user}">
             <c:if test="${user.role == 'Mentor' || user.role == 'Student' || user.role == 'Admin'}">
+                <div class="container-fluid">
                 <form class="comment-input" action="comment" method="post">
-                    <input autocomplete="off" type="hidden" name="txtBlogID" value="${param.txtBlogID}"
+                    <input autocomplete="off" type="hidden" name="txtBlogID" value="${param.txtBlogID}">
                            <div class="avatar">
                         <img src="UI/Icon/avatar-login.png" alt="">
                     </div>
@@ -38,6 +39,7 @@
                     </div>
                     <button class="send-btn" type="submit"><i class="fas fa-paper-plane fa-lg"></i></button>
                 </form>
+                </div>
             </c:if>
         </c:if>
         <c:set var="dtoCmMAP" value="${requestScope.COMMENT_MAP}"/>
