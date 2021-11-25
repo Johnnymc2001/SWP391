@@ -65,7 +65,7 @@ public class BlogEditServlet extends HttpServlet {
         String base64Image = null;
         boolean foundErr = false;
         String button = request.getParameter("btAction");
-
+        System.out.println(button+"con de");
         HttpSession session = request.getSession(true);
         AccountDTO curUser = (AccountDTO) session.getAttribute("USER");
 

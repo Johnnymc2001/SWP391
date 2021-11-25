@@ -44,7 +44,7 @@
         <!-- END OF NAVBAR -->
 
         <div class="create-blog-container container">
-            <form action="edit" method="POST" enctype='multipart/form-data'>
+            <form id="userPost" action="edit" method="POST" enctype='multipart/form-data'>
                 <div class="user-pick">
                     <c:set var="editBlog" value="${requestScope.BLOG_EDIT}"/>
                     <div class="thumbnail-area">
@@ -90,20 +90,64 @@
                     <textarea id="summernote" name="txtContent">${editBlog.content}</textarea>
                 </div>
                 <div class="user-footer">
-                    <button class="btn-action" type="submit" value="Update" name="btAction">Update</button>
-                    <button class="btn-action" type="reset" value="Reset" >Reset</button>
+                    <input type ="hidden" name ="btAction" value="Update">
+                    <button class="btn-action" type="button" value="Update" data-toggle="modal" data-target="#saveModal" data-backdrop="false">Update</button>
+                    <button class="btn-action" type="button" value="Undo" data-toggle="modal" data-target="#cancelModal" data-backdrop="false">Undo</button>
                 </div>
-                <a href="home">Return to Home</a>
+
+                <%--         Boostrap Modal for update buttons         --%>
+
+                <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Your post will be pending for approval after update</br>
+                                Do you sure you want to update?
+                            </div>
+                            <div class="modal-footer">
+                                <button  type="submit" value="Update" name="btAction" class="btn btn-secondary" data-dismiss="modal" onclick="UpdatePost()">Yes</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to undo your changes?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="CancelUpdate()">Yes</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%--         End for Boostrap Modal for update buttons         --%>
+                <div><a id="returnToBlog" class="returnToHome" href="blog?txtBlogID=${editBlog.blogID}">Go back to blog</a></div>
         </div>
 
         <script>
-                    const blogContent = `${blog.content}`;
+            const blogContent = `${blog.content}`;
         </script>
     </form> 
     <!-- FOOTER -->
     <div class="web-footer">
         <p>&copy; 2021 Henry. FE by Henry</p>
-        <button onclick="goTop()">Back to top</button>
     </div>
 
     <script type="text/javascript" src="./UI/script/summernote.js"></script>

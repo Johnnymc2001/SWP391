@@ -21,3 +21,16 @@ function goTop(){
     
 }
 
+
+
+//Modal buttons:
+
+
+function UpdatePost() {
+    $("#userPost").submit();
+}
+
+function CancelUpdate() {
+    window.location.reload();
+}
+
