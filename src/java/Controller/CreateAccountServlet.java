@@ -85,7 +85,7 @@ public class CreateAccountServlet extends HttpServlet {
             }
             if (username == null || !username.trim().matches("[a-zA-Z0-9]{6,20}")) {
                 foundError = true;
-                error.setUserNameLengthError("User name must be from 6-20 character and must contain 1 character at the begining");
+                error.setUserNameLengthError("User name must be from 6-20 character!");
 
             }
             if (!password.trim().matches("^[\\d\\w\\@\\-\\_\\#\\$\\%\\^\\&\\*\\!\\(\\)]{8,20}$")) {

@@ -396,7 +396,7 @@ public class BlogDAO implements Serializable {
         }
         return null;
     }
-    
+
     public ArrayList<BlogDTO> getAllApprovedBlogWithMostAward(int maxBlog) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -612,9 +612,9 @@ public class BlogDAO implements Serializable {
         }
         return null;
     }
-    
+
     public int getAverageRatingFromBlogID(int blogID) throws SQLException {
-          Connection con = null;
+        Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
 
@@ -632,7 +632,7 @@ public class BlogDAO implements Serializable {
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    rating = rs.getInt("ratingCount"); 
+                    rating = rs.getInt("ratingCount");
                 }
 
                 return rating;
@@ -705,7 +705,8 @@ public class BlogDAO implements Serializable {
         }
         return null;
     }
-    public ArrayList<BlogDTO> getAllBlogWithStatusAndAccountID(String s,int accountID) throws SQLException {
+
+    public ArrayList<BlogDTO> getAllBlogWithStatusAndAccountID(String s, int accountID) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -723,7 +724,7 @@ public class BlogDAO implements Serializable {
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, s);
-                 stm.setInt(2, accountID);
+                stm.setInt(2, accountID);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
@@ -1148,7 +1149,7 @@ public class BlogDAO implements Serializable {
         return false;
     }
 
-    public boolean approveBlog(int blogId, String note) throws SQLException {
+    public boolean approveBlog(int blogId, String note, int mentorId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -1158,13 +1159,15 @@ public class BlogDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "UPDATE Blog "
-                        + "SET status = ?, note = ? "
+                        + "SET status = ?, approvedByID = ?, note = ? "
                         + "WHERE blogID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "APPROVED");
-                 stm.setString(2, note);
-                stm.setInt(3, blogId);
+                stm.setInt(2, mentorId);
+
+                stm.setString(3, note);
+                stm.setInt(4, blogId);
                 int line = stm.executeUpdate();
 
                 return line > 0;
@@ -1175,7 +1178,7 @@ public class BlogDAO implements Serializable {
         return false;
     }
 
-    public boolean disapproveBlog(int blogId, String note) throws SQLException {
+    public boolean disapproveBlog(int blogId, String note, int mentorId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -1185,13 +1188,15 @@ public class BlogDAO implements Serializable {
             // 2. Create SQL String
             if (con != null) {
                 String sql = "UPDATE Blog "
-                        + "SET status = ? , note = ? "
+                        + "SET status = ?, approvedByID = ?, note = ? "
                         + "WHERE blogID = ?";
                 // 3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "DISAPPROVED");
-                stm.setString(2, note);
-                stm.setInt(3, blogId);
+                stm.setInt(2, mentorId);
+
+                stm.setString(3, note);
+                stm.setInt(4, blogId);
                 int line = stm.executeUpdate();
 
                 return line > 0;

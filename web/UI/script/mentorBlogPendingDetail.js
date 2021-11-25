@@ -87,10 +87,11 @@ function undoDeleteThumbnail() {
 
 //Modal buttons:
 
+
 function Approve() {
     document.getElementById("ActionBtn").value = "Approve";
     $("#pendingBlog").submit();
-    
+
 }
 
 function Disapprove() {
