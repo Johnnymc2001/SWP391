@@ -94,8 +94,7 @@ public class MentorAwardServlet extends HttpServlet {
                 System.out.println("Award ID Remove NULL!");
             }
             if (null != txtEffectiveDays) {
-                awardID = Integer.parseInt(txtEffectiveDays);
-
+                EffectiveDays = Integer.parseInt(txtEffectiveDays);
             } else {
                 System.out.println("txtEffectiveDays NULL");
             }

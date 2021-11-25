@@ -74,7 +74,7 @@
                     ${requestScope.ERROR_TITLE}<br/>
                     </font>
 
-                    <div class="col-md-12 col-lg-8">  
+                    <div class="col-lg-8">  
                         <div class="edit-button">
                             <button type="button" class="btn-action d-inline" id="editBtn" onclick="EnableEditAndSave()">Edit</button>
                             <button type="button" class="btn-action d-none" id="saveBtn" onclick="SaveEdit()">Save</button>
