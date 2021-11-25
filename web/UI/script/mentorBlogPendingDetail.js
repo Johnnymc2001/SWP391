@@ -94,12 +94,19 @@ function undoDeleteThumbnail() {
 
 
 function Approve() {
-    document.getElementById("ActionBtn").value = "Approve";
+    var input = document.createElement("input");
+    input.type = "text";
+    input.name = "submitAction";
+    input.value = "Approve";
+    $("#pendingBlog").append(input);
     $("#pendingBlog").submit();
-
 }
 
 function Disapprove() {
-    document.getElementById("ActionBtn").value = "Disapprove";
+    var input = document.createElement("input");
+    input.type = "text";
+    input.name = "submitAction";
+    input.value = "Disapprove";
+    $("#pendingBlog").append(input);
     $("#pendingBlog").submit();
 }

@@ -94,7 +94,6 @@
                     <div class="right-colum col-lg-4">
                         <div class="row justify-content-center">
                             <div class="user-footer">
-                                <input type="hidden" id="ActionBtn" name="submitAction" value="">
                                 <button class="btn-action d-none" id="updateBtn" type="submit" name="submitAction" value="Update">Update</button>
                                 <button class="btn-action" id="approveBtn" type="button"  data-toggle="modal" data-target="#approveModal" data-backdrop="false">Approve</button>
                                 <button class="btn-action deactive" id="disapproveBtn" type="button" data-toggle="modal" data-target="#dispproveModal" data-backdrop="false">Disapprove</button>
