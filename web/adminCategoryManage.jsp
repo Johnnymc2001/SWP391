@@ -51,7 +51,7 @@
                         <c:forEach var="dto" items="${list}">
                             <tr>
                         <form action="adminCategoryManage" method="POST">
-                            <td><input type="text" name="categoryid" value="${dto.key.categoryID}" autocomplete="off" required/></td>
+                            <td><input type="text" name="categoryid" value="${dto.key.categoryID}" autocomplete="off" required readonly/></td>
                             <td> <input type="text" name="categoryname" value="${dto.key.categoryName}" autocomplete="off" required/></td>
                             <td>${dto.value}</td>
                             <td><button class="btn-action" type="submit" name="submitAction" value="Edit">Edit</button></td>
