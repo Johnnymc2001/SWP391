@@ -16,7 +16,7 @@ var imgReview = document.getElementById("imgReview");
 var updateBtn = document.getElementById("updateBtn");
 var titleH1 = document.getElementById("blog-title-h1");
 var titleInput = document.getElementById("blog-title-input");
-var note = document.getElementById("note");
+//var note = document.getElementById("note");
 
 var backupTitle = titleInput.value;
 
@@ -27,7 +27,7 @@ function EnableEditAndSave() {
     blogView.classList.replace("d-block", "d-none");
     titleH1.classList.replace("d-block", "d-none");
     titleInput.classList.replace("d-none", "d-block");
-    note.classList.replace("d-none", "d-block");
+//    note.classList.replace("d-none", "d-block");
     if ($('#txtImageUrl').val() === "") {
         undoDeleteBtn.classList.replace("d-none", "d-inline");
     } else {
@@ -61,7 +61,7 @@ function Undo() {
         deleteThumnailBtn.classList.replace("d-inline", "d-none");
         undoDeleteBtn.classList.replace("d-inline", "d-none");
         blogView.classList.replace("d-none", "d-block");
-        note.classList.replace("d-block", "d-none");
+//        note.classList.replace("d-block", "d-none");
         $('.blog-view').html(backupContent);
         $('#summernote').summernote('code', blogView.innerHTML);
         titleH1.innerHTML = backupTitle;
