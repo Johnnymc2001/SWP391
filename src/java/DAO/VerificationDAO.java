@@ -208,7 +208,7 @@ public class VerificationDAO {
             con = DBHelpers.makeConnection();
 
             if (con != null) {
-                String sql = "DELETE FROM AccountVerification WHERE accountID = ? and type = ";
+                String sql = "DELETE FROM AccountVerification WHERE accountID = ? and type = ?";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, accountId);
