@@ -72,7 +72,7 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
         String note = null != request.getParameter("note") ? request.getParameter("note") : "";
         String image = null != request.getParameter("txtImageUrl") && !"".equals(request.getParameter("txtImageUrl").trim()) ? request.getParameter("txtImageUrl") : "";;
         
-        System.out.println("Khong co ok con de"+blogIDString);
+   
         int blogID = 0;
 
         if (null != blogIDString) {
@@ -120,7 +120,6 @@ public class MentorBlogPendingDetailServlet extends HttpServlet {
                                 if ("".equals(image)) {
                                     blog.setThumbnail(DEFAULT_THUMBNAIL);
                                 }
-                                System.out.println(content);
 
                                 boolean result = blogDao.updateBlog(blogID, blog);
 

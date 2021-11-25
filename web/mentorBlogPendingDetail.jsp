@@ -17,7 +17,7 @@
             <c:redirect url="/"/>
         </c:if>
     </c:if>
-    
+
     <c:set var="user" value="${sessionScope.USER}"/>
     <head>
         <!-- this is bootstrap 5 -->
@@ -52,28 +52,29 @@
         <div class="create-blog-container container-fluid"> 
             <form action="blogPendingDetail" method="POST" accept-charset="utf-8">
                 <input type="hidden" name="blogid" value="${blog.blogID}">
-                <div class="thumbnail-area">
-                    <span>Thumbnail: </span>
-                    <div>
-                        <input type="hidden" value="${blog.thumbnail}" id="txtImageUrl" name="txtImageUrl"/>
-                        <img class="d-block" id="imgReview" src="${blog.thumbnail}" alt="Student Thumbnail" />
-                    </div>
-                    <br>
-                    <button type="button" class="btn-action d-none" id="deleteThumnailBtn" onclick="deleteThumbnail()">Default</button>
-                    <button type="button" class="btn-action d-none" id="undoDeleteBtn" onclick="undoDeleteThumbnail()">Undo</button>
-                    <!--<button type="submit"  name="submitAction" value="ChangeThumbnail">Change Image</button>-->                   
-                </div> 
-                <div class="title-area">
-                    <span>Title: </span>
-                    <br>
-                    <h1 class="d-block" id="blog-title-h1">${blog.title}</h1>
-                    <input class="d-none" id="blog-title-input" type="text" value="${blog.title}" name="title"/>
-                </div> 
-                <font color="orange">
-                ${requestScope.ERROR_TITLE}<br/>
-                </font>
                 <div class="row">
-                    <div class="col-lg-8">  
+                    <div class="thumbnail-area">
+                        <span>Thumbnail: </span>
+                        <div>
+                            <input type="hidden" value="${blog.thumbnail}" id="txtImageUrl" name="txtImageUrl"/>
+                            <img class="d-block" id="imgReview" src="${blog.thumbnail}" alt="Student Thumbnail" />
+                        </div>
+                        <br>
+                        <button type="button" class="btn-action d-none" id="deleteThumnailBtn" onclick="deleteThumbnail()">Default</button>
+                        <button type="button" class="btn-action d-none" id="undoDeleteBtn" onclick="undoDeleteThumbnail()">Undo</button>
+                        <!--<button type="submit"  name="submitAction" value="ChangeThumbnail">Change Image</button>-->                   
+                    </div> 
+                    <div class="title-area">
+                        <span>Title: </span>
+                        <br>
+                        <h1 class="d-block" id="blog-title-h1">${blog.title}</h1>
+                        <input class="d-none" id="blog-title-input" type="text" value="${blog.title}" name="title"/>
+                    </div> 
+                    <font color="orange">
+                    ${requestScope.ERROR_TITLE}<br/>
+                    </font>
+
+                    <div class="col-md-12 col-lg-8">  
                         <div class="edit-button">
                             <button type="button" class="btn-action d-inline" id="editBtn" onclick="EnableEditAndSave()">Edit</button>
                             <button type="button" class="btn-action d-none" id="saveBtn" onclick="SaveEdit()">Save</button>
@@ -90,15 +91,17 @@
                             <textarea id="summernote" name="content"></textarea>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="user-footer">
-                            <button class="btn-action d-none" id="updateBtn" type="submit" name="submitAction" value="Update">Update</button>
-                            <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
-                            <button class="btn-action deactive" id="disapproveBtn" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
-                        </div>
-                        <div class="d-none" id="note">
-                            <h1>Note:</h1>
-                            <textarea class="form-control" name="note" rows="10"></textarea>
+                    <div class="right-colum col-lg-4">
+                        <div class="row justify-content-center">
+                            <div class="user-footer">
+                                <button class="btn-action d-none" id="updateBtn" type="submit" name="submitAction" value="Update">Update</button>
+                                <button class="btn-action" id="approveBtn" type="submit" name="submitAction" value="Approve">Approve</button>
+                                <button class="btn-action deactive" id="disapproveBtn" type="submit" name="submitAction" value="Disapprove">Disapprove</button>
+                            </div>
+                            <div class="d-none" id="note">
+                                <h1>Note:</h1>
+                                <textarea class="form-control" name="note" rows="10"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -117,7 +120,7 @@
         <!--this is Js-->
 
         <script>
-            const blogContent = '${blog.content}';
+            const blogContent = `${blog.content}`;
         </script>
         <script type="text/javascript" src="./UI/script/summernote.js"></script>
         <script type="text/javascript" src="./UI/script/mentorBlogPendingDetail.js"></script>
