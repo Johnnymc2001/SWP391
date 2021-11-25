@@ -1,6 +1,6 @@
 
 
-/* global $$, jquery */
+
 
 var editBtn = document.getElementById("editBtn");
 var saveBtn = document.getElementById("saveBtn");

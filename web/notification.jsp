@@ -1,8 +1,8 @@
 <%-- Document : notification Created on : Sep 29, 2021, 6:12:38 PM Author :
 Sammy Guergachi
 <sguergachi at gmail.com>
---%> <%@page contentType="text/html" pageEncoding="UTF-8"%> <%@taglib
-    uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+--%> <%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <!DOCTYPE html>
     <html>
         <head>
