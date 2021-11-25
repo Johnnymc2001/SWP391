@@ -159,7 +159,13 @@ public class CreateBlogServlet extends HttpServlet {
                             content = Jsoup.clean(content, Safelist.relaxed());
 
                             BlogDTO blogDto = new BlogDTO(title, content, postDate, categoryID, "", tags, studentID, imageUrl);
+                            
+                            if (blogDto.getCategoryID().equals(account.getCategoryID())) {
+                                blogDto.setStatus("APPROVED");
+                            }
+                            
                             int result = blogDao.createBlog(blogDto);
+                            
                             if (result > 0) {
                                 url = roadmap.get(HOME_PAGE);
                                 response.sendRedirect(url);
