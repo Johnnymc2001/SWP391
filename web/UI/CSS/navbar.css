@@ -55,8 +55,8 @@ a:link {
     position: relative;
 }
 
-.header-left .options-btn .active-btn {
-    border-bottom: orange 3px solid;
+.header-left .options-btn .btn.active-btn {
+    color: #203656;
 }
 
 .header-left .options-btn a {
@@ -231,6 +231,7 @@ a:link {
 
 .header-left .options-btn .btn {
     position: relative;
+    color: rgba(128, 128, 128, 0.5);
 }
 
 .header-left .options-btn .btn:not(.active-btn):after {
@@ -248,6 +249,10 @@ a:link {
     left: 0;
     right: auto;
     width: 100%;
+}
+
+.header-left .options-btn .btn:hover{
+    color: orange;
 }
 
 .notify-window {

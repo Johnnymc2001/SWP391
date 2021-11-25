@@ -122,9 +122,6 @@
                 <br/>
                 <div class="user-footer">
                     <button class="post" type="submit">Post</button>
-                    <button class="reset" type="reset">Reset</button>
-                    <!-- <input class="post" type="submit" value="Post" />
-                    <input class="reset" type="reset" value="Reset" /> -->
                 </div>
                 <a href="home">Return to Home</a>
             </form>

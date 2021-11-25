@@ -53,17 +53,14 @@
                             <li class="list-group" onclick="activePage(this)">New Account</li>
                         </div>
                         <div class="public-option">
-                            <a href="">
+                            <a href="home">
                                 <li>Home</li>
                             </a>
-                            <a href="">
+                            <a href="search?txtSearchType=recent">
                                 <li>Search</li>
                             </a>
-                            <a href="">
-                                <li>Contact</li>
-                            </a>
                         </div>
-                        <a href="">
+                        <a href="logout">
                             <li>Log out</li>
                         </a>
                     </ul>

@@ -78,11 +78,8 @@
                             <a href="home">
                                 <li>Home</li>
                             </a>
-                            <a href="search">
+                            <a href="search?txtSearchType=recent">
                                 <li>Search</li>
-                            </a>
-                            <a href="">
-                                <li>Contact</li>
                             </a>
                         </div>
                         <a href="logout">

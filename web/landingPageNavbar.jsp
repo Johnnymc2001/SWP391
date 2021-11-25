@@ -13,12 +13,6 @@
                     <a class="nav-link" aria-current="page" href="home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="about">Introduce</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="about">About</a>
-                </li>
-                <li class="nav-item">
                 <c:if test="${empty user}">
                     <a class="nav-link btn-link" aria-current="page" href="registerPage">
                         <button class="btn btn-register">Join us</button>
@@ -37,12 +31,6 @@
                 </li>
                 <li class="left-nav-item">
                     <a class="nav-link" aria-current="page" href="home">Home</a>
-                </li>
-                <li class="left-nav-item">
-                    <a class="nav-link" aria-current="page" href="about">Introduce</a>
-                </li>
-                <li class="left-nav-item">
-                    <a class="nav-link" aria-current="page" href="about">About</a>
                 </li>
                 <li class="left-nav-item">
                 <c:if test="${empty user}">

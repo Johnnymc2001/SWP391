@@ -202,7 +202,7 @@
                                     <td>Student ID: SE150755</td>
                                 </tr>
                                 <tr>
-                                    <td>Phone number: 0937069772</td>
+                                    <td>Role:  FE</td>
                                 </tr>
                                 <tr>
                                     <td>Email: <a href="mailto: haotnse150755@fpt.edu.vn">haotnse150755@fpt.edu.vn</a></td>
@@ -225,7 +225,7 @@
                                     <td>Student ID: SE150840</td>
                                 </tr>
                                 <tr>
-                                    <td>Phone number: 09********</td>
+                                    <td>Role:  BE</td>
                                 </tr>
                                 <tr>
                                     <td>Email: <a href="mailto: khoatdse150840@fpt.edu.vn">khoatdse150840@fpt.edu.vn</a>
@@ -436,7 +436,7 @@
                                     <td>Student ID: SE150890</td>
                                 </tr>
                                 <tr>
-                                    <td>Phone number: 09********</td>
+                                    <td>Role:  BE</td>
                                 </tr>
                                 <tr>
                                     <td>Email: <a href="mailto: LONGNNHSE150890@FPT.EDU.VN">LONGNNHSE150890@FPT.EDU.VN</a>
@@ -460,7 +460,7 @@
                                     <td>Student ID: SE151037</td>
                                 </tr>
                                 <tr>
-                                    <td>Phone number: 09********</td>
+                                    <td>Role:  BE</td>
                                 </tr>
                                 <tr>
                                     <td>Email: <a href="mailto: TAMTSE151037@FPT.EDU.VN">TAMTSE151037@FPT.EDU.VN</a></td>

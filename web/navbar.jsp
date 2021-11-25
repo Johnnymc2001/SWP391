@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse options-btn">
 
         <a href="home">
-            <button class="
+            <button class="btn
                     <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], 'home')}">
                         active-btn
                     </c:if>
@@ -119,9 +119,8 @@
                     <!-- public menu -->
                     <div class="public-menu">
                         <a href="home"><li>Home</li></a>
-                        <a href="search"><li>Search</li></a>
+                        <a href="search?txtSearchType=recent"><li>Search</li></a>
                         <a href="about"><li>About</li></a>
-                        <a href="contact"><li>Contact</li></a>
                     </div>
                 </ul>
                 <div class="notify">
