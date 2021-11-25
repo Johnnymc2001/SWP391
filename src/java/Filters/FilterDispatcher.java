@@ -139,31 +139,39 @@ public class FilterDispatcher implements Filter {
                 url = roadmap.get("default");
             }
 
-            // Set Current User By Cookies
-            HttpServletRequest httpRequest = (HttpServletRequest) request;
-            Cookie[] cookies = httpRequest.getCookies();
-            if (cookies != null) {
+            HttpSession session = req.getSession();
+            AccountDTO currentUser = (AccountDTO) req.getSession().getAttribute("USER");
+            AccountDAO dao = new AccountDAO();
 
-                for (Cookie c : cookies) {
-
-                    String username = c.getName();
-                    if (!username.equals("JSESSIONID")) {
-
-                        String password = c.getValue();
-
-                        AccountDAO dao = new AccountDAO();
-                        AccountDTO dto = dao.checkLogin(username, password);
-
-                        if (null != dto) {
-                            HttpSession session = httpRequest.getSession();
-                            session.setAttribute("USER", dto);
-                            break;
-                        }
-                    } else {
-
+            if (null != currentUser) {
+                AccountDTO dto = dao.checkLogin(currentUser.getUsername(), currentUser.getPassword());
+                if (dto != null) {
+                    if ("UNAVAILABLE".equals(dto.getStatus())) {
+                        session.removeAttribute("USER");
+                    } else if ("AVAILABLE".equals(dto.getStatus()) && currentUser != dto) {
+                        session.setAttribute("USER", dto);
                     }
                 }
 
+            } else {
+                // Set Current User By Cookies
+                Cookie[] cookies = req.getCookies();
+                if (cookies != null) {
+                    for (Cookie c : cookies) {
+                        String username = c.getName();
+                        if (!username.equals("JSESSIONID")) {
+
+                            String password = c.getValue();
+
+                            AccountDTO dto = dao.checkLogin(username, password);
+
+                            if (null != dto) {
+                                session.setAttribute("USER", dto);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
 
             RequestDispatcher rd = req.getRequestDispatcher(url);
