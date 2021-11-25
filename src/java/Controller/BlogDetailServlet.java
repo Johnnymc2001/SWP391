@@ -35,7 +35,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "BlogDetailServlet", urlPatterns = {"/BlogDetailServlet"})
 public class BlogDetailServlet extends HttpServlet {
 
-    private final String HOME_PAGE = "default";
+    private final String HOME_PAGE = "home";
     private final String BLOGDETAIL_PAGE = "blogPage";
 
     /**
