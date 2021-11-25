@@ -57,7 +57,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <span>Account ID: ${account.accountID}</span>
-                                    <input type="hidden" name="accountid" value="${account.accountID}"/>
+                                    <input type="hidden" name="accountid" value="${account.accountID}" autocomplete="off"/>
                                 </div>
                                 <div class="col-sm-6">
                                     <button class="btn-action" type="submit" name="submitAction" value="Update">Update</button>
@@ -73,38 +73,38 @@
                                 </div>
                                 <div class="enter-field col-sm-6">
                                     Username<br/>
-                                    <input type="text" name="username" id="username" value="${account.username}" disabled/>
+                                    <input type="text" name="username" id="username" value="${account.username}" autocomplete="off" disabled/>
                                     <font color="red">
                                     </font>
                                 </div>
 
                                 <div class="enter-field col-sm-6">
                                     Fullname<br/>
-                                    <input type="text" name="fullname" id="fullname" value="${account.fullname}" disabled></input>
+                                    <input type="text" name="fullname" id="fullname" value="${account.fullname}" autocomplete="off" disabled></input>
                                     <font color="red">
                                     </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
                                     Birthday<br/>
-                                    <input type="date" name="birthday" id="birthday" value="${account.birthday}" disabled></input>
+                                    <input type="date" name="birthday" id="birthday" value="${account.birthday}" autocomplete="off" disabled></input>
                                 </div>
 
                                 <div class="enter-field col-sm-6">
                                     Address<br/>
-                                    <input type="text" name="address" id="address" value="${account.address}" disabled></input>
+                                    <input type="text" name="address" id="address" value="${account.address}" autocomplete="off" disabled></input>
                                     <font color="red">
                                     </font>
                                 </div>
 
                                 <div class="enter-field col-sm-6">
                                     Email<br/>
-                                    <input type="text" name="email" id="email"value="${account.email}" disabled></input>
+                                    <input type="text" name="email" id="email"value="${account.email}" autocomplete="off" disabled></input>
                                     <font color="red">
                                     </font>
                                 </div>
                                 <div class="enter-field col-sm-6">
                                     Phone<br/>
-                                    <input type="text" name="phone" id="phone" value="${account.phone}" disabled></input>
+                                    <input type="text" name="phone" id="phone" value="${account.phone}" autocomplete="off" disabled></input>
                                     <font color="red">
                                     </font>
                                 </div>

@@ -35,7 +35,7 @@
     <body>
         <h1>Admin AccountList</h1>
         <form class="search-account-form">
-            <input class="search-account-textbox" type="text" name="txtSearchValue" value="${param.txtSearchValue}"/>
+            <input class="search-account-textbox" type="text" name="txtSearchValue" autocomplete="off" value="${param.txtSearchValue}"/>
             <select class="role-select" name="txtAccountType">
                 <option>All</option>
                 <option <c:if test="${param.txtAccountType == 'Student'}">selected</c:if>>Student</option>

@@ -43,7 +43,7 @@
         <div id="search-bar" class="search-bar">
             <div class="box">
                 <form action="search" method="GET" class="search-form">
-                    <input name="txtSearchValue" value="${param.txtSearchValue}" type="text" id="search-input" class="search-input"
+                    <input name="txtSearchValue" value="${param.txtSearchValue}" type="text" id="search-input" autocomplete="off" class="search-input"
                            >
                     <label class="search-label" for="search-input">Search</label>
                     <button type="submit"><i class="fas fa-search"></i></button>

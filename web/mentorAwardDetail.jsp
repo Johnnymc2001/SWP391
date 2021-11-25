@@ -62,7 +62,7 @@
                                 </c:if>
                             </c:forEach>
                         </select>
-                        <input class="btn-action" type="submit" name="btnAction" value="Award Blog"></input>
+                        <input class="btn-action" type="submit" name="btnAction" autocomplete="off" value="Award Blog"></input>
                     </form>
                 </c:if>
             </div>
@@ -95,16 +95,16 @@
                     <form action="award?txtBlogID=${blogInfo.blogID}" method="POST">
                         <div class="enter-field">
                             <span>Award Name: </span>
-                            <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" required/></br>
+                            <input type="textAward" value="" name="txtAwardName" maxlength="60" size="62" autocomplete="off" required/></br>
 
                         </div>
                         <div class="enter-field">
                             <span>Effective Days: </span>
-                            <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" required/></br>
+                            <input type="textAward" value="" name="txtEffectiveDays" maxlength="5" size="5" autocomplete="off" required/></br>
 
                         </div>
                         <br>
-                        <input class="btn-action" type="submit" name="btnAction" value="Create Award"></input>
+                        <input class="btn-action" type="submit" name="btnAction" autocomplete="off" value="Create Award"></input>
                     </form>
                 </div>
             </div>

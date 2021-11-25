@@ -45,42 +45,42 @@
                     <div class="enter-field col-md-6">
                         Username<br/>
                         ${requestScope.ERROR_USERNAME}
-                        <input type="text" name="username" id="username" value="${param.username}" required/>
+                        <input type="text" name="username" id="username" value="${param.username}" autocomplete="off" required/>
                     </div>
                     <div class="enter-field col-md-6">
                         Fullname<br/>
                         ${requestScope.ERROR_FULLNAME}
-                        <input type="text" name="fullname" id="fullname" value="${param.fullname}" required/>
+                        <input type="text" name="fullname" id="fullname" value="${param.fullname}" autocomplete="off" required/>
                     </div>
                     <div class="enter-field col-md-6">
                         Password<br/>
                         ${requestScope.ERROR_PASSWORD}
-                        <input type="password" name="password" id="password" value="${param.password}" required/>
+                        <input type="password" name="password" id="password" value="${param.password}" autocomplete="off" autocomplete="off" required/>
                     </div>
                     <div class="enter-field col-md-6">
                         Confirm Password<br/>
                         ${requestScope.ERROR_CONFIRM_PASSWORD}
-                        <input type="password" name="confirm_password" id="confirm_password" value="${param.confirm_password}" required/>
+                        <input type="password" name="confirm_password" id="confirm_password" value="${param.confirm_password}" autocomplete="off" required/>
                     </div>
                     <div class="enter-field col-md-6">
                         Address<br/>
                         ${requestScope.ERROR_ADDRESS}
-                        <input type="text" name="address" id="address" value="${param.address}" required/>
+                        <input type="text" name="address" id="address" value="${param.address}" autocomplete="off" required/>
                     </div>
                     <div class="enter-field col-md-6">
                         Birthday<br/>
                         ${requestScope.ERROR_BIRTHDAY}
-                        <input type="date" name="birthday" id="birthday" value="${param.birthday}" required/>
+                        <input type="date" name="birthday" id="birthday" value="${param.birthday}" autocomplete="off" required/>
                     </div>
                     <div class="enter-field col-md-6">
                         Email<br/>
                         ${requestScope.ERROR_EMAIL}
-                        <input type="text" name="email" id="email"value="${param.email}" required/>
+                        <input type="text" name="email" id="email"value="${param.email}" autocomplete="off" required/>
                     </div>
                     <div class="enter-field col-md-6">
                         Phone<br/>
                         ${requestScope.ERROR_PHONE}
-                        <input type="text" name="phone" id="phone" value="${param.phone}" required/>
+                        <input type="text" name="phone" id="phone" value="${param.phone}" autocomplete="off" required/>
                     </div>
                     <div class="enter-field col-md-6">
                         <span>Role</span>

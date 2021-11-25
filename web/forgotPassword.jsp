@@ -62,6 +62,7 @@
                         <div class="form-group">
                             <label class="mb-1" for="emailInput">Email address</label>
                             <input
+                                autocomplete="off"
                                 name="email"
                                 type="email"
                                 class="form-control"
@@ -70,7 +71,7 @@
                                 required
                                 />
                         </div>
-                        <input type="submit" class="btn btn-warning btn-lg btn-block mt-3" name="action" value="Request Password Change"/>  
+                        <input type="submit" class="btn btn-warning btn-lg btn-block mt-3" name="action" value="Request Password Change" autocomplete="off"/>  
                     </form>
                 </div>
             </c:if>

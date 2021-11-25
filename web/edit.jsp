@@ -52,7 +52,7 @@
                         <br>
                         <label for="attachment">Choose file</label>
                         <!--<input type="file" id="attachment" name="fileAttachment">-->
-                        <input accept="image/*" type='file' id="attachment" name="fileAttachment" />
+                        <input accept="image/*" type='file' id="attachment" name="fileAttachment" autocomplete="off" />
                         <span id="file-name">${editBlog.thumbnail.toString()}</span>
                         <br>
                         <img id="imgReview" src="${editBlog.thumbnail}" alt="Your Thumbnail" />
@@ -60,11 +60,11 @@
                     <font color="red">
                     ${requestScope.ERROR_UPLOAD}
                     </font>
-                    <input type="hidden" name ="txtBlogID" value="${editBlog.blogID}">
+                    <input type="hidden" name ="txtBlogID" value="${editBlog.blogID}" >
                     <div class="title-area">
                         <span>Title: </span>
                         <br>
-                        <input type="text" value="${editBlog.title}" name="txtTitle" maxlength="60" size="62"/>
+                        <input type="text" value="${editBlog.title}" name="txtTitle" maxlength="60" size="62" autocomplete="off"/>
                     </div> 
                     <c:if test="${not empty ERROR_TITLE}" >
                         <font color="red">

@@ -68,7 +68,7 @@
                         <span>Title: </span>
                         <br>
                         <h1 class="d-block" id="blog-title-h1">${blog.title}</h1>
-                        <input class="d-none" id="blog-title-input" type="text" value="${blog.title}" name="title"/>
+                        <input class="d-none" id="blog-title-input" type="text" value="${blog.title}" autocomplete="off" name="title"/>
                     </div> 
                     <font color="orange">
                     ${requestScope.ERROR_TITLE}<br/>

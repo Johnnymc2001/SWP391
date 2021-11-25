@@ -52,7 +52,7 @@
                     <c:if test="${blog.studentID == user.accountID}">
                         <c:if test="${blog.status != 'PENDING'}">
                             <form action="edit" method="POST" >
-                                <input type="hidden" name="txtBlogID" value="${blog.blogID}">
+                                <input type="hidden" name="txtBlogID" autocomplete="off" value="${blog.blogID}">
                                 <button class="edit-btn" type="submit" name="btAction" value="Edit">Edit</button>
                             </form>
                         </c:if>

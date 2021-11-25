@@ -43,11 +43,11 @@
                     <h1>Login</h1>
                     <form class="login-form" action="login" method="POST">
                         <div class="enter-field">
-                            <input name="username" id="username" type="text" required>
+                            <input name="username" id="username" type="text" autocomplete="off" required>
                             <label class="username-label" for="username"><i class="fas fa-user"></i> Username</label>
                         </div>
                         <div class="enter-field">
-                            <input name="password" id="password" type="password" required>
+                            <input name="password" id="password" type="password" autocomplete="off" required>
                             <label class="password-label" for="password"><i class="fas fa-lock"></i> Password</label>
                             <i id="close-eye" class="close-eye d-block fas fa-eye-slash" onclick="showPassword()"></i>
                             <i id="open-eye" class="open-eye d-none fas fa-eye" onclick="hidePassword()"></i>
@@ -64,7 +64,7 @@
                         <div class="footer-link">
                             <div class="row">
                                 <div class="remember-me col-12 col-sm-6">
-                                    <input id="checkbox" type="checkbox" name="chkRemember" value="true">
+                                    <input id="checkbox" type="checkbox" name="chkRemember" value="true" autocomplete="off">
                                     <label for="checkbox">Remember me</label>
                                 </div>
                                 <div class="forgot-link col-12 col-sm-6">
@@ -97,7 +97,7 @@
                     <form class="register-form" action="register" method="POST">
                         <div class="row">
                             <div class="enter-field col-md-6">
-                                <input name="username" id="username-register" value="${param.username}" type="text" required>
+                                <input name="username" id="username-register" value="${param.username}" type="text" autocomplete="off" required>
                                 <label class="username-label" for="username-register"><i class="fas fa-user"></i> Username</label>
                                 <c:if test="${not empty error.userNameLengthError}">
                                     <br/>
@@ -113,7 +113,7 @@
                                 </c:if>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="fullname" id="fullname" value="${param.fullname}" type="text" required>
+                                <input name="fullname" id="fullname" value="${param.fullname}" type="text" autocomplete="off" required>
                                 <label class="fullname-label" for="fullname"><i class="fas fa-file-signature"></i>
                                     Fullname</label>
                                     <c:if test="${not empty error.fullNameLengthError}">
@@ -124,7 +124,7 @@
                                 </c:if>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="address" id="address" value="${param.address}" type="text" required>
+                                <input name="address" id="address" value="${param.address}" type="text" autocomplete="off" required>
                                 <label class="address-label" for="address"><i class="fas fa-map-marked-alt"></i>
                                     Address</label>
                                 <br/>
@@ -133,7 +133,7 @@
                                 </font>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="birthdate" id="birthdate" value="${param.birthdate}" type="text" max="9999-12-31" onfocus="(this.type = 'date')"
+                                <input name="birthdate" id="birthdate" value="${param.birthdate}" type="text" max="9999-12-31" autocomplete="off" onfocus="(this.type = 'date')"
                                        onblur="if (!this.value)
                                                    this.type = 'text'" required>
                                 <label class="birthdate-label" for="birthdate"><i class="fas fa-calendar-alt"></i>Birthdate</label>
@@ -146,7 +146,7 @@
                                 </c:if>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="email" id="email" value="${param.email}" type="text" required>
+                                <input name="email" id="email" value="${param.email}" type="text" autocomplete="off" required>
                                 <label class="email-label" for="email"><i class="fas fa-envelope"></i> Email</label>
                                 <c:set var="emailError" value="${requestScope.ERROR_EMAIL}"/>
                                 <c:if test="${not empty error.emailErrorFormat}">
@@ -163,7 +163,7 @@
                                 </c:if>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="phone" id="phone" value="${param.phone}"  type="text" required>
+                                <input name="phone" id="phone" value="${param.phone}" autocomplete="off"  type="text" required>
                                 <label class="phone-label" for="phone"><i class="fas fa-phone-alt"></i> Phone</label>
                                 <c:if test="${not empty error.phoneErrorFormat}">
                                     <br/>
@@ -174,7 +174,7 @@
                             </div>
 
                             <div class="enter-field col-md-6">
-                                <input name="password" id="password-register" type="password" required>
+                                <input name="password" id="password-register" type="password" autocomplete="off" required>
                                 <label class="password-label" for="password-register"><i class="fas fa-lock"></i> Password</label>
                                 <c:if test="${not empty error.passwordLengthError}">
                                     <br/>
@@ -187,7 +187,7 @@
                                 <i id="reopen-eye" class="open-eye d-none fas fa-eye" onclick="hiderePassword()"></i>
                             </div>
                             <div class="enter-field col-md-6">
-                                <input name="confirm-password" id="confirm-password" type="password" required>
+                                <input name="confirm-password" id="confirm-password" type="password"  autocomplete="off" required>
                                 <label class="confirm-password-label" for="confirm-password"><i class="fas fa-lock"></i>Confirm Password</label>
                                 <c:if test="${not empty error.confirmNotMatched}">
                                     <br/>

@@ -56,15 +56,15 @@
                                     <input type ="hidden" name ="userID" value="${account.accountID}" readonly>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Username</label>
-                                        <input type ="text" name ="username" value="${account.username}" readonly>
+                                        <input type ="text" name ="username" value="${account.username}" autocomplete="off" readonly>
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Email</label>
-                                        <input type ="text"  name ="email" value="${account.email}" readonly>
+                                        <input type ="text"  name ="email" value="${account.email}" autocomplete="off" readonly>
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Full name</label>
-                                        <input type ="text" class="txt-edit" name ="fullname" value="${account.fullname}" readonly=true required>
+                                        <input type ="text" class="txt-edit" name ="fullname" value="${account.fullname}" autocomplete="off" readonly=true required>
                                         <c:if test="${not empty FULL_NAME_ERROR}">
                                             <font color="red">
                                             ${FULL_NAME_ERROR}<br/>
@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Address</label>
-                                        <input type ="text" class="txt-edit" name="address" value="${account.address}" readonly="true" required>
+                                        <input type ="text" class="txt-edit" name="address" value="${account.address}" autocomplete="off" readonly="true" required>
                                         <c:if test="${not empty ADDRESS_ERROR}">
                                             <font color="red">
                                             ${ADDRESS_ERROR}<br/>
@@ -82,7 +82,7 @@
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Phone</label>
-                                        <input type ="text" class="txt-edit" name ="phone" value="${account.phone}" readonly="true" required>
+                                        <input type ="text" class="txt-edit" name ="phone" value="${account.phone}" autocomplete="off" readonly="true" required>
                                         <c:if test="${not empty PHONE_ERROR}">
                                             <font color="red">
                                             ${PHONE_ERROR}<br/>
@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6">
                                         <label>Birth</label>
-                                        <input type="date" class="txt-edit" id="birthdate" name ="birthdate" value="${account.birthday}" max="9999-12-31" readonly="true" required>
+                                        <input type="date" class="txt-edit" id="birthdate" name ="birthdate" value="${account.birthday}" autocomplete="off" max="9999-12-31" readonly="true" required>
                                         <c:if test="${not empty BIRTHDATE_ERROR}">
                                             <font color="red">
                                             ${BIRTHDATE_ERROR}<br/>
@@ -100,13 +100,13 @@
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6 d-none" id="passwordTextBox1">
                                         <label >New Password</label>
-                                        <input type ="password" class="txt-edit" name="password" value="" readonly="true">
+                                        <input type ="password" class="txt-edit" name="password" value="" autocomplete="off" readonly="true">
                                     </div>
                                     <div class="enter-field col-sm-12 col-md-6 d-none" id="passwordTextBox2">
                                         <label>Confirm Password</label>
-                                        <input type ="password" class="txt-edit" name="confirmPassword" value="" readonly="true">
+                                        <input type ="password" class="txt-edit" name="confirmPassword" value="" autocomplete="off" readonly="true">
                                     </div>
-                                    <input type="hidden" name="btnAction" value="UpdateProfile">
+                                    <input type="hidden" name="btnAction" autocomplete="off" value="UpdateProfile">
                                 </div>
                                 <div class="edit-button">
                                     <c:if test="${not empty PASSWORD_ERROR}">

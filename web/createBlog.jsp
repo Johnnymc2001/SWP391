@@ -82,7 +82,7 @@
                         <br>
                         <label for="attachment">Choose file</label>
                         <!--<input type="file" id="attachment" name="fileAttachment">-->
-                        <input accept="image/*" type='file' id="attachment" name="fileAttachment" />
+                        <input accept="image/*" type='file' id="attachment" name="fileAttachment" autocomplete="off"/>
                         <span id="file-name">None</span>
                         <br>
                         <img id="imgReview" src="#" alt="Your Thumbnail" />
@@ -94,7 +94,7 @@
                     <div class="title-area">
                         <span>Title: </span>
                         <br>
-                        <input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="100" size="62" required/>
+                        <input type="text" value="${param.txtTitle}" name="txtTitle" maxlength="100" size="62" autocomplete="off" required/>
                     </div> 
                     <br>
                     <font color="red">
@@ -130,7 +130,6 @@
         <!-- FOOTER -->
         <div class="web-footer">
             <p>&copy; 2021 Henry. FE by Henry</p>
-            <button onclick="goTop()">Back to top</button>
         </div>
 
         <!-- this is JS for summernote -->

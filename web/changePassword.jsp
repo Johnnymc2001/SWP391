@@ -68,6 +68,7 @@
                         <div class="form-group">
                             <label class="mb-1" for="emailInput">Verify Code</label>
                             <input
+                                autocomplete="off"
                                 name="code"
                                 type="text"
                                 class="form-control"
@@ -80,6 +81,7 @@
                         <div class="form-group">
                             <label class="mb-1" for="emailInput">Password</label>
                             <input
+                                autocomplete="off"
                                 name="password"
                                 type="password"
                                 class="form-control"
@@ -92,6 +94,7 @@
                         <div class="form-group">
                             <label class="mb-1" for="emailInput">Confirm Password</label>
                             <input
+                                autocomplete="off"
                                 name="confirmPassword"
                                 type="password"
                                 class="form-control"
@@ -101,7 +104,7 @@
                                 required
                                 />
                         </div>
-                        <input type="submit" class="btn btn-warning btn-lg btn-block mt-3" name="action" value="Change Password"/>  
+                        <input autocomplete="off" type="submit" class="btn btn-warning btn-lg btn-block mt-3" name="action" value="Change Password"/>  
                     </form>
                 </div>
             </c:if>
