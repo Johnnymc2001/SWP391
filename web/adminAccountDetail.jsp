@@ -77,13 +77,6 @@
                                     <font color="red">
                                     </font>
                                 </div>
-                                <div class="enter-field col-sm-6">
-                                    Password<br/>
-                                    <input type="password" name="password" id="password" value="${account.password}" disabled/>
-                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
-                                    <font color="red">
-                                    </font>
-                                </div>
 
                                 <div class="enter-field col-sm-6">
                                     Fullname<br/>
@@ -96,7 +89,7 @@
                                     <input type="date" name="birthday" id="birthday" value="${account.birthday}" disabled></input>
                                 </div>
 
-                                <div class="enter-field col-sm-12">
+                                <div class="enter-field col-sm-6">
                                     Address<br/>
                                     <input type="text" name="address" id="address" value="${account.address}" disabled></input>
                                     <font color="red">
@@ -157,6 +150,10 @@
 
                                     <c:if test="${account.status == 'UNAVAILABLE'}">
                                         <font id="unavailable-text">UNAVAILABLE</font>
+                                    </c:if>
+
+                                    <c:if test="${account.status == 'PENDING'}">
+                                        <font id="pending-text">PENDING</font>
                                     </c:if>
                                 </h1>
                             </div>
