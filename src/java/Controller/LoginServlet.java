@@ -73,7 +73,7 @@ public class LoginServlet extends HttpServlet {
                     }
                     if (curUser.getStatus().equals("PENDING")) {
                         foundError = true;
-                        request.setAttribute("LOGIN_FAIL", "You account is not verified! Please check your mailbox or <a href=\"verify\">send again?</a>");
+                        request.setAttribute("LOGIN_FAIL", "You account is not verified! Please check your mailbox or <a href=\"verify?email=" + curUser.getEmail() + "\">send again?</a>");
                     }
                 }
             }

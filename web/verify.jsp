@@ -88,6 +88,7 @@
                                 class="form-control"
                                 id="emailInput"
                                 placeholder="name@example.com"
+                                value="${param.email}"
                                 required
                                 />
                         </div>

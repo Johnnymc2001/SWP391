@@ -134,9 +134,8 @@ public class CreateAccountServlet extends HttpServlet {
                 request.setAttribute("ERROR", error);
                 url = "registerPage";
                 url = roadmap.get(url);
-                request.getRequestDispatcher(url).forward(request, response);
                 request.setAttribute("PAGE", "REGISTER");
-
+                request.getRequestDispatcher(url).forward(request, response);  
             } else {
 //                   Date  date =new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);  
 
@@ -144,7 +143,7 @@ public class CreateAccountServlet extends HttpServlet {
 
 //               AccountDAO.createAccount(dto);
                 VerificationDAO veriDao = new VerificationDAO();
-
+                dto.setStatus("PENDING");
                 int key = dao.createAccount(dto);
 
                 if (key != 0) {

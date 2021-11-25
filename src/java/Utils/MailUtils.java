@@ -30,48 +30,49 @@ public class MailUtils {
     private static String USER_NAME = "academyblog.fpt@gmail.com";
     private static String PASSWORD = "Ka563^qvw!2K#sL@aXvL";
 
-    public static boolean sendForgotPassword(int accountId) throws SQLException {
-        AccountDAO accDao = new AccountDAO();
-        VerificationDAO veriDao = new VerificationDAO();
+    public static boolean sendForgotPassword(int accountId) {
+        try {
+            AccountDAO accDao = new AccountDAO();
+            VerificationDAO veriDao = new VerificationDAO();
 
-        AccountDTO dto = accDao.getAccountFromAcoountID(accountId);
-        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "FORGOT_PASSWORD");
+            AccountDTO dto = accDao.getAccountFromAcoountID(accountId);
+            VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "FORGOT_PASSWORD");
 
-        String from = USER_NAME;
-        String pass = PASSWORD;
+            String from = USER_NAME;
+            String pass = PASSWORD;
 
-        System.out.println("Send Email to Account : " + accountId);
-        String[] to = new String[100];
-        to[0] = dto.getEmail();
-        String subject = "Academy Blog Account Forgot Password";
-        String body = "Please change your account password with this link : https://academyblog.azurewebsites.net/SWP391_Project/forgotPassword?code=" + code.getCode();
-        System.out.println(body);
-        sendFromGMail(from, pass, to, subject, body, to[0]);
-        return true;
+            System.out.println("[Forgot Password] Send to AccountID : " + accountId);
+            String to = dto.getEmail();
+            String subject = "Academy Blog Account Forgot Password";
+            String body = "Please change your account password with this link : https://academyblog.azurewebsites.net/SWP391_Project/forgotPassword?code=" + code.getCode();
+            sendFromGMail(subject, body, to);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
     }
 
-    public static boolean sendVerification(int accountId) throws SQLException {
-        AccountDAO accDao = new AccountDAO();
-        VerificationDAO veriDao = new VerificationDAO();
+    public static boolean sendVerification(int accountId) {
+        try {
+            AccountDAO accDao = new AccountDAO();
+            VerificationDAO veriDao = new VerificationDAO();
 
-        AccountDTO dto = accDao.getAccountFromAcoountID(accountId);
-        VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "VERIFICATION");
+            AccountDTO dto = accDao.getAccountFromAcoountID(accountId);
+            VerificationDTO code = veriDao.GetVerificationDTOUsingAccountID(accountId, "VERIFICATION");
 
-        String from = USER_NAME;
-        String pass = PASSWORD;
+            System.out.println("[Verify] Send to AccountID : " + accountId);
+            String to = dto.getEmail();
+            String subject = "Academy Blog Account Verification";
+            String body = "Please verify your account with this link : https://academyblog.azurewebsites.net/SWP391_Project/verify?code=" + code.getCode();
+            sendFromGMail(subject, body, to);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
 
-        System.out.println("Send Email to Account : " + accountId);
-        String[] to = new String[100];
-        to[0] = dto.getEmail();
-        String subject = "Academy Blog Account Verification";
-        String body = "Please verify your account with this link : https://academyblog.azurewebsites.net/SWP391_Project/verify?code=" + code.getCode();
-        
-        System.out.println(body);
-        sendFromGMail(from, pass, to, subject, body, to[0]);
-        return true;
     }
 
-    private static void sendFromGMail(String from, String pass, String[] to, String subject, String body, String toEmail) {
+    private static void sendFromGMail(String subject, String body, String toEmail) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
         props.put("mail.smtp.port", "587"); //TLS Port
@@ -98,9 +99,9 @@ public class MailUtils {
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
 
-            msg.setFrom(new InternetAddress("no_reply@example.com", "NoReply-JD"));
+            msg.setFrom(new InternetAddress("no_reply@academyblog.com", "NoReply"));
 
-            msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
+            msg.setReplyTo(InternetAddress.parse("no_reply@academyblog.com", false));
 
             msg.setSubject(subject, "UTF-8");
             String text = "<h1>Please Verify Your Account</h1>";
@@ -112,10 +113,9 @@ public class MailUtils {
             msg.setSentDate(new Date());
 
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-            System.out.println("Message is ready");
             Transport.send(msg);
 
-            System.out.println("EMail Sent Successfully!!");
+            System.out.println("Email Sent Successfully!!");
         } catch (Exception e) {
             e.printStackTrace();
         }
