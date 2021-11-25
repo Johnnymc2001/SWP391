@@ -76,7 +76,7 @@ public class BlogDetailServlet extends HttpServlet {
                 ArrayList<String> awawdNames = new ArrayList<>();
 
                 //Check pending and user constraint:
-                if (null==account||!(account.getAccountID() == author.getAccountID()) && ("PENDING".equals(blog.getStatus()))) {
+                if ((null==account||!(account.getAccountID() == author.getAccountID())) && ("PENDING".equals(blog.getStatus()))) {
                     System.out.println("Pending blog access denied");
                     response.sendError(404);
                     return;
