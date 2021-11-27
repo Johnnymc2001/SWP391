@@ -1,4 +1,4 @@
-![FIconLogo](web/UI/Icon/Ficon.png)
+<img src="web/UI/Icon/Ficon.png" alt="drawing" width="100" height="100"/>
 
 # Academic Blog System
 
