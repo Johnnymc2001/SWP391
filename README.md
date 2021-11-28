@@ -62,6 +62,7 @@
 ![Supervise Blog](readme-assets/pendingedit.png)
 
 ## View own blog and profile
-![BlogList](readme-assets/list.png)
 ![Profile](readme-assets/profile.png)
+![BlogList](readme-assets/list.png)
+
 
