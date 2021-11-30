@@ -2,7 +2,7 @@
 
 # Academic Blog System
 
-- This is a system allow users to post blogs about academic enviroment.
+- This is a system allows users to post blogs about the academic environment.
 
 # Team
 
